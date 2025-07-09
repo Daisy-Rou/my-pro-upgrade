@@ -255,78 +255,19 @@
         </div>
         <div class="big-title" style="margin-top: 30px;">推荐产品</div>
       </div>
-      <div class="news-small-card-box">
-        <div class="news-small-card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhcs-tjcp1.png" alt="">
-          </div>
-          <div class="news-small-card-item-title-box">
-            <div class="news-small-card-item-title">场景编辑器</div>
-            <span class="news-small-card-item-content">创建数字孪生场景，并将孪生场景作为服务进行部署</span>
-            <div class="news-small-card-item-btn">更多</div>
-          </div>
-        </div>
-        <div class="news-small-card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhcs-tjcp2.png" alt="">
-          </div>
-          <div class="news-small-card-item-title-box">
-            <div class="news-small-card-item-title">应用程序编辑器</div>
-            <span class="news-small-card-item-content">添加图表小部件、配置交互逻辑和部署数字孪生应用程序</span>
-            <div class="news-small-card-item-btn">更多</div>
-          </div>
-        </div>
-        <div class="news-small-card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhcs-tjcp3.png" alt="">
-          </div>
-          <div class="news-small-card-item-title-box">
-            <div class="news-small-card-item-title">场景服务器</div>
-            <span class="news-small-card-item-content">提供场景托管和高效便捷的流式渲染服务</span>
-            <div class="news-small-card-item-btn">更多</div>
-          </div>
-        </div>
-        <div class="news-small-card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhcs-tjcp4.png" alt="">
-          </div>
-          <div class="news-small-card-item-title-box">
-            <div class="news-small-card-item-title">统一开发API</div>
-            <span class="news-small-card-item-content">为控制逻辑的高效编码和数据可视化提供全面的API系统</span>
-            <div class="news-small-card-item-btn">更多</div>
-          </div>
-        </div>
-        <div class="news-small-card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhcs-tjcp5.png" alt="">
-          </div>
-          <div class="news-small-card-item-title-box">
-            <div class="news-small-card-item-title">服务</div>
-            <span class="news-small-card-item-content">提供端到端支持服务，促进无忧开发</span>
-            <div class="news-small-card-item-btn">更多</div>
-          </div>
-        </div>
-        <div class="news-small-card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhcs-tjcp6.png" alt="">
-          </div>
-          <div class="news-small-card-item-title-box">
-            <div class="news-small-card-item-title">统一API调试器</div>
-            <span class="news-small-card-item-content">学习/编写/调试数字双胞胎的数据显示和控制逻辑代码</span>
-            <div class="news-small-card-item-btn">更多</div>
-          </div>
-        </div>
-      </div>
+      <left-right-card :list="list"></left-right-card>
     </div>
   </div>
 </template>
 
 <script>
 import mainTitle from '@/components/main-title.vue';
+import leftRightCard from '@/components/left-right-card.vue'
 export default {
   name: 'smart-transportation',
   components: {
-    mainTitle
+    mainTitle,
+    leftRightCard
   },
   data() {
     return {
@@ -354,7 +295,45 @@ export default {
         name: '智能运维'
       },{
         name: '基础平台'
-      }]
+      }],
+      list: [
+        {
+          imgSrc: require('../assets/images/zhcs-tjcp1.png'),
+          title: '场景编辑器',
+          content: '创建数字孪生场景，并将孪生场景作为服务进行部署',
+          path: '/scene-editor'
+        },
+        {
+          imgSrc: require('../assets/images/zhcs-tjcp2.png'),
+          title: '应用程序编辑器',
+          content: '添加图表小部件、配置交互逻辑和部署数字孪生应用程序',
+          path: '/application-editor'
+        },
+        {
+          imgSrc: require('../assets/images/zhcs-tjcp3.png'),
+          title: '场景服务器',
+          content: '提供场景托管和高效便捷的流式渲染服务',
+          path: '/scene-server'
+        },
+        {
+          imgSrc: require('../assets/images/zhcs-tjcp4.png'),
+          title: '统一开发API',
+          content: '为控制逻辑的高效编码和数据可视化提供全面的API系统',
+          path: '/unified-development'
+        },
+        {
+          imgSrc: require('../assets/images/zhcs-tjcp5.png'),
+          title: '服务',
+          content: '提供端到端支持服务，促进无忧开发',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/zhcs-tjcp6.png'),
+          title: '统一API调试器',
+          content: '学习、编写和调试数字双数据显示和控制逻辑代码',
+          path: '/unified-debugging'
+        }
+      ]
     }
   },
    mounted() {
@@ -809,92 +788,6 @@ export default {
       line-height: 78px;
     }
   }
-  .news-small-card-box {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 36px;
-    margin-right: -24px;
-    .news-small-card-item {
-      display: flex;
-      flex-direction: row;
-      width: calc(33.3% - 24px);
-      margin-right: 24px;
-      margin-bottom: 24px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background-color: rgba(255, 255, 255, 0.05);
-      transition: transform 0.5s ease;
-      cursor: pointer;
-      &:nth-child(3n) {
-        margin-right: 0;
-      }
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        img {
-          transform: scale(1.1);
-        }
-      }
-      .img-box {
-        display: flex;
-        flex-shrink: 0;
-        max-width: 191px;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        border-radius: 16px 0 0 16px;
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 16px 0 0 16px;
-        }
-      }
-      .news-small-card-item-title-box {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        padding: 24px;
-        .news-small-card-item-title {
-          color: #fff;
-          font-size: 20px;
-          font-weight: 700;
-          font-family: Inter Tight, sans-serif;
-          line-height: 25px;
-          margin-bottom: 12px;
-        }
-        .news-small-card-item-content {
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 23px;
-          color: rgba(255, 255, 255, .65);
-          overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-          text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-          display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-          -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-          -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-        }
-        .news-small-card-item-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 48px;
-          height: 24px;
-          font-size: 12px;
-          font-weight: 400;
-          color: #fff;
-          background-color: rgba(255, 255, 255, .15);
-          border-radius: 12px;
-          margin-top: 36px;
-          // cursor: pointer;
-          // &:hover {
-          //   background-color: rgba(255, 255, 255, 0.35);
-          // }
-        }
-      }
-    }
-  }
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;
@@ -950,15 +843,6 @@ export default {
         margin-right: 0 !important;
       }
     }
-    .news-small-card-box {
-      .news-small-card-item {
-        width: calc(50% - 24px) !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-          margin-right: 0 !important;
-        }
-      }
-    }
   }
   @media screen and (max-width: 1280px) {
     .main-box {
@@ -989,20 +873,6 @@ export default {
           &:nth-child(2n) {
             margin-right: 0 !important;
           }
-        }
-      }
-    }
-  }
-  @media screen and (max-width: 1020px) {
-    .news-small-card-box {
-      .news-small-card-item {
-        width: 100% !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-          margin-right: 24px !important;
-        }
-        .img-box {
-          aspect-ratio: 180 / 120 !important;
         }
       }
     }
