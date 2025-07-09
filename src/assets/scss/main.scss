@@ -1,0 +1,90 @@
+@font-face {
+    font-family: Inter;
+    font-display: swap;
+    font-weight: 300;
+    src: local("Inter Light"),local("Inter-Light"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Light.27083fa6.woff2) format("woff2"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Light.91dfddd8.woff) format("woff")
+}
+
+@font-face {
+    font-family: Inter;
+    font-display: swap;
+    font-weight: 400;
+    src: local("Inter Regular"),local("Inter-Regular"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Regular.f1f0c35b.woff2) format("woff2"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Regular.f356e84a.woff) format("woff")
+}
+
+@font-face {
+    font-family: Inter;
+    font-display: swap;
+    font-weight: 500;
+    src: local("Inter Medium"),local("Inter-Medium"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Medium.dc792b50.woff2) format("woff2"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Medium.ec7dd2d9.woff) format("woff")
+}
+
+@font-face {
+    font-family: Inter;
+    font-display: swap;
+    font-weight: 700;
+    src: local("Inter Bold"),local("Inter-Bold"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Bold.579e0f95.woff2) format("woff2"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/Inter-Bold.b1234477.woff) format("woff")
+}
+
+@font-face {
+    font-family: Inter Tight;
+    font-display: swap;
+    font-weight: 700;
+    src: local("Inter Tight Bold"),local("InterTight-Bold"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/InterTight-Bold.fb15a343.woff2) format("woff2"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/InterTight-Bold.9b43b0a5.woff) format("woff")
+}
+
+@font-face {
+    font-family: Inter Tight;
+    font-display: swap;
+    font-weight: 900;
+    src: local("Inter Tight Black"),local("InterTight-Black"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/InterTight-Black.2e10fd2f.woff2) format("woff2"),url(https://assets.unrealengine.com/unrealengine-website-f376134/_next/static/media/InterTight-Black.96f04dd0.woff) format("woff")
+}
+* {
+  	font-size: 12px;
+	font-family: Inter, sans-serif;
+}
+html, body {
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	height: 100%;
+}
+
+
+textarea{
+	outline:none;
+	resize:none;
+}
+input {
+	outline: none;
+}
+input[type="checkbox"], input[type="radio"] {
+	vertical-align: sub;
+}
+input[type="text"], input[type="email"], input[type="date"], input[type="password"], input[type="tel"] {
+	padding: 0 5px;
+}
+input:-webkit-autofill {
+	-webkit-box-shadow: 0 0 0 400px $color-white inset;
+}
+a {
+	color: $color-black;
+}
+a:hover {
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+ul, li, p {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#app {
+	height: 100%;
+}

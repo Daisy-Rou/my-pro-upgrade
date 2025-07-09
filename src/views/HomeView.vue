@@ -1,18 +1,26 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view/>
+    <footer-link></footer-link>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import FooterLink from '@/components/footer-link.vue'
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    FooterLink
   }
 }
 </script>
+<style lang="scss" scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: Inter Tight, sans-serif;
+  background-color: #101014;
+}
+</style>
