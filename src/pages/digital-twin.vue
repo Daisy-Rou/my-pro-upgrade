@@ -347,10 +347,14 @@ export default {
   }
   /* 步骤导航栏样式 */
   .step-box {
+    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     background-color: rgba(255, 255, 255, .05);
     &.fixed {
       position: fixed;
@@ -363,6 +367,7 @@ export default {
     }
     /* 步骤项样式 */
     .step-item {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       margin-right: 42px;
@@ -399,6 +404,7 @@ export default {
   }
   /* 步骤内容区域通用样式 */
   .step-one-box, .step-two-box, .step-three-box {
+    width: 100%;
     .text-title-box {
       margin-bottom: 24px;
       margin-top: 32px;
@@ -417,6 +423,8 @@ export default {
   }
   /* 第二步背景区域 */
   .step-two-bg-box {
+    width: 100%;
+    max-width: 1920px;
     background-image: url(../assets/images/step-bg222.png);
     aspect-ratio: 1920 / 488;
     object-fit: cover;
@@ -434,6 +442,9 @@ export default {
     }
   }
   .news-small-card-box {
+    max-width: 1920px;
+    display: flex;
+    flex-direction: column;
     padding: 24px 128px;
   }
   /* 响应式设计 - 1905px以下 */
@@ -507,6 +518,9 @@ export default {
           line-height: 40px !important;
         }
       }
+    }
+    .step-box {
+      justify-content: inherit !important;
     }
     .step-two-box, .step-three-box {
       padding: 40px 24px !important;
