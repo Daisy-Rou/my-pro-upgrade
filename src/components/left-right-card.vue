@@ -71,7 +71,7 @@ export default {
     .img-box {
       display: flex;
       flex-shrink: 0;
-      max-width: 191px;
+      max-width: 150px;
       height: auto;
       aspect-ratio: 1 / 1;
       border-radius: 16px 0 0 16px;
@@ -95,6 +95,11 @@ export default {
         font-family: Inter Tight, sans-serif;
         line-height: 25px;
         margin-bottom: 12px;
+        overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
+        text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
+        display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
+        -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
+        -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
       }
       .news-small-card-item-content {
         font-size: 14px;
@@ -119,7 +124,7 @@ export default {
         color: #fff;
         background-color: rgba(255, 255, 255, .15);
         border-radius: 12px;
-        margin-top: 36px;
+        margin-top: 24px;
         // cursor: pointer;
         // &:hover {
         //   background-color: rgba(255, 255, 255, 0.35);
@@ -144,7 +149,7 @@ export default {
         margin-right: 24px !important;
       }
       .img-box {
-        aspect-ratio: 180 / 120 !important;
+        max-width: 120px !important;
       }
     }
   }

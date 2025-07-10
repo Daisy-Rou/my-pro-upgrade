@@ -233,6 +233,7 @@ export default {
 .digital-twin {
   display: flex;
   flex-direction: column;
+  align-items: center;
   /* 主容器样式 */
   .main-box {
     position: relative;

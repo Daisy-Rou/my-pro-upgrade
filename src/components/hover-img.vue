@@ -45,6 +45,7 @@ export default {
   flex-wrap: wrap;
   margin-top: 60px;
   margin-right: -32px;
+  max-width: 1920px;
   .solution-item {
     position: relative;
     width: calc(25% - 32px);
