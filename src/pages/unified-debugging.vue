@@ -1,19 +1,22 @@
 <template>
   <div class="unified-debugging">
     <div class="main-box">
+      <!-- 动态显示文本标题 -->
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
         <div v-show="showVideo" class="text-icon">调试API</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">统一API调试器</div>
-        <span class="small-title" :class="{'fs18': showVideo}">数智统一API调试器是为应用程序开发人员和系统构建人员设计的。它基于HTML5和WebGL技术，可以使用端渲染控件或流渲染控件调用场景编辑器发布的3D场景服务，调试场景交互效果。它帮助开发人员快速开发和调试场景交互效果代码，并帮助您高效地构建数字孪生应用程序</span>
+        <div class="big-title" style="margin-top: 30px;">统一API调试器</div>
+        <!-- 副标题内容 -->
+        <span class="small-title">数智统一API调试器是为应用程序开发人员和系统构建人员设计的。它基于HTML5和WebGL技术，可以使用端渲染控件或流渲染控件调用场景编辑器发布的3D场景服务，调试场景交互效果。它帮助开发人员快速开发和调试场景交互效果代码，并帮助您高效地构建数字孪生应用程序</span>
+        <!-- 按钮区域 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 主展示图片 -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/tsq-img.png" alt="统一API调试器">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+    <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -21,29 +24,38 @@
         :key="index"
         @click="clickStepItem(index)"
       >
+        <!-- 步骤序号和标题 -->
         <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
-    <div class="step-one-box" ref="stepItem1">
+    <!-- 步骤1内容区 -->
+    <div class="step-two-box" ref="stepItem1">
       <div class="text-title-box">
         <span class="num">01</span>
-        <span class="title">API调试器</span>
+        <span class="title">产品特性</span>
       </div>
+    </div>
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
       <content-introduction :list="list"></content-introduction>
     </div>
+    <!-- 步骤2内容区 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-title-box">
         <span class="num">02</span>
         <span class="title">产品特性</span>
       </div>
+      <!-- 主标题组件 -->
       <main-title
         style="margin-top: 32px;"
         title="全面方便的API接口调用"
         small-title="提供完整的接口API，实现多类型特征数据的加载、显示、交互分析，如设置场景摄像头、图表交互、信息标签交互等。开发人员可以基于业务逻辑轻松实现三维可视化场景的展示和交互分析"
       ></main-title>
+      <!-- 图片悬停展示组件 -->
       <hover-img :list="listSolution"></hover-img>
     </div>
+    <!-- 步骤3内容区 -->
     <div class="step-two-box" ref="stepItem3">
       <div class="text-box">
         <div class="text-title-box">
@@ -53,6 +65,7 @@
         <!-- <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">产品优势</div> -->
       </div>
     </div>
+    <!-- 产品优势区域（带背景） -->
     <div class="step-two-bg-box">
       <div class="big-title">产品优势</div>
       <div class="card-box">
@@ -110,14 +123,15 @@ export default {
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      stepTtemTop1: 0,
-      stepTtemTop2: 0,
-      stepTtemTop3: 0,
+       showVideo: true,       // 控制大屏元素显示
+      activeIndex: 0,         // 当前激活的步骤索引
+      scrollTop: 0,           // 页面滚动位置
+      stepTop: 0,             // 步骤导航栏的顶部位置
+      stepTtemTop1: 0,        // 步骤1元素的顶部位置
+      stepTtemTop2: 0,        // 步骤2元素的顶部位置
+      stepTtemTop3: 0,        // 步骤3元素的顶部位置
       isFixed: false,
+      // 步骤导航数据
       stepList: [{
         num: '01',
         title: 'API调试器'
@@ -128,6 +142,7 @@ export default {
         num: '03',
         title: '产品优势'
       }],
+      // 解决方案列表数据
       listSolution: [
         {
           imgSrc: require('../assets/images/jkdy-img1.png'),
@@ -178,6 +193,7 @@ export default {
           path: ''
         }
       ],
+      // 内容介绍列表
       list: [
         {
           tagName: '场景加载',
@@ -208,6 +224,7 @@ export default {
   },
    mounted() {
     // 添加窗口大小改变的监听器，以便动态更新计算属性
+     // 初始化响应式布局
     this.handleResize()
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('scroll', this.handleStepScroll)
@@ -218,6 +235,7 @@ export default {
     window.removeEventListener('scroll', this.handleStepScroll)
   },
   methods: {
+    // 响应窗口大小变化
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
@@ -235,6 +253,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素绝对位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -242,38 +261,19 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      console.log(document.documentElement.scrollTop)
-      this.scrollTop = document.documentElement.scrollTop
-      if (this.scrollTop >= this.stepTop) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      // 判断步骤导航是否应该固定
+      this.isFixed = this.scrollTop >= this.stepTop;
+      //  TODO: 根据滚动位置更新activeIndex
     },
+    // 点击步骤项滚动到对应位置
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        this.stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: this.stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        this.stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: this.stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 2) {
-        this.stepItemTop3 = this.getElementTop(this.$refs.stepItem3)
-        window.scrollTo({
-          top: this.stepItemTop3,
-          behavior: 'smooth'
-        })
-      }
+      const refName = `stepItem${index + 1}`
+      const top = this.getElementTop(this.$refs[refName])
+      window.scrollTo({ top, behavior: 'smooth' })
     }
   }
 }
@@ -283,6 +283,7 @@ export default {
 .unified-debugging {
   display: flex;
   flex-direction: column;
+  // 主容器样式
   .main-box {
     position: relative;
     width: 100%;
@@ -299,13 +300,6 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
     .text-box {
       display: flex;
       flex-direction: column;
@@ -393,6 +387,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  // 步骤导航栏固定样式
   .step-box {
     display: flex;
     flex-direction: row;
@@ -436,11 +431,13 @@ export default {
       }
     }
   }
+  // 步骤1内容区
   .step-one-box {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+  // 步骤3内容区
   .step-one-box, .step-two-box {
     .text-title-box {
       margin-bottom: 24px;
@@ -458,6 +455,7 @@ export default {
       }
     }
   }
+  // 产品优势区域（带背景）
   .step-two-bg-box {
     display: flex;
     flex-direction: column;
@@ -542,6 +540,7 @@ export default {
       line-height: 78px;
     }
   }
+  // 媒体查询
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;

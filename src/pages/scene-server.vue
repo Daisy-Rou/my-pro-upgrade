@@ -1,19 +1,24 @@
 <template>
   <div class="scene-server">
+    <!-- 主展示区域 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
+        <!-- 场景服务器标题 -->
         <div v-show="showVideo" class="text-icon">场景服务器</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">数智场景服务器</div>
-        <span class="small-title" :class="{'fs18': showVideo}">提供一站式基于云的场景托管服务，在云端实现数字孪生场景的分布式渲染。用户可以通过任何现代网络浏览器访问高质量的数字孪生应用程序，而无需安装或下载任何内容。它支持终端用户和云应用之间的实时交互，为用户提供了一个轻量级、高效、便捷的云渲染解决方案</span>
+        <!-- 主标题（响应式字体大小） -->
+        <div class="big-title" style="margin-top: 30px;">数智场景服务器</div>
+        <!-- 副标题（响应式字体大小） -->
+        <span class="small-title">提供一站式基于云的场景托管服务，在云端实现数字孪生场景的分布式渲染。用户可以通过任何现代网络浏览器访问高质量的数字孪生应用程序，而无需安装或下载任何内容。它支持终端用户和云应用之间的实时交互，为用户提供了一个轻量级、高效、便捷的云渲染解决方案</span>
+        <!-- 按钮区域 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 主展示图片（响应式位置） -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/cjfwq-img.png" alt="智能孪生">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+     <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -21,27 +26,34 @@
         :key="index"
         @click="clickStepItem(index)"
       >
+        <!-- 步骤序号（激活状态高亮） -->
         <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
+        <!-- 步骤标题（激活状态高亮） -->
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
-    <div class="step-one-box" ref="stepItem1">
+    <!-- 步骤1：产品特性 -->
+    <div class="step-two-box" ref="stepItem1">
       <div class="text-title-box">
         <span class="num">01</span>
         <span class="title">产品特性</span>
       </div>
+    </div>
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
       <content-introduction :list="list"></content-introduction>
     </div>
-    
+    <!-- 步骤2：产品优势 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
         <div class="text-title-box">
           <span class="num">02</span>
           <span class="title">产品优势</span>
         </div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">高速传输</div>
+        <div class="big-title" style="margin-top: 30px;">高速传输</div>
       </div>
     </div>
+    <!-- 优势卡片区域 -->
     <div class="step-two-bg-box">
       <div class="card-item">
         <div class="img-box">
@@ -71,6 +83,7 @@
         </div>
       </div>
     </div>
+    <!-- 步骤3：多平台适应 -->
     <div class="step-three-box" ref="stepItem3">
       <div class="text-box">
         <div class="text-title-box">
@@ -80,6 +93,7 @@
         <div class="big-title" style="margin-top: 30px;">多平台适应</div>
       </div>
     </div>
+     <!-- 平台适应卡片区域 -->
     <div class="step-three-bg-box">
       <div class="card-item">
         <img src="../assets/images/server-cpys-logo1.png" alt="" class="card-item-logo">
@@ -92,6 +106,7 @@
         <span class="card-item-content">灵活配置，满足场景编辑器和流程渲染控件的集成；支持二次开发，为底层功能接口的开发提供支持，大大提高构建数字孪生应用的效率</span>
       </div>
     </div>
+    <!-- 步骤4：视觉效果 -->
     <div class="step-three-box" ref="stepItem4">
       <div class="text-box">
         <div class="text-title-box">
@@ -101,6 +116,7 @@
         <div class="big-title" style="margin-top: 30px;">非凡的视觉效果</div>
       </div>
     </div>
+    <!-- 视觉效果卡片区域 -->
     <div class="news-small-card-box">
       <div class="news-small-card-item">
         <div class="img-box">
@@ -151,15 +167,17 @@ export default {
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
+      showVideo: true, // 控制大屏元素显示
+      activeIndex: 0,   // 当前激活的步骤索引
+      scrollTop: 0,     // 页面滚动位置
+      stepTop: 0,       // 步骤导航栏位置
+      // 各步骤区域的位置
       stepTtemTop1: 0,
       stepTtemTop2: 0,
       stepItemTop3: 0,
       stepItemTop4: 0,
-      isFixed: false,
+      isFixed: false,    // 是否固定导航栏
+      // 步骤列表数据
       stepList: [{
         num: '01',
         title: '产品特性'
@@ -173,6 +191,7 @@ export default {
         num: '04',
         title: '非凡的视觉效果'
       }],
+      // 产品特性列表数据
       list: [
         {
           tagName: '模型导入',
@@ -202,9 +221,11 @@ export default {
     }
   },
    mounted() {
+    // 初始化响应式处理
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
     window.addEventListener('resize', this.handleResize);
+    // 添加滚动事件监听
     window.addEventListener('scroll', this.handleStepScroll)
   },
   beforeDestroy() {
@@ -213,12 +234,14 @@ export default {
     window.removeEventListener('scroll', this.handleStepScroll)
   },
   methods: {
+    // 处理窗口大小变化
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
       const screenWidth = window.innerWidth;
       // 判断屏幕宽度并返回是否显示元素的布尔值
       this.showVideo = screenWidth > 1280
+      // 更新步骤导航栏位置
       this.stepTop = this.getElementTop(this.$refs.stepBox)
     },
     debounce(fn, delay = 500) {
@@ -230,6 +253,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素距顶位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -237,51 +261,32 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      console.log(document.documentElement.scrollTop)
+      // 检测是否需要固定导航栏
       this.scrollTop = document.documentElement.scrollTop
-      if (this.scrollTop >= this.stepTop) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
+      this.isFixed = this.scrollTop >= this.stepTop
     },
+    // 点击步骤导航项
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        this.stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: this.stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        this.stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: this.stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 2) {
-        this.stepItemTop3 = this.getElementTop(this.$refs.stepItem3)
-        window.scrollTo({
-          top: this.stepItemTop3,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 3) {
-        this.stepItemTop4 = this.getElementTop(this.$refs.stepItem4)
-        window.scrollTo({
-          top: this.stepItemTop4,
-          behavior: 'smooth'
-        })
-      }
+      // 滚动到对应区域
+      const targetRef = `stepItem${index + 1}`
+      const targetTop = this.getElementTop(this.$refs[targetRef])
+      window.scrollTo({ top: targetTop, behavior: 'smooth' })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/* 
+  响应式设计实现：
+  - 使用flex布局实现自适应
+  - 通过media query实现不同屏幕尺寸下的样式适配
+  - 使用aspect-ratio保持元素比例
+  - 使用CSS变量和嵌套规则简化样式
+*/
 .scene-server {
   display: flex;
   flex-direction: column;
@@ -301,13 +306,7 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
+    // 标题
     .text-box {
       display: flex;
       flex-direction: column;
@@ -331,12 +330,7 @@ export default {
         line-height: 78px;
       }
     }
-    
-    // .text-icon {
-    //   width: 120px;
-    //   height: 38px;
-    //   margin-top: 164px;
-    // }
+    // 场景服务器标题
     .text-icon {
       color: #fff;
       font-size: 18px;
@@ -345,7 +339,7 @@ export default {
       margin-top: 164px;
       font-family: Inter Tight, sans-serif;
     }
-    
+    // 按钮区域
     .btn-box {
       display: flex;
       align-items: center;
@@ -380,12 +374,14 @@ export default {
         }
       }
     }
+    // 主展示图片（响应式位置）
     .cosmos-video {
       margin-top: 344px;
       border-radius: 12px;
       aspect-ratio: 1252 / 704;
       border-radius: 24px;
     }
+    // 主展示图片（响应式位置）
     .right-video {
       position: absolute;
       right: 128px;
@@ -395,6 +391,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  // 步骤导航栏
   .step-box {
     display: flex;
     flex-direction: row;
@@ -438,11 +435,13 @@ export default {
       }
     }
   }
+  // 步骤1：产品特性
   .step-one-box {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+  // 步骤2：产品优势
   .step-one-box, .step-two-box, .step-three-box {
     .text-title-box {
       margin-bottom: 24px;
@@ -460,6 +459,7 @@ export default {
       }
     }
   }
+  // 优势卡片区域
   .step-two-bg-box {
     display: flex;
     flex-direction: row;
@@ -527,6 +527,7 @@ export default {
       line-height: 78px;
     }
   }
+  // 平台适应卡片区域
   .step-three-bg-box {
     display: flex;
     flex-direction: row;
@@ -575,6 +576,7 @@ export default {
       }
     }
   }
+  // 视觉效果卡片区域
   .news-small-card-box {
     display: flex;
     flex-direction: row;
@@ -638,6 +640,7 @@ export default {
       }
     }
   }
+  // 媒体查询
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;

@@ -1,19 +1,24 @@
 <template>
   <div class="unified-development">
+    <!-- 主内容区域 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
+        <!-- 标题图标/文字 -->
         <div v-show="showVideo" class="text-icon">开发API</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">统一开发API</div>
-        <span class="small-title" :class="{'fs18': showVideo}">数智统一开发API是基于JavaScript语言开发的二次编程接口。用于在现代浏览器中加载和显示GraphGIS引擎提供的流渲染或端渲染3D场景，为开发者提供绘制业务数据、触发场景交互、控制场景中场景逻辑的功能。图形化统一开发API兼容当前主流的JavaScript前端框架，如Vue.js或React，前端开发者可以快速便捷地进行二次开发</span>
+        <!-- 主标题（根据屏幕尺寸调整字体大小） -->
+        <div class="big-title" style="margin-top: 30px;">统一开发API</div>
+        <!-- 副标题（根据屏幕尺寸调整字体大小） -->
+        <span class="small-title">数智统一开发API是基于JavaScript语言开发的二次编程接口。用于在现代浏览器中加载和显示GraphGIS引擎提供的流渲染或端渲染3D场景，为开发者提供绘制业务数据、触发场景交互、控制场景中场景逻辑的功能。图形化统一开发API兼容当前主流的JavaScript前端框架，如Vue.js或React，前端开发者可以快速便捷地进行二次开发</span>
+        <!-- 按钮区域 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 右侧大图（在宽屏时显示在右侧） -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/tykf-img.png" alt="统一开发API">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+     <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -25,19 +30,22 @@
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
+    <!-- 步骤1内容 -->
     <div class="step-two-box" ref="stepItem1">
       <div class="text-title-box">
         <span class="num">01</span>
         <span class="title">产品特性</span>
       </div>
+      <!-- 主标题组件 -->
       <main-title
         style="margin-top: 32px;"
         title="全面方便的API接口调用"
         small-title="提供完整的接口API，实现多类型特征数据的加载、显示、交互分析，如设置场景摄像头、图表交互、信息标签交互等。开发人员可以基于业务逻辑轻松实现三维可视化场景的展示和交互分析"
       ></main-title>
+      <!-- 悬停图片组件 -->
       <hover-img :list="listSolution"></hover-img>
     </div>
-    
+    <!-- 步骤2内容 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
         <div class="text-title-box">
@@ -101,13 +109,14 @@ export default {
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      stepTtemTop1: 0,
-      stepTtemTop2: 0,
-      isFixed: false,
+      showVideo: true, // 控制是否显示右侧大图
+      activeIndex: 0, // 当前激活的步骤索引
+      scrollTop: 0, // 页面滚动位置
+      stepTop: 0, // 步骤导航栏的顶部位置
+      stepTtemTop1: 0, // 步骤1内容顶部位置
+      stepTtemTop2: 0, // 步骤2内容顶部位置
+      isFixed: false, // 步骤导航栏是否固定
+      // 步骤列表数据
       stepList: [{
         num: '01',
         title: '产品特性'
@@ -115,6 +124,7 @@ export default {
         num: '02',
         title: '产品优势'
       }],
+      // 解决方案列表数据
       listSolution: [
         {
           imgSrc: require('../assets/images/jkdy-img1.png'),
@@ -168,9 +178,11 @@ export default {
     }
   },
    mounted() {
+    // 初始化时执行
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
     window.addEventListener('resize', this.handleResize);
+    // 添加滚动事件监听
     window.addEventListener('scroll', this.handleStepScroll)
   },
   beforeDestroy() {
@@ -179,6 +191,7 @@ export default {
     window.removeEventListener('scroll', this.handleStepScroll)
   },
   methods: {
+    // 处理窗口大小变化
     handleResize() {
       this.handleStepScroll()
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
@@ -186,17 +199,20 @@ export default {
       const screenWidth = window.innerWidth;
       // 判断屏幕宽度并返回是否显示元素的布尔值
       this.showVideo = screenWidth > 1280
+      // 获取步骤导航栏位置
       this.stepTop = this.getElementTop(this.$refs.stepBox)
     },
-    debounce(fn, delay = 500) {
-      let timer = null
-      return function() {
-        if (timer) {
-          clearTimeout(timer)
-        }
-        timer = setTimeout(fn, delay)
-      }
+    // 完整实现防抖函数
+    debounce(func, wait = 100) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          func.apply(this, args);
+        }, wait);
+      };
     },
+    // 获取元素顶部位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -204,6 +220,7 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
       this.scrollTop = document.documentElement.scrollTop
       if (this.scrollTop >= this.stepTop) {
@@ -212,31 +229,27 @@ export default {
         this.isFixed = false
       }
     },
+    // 点击步骤项
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        this.stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: this.stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        this.stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: this.stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
+      // 滚动到对应内容区域
+      const refName = `stepItem${index + 1}`
+      this[`stepItemTop${index + 1}`] = this.getElementTop(this.$refs[refName])
+      window.scrollTo({
+        top: this[`stepItemTop${index + 1}`],
+        behavior: 'smooth'
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/* 统一开发API页面样式 */
 .unified-development {
   display: flex;
   flex-direction: column;
+  /* 主内容区样式 */
   .main-box {
     position: relative;
     width: 100%;
@@ -253,13 +266,7 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
+    /* 文字区域样式 */
     .text-box {
       display: flex;
       flex-direction: column;
@@ -283,12 +290,7 @@ export default {
         line-height: 78px;
       }
     }
-    
-    // .text-icon {
-    //   width: 120px;
-    //   height: 38px;
-    //   margin-top: 164px;
-    // }
+
     .text-icon {
       color: #fff;
       font-size: 18px;
@@ -347,6 +349,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  /* 步骤导航栏样式 */
   .step-box {
     display: flex;
     flex-direction: row;
@@ -390,6 +393,7 @@ export default {
       }
     }
   }
+  /* 步骤内容区样式 */
   .step-two-box {
     padding: 40px 128px;
     .text-title-box {
@@ -406,6 +410,7 @@ export default {
       }
     }
   }
+  /* 产品优势区域样式 */
   .step-two-bg-box {
     display: flex;
     flex-direction: column;
@@ -480,6 +485,7 @@ export default {
       }
     }
   }
+  /* 响应式媒体查询 */
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;

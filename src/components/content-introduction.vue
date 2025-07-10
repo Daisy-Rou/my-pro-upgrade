@@ -7,9 +7,10 @@
     >
       <img v-show="(!showTop && index % 2 !== 0)" class="right-img" :src="item.imgSrc" alt="">
       <div class="left-box">
-        <div class="tag">{{item.tagName}}</div>
+        <div class="tag" v-if="item.tagName">{{item.tagName}}</div>
         <div class="title">{{item.title}}</div>
         <div class="content">{{item.content}}</div>
+        <div class="content" v-if="item.content1">{{item.content1}}</div>
       </div>
       <img v-show="index % 2 === 0 || showTop" class="right-img" :src="item.imgSrc" alt="">
     </div>

@@ -1,19 +1,24 @@
 <template>
   <div class="smart-park">
+    <!-- 顶部展示区 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
+        <!-- 产品展示图（响应式位置） -->
         <div v-show="showVideo" class="text-icon">智能公园数字双国际奥委会</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">智能公园数字双国际奥委会</div>
-        <span class="small-title" :class="{'fs18': showVideo}">智慧公园数字孪生 IOC 系统专为各种园区运营管理部门设计。它整合了园区现有信息系统的数据资源，深度融合5G、大数据、云计算、AI、融合通信等前沿技术，有效提升跨部门决策和资源协同效率。可广泛应用于政府园区、地产园区、园区运营、产业园区、景区运营等场景</span>
+        <!-- 响应式显示的标题 -->
+        <div class="big-title" style="margin-top: 30px;">智能公园数字双国际奥委会</div>
+        <!-- 产品描述 -->
+        <span class="small-title">智慧公园数字孪生 IOC 系统专为各种园区运营管理部门设计。它整合了园区现有信息系统的数据资源，深度融合5G、大数据、云计算、AI、融合通信等前沿技术，有效提升跨部门决策和资源协同效率。可广泛应用于政府园区、地产园区、园区运营、产业园区、景区运营等场景</span>
+        <!-- 下载按钮 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 产品展示图（响应式位置） -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/zhyq-img.png" alt="智慧园区">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+    <!-- 步骤导航 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -21,10 +26,12 @@
         :key="index"
         @click="clickStepItem(index)"
       >
+        <!-- 动态激活状态 -->
         <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
+    <!-- 产品特性模块 -->
     <div class="step-two-box" ref="stepItem1">
       <div class="top-title-box">
         <div class="text-title-box">
@@ -44,38 +51,12 @@
         </div>
       </div>
     </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">情况监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">整合园区数据资源，对园区产业、安全、基础设施等管理领域的关键指标进行综合分析，协助管理者掌握园区运营情况，一屏掌握园区整体运营情况</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/zhyq-img1.png" alt="智能孪生">
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
+      <!-- 商业决策 -->
+      <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
     </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">安全监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持整合视频监控等系统数据，支持对园区内重点区域、人员、车辆、报警事件等要素的实时监控，以及对周边视频的实时获取，辅助管理者提升园区安防管控的有效性</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/zhyq-img2.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">通道监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持对楼宇内人员和车辆出入、车位利用、内部电梯运行状态的实时监控，对人员和车辆的异常情况进行预警，帮助管理者实时掌握园区交通情况，实现人员和车辆的便捷出入</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/zhyq-img3.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">设施监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持对园区内各种设备设施的位置、分布、状态的实时监控；通过三维建模，在三维仿真中展示设备的外观和复杂的机械结构，辅助管理人员掌握设备的运行状态，提高设备运维效率</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/zhyq-img4.png" alt="智能孪生">
-    </div>
+    <!-- 数字孪生 -->
     <div v-if="activeBtnIndex === 1" class="szls-box">
       <main-title
         title="数字孪生赋权"
@@ -112,6 +93,7 @@
         </div>
       </div>
     </div>
+    <!-- 智能运维 -->
     <div v-if="activeBtnIndex === 2" class="szls-box szls-bg-znyw">
       <main-title
         title="智能运维赋能"
@@ -148,7 +130,9 @@
         </div>
       </div>
     </div>
+    <!-- 基础平台 -->
     <div v-if="activeBtnIndex === 3" class="szls-box szls-bg-jcpt">
+      <!-- 主标题组件 -->
       <main-title
         title="基础平台赋能"
         small-title="强大的跨业务平台集成能力，将数据、技术、设备和业务需求紧密结合，全面赋能用户业务应用"
@@ -198,6 +182,7 @@
         </div>
       </div>
     </div>
+    <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
         <div class="text-title-box">
@@ -247,6 +232,7 @@
         </div>
       </div>
     </div>
+    <!-- 推荐产品卡片区域 -->
     <div class="step-two-box" ref="stepItem3">
       <div class="text-box">
         <div class="text-title-box">
@@ -255,6 +241,7 @@
         </div>
         <div class="big-title" style="margin-top: 30px;">推荐产品</div>
       </div>
+      <!-- 左右布局卡片组件 -->
       <left-right-card :list="list"></left-right-card>
     </div>
   </div>
@@ -263,20 +250,23 @@
 <script>
 import mainTitle from '@/components/main-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
+import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'smart-park',
   components: {
     mainTitle,
-    leftRightCard
+    leftRightCard,
+    contentIntroduction
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      isFixed: false,
-      activeBtnIndex: 0,
+      showVideo: true,      // 控制大屏展示模式
+      activeIndex: 0,       // 当前激活的导航项
+      scrollTop: 0,         // 页面滚动位置
+      stepTop: 0,           // 导航栏位置
+      isFixed: false,      // 导航栏是否固定
+      activeBtnIndex: 0,   // 当前高亮按钮
+      // 进度条列表
       stepList: [{
         num: '01',
         title: '产品功能介绍'
@@ -287,6 +277,7 @@ export default {
         num: '03',
         title: '推荐产品'
       }],
+      // 按钮列表
       stepBtnList: [{
         name: '商业决策'
       },{
@@ -296,6 +287,7 @@ export default {
       },{
         name: '基础平台'
       }],
+      // 卡片数据
       list: [
         {
           imgSrc: require('../assets/images/zhcs-tjcp1.png'),
@@ -333,6 +325,33 @@ export default {
           content: '学习、编写和调试数字双数据显示和控制逻辑代码',
           path: '/unified-debugging'
         }
+      ],
+      // 特性列表
+      listSYJC: [
+        {
+          tagName: '商业决策授权',
+          title: '情况监控',
+          content: '整合园区数据资源，对园区产业、安全、基础设施等管理领域的关键指标进行综合分析，协助管理者掌握园区运营情况，一屏掌握园区整体运营情况',
+          imgSrc: require('../assets/images/zhyq-img1.png')
+        },
+        {
+          tagName: '商业决策授权',
+          title: '安全监控',
+          content: '支持整合视频监控等系统数据，支持对园区内重点区域、人员、车辆、报警事件等要素的实时监控，以及对周边视频的实时获取，辅助管理者提升园区安防管控的有效性',
+          imgSrc: require('../assets/images/zhyq-img2.png')
+        },
+        {
+          tagName: '商业决策授权',
+          title: '通道监控',
+          content: '支持对楼宇内人员和车辆出入、车位利用、内部电梯运行状态的实时监控，对人员和车辆的异常情况进行预警，帮助管理者实时掌握园区交通情况，实现人员和车辆的便捷出入',
+          imgSrc: require('../assets/images/zhyq-img3.png')
+        },
+        {
+          tagName: '商业决策授权',
+          title: '设施监控',
+          content: '支持对园区内各种设备设施的位置、分布、状态的实时监控；通过三维建模，在三维仿真中展示设备的外观和复杂的机械结构，辅助管理人员掌握设备的运行状态，提高设备运维效率',
+          imgSrc: require('../assets/images/zhyq-img4.png')
+        }
       ]
     }
   },
@@ -365,6 +384,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素距顶位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -374,38 +394,21 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      this.scrollTop = document.documentElement.scrollTop
-      if (this.scrollTop >= this.stepTop) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      // 判断步骤导航是否应该固定
+      this.isFixed = this.scrollTop >= this.stepTop;
+      //  TODO: 根据滚动位置更新activeIndex
     },
+    // 导航项点击事件
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        let stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        let stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 2) {
-        let stepItemTop3 = this.getElementTop(this.$refs.stepItem3)
-        window.scrollTo({
-          top: stepItemTop3,
-          behavior: 'smooth'
-        })
-      }
+      const refName = `stepItem${index + 1}`
+      const top = this.getElementTop(this.$refs[refName])
+      window.scrollTo({ top, behavior: 'smooth' })
     },
+    // 按钮切换
     handleBtnClick(index) {
       this.activeBtnIndex = index
     }
@@ -417,7 +420,8 @@ export default {
 .smart-park {
   display: flex;
   flex-direction: column;
-  .main-box, .step-one-box {
+  // 主内容区域
+  .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
@@ -432,13 +436,7 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
+
     .text-box {
       display: flex;
       flex-direction: column;
@@ -462,12 +460,6 @@ export default {
         line-height: 78px;
       }
     }
-    
-    // .text-icon {
-    //   width: 120px;
-    //   height: 38px;
-    //   margin-top: 164px;
-    // }
     .text-icon {
       color: #fff;
       font-size: 18px;
@@ -526,6 +518,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  // 进度条区域
   .step-box {
     display: flex;
     flex-direction: row;
@@ -569,23 +562,20 @@ export default {
       }
     }
   }
+  // 商业决策
   .step-one-box {
-    min-height: 800px;
-    .right-text-box {
-      right: 128px;
-      left: auto;
-    }
-    .left-video {
-      left: 128px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  // 产品优势卡片区域
   .step-one-box, .step-two-box {
-    background-image: none;
-    margin-top: 0;
     .top-title-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 24px;
+      margin-top: 32px;
     }
     .text-title-box {
       .num {
@@ -614,6 +604,9 @@ export default {
         border-radius: 16px;
         margin-right: 16px;
         cursor: pointer;
+        &:last-child {
+          margin-right: 0;
+        }
         &:hover {
           background-color: rgba(255, 255, 255, 0.35);
         }
@@ -645,6 +638,7 @@ export default {
       }
     }
   }
+  // 数字孪生
   .szls-box {
     display: flex;
     flex-direction: column;
@@ -705,6 +699,7 @@ export default {
       }
     }
   }
+  // 推荐产品卡片区域
   .step-two-bg-box {
     display: flex;
     flex-direction: column;
@@ -789,6 +784,7 @@ export default {
       line-height: 78px;
     }
   }
+  // 媒体查询区域
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;
@@ -801,16 +797,6 @@ export default {
         max-width: 1024px !important;
         top: 96px !important;
         aspect-ratio: 1024 / 576 !important;
-      }
-    }
-    
-    .step-one-box {
-      .right-text-box {
-        right: 64px !important;
-        left: auto !important;
-      }
-      .left-video {
-        left: 64px !important;
       }
     }
     .szls-box {
@@ -826,9 +812,6 @@ export default {
   @media screen  and (max-width: 1440px) {
     .main-box {
       padding: 80px 64px !important;
-    }
-    .step-one-box {
-      min-height: 740px !important;
     }
     .step-two-bg-box {
       padding: 24px 64px !important;
@@ -876,6 +859,13 @@ export default {
           }
         }
       }
+    }
+  }
+  @media screen and (max-width: 960px)  {
+    .step-one-box {
+      padding: 40px 24px !important;
+      align-items: normal !important;
+      justify-content: normal !important;
     }
   }
   @media screen and (max-width: 768px){

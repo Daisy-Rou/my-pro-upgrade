@@ -1,19 +1,22 @@
 <template>
   <div class="scene-editor">
+    <!-- 主视觉区域 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
         <div v-show="showVideo" class="text-icon">场景编辑器</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">数智场景编辑器</div>
-        <span class="small-title" :class="{'fs18': showVideo}">数智场景编辑器是一款基于 HTML5 和 WebGL 技术的专用产品，用于配置交互式、实时渲染的 3D 场景效果。 产品具有强大的数据集成能力，用户友好的配置环境，丰富的可定义场景属性，非凡 实时渲染效果，并且可以将配置的 3D 场景发布为公有云服务。 开发者助力行业智能化升级！</span>
+        <!-- 标题区域 -->
+        <div class="big-title" style="margin-top: 30px;">数智场景编辑器</div>
+        <span class="small-title">数智场景编辑器是一款基于 HTML5 和 WebGL 技术的专用产品，用于配置交互式、实时渲染的 3D 场景效果。 产品具有强大的数据集成能力，用户友好的配置环境，丰富的可定义场景属性，非凡 实时渲染效果，并且可以将配置的 3D 场景发布为公有云服务。 开发者助力行业智能化升级！</span>
+        <!-- 按钮区域 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+       <!-- 主视觉图片 -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/cjbjq-img.png" alt="智能孪生">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+    <!-- 步骤导航 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -25,22 +28,27 @@
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
-    <div class="step-one-box" ref="stepItem1">
+    <!-- 步骤1：产品特性 -->
+    <div class="step-two-box" ref="stepItem1">
       <div class="text-title-box">
         <span class="num">01</span>
         <span class="title">产品特性</span>
       </div>
+    </div>
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
       <content-introduction :list="list"></content-introduction>
     </div>
+    <!-- 步骤2：产品优势 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
         <div class="text-title-box">
           <span class="num">02</span>
           <span class="title">产品优势</span>
         </div>
-        <!-- <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">产品优势</div> -->
       </div>
     </div>
+     <!-- 产品优势卡片区域 -->
     <div class="step-two-bg-box">
       <div class="big-title">产品优势</div>
       <div class="card-box">
@@ -94,13 +102,14 @@ export default {
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      stepTtemTop1: 0,
-      stepTtemTop2: 0,
-      isFixed: false,
+      showVideo: true, // 控制大屏显示状态
+      activeIndex: 0,   // 当前激活的步骤索引
+      scrollTop: 0,     // 页面滚动位置
+      stepTop: 0,       // 步骤导航栏位置
+      stepTtemTop1: 0,  // 步骤1元素位置
+      stepTtemTop2: 0,  // 步骤2元素位置
+      isFixed: false,   // 导航栏是否固定
+      // 步骤列表数据
       stepList: [{
         num: '01',
         title: '产品特性'
@@ -108,6 +117,7 @@ export default {
         num: '02',
         title: '产品优势'
       }],
+      // 产品特性列表数据
       list: [
         {
           tagName: '模型导入',
@@ -137,9 +147,12 @@ export default {
     }
   },
   mounted() {
+    // 初始化时执行
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
+    // 添加窗口大小改变监听
     window.addEventListener('resize', this.handleResize);
+    // 添加滚动监听
     window.addEventListener('scroll', this.handleStepScroll)
   },
   beforeDestroy() {
@@ -148,12 +161,14 @@ export default {
     window.removeEventListener('scroll', this.handleStepScroll)
   },
   methods: {
+    // 理窗口大小变化
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
       const screenWidth = window.innerWidth;
       // 判断屏幕宽度并返回是否显示元素的布尔值
       this.showVideo = screenWidth > 1280
+      // 更新导航栏位置
       this.stepTop = this.getElementTop(this.$refs.stepBox)
     },
     debounce(fn, delay = 500) {
@@ -165,6 +180,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -172,8 +188,8 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      console.log(document.documentElement.scrollTop)
       this.scrollTop = document.documentElement.scrollTop
       if (this.scrollTop >= this.stepTop) {
         this.isFixed = true
@@ -181,28 +197,23 @@ export default {
         this.isFixed = false
       }
     },
+    // 点击步骤导航
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        this.stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: this.stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        this.stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: this.stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
+      // 滚动到对应区块
+      const refName = `stepItem${index + 1}`
+      const targetTop = this.getElementTop(this.$refs[refName])
+      window.scrollTo({
+        top: targetTop,
+        behavior: 'smooth'
+      })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+/* 响应式布局样式 */
 .scene-editor {
   display: flex;
   flex-direction: column;
@@ -222,13 +233,6 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
     .text-box {
       display: flex;
       flex-direction: column;
@@ -316,6 +320,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  // 进度条样式
   .step-box {
     display: flex;
     flex-direction: row;
@@ -364,6 +369,7 @@ export default {
     flex-direction: column;
     align-items: center;
   }
+  /* 卡片响应式布局 */
   .step-one-box, .step-two-box {
     .text-title-box {
       margin-bottom: 24px;
@@ -465,6 +471,7 @@ export default {
       line-height: 78px;
     }
   }
+  // 媒体查询
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;

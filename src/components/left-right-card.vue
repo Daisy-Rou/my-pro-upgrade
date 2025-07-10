@@ -10,9 +10,9 @@
         <img :src="item.imgSrc" alt="">
       </div>
       <div class="news-small-card-item-title-box">
-        <div class="news-small-card-item-title">{{item.title}}</div>
-        <span class="news-small-card-item-content">{{item.content}}</span>
-        <div class="news-small-card-item-btn">更多</div>
+        <div class="news-small-card-item-title">{{item.title || ''}}</div>
+        <span class="news-small-card-item-content">{{item.content || ''}}</span>
+        <div v-if="showBtn" class="news-small-card-item-btn">更多</div>
       </div>
     </div>
   </div>
@@ -25,6 +25,10 @@ export default {
     list: {
       type: Array,
       default: () => []
+    },
+    showBtn: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {

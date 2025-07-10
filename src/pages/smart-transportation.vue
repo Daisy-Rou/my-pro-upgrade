@@ -1,19 +1,24 @@
 <template>
   <div class="smart-transportation">
+    <!-- 顶部展示区 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
+        <!-- 产品展示图（响应式位置） -->
         <div v-show="showVideo" class="text-icon">智能交通数字双IOC</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">智能交通数字双IOC</div>
-        <span class="small-title" :class="{'fs18': showVideo}">智慧交通数字孪生IOC系统支持整合交通运输各部门现有信息系统的数据资源，深度融合5G、大数据、云计算、人工智能、融合通信等前沿技术。它将信息、技术、枢纽态势监测、实现“智慧感知、智慧处置、智慧评价、智慧改善”，有效提升跨部门决策和资源协调效率</span>
+        <!-- 响应式显示的标题 -->
+        <div class="big-title" style="margin-top: 30px;">智能交通数字双IOC</div>
+        <!-- 产品描述 -->
+        <span class="small-title">智慧交通数字孪生IOC系统支持整合交通运输各部门现有信息系统的数据资源，深度融合5G、大数据、云计算、人工智能、融合通信等前沿技术。它将信息、技术、枢纽态势监测、实现“智慧感知、智慧处置、智慧评价、智慧改善”，有效提升跨部门决策和资源协调效率</span>
+        <!-- 下载按钮 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 产品展示图（响应式位置） -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/zhjt-img.png" alt="智慧交通">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+    <!-- 步骤导航 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -21,10 +26,12 @@
         :key="index"
         @click="clickStepItem(index)"
       >
+        <!-- 动态激活状态 -->
         <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
+    <!-- 产品特性模块 -->
     <div class="step-two-box" ref="stepItem1">
       <div class="top-title-box">
         <div class="text-title-box">
@@ -44,38 +51,12 @@
         </div>
       </div>
     </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">整体监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持监控城市交通要素的分布和状态，支持选择和查看机动目标、执法人员、视频监控等对象的详细信息；协助管理人员全面掌握运输的整体运行情况</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/zhjt-img1.png" alt="智能孪生">
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
+      <!-- 商业决策 -->
+      <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
     </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">人口监测</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持通过热图、流图等分析方法对城市各类人口群体的地域分布、出行方式等关键指标进行可视化分析，结合可视化图表进行综合分析，为城市交通需求分析提供决策支持</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/zhjt-img2.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">出行需求分析</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持实时监控人口出行路线、交通方式、出行目的等信息。基于专业模型算法，对关键指标进行多维分析，辅助用户了解城市出行需求，为城市交通规划业务应用提供科学依据</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/zhjt-img3.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">通勤分析</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持对居住人口、工作和居住管理要素的监控和分析。对交通流量/始发地、物业类型等关键指标进行多维分析。，协助探索辖区内人口与其工作和居住的关系</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/zhjt-img4.png" alt="智能孪生">
-    </div>
+    <!-- 数字孪生 -->
     <div v-if="activeBtnIndex === 1" class="szls-box">
       <main-title
         title="数字孪生赋权"
@@ -112,6 +93,7 @@
         </div>
       </div>
     </div>
+    <!-- 智能运维 -->
     <div v-if="activeBtnIndex === 2" class="szls-box szls-bg-znyw">
       <main-title
         title="智能运维赋能"
@@ -148,6 +130,7 @@
         </div>
       </div>
     </div>
+    <!-- 基础平台 -->
     <div v-if="activeBtnIndex === 3" class="szls-box szls-bg-jcpt">
       <main-title
         title="基础平台赋能"
@@ -198,6 +181,7 @@
         </div>
       </div>
     </div>
+    <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
         <div class="text-title-box">
@@ -247,6 +231,7 @@
         </div>
       </div>
     </div>
+    <!-- 推荐产品卡片区域 -->
     <div class="step-two-box" ref="stepItem3">
       <div class="text-box">
         <div class="text-title-box">
@@ -255,6 +240,7 @@
         </div>
         <div class="big-title" style="margin-top: 30px;">推荐产品</div>
       </div>
+      <!-- 左右布局卡片组件 -->
       <left-right-card :list="list"></left-right-card>
     </div>
   </div>
@@ -263,20 +249,23 @@
 <script>
 import mainTitle from '@/components/main-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
+import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'smart-transportation',
   components: {
     mainTitle,
-    leftRightCard
+    leftRightCard,
+    contentIntroduction
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      isFixed: false,
-      activeBtnIndex: 0,
+      showVideo: true,      // 控制大屏展示模式
+      activeIndex: 0,       // 当前激活的导航项
+      scrollTop: 0,         // 页面滚动位置
+      stepTop: 0,           // 导航栏位置
+      isFixed: false,      // 导航栏是否固定
+      activeBtnIndex: 0,   // 当前高亮按钮
+      // 进度条列表
       stepList: [{
         num: '01',
         title: '产品功能介绍'
@@ -287,6 +276,7 @@ export default {
         num: '03',
         title: '推荐产品'
       }],
+      // 按钮列表
       stepBtnList: [{
         name: '业务决策'
       },{
@@ -296,6 +286,7 @@ export default {
       },{
         name: '基础平台'
       }],
+      // 卡片数据
       list: [
         {
           imgSrc: require('../assets/images/zhcs-tjcp1.png'),
@@ -333,6 +324,33 @@ export default {
           content: '学习、编写和调试数字双数据显示和控制逻辑代码',
           path: '/unified-debugging'
         }
+      ],
+      // 特性列表
+      listSYJC: [
+        {
+          tagName: '商业决策授权',
+          title: '整体监控',
+          content: '支持监控城市交通要素的分布和状态，支持选择和查看机动目标、执法人员、视频监控等对象的详细信息；协助管理人员全面掌握运输的整体运行情况',
+          imgSrc: require('../assets/images/zhjt-img1.png')
+        },
+        {
+          tagName: '商业决策授权',
+          title: '人口监测',
+          content: '支持通过热图、流图等分析方法对城市各类人口群体的地域分布、出行方式等关键指标进行可视化分析，结合可视化图表进行综合分析，为城市交通需求分析提供决策支持',
+          imgSrc: require('../assets/images/zhjt-img2.png')
+        },
+        {
+          tagName: '商业决策授权',
+          title: '出行需求分析',
+          content: '支持实时监控人口出行路线、交通方式、出行目的等信息。基于专业模型算法，对关键指标进行多维分析，辅助用户了解城市出行需求，为城市交通规划业务应用提供科学依据',
+          imgSrc: require('../assets/images/zhjt-img3.png')
+        },
+        {
+          tagName: '商业决策授权',
+          title: '通勤分析',
+          content: '支持对居住人口、工作和居住管理要素的监控和分析。对交通流量/始发地、物业类型等关键指标进行多维分析。协助探索辖区内人口与其工作和居住的关系',
+          imgSrc: require('../assets/images/zhjt-img4.png')
+        }
       ]
     }
   },
@@ -365,6 +383,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素距顶位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -374,38 +393,21 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      this.scrollTop = document.documentElement.scrollTop
-      if (this.scrollTop >= this.stepTop) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      // 判断步骤导航是否应该固定
+      this.isFixed = this.scrollTop >= this.stepTop;
+      //  TODO: 根据滚动位置更新activeIndex
     },
+    // 导航项点击事件
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        let stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        let stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 2) {
-        let stepItemTop3 = this.getElementTop(this.$refs.stepItem3)
-        window.scrollTo({
-          top: stepItemTop3,
-          behavior: 'smooth'
-        })
-      }
+      const refName = `stepItem${index + 1}`
+      const top = this.getElementTop(this.$refs[refName])
+      window.scrollTo({ top, behavior: 'smooth' })
     },
+    // 按钮切换
     handleBtnClick(index) {
       this.activeBtnIndex = index
     }
@@ -417,7 +419,8 @@ export default {
 .smart-transportation {
   display: flex;
   flex-direction: column;
-  .main-box, .step-one-box {
+  // 主内容区域
+  .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
@@ -433,13 +436,6 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
     .text-box {
       display: flex;
       flex-direction: column;
@@ -463,12 +459,6 @@ export default {
         line-height: 78px;
       }
     }
-    
-    // .text-icon {
-    //   width: 120px;
-    //   height: 38px;
-    //   margin-top: 164px;
-    // }
     .text-icon {
       color: #fff;
       font-size: 18px;
@@ -527,6 +517,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  // 进度条区域
   .step-box {
     display: flex;
     flex-direction: row;
@@ -570,23 +561,20 @@ export default {
       }
     }
   }
+  // 商业决策
   .step-one-box {
-    min-height: 800px;
-    .right-text-box {
-      right: 128px;
-      left: auto;
-    }
-    .left-video {
-      left: 128px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  // 产品优势卡片区域
   .step-one-box, .step-two-box {
-    background-image: none;
-    margin-top: 0;
     .top-title-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 24px;
+      margin-top: 32px;
     }
     .text-title-box {
       .num {
@@ -615,6 +603,9 @@ export default {
         border-radius: 16px;
         margin-right: 16px;
         cursor: pointer;
+        &:last-child {
+          margin-right: 0;
+        }
         &:hover {
           background-color: rgba(255, 255, 255, 0.35);
         }
@@ -646,6 +637,7 @@ export default {
       }
     }
   }
+  // 数字孪生
   .szls-box {
     display: flex;
     flex-direction: column;
@@ -704,6 +696,7 @@ export default {
       }
     }
   }
+  // 推荐产品卡片区域
   .step-two-bg-box {
     display: flex;
     flex-direction: column;
@@ -788,6 +781,7 @@ export default {
       line-height: 78px;
     }
   }
+  // 媒体查询区域
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;
@@ -800,16 +794,6 @@ export default {
         max-width: 1024px !important;
         top: 96px !important;
         aspect-ratio: 1024 / 576 !important;
-      }
-    }
-    
-    .step-one-box {
-      .right-text-box {
-        right: 64px !important;
-        left: auto !important;
-      }
-      .left-video {
-        left: 64px !important;
       }
     }
     .szls-box {
@@ -825,9 +809,6 @@ export default {
   @media screen  and (max-width: 1440px) {
     .main-box {
       padding: 80px 64px !important;
-    }
-    .step-one-box {
-      min-height: 740px !important;
     }
     .step-two-bg-box {
       padding: 24px 64px !important;
@@ -875,6 +856,13 @@ export default {
           }
         }
       }
+    }
+  }
+  @media screen and (max-width: 960px)  {
+    .step-one-box {
+      padding: 40px 24px !important;
+      align-items: normal !important;
+      justify-content: normal !important;
     }
   }
   @media screen and (max-width: 768px){

@@ -1,19 +1,23 @@
 <template>
   <div class="smart-city">
+    <!-- 顶部展示区 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
+        <!-- 响应式显示的标题 -->
         <div v-show="showVideo" class="text-icon">智慧城市</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">智慧城市</div>
-        <span class="small-title" :class="{'fs18': showVideo}">全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！</span>
+        <div class="big-title" style="margin-top: 30px;">智慧城市</div>
+        <!-- 产品描述 -->
+        <span class="small-title">全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！</span>
+        <!-- 下载按钮 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 产品展示图（响应式位置） -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/znls-img.png" alt="智慧城市">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+    <!-- 步骤导航 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -21,10 +25,12 @@
         :key="index"
         @click="clickStepItem(index)"
       >
+        <!-- 动态激活状态 -->
         <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
+    <!-- 产品特性模块 -->
     <div class="step-two-box" ref="stepItem1">
       <div class="top-title-box">
         <div class="text-title-box">
@@ -44,42 +50,14 @@
         </div>
       </div>
     </div>
-    <div v-if="false" class="step-one-box">
-      <content-introduction :list="listSYJC"></content-introduction>
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
+      <!-- 商业决策 -->
+      <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
     </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">全景监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持整合政府数据资源，基于地理信息系统，可视化分析城市治理、生态环境、经济发展、联动指挥等核心指标，全面掌握城市情况，提高监管力度和行政效率</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/zhcs-img1.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">治理监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持城市网格化管理，显示道路、建筑、工地等城市组成部分的位置、状态、详细信息，监控分析公共设施、道路交通等指标，实现全周期城市治理</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/zhcs-img2.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">管道走廊监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">基于CIM平台，对大型管网分布和运行的实时信息进行监控。它提供了管道走廊内部结构和组件的精细3D显示，并实现了管道运行的全域、端到端“点-线-面”管理和可视化</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/zhcs-img3.png" alt="智能孪生">
-    </div>
-    <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">商业决策授权</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">施工现场监控</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持从城市到地区到街道级别的深入分析，提供建筑区域分布的可视化表示。动态展示施工过程及各阶段成果，辅助管理者控制施工进度</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/zhcs-img4.png" alt="智能孪生">
-    </div>
+    <!-- 数字孪生 -->
     <div v-if="activeBtnIndex === 1" class="szls-box">
+      <!-- 主标题组件 -->
       <main-title
         title="数字孪生赋权"
         small-title="在最大范围内实时渲染所有元素，提供电影级视觉效果，提升用户体验"
@@ -115,7 +93,9 @@
         </div>
       </div>
     </div>
+    <!-- 智能运维 -->
     <div v-if="activeBtnIndex === 2" class="szls-box szls-bg-znyw">
+      <!-- 主标题组件 -->
       <main-title
         title="智能运维赋能"
         small-title="在最大范围内实时渲染所有元素，提供电影级视觉效果，提升用户体验"
@@ -151,7 +131,9 @@
         </div>
       </div>
     </div>
+    <!-- 基础平台 -->
     <div v-if="activeBtnIndex === 3" class="szls-box szls-bg-jcpt">
+      <!-- 主标题组件 -->
       <main-title
         title="基础平台赋能"
         small-title="强大的跨业务平台集成能力，将数据、技术、设备和业务需求紧密结合，全面赋能用户业务应用"
@@ -201,6 +183,7 @@
         </div>
       </div>
     </div>
+    <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
         <div class="text-title-box">
@@ -250,6 +233,7 @@
         </div>
       </div>
     </div>
+    <!-- 推荐产品卡片区域 -->
     <div class="step-two-box" ref="stepItem3">
       <div class="text-box">
         <div class="text-title-box">
@@ -258,6 +242,7 @@
         </div>
         <div class="big-title" style="margin-top: 30px;">推荐产品</div>
       </div>
+      <!-- 左右布局卡片组件 -->
       <left-right-card :list="list"></left-right-card>
     </div>
   </div>
@@ -266,20 +251,23 @@
 <script>
 import mainTitle from '@/components/main-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
+import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'smart-city',
   components: {
     mainTitle,
-    leftRightCard
+    leftRightCard,
+    contentIntroduction
   },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      isFixed: false,
-      activeBtnIndex: 0,
+      showVideo: true,      // 控制大屏展示模式
+      activeIndex: 0,       // 当前激活的导航项
+      scrollTop: 0,         // 页面滚动位置
+      stepTop: 0,           // 导航栏位置
+      isFixed: false,      // 导航栏是否固定
+      activeBtnIndex: 0,   // 当前高亮按钮
+      // 进度条列表
       stepList: [{
         num: '01',
         title: '产品功能介绍'
@@ -290,6 +278,7 @@ export default {
         num: '03',
         title: '推荐产品'
       }],
+      // 按钮列表
       stepBtnList: [{
         name: '商业决策'
       },{
@@ -299,6 +288,7 @@ export default {
       },{
         name: '基础平台'
       }],
+      // 卡片数据
       list: [
         {
           imgSrc: require('../assets/images/zhcs-tjcp1.png'),
@@ -337,30 +327,31 @@ export default {
           path: '/unified-debugging'
         }
       ],
+      // 特性列表
       listSYJC: [
         {
           tagName: '商业决策授权',
           title: '全景监控',
-          content: '支持导入从 3DMax、Maya 和 Blender 等建模工具导出的 GLB 模型文件，准确读取模型层次结构、纹理材质和数据驱动逻辑等属性，有效利用现有数据资源',
-          imgSrc: require('../assets/images/server-cptx1.png')
+          content: '支持整合政府数据资源，基于地理信息系统，可视化分析城市治理、生态环境、经济发展、联动指挥等核心指标，全面掌握城市情况，提高监管力度和行政效率',
+          imgSrc: require('../assets/images/zhcs-img1.png')
         },
         {
-          tagName: '场景构建',
-          title: '场景构建',
-          content: '完全拖放式场景编辑，有大量预设模型资产可用。可以将多个模型拖入场景中进行组合，通过坐标编辑和偏移校正实现场景模型的精确定位',
-          imgSrc: require('../assets/images/server-cptx2.png')
+          tagName: '商业决策授权',
+          title: '治理监控',
+          content: '支持城市网格化管理，显示道路、建筑、工地等城市组成部分的位置、状态、详细信息，监控分析公共设施、道路交通等指标，实现全周期城市治理',
+          imgSrc: require('../assets/images/zhcs-img2.png')
         },
         {
-          tagName: '材料编辑',
-          title: '材料编辑',
-          content: '提供了一组丰富的物理材质效果编辑选项，允许对模型材质、纹理、反射、透明度、高光和其他材质属性进行自定义编辑，以实现快速而非凡的材质效果',
-          imgSrc: require('../assets/images/server-cptx3.png')
+          tagName: '商业决策授权',
+          title: '管道走廊监控',
+          content: '基于CIM平台，对大型管网分布和运行的实时信息进行监控。它提供了管道走廊内部结构和组件的精细3D显示，并实现了管道运行的全域、端到端“点',
+          imgSrc: require('../assets/images/zhcs-img3.png')
         },
         {
-          tagName: '联合动画',
-          title: '联合动画',
-          content: '支持复杂的层次结构和模型节点定义，允许同时控制多个结构节点。支持为模型定义数据驱动的逻辑和复杂的动画，允许用户输入简单的值来实现对3D对象的复杂控制',
-          imgSrc: require('../assets/images/server-cptx4.png')
+          tagName: '商业决策授权',
+          title: '施工现场监控',
+          content: '支持从城市到地区到街道级别的深入分析，提供建筑区域分布的可视化表示。动态展示施工过程及各阶段成果，辅助管理者控制施工进度',
+          imgSrc: require('../assets/images/zhcs-img4.png')
         }
       ]
     }
@@ -394,6 +385,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素距顶位置
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -403,38 +395,21 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      this.scrollTop = document.documentElement.scrollTop
-      if (this.scrollTop >= this.stepTop) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      // 判断步骤导航是否应该固定
+      this.isFixed = this.scrollTop >= this.stepTop;
+      //  TODO: 根据滚动位置更新activeIndex
     },
+    // 导航项点击事件
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
-        let stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
-        window.scrollTo({
-          top: stepItemTop1,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        let stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
-        window.scrollTo({
-          top: stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 2) {
-        let stepItemTop3 = this.getElementTop(this.$refs.stepItem3)
-        window.scrollTo({
-          top: stepItemTop3,
-          behavior: 'smooth'
-        })
-      }
+      const refName = `stepItem${index + 1}`
+      const top = this.getElementTop(this.$refs[refName])
+      window.scrollTo({ top, behavior: 'smooth' })
     },
+    // 按钮切换
     handleBtnClick(index) {
       this.activeBtnIndex = index
     }
@@ -446,7 +421,8 @@ export default {
 .smart-city {
   display: flex;
   flex-direction: column;
-  .main-box, .step-one-box {
+  // 主内容区域
+  .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
@@ -462,13 +438,6 @@ export default {
     background-size: 100% 100%;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
     .text-box {
       display: flex;
       flex-direction: column;
@@ -493,11 +462,6 @@ export default {
       }
     }
     
-    // .text-icon {
-    //   width: 120px;
-    //   height: 38px;
-    //   margin-top: 164px;
-    // }
     .text-icon {
       color: #fff;
       font-size: 18px;
@@ -556,6 +520,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  // 进度条区域
   .step-box {
     display: flex;
     flex-direction: row;
@@ -599,23 +564,20 @@ export default {
       }
     }
   }
+  // 商业决策
   .step-one-box {
-    min-height: 800px;
-    .right-text-box {
-      right: 128px;
-      left: auto;
-    }
-    .left-video {
-      left: 128px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+  // 产品优势卡片区域
   .step-one-box, .step-two-box {
-    background-image: none;
-    margin-top: 0;
     .top-title-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 24px;
+      margin-top: 32px;
     }
     .text-title-box {
       .num {
@@ -644,6 +606,9 @@ export default {
         border-radius: 16px;
         margin-right: 16px;
         cursor: pointer;
+        &:last-child {
+          margin-right: 0;
+        }
         &:hover {
           background-color: rgba(255, 255, 255, 0.35);
         }
@@ -675,6 +640,7 @@ export default {
       }
     }
   }
+  // 数字孪生
   .szls-box {
     display: flex;
     flex-direction: column;
@@ -733,6 +699,7 @@ export default {
       }
     }
   }
+  // 推荐产品卡片区域
   .step-two-bg-box {
     display: flex;
     flex-direction: column;
@@ -817,6 +784,7 @@ export default {
       line-height: 78px;
     }
   }
+  // 媒体查询区域
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;
@@ -829,16 +797,6 @@ export default {
         max-width: 1024px !important;
         top: 96px !important;
         aspect-ratio: 1024 / 576 !important;
-      }
-    }
-    
-    .step-one-box {
-      .right-text-box {
-        right: 64px !important;
-        left: auto !important;
-      }
-      .left-video {
-        left: 64px !important;
       }
     }
     .szls-box {
@@ -854,9 +812,6 @@ export default {
   @media screen  and (max-width: 1440px) {
     .main-box {
       padding: 80px 64px !important;
-    }
-    .step-one-box {
-      min-height: 740px !important;
     }
     .step-two-bg-box {
       padding: 24px 64px !important;
@@ -904,6 +859,13 @@ export default {
           }
         }
       }
+    }
+  }
+  @media screen and (max-width: 960px)  {
+    .step-one-box {
+      padding: 40px 24px !important;
+      align-items: normal !important;
+      justify-content: normal !important;
     }
   }
   @media screen and (max-width: 768px){

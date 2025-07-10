@@ -80,14 +80,12 @@
 
 <script>
 // 导入组件
-import DropdownList from '@/components/dropdown-list'
 import MainTitle from '@/components/main-title.vue'
 import leftRightCard from '@/components/left-right-card.vue'
 import hoverImg from '@/components/hover-img.vue'
 export default {
   name: 'first-page',
   components: {
-    DropdownList,
     MainTitle,
     leftRightCard,
     hoverImg
@@ -275,7 +273,9 @@ export default {
     // justify-content: center;
     margin-top: 72px;
     padding: 96px 128px;
+    /* 渐变背景 */
     background: linear-gradient(45deg, #101014 76%, #1e0d1a 84%, #0f141b 95%);
+    /* 响应式间距调整类 */
     .mt160 {
       font-family: Inter Tight, sans-serif;
       margin-top: 820px !important;
@@ -283,6 +283,7 @@ export default {
     .mr0 {
       margin-right: 0 !important;
     }
+    /* 左侧文本区域 */
     .text-box {
       display: flex;
       flex-direction: column;
@@ -291,13 +292,14 @@ export default {
       left: 128px;
       z-index: 10;
       .small-title {
-        max-width: 680px;
+        max-width: 680px; // 限制描述文本宽度
         color: #fff;
         font-size: 18px;
         font-weight: 400;
         line-height: 30px;
         margin-top: 32px;
       }
+      /* 主标题样式 */
       .big-title {
         color: #fff;
         font-size: 64px;
@@ -306,6 +308,7 @@ export default {
         line-height: 78px;
       }
     }
+    /* 顶部图标 */
     .text-icon {
       // width: 120px;
       // height: 38px;
@@ -315,12 +318,13 @@ export default {
       margin-top: 124px;
       margin-left: -30px;
     }
-    
+    /* 按钮容器 */
     .btn-box {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
       margin-top: 34px;
+      /* 主按钮样式 */
       .btn-blue {
         color: #101014;
         font-size: 14px;
@@ -332,7 +336,7 @@ export default {
         margin-bottom: 12px;
         cursor: pointer;
         &:hover {
-          background: #60c6f5;
+          background: #60c6f5; // 悬停效果
         }
       }
       .btn-solid {
@@ -350,10 +354,12 @@ export default {
         }
       }
     }
+    /* 背景视频 */
     .cosmos-video {
       margin-top: 344px;
       border-radius: 12px;
     }
+    /* 大屏模式下右侧定位 */
     .right-video {
       position: absolute;
       right: 128px;
@@ -361,8 +367,9 @@ export default {
       width: 1252px;
       max-width: 1252px;
       margin-top: 64px !important;
-      aspect-ratio: 1252 / 704;
+      aspect-ratio: 1252 / 704; // 保持视频比例
     }
+     /* 工具链区域 */
     .news-box {
       display: flex;
       flex-direction: column;
@@ -372,6 +379,7 @@ export default {
         flex-direction: row;
         flex-wrap: wrap;
         margin-top: 60px;
+        /* 卡片样式 */
         .news-card-item {
           width: 100%;
           display: flex;
@@ -388,6 +396,7 @@ export default {
           //     transform: scale(1.1);
           //   }
           // }
+          /* 图片容器 */
           .img-box {
             display: flex;
             flex-shrink: 0;
@@ -403,6 +412,7 @@ export default {
               border-radius: 24px 0 0 24px;
             }
           }
+           /* 卡片内容区域 */
           .news-card-item-title-box {
             display: flex;
             flex-direction: column;
@@ -427,6 +437,7 @@ export default {
               flex-direction: column;
               margin-top: 32px;
             }
+            /* 功能链接样式 */
             .news-card-item-go {
               color: rgb(38, 187, 255);
               font-size: 16px;
@@ -440,6 +451,7 @@ export default {
       }
     }
   }
+  /* 解决方案区域 */
   .study-box {
     width: 100%;
     height: 100%;
@@ -449,6 +461,7 @@ export default {
       aspect-ratio: 314 / 176 !important;
     }
   }
+  /* 响应式断点：1905px以下 */
   @media screen and (max-width: 1905px) {
     .main-box, .study-box {
       padding: 96px 64px !important;
@@ -467,6 +480,7 @@ export default {
       aspect-ratio: 1024 / 576 !important;
     }
   }
+  /* 响应式断点：1440px以下 */
   @media screen  and (max-width: 1440px) {
     .main-box, .study-box {
       padding: 80px 64px !important;
@@ -479,6 +493,7 @@ export default {
       aspect-ratio: 818 / 460 !important;
     }
   }
+  /* 响应式断点：1280px以下（平板/手机） */
   @media screen and (max-width: 1280px) {
     .text-box {
       position: static !important;
@@ -496,7 +511,7 @@ export default {
     }
     .news-card-box {
       .news-card-item {
-        flex-direction: column !important;
+        flex-direction: column !important; // 卡片垂直布局
         .img-box {
           width: 100% !important;
           border-radius: 24px 24px 0 0 !important;
@@ -510,7 +525,9 @@ export default {
       }
     }
   }
+  /* 响应式断点：768px以下（手机） */
   @media screen and (max-width: 768px){
+    /* 调整内边距和字体大小 */
     .main-box, .study-box {
       padding: 80px 24px !important;
     }

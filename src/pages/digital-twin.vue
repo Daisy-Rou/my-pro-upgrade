@@ -1,19 +1,24 @@
 <template>
   <div class="digital-twin">
+    <!-- 主展示区域 -->
     <div class="main-box">
       <div class="text-box">
-        <!-- <img class="text-icon" src="../assets/images/jysz.png" alt=""> -->
+        <!-- 顶部图标/文字 -->
         <div v-show="showVideo" class="text-icon">场景编辑器</div>
+        <!-- 主标题 -->
         <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">智能孪生</div>
+        <!-- 副标题描述 -->
         <span class="small-title" :class="{'fs18': showVideo}">全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！</span>
+        <!-- 操作按钮 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
+      <!-- 右侧展示图片 -->
       <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/znls-img.png" alt="智能孪生">
     </div>
     <!--  :class="{'fixed': isFixed}" -->
+    <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
       <div
         class="step-item"
@@ -21,111 +26,69 @@
         :key="index"
         @click="clickStepItem(index)"
       >
+        <!-- 步骤序号 -->
         <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
+        <!-- 步骤标题 -->
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
-    <div class="main-box step-one-box" ref="stepItem1">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">01</span>
-          <span class="title">愿景与使命</span>
-        </div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">愿景与使命</div>
-        <span class="small-title" :class="{'fs18': showVideo}">在元宇宙时代，5G、物联网、云计算、大数据和人工智能等新技术将带来众多数字孪生应用</span>
-        <span class="small-title" :class="{'fs18': showVideo}" style="margin-top: 0;">为了提高跨行业的决策能力，旨在构建一个开放共享的数字孪生生态系统，其平台为创作者开发和发布数字孪生应用程序提供了必要的工具和云服务 这有助于建立智能孪生工程生态系统和通用工业智能运维的闭环生态系统，引领行业的数字化转型</span>
+     <!-- 第一步内容区域 -->
+    <div class="step-two-box" ref="stepItem1">
+      <div class="text-title-box">
+        <span class="num">01</span>
+        <span class="title">愿景与使命</span>
       </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/step-bg1.png" alt="智能孪生">
     </div>
+    <div class="step-one-box">
+      <!-- 特性列表组件 -->
+      <content-introduction :list="list"></content-introduction>
+    </div>
+    <!-- 第二步内容区域 -->
     <div class="step-two-box" ref="stepItem2">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">02</span>
-          <span class="title">开发人员之旅</span>
-        </div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">开发人员之旅</div>
+      <div class="text-title-box">
+        <span class="num">02</span>
+        <span class="title">开发人员之旅</span>
       </div>
+      <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">开发人员之旅</div>
     </div>
+    <!-- 第二步背景区域 -->
     <div class="step-two-bg-box"></div>
+     <!-- 第三步内容区域 -->
     <div class="step-three-box" ref="stepItem3">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">03</span>
-          <span class="title">权益</span>
-        </div>
-        <div class="big-title" style="margin-top: 30px;">权益</div>
+      <div class="text-title-box">
+        <span class="num">03</span>
+        <span class="title">权益</span>
       </div>
+      <div class="big-title" style="margin-top: 30px;">权益</div>
     </div>
+    <!-- 左右布局卡片组件 -->
     <div class="news-small-card-box">
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/qy-img1.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">技能提高</div>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/qy-img2.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">分配计划</div>
-          <span class="news-small-card-item-content">加入土管分配计划，参与联合项目实施，兼职轻松挣钱</span>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/qy-img3.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">品牌支持</div>
-          <span class="news-small-card-item-content">认证可以获得途冠的线上线下营销支持，快速提升知名度</span>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/qy-img4.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">技术支持</div>
-          <span class="news-small-card-item-content">一站式数字双应用开发学习平台，快速提高开发技能，提升人才和扩大职业机会</span>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/qy-img5.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">投资回报率</div>
-          <span class="news-small-card-item-content">加入土管分配计划，参与联合项目实施，兼职轻松挣钱</span>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/qy-img6.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">资源效益</div>
-        </div>
-      </div>
+      <left-right-card :list="benefitList" :showBtn="false"></left-right-card>
     </div>
   </div>
 </template>
 
 <script>
+// 组件引入
+import leftRightCard from '@/components/left-right-card.vue'
+import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'digital-twin',
+  components: {
+    leftRightCard,
+    contentIntroduction
+  },
   data() {
     return {
-      showVideo: true,
-      activeIndex: 0,
-      scrollTop: 0,
-      stepTop: 0,
-      stepTtemTop1: 0,
-      stepTtemTop2: 0,
-      stepItemTop3: 0,
-      isFixed: false,
+      showVideo: true,      // 控制响应式布局显示
+      activeIndex: 0,        // 当前激活的步骤索引
+      scrollTop: 0,          // 当前滚动位置
+      stepTop: 0,            // 步骤导航栏的顶部位置
+      stepTtemTop1: 0,       // 第一步的顶部位置
+      stepTtemTop2: 0,       // 第二步的顶部位置
+      stepItemTop3: 0,       // 第三步的顶部位置
+      isFixed: false,        // 步骤导航栏是否固定
+      // 步骤导航数据
       stepList: [{
         num: '01',
         title: '愿景与使命',
@@ -138,13 +101,65 @@ export default {
         num: '03',
         title: '权益',
         active: false
-      }]
+      }],
+      // 愿景与使命数据
+      list: [
+        {
+          tagName: '',
+          title: '愿景和使命',
+          content: '在元宇宙时代，5G、物联网、云计算、大数据和人工智能等新技术将带来众多数字孪生应用',
+          content1: '为了提高跨行业的决策能力，旨在构建一个开放共享的数字孪生生态系统，其平台为创作者开发和发布数字孪生应用程序提供了必要的工具和云服务',
+          imgSrc: require('../assets/images/step-bg1.png')
+        }
+      ],
+      // 权益卡片数据
+      benefitList:  [
+        {
+          imgSrc: require('../assets/images/qy-img1.png'),
+          title: '技能提高',
+          content: '',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/qy-img2.png'),
+          title: '分配计划',
+          content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/qy-img3.png'),
+          title: '品牌支持',
+          content: '认证可以获得途冠的线上线下营销支持，快速提升知名度',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/qy-img4.png'),
+          title: '技术支持',
+          content: '一站式数字双应用开发学习平台，快速提高开发技能，提升人才和扩大职业机会',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/qy-img5.png'),
+          title: '投资回报率',
+          content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/qy-img6.png'),
+          title: '资源效益',
+          content: '',
+          path: ''
+        }
+      ],
     }
   },
    mounted() {
+    // 初始化响应式布局
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
+    // 添加窗口大小改变监听
     window.addEventListener('resize', this.handleResize);
+    // 添加滚动事件监听
     window.addEventListener('scroll', this.handleStepScroll)
   },
   beforeDestroy() {
@@ -153,12 +168,14 @@ export default {
     window.removeEventListener('scroll', this.handleStepScroll)
   },
   methods: {
+    // 处理窗口大小变化
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
       const screenWidth = window.innerWidth;
       // 判断屏幕宽度并返回是否显示元素的布尔值
       this.showVideo = screenWidth > 1280
+      // 获取各元素位置
       this.stepTop = this.getElementTop(this.$refs.stepBox)
       this.stepItemTop1 = this.getElementTop(this.$refs.stepItem1)
       this.stepItemTop2 = this.getElementTop(this.$refs.stepItem2)
@@ -166,6 +183,7 @@ export default {
       
       console.log('top', this.stepTop)
     },
+    // 防抖函数
     debounce(fn, delay = 500) {
       let timer = null
       return function() {
@@ -175,6 +193,7 @@ export default {
         timer = setTimeout(fn, delay)
       }
     },
+    // 获取元素距页面顶部距离
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -182,34 +201,28 @@ export default {
       }
       return 0;
     },
+    // 处理滚动事件
     handleStepScroll() {
-      console.log(document.documentElement.scrollTop)
-      this.scrollTop = document.documentElement.scrollTop
-      if (this.scrollTop >= this.stepTop) {
-        this.isFixed = true
-      } else {
-        this.isFixed = false
-      }
+      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
+      // 判断步骤导航是否应该固定
+      this.isFixed = this.scrollTop >= this.stepTop;
+      //  TODO: 根据滚动位置更新activeIndex
     },
+    // 点击步骤导航项
     clickStepItem(index) {
       this.activeIndex = index
-      if (index === 0) {
+      // 根据点击的步骤滚动到对应位置
+      const scrollMap = {
+        0: this.stepItemTop1,
+        1: this.stepItemTop2,
+        2: this.stepItemTop3
+      };
+      
+      if (scrollMap[index] !== undefined) {
         window.scrollTo({
-          top: this.stepItemTop1,
+          top: scrollMap[index],
           behavior: 'smooth'
-        })
-      }
-      if (index === 1) {
-        window.scrollTo({
-          top: this.stepItemTop2,
-          behavior: 'smooth'
-        })
-      }
-      if (index === 2) {
-        window.scrollTo({
-          top: this.stepItemTop3,
-          behavior: 'smooth'
-        })
+        });
       }
     }
   }
@@ -220,20 +233,21 @@ export default {
 .digital-twin {
   display: flex;
   flex-direction: column;
-  .main-box, .step-one-box {
+  /* 主容器样式 */
+  .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
     // aspect-ratio: 1920 / 600;
     // height: auto;
     height: 100%;
-    min-height: 860px;
+    min-height: 860px; /* 设置最小高度保证内容区域 */
     display: flex;
     flex-direction: column;
     margin-top: 72px;
     padding: 96px 128px;
     background-image: url('../assets/images/znls-bg.png');
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;
     .mt160 {
@@ -243,6 +257,7 @@ export default {
     .mr0 {
       margin-right: 0 !important;
     }
+    /* 文本区域样式 */
     .text-box {
       display: flex;
       flex-direction: column;
@@ -278,7 +293,7 @@ export default {
       line-height: 30px;
       font-family: Inter Tight, sans-serif;
     }
-    
+    /* 按钮容器 */
     .btn-box {
       display: flex;
       align-items: center;
@@ -313,11 +328,13 @@ export default {
         }
       }
     }
+    /* 右侧图片/视频样式 */
     .cosmos-video {
       margin-top: 344px;
       border-radius: 12px;
       aspect-ratio: 1252 / 704;
     }
+    /* 大屏右侧定位样式 */
     .right-video {
       position: absolute;
       right: 128px;
@@ -327,6 +344,7 @@ export default {
       margin-top: 64px !important;
     }
   }
+  /* 步骤导航栏样式 */
   .step-box {
     display: flex;
     flex-direction: row;
@@ -342,6 +360,7 @@ export default {
       border-top: 1px solid rgba(255, 255, 255, .15);
       border-bottom: 1px solid rgba(255, 255, 255, .15);
     }
+    /* 步骤项样式 */
     .step-item {
       display: flex;
       align-items: center;
@@ -362,6 +381,7 @@ export default {
           color: rgba(255, 255, 255, .65);
         }
       }
+      /* 激活状态样式 */
       .active {
         color: #B164E2;
         &:hover {
@@ -370,40 +390,38 @@ export default {
       }
     }
   }
+  // 产品特性模块
+  .step-one-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  /* 步骤内容区域通用样式 */
   .step-one-box, .step-two-box, .step-three-box {
-    background-image: none;
-    margin-top: 0;
-    .text-box {
-      top: 280px;
-      .text-title-box {
-        .num {
-          color: #76777C;
-          font-size: 14px;
-          font-weight: 700;
-          margin-right: 4px;
-        }
-        .title {
-          font-size: 24px;
-          font-weight: 700;
-          color: #B665E9;
-        }
+    .text-title-box {
+      margin-bottom: 24px;
+      margin-top: 32px;
+      .num {
+        color: #76777C;
+        font-size: 14px;
+        font-weight: 700;
+        margin-right: 4px;
+      }
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #B665E9;
       }
     }
   }
-  // .step-two-box {
-  //   margin-top: 120px;
-  //   padding-bottom: 0 !important;
-  //   aspect-ratio: inherit;
-  //   .text-box { 
-  //     position: static !important;
-  //   }
-  // }
+  /* 第二步背景区域 */
   .step-two-bg-box {
     background-image: url(../assets/images/step-bg222.png);
     aspect-ratio: 1920 / 488;
     object-fit: cover;
     background-size: 100% 100%;
   }
+  /* 第二步和第三步标题样式 */
   .step-two-box, .step-three-box {
     padding: 40px 128px;
     .big-title {
@@ -415,92 +433,9 @@ export default {
     }
   }
   .news-small-card-box {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    // margin-top: 36px;
-    margin-right: -24px;
     padding: 24px 128px;
-    .news-small-card-item {
-      display: flex;
-      flex-direction: row;
-      width: calc(33.3% - 24px);
-      margin-right: 24px;
-      margin-bottom: 24px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background-color: rgba(255, 255, 255, 0.05);
-      transition: transform 0.5s ease;
-      cursor: pointer;
-      &:nth-child(3n) {
-        margin-right: 0;
-      }
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        img {
-          transform: scale(1.1);
-        }
-      }
-      .img-box {
-        display: flex;
-        flex-shrink: 0;
-        max-width: 191px;
-        height: auto;
-        aspect-ratio: 1 / 1;
-        border-radius: 16px 0 0 16px;
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 16px 0 0 16px;
-        }
-      }
-      .news-small-card-item-title-box {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        padding: 24px;
-        .news-small-card-item-title {
-          color: #fff;
-          font-size: 20px;
-          font-weight: 700;
-          font-family: Inter Tight, sans-serif;
-          line-height: 25px;
-          margin-bottom: 12px;
-        }
-        .news-small-card-item-content {
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 23px;
-          color: rgba(255, 255, 255, .65);
-          overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-          text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-          display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-          -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-          -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-        }
-        .news-small-card-item-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-shrink: 0;
-          width: 48px;
-          height: 24px;
-          font-size: 12px;
-          font-weight: 400;
-          color: #fff;
-          background-color: rgba(255, 255, 255, .15);
-          border-radius: 12px;
-          margin-top: 36px;
-          // cursor: pointer;
-          // &:hover {
-          //   background-color: rgba(255, 255, 255, 0.35);
-          // }
-        }
-      }
-    }
   }
+  /* 响应式设计 - 1905px以下 */
   @media screen and (max-width: 1905px) {
     .main-box {
       padding: 96px 64px !important;
@@ -522,20 +457,13 @@ export default {
       padding: 24px 64px !important;
     }
   }
+  /* 响应式设计 - 1440px以下 */
   @media screen  and (max-width: 1440px) {
     .main-box {
       padding: 80px 64px !important;
     }
-    .news-small-card-box {
-      .news-small-card-item {
-        width: calc(50% - 24px) !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-          margin-right: 0 !important;
-        }
-      }
-    }
   }
+  /* 响应式设计 - 1280px以下（平板） */
   @media screen and (max-width: 1280px) {
     .main-box {
       .text-box {
@@ -560,20 +488,14 @@ export default {
       }
     }
   }
-  @media screen and (max-width: 1020px) {
-    .news-small-card-box {
-      .news-small-card-item {
-        width: 100% !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-          margin-right: 24px !important;
-        }
-        // .img-box {
-        //   aspect-ratio: 80 / 100 !important;
-        // }
-      }
+  @media screen and (max-width: 960px)  {
+    .step-one-box {
+      padding: 40px 24px !important;
+      align-items: normal !important;
+      justify-content: normal !important;
     }
   }
+  /* 响应式设计 - 768px以下（手机） */
   @media screen and (max-width: 768px){
     .main-box {
       padding: 80px 24px !important;
@@ -597,7 +519,4 @@ export default {
     }
   }
 }
-// /deep/ .introduction-box {
-//   background-color: rgba(255, 255, 255, .05) !important;
-// }
 </style>
