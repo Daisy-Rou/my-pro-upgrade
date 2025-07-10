@@ -67,13 +67,15 @@
 
     <!-- 解决方案区域 -->
     <div class="study-box">
-      <main-title
-        title="为更多行业提供专属解决方案"
-        small-title="我们相信数字孪生的真正价值在于其实际应用，帮助各行各业的用户提高他们的 决策能力和科学性。Digital Hail 深耕可视化技术领域多年，拥有成熟完善的技术平台和丰富的 行业实施经验。我们为各个行业开发了一系列数字孪生产品，并已成功应用于 智慧城市、园区、公安、交通管理、监狱、电力、应急管理、航空航天战场等众多领域，助力 各行业的管理者提高他们的智能决策能力和效率"
-      ></main-title>
-      
-      <!-- 悬停图片组件展示解决方案 -->
-      <hover-img :list="listSolution"></hover-img>
+      <div class="solution-box">
+        <main-title
+          title="为更多行业提供专属解决方案"
+          small-title="我们相信数字孪生的真正价值在于其实际应用，帮助各行各业的用户提高他们的 决策能力和科学性。Digital Hail 深耕可视化技术领域多年，拥有成熟完善的技术平台和丰富的 行业实施经验。我们为各个行业开发了一系列数字孪生产品，并已成功应用于 智慧城市、园区、公安、交通管理、监狱、电力、应急管理、航空航天战场等众多领域，助力 各行业的管理者提高他们的智能决策能力和效率"
+        ></main-title>
+        
+        <!-- 悬停图片组件展示解决方案 -->
+        <hover-img :list="listSolution"></hover-img>
+      </div>
     </div>
   </div>
 </template>
@@ -262,6 +264,9 @@ export default {
 
 <style lang="scss" scoped>
 .first-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   /* 首页主容器样式 */
   .main-box {
     position: relative;
@@ -453,17 +458,26 @@ export default {
   }
   /* 解决方案区域 */
   .study-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, .05); 
-    padding: 80px 128px;
+    .solution-box {
+      padding: 80px 128px;
+      width: 100%;
+      max-width: 1920px;
+      display: flex;
+      flex-direction: column;
+    }
     /deep/ .solution-item {
       aspect-ratio: 314 / 176 !important;
     }
   }
   /* 响应式断点：1905px以下 */
   @media screen and (max-width: 1905px) {
-    .main-box, .study-box {
+    .main-box, .solution-box  {
       padding: 96px 64px !important;
     }
     
@@ -482,7 +496,7 @@ export default {
   }
   /* 响应式断点：1440px以下 */
   @media screen  and (max-width: 1440px) {
-    .main-box, .study-box {
+    .main-box, .solution-box {
       padding: 80px 64px !important;
     }
     .right-video {
@@ -528,7 +542,7 @@ export default {
   /* 响应式断点：768px以下（手机） */
   @media screen and (max-width: 768px){
     /* 调整内边距和字体大小 */
-    .main-box, .study-box {
+    .main-box, .solution-box {
       padding: 80px 24px !important;
     }
     .main-box {
