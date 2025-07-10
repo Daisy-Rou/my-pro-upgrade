@@ -35,88 +35,7 @@
         title="全面方便的API接口调用"
         small-title="提供完整的接口API，实现多类型特征数据的加载、显示、交互分析，如设置场景摄像头、图表交互、信息标签交互等。开发人员可以基于业务逻辑轻松实现三维可视化场景的展示和交互分析"
       ></main-title>
-      <div class="solution-box">
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img1.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">背景效果</div>
-              <div class="tip">设置背景颜色或背景图像</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img2.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">萤火虫信息雨</div>
-              <div class="tip">显示数据分布、数量和范围之间的相关性</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img3.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">照相机</div>
-              <div class="tip">设置场景透视、视觉距离和其他参数</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img4.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">设置地球效果</div>
-              <div class="tip">设置地球效果，如宇宙/大气/雾/雨</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img5.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">热图</div>
-              <div class="tip">显示数据的分布</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img6.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">泡泡图</div>
-              <div class="tip">显示数据分布、数量和范围之间的相关性</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img7.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">地标地图</div>
-              <div class="tip">用于显示位置名称的散点图图标</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img8.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">等值区域图</div>
-              <div class="tip">用于表示行政区划、区域边界等</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <hover-img :list="listSolution"></hover-img>
     </div>
     
     <div class="step-two-box" ref="stepItem2">
@@ -173,10 +92,12 @@
 
 <script>
 import mainTitle from '@/components/main-title.vue';
+import hoverImg from '@/components/hover-img.vue'
 export default {
   name: 'unified-development',
   components: {
-    mainTitle
+    mainTitle,
+    hoverImg
   },
   data() {
     return {
@@ -193,7 +114,57 @@ export default {
       }, {
         num: '02',
         title: '产品优势'
-      }]
+      }],
+      listSolution: [
+        {
+          imgSrc: require('../assets/images/jkdy-img1.png'),
+          name: '背景效果',
+          tip: '设置背景颜色或背景图像',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img2.png'),
+          name: '萤火虫信息雨',
+          tip: '显示数据分布、数量和范围之间的相关性',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img3.png'),
+          name: '照相机',
+          tip: '设置场景透视、视觉距离和其他参数',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img4.png'),
+          name: '设置地球效果',
+          tip: '设置地球效果，如宇宙/大气/雾/雨',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img5.png'),
+          name: '热图',
+          tip: '显示数据的分布',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img6.png'),
+          name: '泡泡图',
+          tip: '显示数据分布、数量和范围之间的相关性',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img7.png'),
+          name: '地标地图',
+          tip: '用于显示位置名称的散点图图标',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img8.png'),
+          name: '等值区域图',
+          tip: '用于表示行政区划、区域边界等',
+          path: ''
+        }
+      ]
     }
   },
    mounted() {
@@ -434,78 +405,6 @@ export default {
         color: #B665E9;
       }
     }
-    .solution-box {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 60px;
-      margin-right: -32px;
-      .solution-item {
-        position: relative;
-        width: calc(25% - 32px);
-        aspect-ratio: 304 / 200;
-        margin-right: 32px;
-        margin-bottom: 32px;
-        border-radius: 8px;
-        transition: transform 1s ease-in;
-        cursor: pointer;
-        &:hover {
-          .solution-content {
-            transform: translateY(-10px);
-          }
-          .solution-img {
-            transform: scale(1.05);
-          }
-        }
-        .solution-img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-          opacity: 0.6; /* 设置图片不透明度 */
-          filter: alpha(opacity=60); /* 兼容IE */
-          background-size: 100% 100%; 
-          transition: transform 0.5s ease;
-          &:nth-child(4n) {
-            margin-right: 0; /* 每四张图片后不设置右边距 */
-          }
-        }
-        .solution-content {
-          position: absolute;
-          left: 24px;
-          bottom: 28px;
-          display: flex;
-          flex-direction: row;
-          align-items: flex-start;
-        }
-        .solution-item-icon {
-          width: 16px;
-          height: 16px;
-          margin-right: 4px;
-        }
-        .title-box {
-          display: flex;
-          flex-direction: column;
-          .title {
-            color: #fff;
-            font-size: 18px;
-            line-height: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            font-family: Inter Tight, sans-serif;
-          }
-          .tip {
-            color:#fff;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 23px;
-          }
-        }
-      }
-    }
   }
   .step-two-bg-box {
     display: flex;
@@ -631,19 +530,6 @@ export default {
         margin-top: 54px !important;
       }
     }
-    .step-two-box {
-      .solution-box {
-        .solution-item {
-          width: calc(50% - 32px) !important;
-          margin-bottom: 32px !important;
-          img {
-            &:nth-child(2n) {
-              margin-right: 0 !important; /* 每四张图片后不设置右边距 */
-            }
-          }
-        }
-      }
-    }
     .step-two-bg-box {
       .big-title {
         font-size: 40px !important;
@@ -673,11 +559,6 @@ export default {
     }
     .step-two-box {
       padding: 40px 24px !important;
-      .solution-box {
-        .solution-item {
-          width: 100% !important;
-        }
-      }
     }
     .step-two-bg-box {
       padding: 24px !important;

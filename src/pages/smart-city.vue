@@ -44,6 +44,9 @@
         </div>
       </div>
     </div>
+    <div v-if="false" class="step-one-box">
+      <content-introduction :list="listSYJC"></content-introduction>
+    </div>
     <div v-if="activeBtnIndex === 0" class="main-box step-one-box">
       <div class="text-box">
         <div v-show="showVideo" class="text-btn">商业决策授权</div>
@@ -332,6 +335,32 @@ export default {
           title: '统一API调试器',
           content: '学习、编写和调试数字双数据显示和控制逻辑代码',
           path: '/unified-debugging'
+        }
+      ],
+      listSYJC: [
+        {
+          tagName: '商业决策授权',
+          title: '全景监控',
+          content: '支持导入从 3DMax、Maya 和 Blender 等建模工具导出的 GLB 模型文件，准确读取模型层次结构、纹理材质和数据驱动逻辑等属性，有效利用现有数据资源',
+          imgSrc: require('../assets/images/server-cptx1.png')
+        },
+        {
+          tagName: '场景构建',
+          title: '场景构建',
+          content: '完全拖放式场景编辑，有大量预设模型资产可用。可以将多个模型拖入场景中进行组合，通过坐标编辑和偏移校正实现场景模型的精确定位',
+          imgSrc: require('../assets/images/server-cptx2.png')
+        },
+        {
+          tagName: '材料编辑',
+          title: '材料编辑',
+          content: '提供了一组丰富的物理材质效果编辑选项，允许对模型材质、纹理、反射、透明度、高光和其他材质属性进行自定义编辑，以实现快速而非凡的材质效果',
+          imgSrc: require('../assets/images/server-cptx3.png')
+        },
+        {
+          tagName: '联合动画',
+          title: '联合动画',
+          content: '支持复杂的层次结构和模型节点定义，允许同时控制多个结构节点。支持为模型定义数据驱动的逻辑和复杂的动画，允许用户输入简单的值来实现对3D对象的复杂控制',
+          imgSrc: require('../assets/images/server-cptx4.png')
         }
       ]
     }

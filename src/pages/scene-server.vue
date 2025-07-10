@@ -25,41 +25,12 @@
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
-    <div class="main-box step-one-box" ref="stepItem1">
+    <div class="step-one-box" ref="stepItem1">
       <div class="text-title-box">
         <span class="num">01</span>
         <span class="title">产品特性</span>
       </div>
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">模型导入</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">模型导入</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持导入从 3DMax、Maya 和 Blender 等建模工具导出的 GLB 模型文件，准确读取模型层次结构、纹理材质和数据驱动逻辑等属性，有效利用现有数据资源</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/server-cptx1.png" alt="智能孪生">
-    </div>
-    <div class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">场景构建</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">场景构建</div>
-        <span class="small-title" :class="{'fs18': showVideo}">完全拖放式场景编辑，有大量预设模型资产可用。可以将多个模型拖入场景中进行组合，通过坐标编辑和偏移校正实现场景模型的精确定位</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/server-cptx2.png" alt="智能孪生">
-    </div>
-    <div class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">材料编辑</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">材料编辑</div>
-        <span class="small-title" :class="{'fs18': showVideo}">提供了一组丰富的物理材质效果编辑选项，允许对模型材质、纹理、反射、透明度、高光和其他材质属性进行自定义编辑，以实现快速而非凡的材质效果</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/server-cptx3.png" alt="智能孪生">
-    </div>
-    <div class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">联合动画</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">联合动画</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持复杂的层次结构和模型节点定义，允许同时控制多个结构节点。支持为模型定义数据驱动的逻辑和复杂的动画，允许用户输入简单的值来实现对3D对象的复杂控制</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/server-cptx4.png" alt="智能孪生">
+      <content-introduction :list="list"></content-introduction>
     </div>
     
     <div class="step-two-box" ref="stepItem2">
@@ -172,8 +143,12 @@
 </template>
 
 <script>
+import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'scene-server',
+  components: {
+    contentIntroduction
+  },
   data() {
     return {
       showVideo: true,
@@ -197,7 +172,33 @@ export default {
       }, {
         num: '04',
         title: '非凡的视觉效果'
-      }]
+      }],
+      list: [
+        {
+          tagName: '模型导入',
+          title: '模型导入',
+          content: '支持导入从 3DMax、Maya 和 Blender 等建模工具导出的 GLB 模型文件，准确读取模型层次结构、纹理材质和数据驱动逻辑等属性，有效利用现有数据资源',
+          imgSrc: require('../assets/images/server-cptx1.png')
+        },
+        {
+          tagName: '场景构建',
+          title: '场景构建',
+          content: '完全拖放式场景编辑，有大量预设模型资产可用。可以将多个模型拖入场景中进行组合，通过坐标编辑和偏移校正实现场景模型的精确定位',
+          imgSrc: require('../assets/images/server-cptx2.png')
+        },
+        {
+          tagName: '材料编辑',
+          title: '材料编辑',
+          content: '提供了一组丰富的物理材质效果编辑选项，允许对模型材质、纹理、反射、透明度、高光和其他材质属性进行自定义编辑，以实现快速而非凡的材质效果',
+          imgSrc: require('../assets/images/server-cptx3.png')
+        },
+        {
+          tagName: '联合动画',
+          title: '联合动画',
+          content: '支持复杂的层次结构和模型节点定义，允许同时控制多个结构节点。支持为模型定义数据驱动的逻辑和复杂的动画，允许用户输入简单的值来实现对3D对象的复杂控制',
+          imgSrc: require('../assets/images/server-cptx4.png')
+        }
+      ]
     }
   },
    mounted() {
@@ -284,7 +285,7 @@ export default {
 .scene-server {
   display: flex;
   flex-direction: column;
-  .main-box, .step-one-box {
+  .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
@@ -438,18 +439,14 @@ export default {
     }
   }
   .step-one-box {
-    .right-text-box {
-      right: 128px;
-      left: auto;
-    }
-    .left-video {
-      left: 128px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .step-one-box, .step-two-box, .step-three-box {
-    background-image: none;
-    margin-top: 0;
     .text-title-box {
+      margin-bottom: 24px;
+      margin-top: 32px;
       .num {
         color: #76777C;
         font-size: 14px;
@@ -460,24 +457,6 @@ export default {
         font-size: 24px;
         font-weight: 700;
         color: #B665E9;
-      }
-    }
-    .text-box {
-      top: 280px;
-      .text-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 88px;
-        height: 32px;
-        border-radius: 4px;
-        background: #C776F9;
-        box-shadow: 0px 4px 10px 0px #C676F8;
-        color: #000;
-        font-size: 14px;
-        font-weight: 700;
-        font-family: Inter Tight, sans-serif;
       }
     }
   }
@@ -673,15 +652,6 @@ export default {
         aspect-ratio: 1024 / 576 !important;
       }
     }
-    .step-one-box {
-      .right-text-box {
-        right: 64px !important;
-        left: auto !important;
-      }
-      .left-video {
-        left: 64px !important;
-      }
-    }
     .step-two-box, .step-three-box {
       padding: 40px 64px !important;
     }
@@ -735,6 +705,13 @@ export default {
           margin-right: 0 !important;
         }
       }
+    }
+  }
+  @media screen and (max-width: 960px)  {
+    .step-one-box {
+      padding: 40px 24px !important;
+      align-items: normal !important;
+      justify-content: normal !important;
     }
   }
   @media screen and (max-width: 768px){

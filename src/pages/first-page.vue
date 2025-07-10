@@ -1,36 +1,48 @@
 <template>
   <div class="first-page">
+    <!-- 首页主容器 -->
     <div class="main-box">
+      <!-- 左侧文本区域 -->
       <div class="text-box">
-        <!-- <img v-show="showVideo" class="text-icon" src="../assets/images/jysz.png" alt=""> -->
-        <img v-show="showVideo" class="text-icon" src="../assets/2.svg" alt="">
-        <!--  style="margin-top: 30px;" -->
+        <!-- 顶部图标（大屏显示） -->
+        <img v-show="showVideo" class="text-icon" src="../assets/2.svg" alt="数智建院图标">
+        <!-- 主标题 -->
         <div class="big-title">数智建院</div>
         <div class="big-title">国产数字孪生应用开发引擎</div>
+        <!-- 副标题描述 -->
         <span class="small-title">我们提供数字孪生构建与发布，低成本，高效率，我们的渲染内核技术自主研发且可控，既支持单台服务器上数千次并发访问，又支持渲染效果卓越的大规模场景</span>
+        <!-- 操作按钮 -->
         <div class="btn-box">
           <div class="btn-blue">了解更多</div>
-          <!-- <div class="btn-solid">了解许可选项</div> -->
         </div>
       </div>
-      <video class="cosmos-video" :class="{'right-video': showVideo}" controls  muted autoplay loop>
+
+      <!-- 背景视频区域 -->
+      <video class="cosmos-video" :class="{'right-video': showVideo}" controls muted autoplay loop>
         <source src="../assets/images/big-bg-compress.mp4" type="video/mp4">
       </video>
-      <!-- <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/big-bg.png" alt="数智建院"> -->
+
+      <!-- 工具链展示区域 -->
       <div class="news-box" :class="{'mt160': showVideo}">
+        <!-- 主标题组件 -->
         <main-title
           title="全栈开发工具链"
           small-title="数智国产数字孪生应用开发引擎，可满足数字孪生应用全流程开发需求，包括场景 编辑器、场景服务器、统一开发 API、统一接口调试器和应用程序编辑器，使用户能够构建个性化的数字孪生 应用程序以更灵活、更自主、更高质量和更高效的方式进行"
         ></main-title>
+        
+        <!-- 工具链卡片列表 -->
         <div class="news-card-box">
           <div v-for="(item, index) in cardList" :key="index" class="news-card-item">
-            <!-- showNewsBig代表屏幕宽度大于1280 列表第二项倍数图片靠后展示 当屏幕宽度小于1280时 列表第二项倍数图片展示在前面 -->
+            <!-- 响应式图片显示：小屏时偶数项在前，大屏时按正常顺序 -->
             <div v-show="(!showNewsBig && index % 2 === 0) || index % 2 !== 0" class="img-box">
-              <img :src="item.imgSrc" alt="">
+              <img :src="item.imgSrc" :alt="item.title">
             </div>
+            
+            <!-- 卡片内容区域 -->
             <div class="news-card-item-title-box">
               <div class="news-card-item-title">{{item.title}}</div>
               <span class="news-card-item-content">{{item.content}}</span>
+              <!-- 功能链接列表 -->
               <div class="news-card-item-go-box">
                 <div 
                   class="news-card-item-go" 
@@ -40,96 +52,51 @@
                 >{{itemc.name}}</div>
               </div>
             </div>
+            
+            <!-- 大屏模式下偶数项的图片显示在右侧 -->
             <div v-show="showNewsBig && index % 2 === 0" class="img-box" style="border-radius: 0 24px 24px 0;">
-              <img style="border-radius: 0 24px 24px 0;" :src="item.imgSrc" alt="">
+              <img style="border-radius: 0 24px 24px 0;" :src="item.imgSrc" :alt="item.title">
             </div>
           </div>
         </div>
+        
+        <!-- 左右布局卡片组件 -->
         <left-right-card :list="list"></left-right-card>
       </div>
     </div>
+
+    <!-- 解决方案区域 -->
     <div class="study-box">
       <main-title
         title="为更多行业提供专属解决方案"
         small-title="我们相信数字孪生的真正价值在于其实际应用，帮助各行各业的用户提高他们的 决策能力和科学性。Digital Hail 深耕可视化技术领域多年，拥有成熟完善的技术平台和丰富的 行业实施经验。我们为各个行业开发了一系列数字孪生产品，并已成功应用于 智慧城市、园区、公安、交通管理、监狱、电力、应急管理、航空航天战场等众多领域，助力 各行业的管理者提高他们的智能决策能力和效率"
       ></main-title>
-      <div class="solution-box">
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img1.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title">智慧城市</div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img2.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智慧城市管理</span>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img3.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智慧旅游与文化</span>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img4.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智能水务管理</span>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img5.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智慧水利</span>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img6.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智能电源</span>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img7.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智慧校园</span>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/solution-img8.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <span class="title">智能工厂</span>
-          </div>
-        </div>
-      </div>
+      
+      <!-- 悬停图片组件展示解决方案 -->
+      <hover-img :list="listSolution"></hover-img>
     </div>
   </div>
 </template>
 
 <script>
+// 导入组件
 import DropdownList from '@/components/dropdown-list'
 import MainTitle from '@/components/main-title.vue'
 import leftRightCard from '@/components/left-right-card.vue'
+import hoverImg from '@/components/hover-img.vue'
 export default {
   name: 'first-page',
   components: {
     DropdownList,
     MainTitle,
-    leftRightCard
+    leftRightCard,
+    hoverImg
   },
   data() {
     return {
-      showVideo: true,
-      showNewsBig: true,
+      showVideo: true, // 控制视频显示位置（大屏右侧/小屏下方）
+      showNewsBig: true, // 控制卡片布局（大屏左右布局/小屏上下布局）
+      // 工具链卡片数据
       cardList: [
         {
           imgSrc: require('../assets/images/qzkf-img1.png'),
@@ -173,6 +140,7 @@ export default {
           ]
         },
       ],
+      // 左右布局卡片数据
       list: [
         {
           imgSrc: require('../assets/images/qzkf-small-img1.png'),
@@ -210,19 +178,72 @@ export default {
           content: '学习、编写和调试数字双数据显示和控制逻辑代码',
           path: '/unified-debugging'
         }
+      ],
+      // 解决方案数据
+      listSolution: [
+        {
+          imgSrc: require('../assets/images/solution-img1.png'),
+          name: '智慧城市',
+          tip: '',
+          path: '/smart-city'
+        },
+        {
+          imgSrc: require('../assets/images/solution-img2.png'),
+          name: '智慧城市管理',
+          tip: '',
+          path: '/smart-city'
+        },
+        {
+          imgSrc: require('../assets/images/solution-img3.png'),
+          name: '智慧旅游与文化',
+          tip: '',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/solution-img4.png'),
+          name: '智能水务管理',
+          tip: '',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/solution-img5.png'),
+          name: '智慧水利',
+          tip: '',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/solution-img6.png'),
+          name: '智能电源',
+          tip: '',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/solution-img7.png'),
+          name: '智慧校园',
+          tip: '',
+          path: '/smart-park'
+        },
+        {
+          imgSrc: require('../assets/images/solution-img8.png'),
+          name: '智能工厂',
+          tip: '',
+          path: '/smart-factory'
+        }
       ]
     }
   },
   mounted() {
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
+    // 初始调整布局
     this.handleResize()
+    // 添加窗口大小变化监听
     window.addEventListener('resize', this.handleResize);
   },
   beforeDestroy() {
-    // 移除监听器以避免内存泄漏
+    // 组件销毁前移除监听器
     window.removeEventListener('resize', this.handleResize);
   },
   methods: {
+    // 响应窗口大小变化
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
@@ -231,6 +252,7 @@ export default {
       this.showVideo = screenWidth > 1280
       this.showNewsBig = screenWidth > 1280
     },
+    // 处理卡片项点击事件
     handleItemClick(item) {
       if (item.path) {
         this.$router.push(item.path)
@@ -242,6 +264,7 @@ export default {
 
 <style lang="scss" scoped>
 .first-page {
+  /* 首页主容器样式 */
   .main-box {
     position: relative;
     width: 100%;
@@ -422,63 +445,8 @@ export default {
     height: 100%;
     background-color: rgba(255, 255, 255, .05); 
     padding: 80px 128px;
-    .solution-box {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 60px;
-      margin-right: -32px;
-      .solution-item {
-        position: relative;
-        width: calc(25% - 32px);
-        aspect-ratio: 314 / 176;
-        margin-right: 32px;
-        margin-bottom: 32px;
-        border-radius: 8px;
-        transition: transform 1s ease-in;
-        cursor: pointer;
-        &:hover {
-          .solution-content {
-            transform: translateY(-10px);
-          }
-          .solution-img {
-            transform: scale(1.05);
-          }
-        }
-        .solution-img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-          background-size: 100% 100%; 
-          transition: transform 0.5s ease;
-          &:nth-child(4n) {
-            margin-right: 0; /* 每四张图片后不设置右边距 */
-          }
-        }
-        .solution-content {
-          position: absolute;
-          left: 24px;
-          bottom: 28px;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-        .solution-item-icon {
-          width: 16px;
-          height: 16px;
-          margin-right: 4px;
-        }
-        .title {
-          color: #fff;
-          font-size: 18px;
-          font-weight: 700;
-          font-family: Inter Tight, sans-serif;
-        }
-      }
+    /deep/ .solution-item {
+      aspect-ratio: 314 / 176 !important;
     }
   }
   @media screen and (max-width: 1905px) {
@@ -542,17 +510,6 @@ export default {
       }
     }
   }
-  @media screen and (min-width: 768px) and (max-width: 1280px) {
-    .solution-item {
-      width: calc(50% - 32px) !important;
-      margin-bottom: 32px !important;
-      img {
-        &:nth-child(2n) {
-          margin-right: 0 !important; /* 每四张图片后不设置右边距 */
-        }
-      }
-    }
-  }
   @media screen and (max-width: 768px){
     .main-box, .study-box {
       padding: 80px 24px !important;
@@ -578,9 +535,6 @@ export default {
           }
         }
       }
-    }
-    .solution-item {
-      width: 100% !important;
     }
   }
 }

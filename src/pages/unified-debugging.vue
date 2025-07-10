@@ -25,41 +25,12 @@
         <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
       </div>
     </div>
-    <div class="main-box step-one-box" ref="stepItem1">
+    <div class="step-one-box" ref="stepItem1">
       <div class="text-title-box">
         <span class="num">01</span>
         <span class="title">API调试器</span>
       </div>
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">场景加载</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">全功能场景加载</div>
-        <span class="small-title" :class="{'fs18': showVideo}">支持GraphGIS“场景编辑器”生成的全功能场景的集成。只需输入场景服务地址，即可调出数字孪生场景并开始调试</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/tsq-img1.png" alt="">
-    </div>
-    <div class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">双重渲染</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">双重渲染架构和统一逻辑代码</div>
-        <span class="small-title" :class="{'fs18': showVideo}">原生支持末端/流渲染的双渲染架构。一套代码可以兼容同一地理位置的不同场景服务，场景服务可以自由切换，便于移植</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/tsq-img2.png" alt="">
-    </div>
-    <div class="main-box step-one-box">
-      <div class="text-box">
-        <div v-show="showVideo" class="text-btn">材料编辑</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">两种测试模式:单一和集成</div>
-        <span class="small-title" :class="{'fs18': showVideo}">API调用调试复杂逻辑代码，灵活满足各种开发需求</span>
-      </div>
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" style="border-radius: 24px;" src="../assets/images/tsq-img3.png" alt="">
-    </div>
-    <div class="main-box step-one-box">
-      <div class="text-box right-text-box">
-        <div v-show="showVideo" class="text-btn">数据打印导出</div>
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">数据打印和代码数据导出</div>
-        <span class="small-title" :class="{'fs18': showVideo}">可在3D场景中进行可定制的点/线/多边形绘图。基于绘图数据，可以自动生成几十个API调用代码。还支持填充模拟演示数据，有效提高数据绘制效率</span>
-      </div>
-      <img  class="cosmos-video" :class="[{'right-video': showVideo}, 'left-video']" style="border-radius: 24px;" src="../assets/images/tsq-img4.png" alt="">
+      <content-introduction :list="list"></content-introduction>
     </div>
     <div class="step-two-box" ref="stepItem2">
       <div class="text-title-box">
@@ -71,88 +42,7 @@
         title="全面方便的API接口调用"
         small-title="提供完整的接口API，实现多类型特征数据的加载、显示、交互分析，如设置场景摄像头、图表交互、信息标签交互等。开发人员可以基于业务逻辑轻松实现三维可视化场景的展示和交互分析"
       ></main-title>
-      <div class="solution-box">
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img1.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">背景效果</div>
-              <div class="tip">设置背景颜色或背景图像</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img2.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">萤火虫信息雨</div>
-              <div class="tip">显示数据分布、数量和范围之间的相关性</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img3.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">照相机</div>
-              <div class="tip">设置场景透视、视觉距离和其他参数</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img4.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">设置地球效果</div>
-              <div class="tip">设置地球效果，如宇宙/大气/雾/雨</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img5.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">热图</div>
-              <div class="tip">显示数据的分布</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img6.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">泡泡图</div>
-              <div class="tip">显示数据分布、数量和范围之间的相关性</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img7.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">地标地图</div>
-              <div class="tip">用于显示位置名称的散点图图标</div>
-            </div>
-          </div>
-        </div>
-        <div class="solution-item">
-          <img class="solution-img" src="../assets/images/jkdy-img8.png" alt="">
-          <div class="solution-content">
-            <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
-            <div class="title-box">
-              <div class="title">等值区域图</div>
-              <div class="tip">用于表示行政区划、区域边界等</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <hover-img :list="listSolution"></hover-img>
     </div>
     <div class="step-two-box" ref="stepItem3">
       <div class="text-box">
@@ -209,10 +99,14 @@
 
 <script>
 import mainTitle from '@/components/main-title.vue';
+import hoverImg from '@/components/hover-img.vue'
+import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'unified-debugging',
   components: {
-    mainTitle
+    mainTitle,
+    hoverImg,
+    contentIntroduction
   },
   data() {
     return {
@@ -233,7 +127,83 @@ export default {
       }, {
         num: '03',
         title: '产品优势'
-      }]
+      }],
+      listSolution: [
+        {
+          imgSrc: require('../assets/images/jkdy-img1.png'),
+          name: '背景效果',
+          tip: '设置背景颜色或背景图像',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img2.png'),
+          name: '萤火虫信息雨',
+          tip: '显示数据分布、数量和范围之间的相关性',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img3.png'),
+          name: '照相机',
+          tip: '设置场景透视、视觉距离和其他参数',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img4.png'),
+          name: '设置地球效果',
+          tip: '设置地球效果，如宇宙/大气/雾/雨',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img5.png'),
+          name: '热图',
+          tip: '显示数据的分布',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img6.png'),
+          name: '泡泡图',
+          tip: '显示数据分布、数量和范围之间的相关性',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img7.png'),
+          name: '地标地图',
+          tip: '用于显示位置名称的散点图图标',
+          path: ''
+        },
+        {
+          imgSrc: require('../assets/images/jkdy-img8.png'),
+          name: '等值区域图',
+          tip: '用于表示行政区划、区域边界等',
+          path: ''
+        }
+      ],
+      list: [
+        {
+          tagName: '场景加载',
+          title: '全功能场景加载',
+          content: '支持GraphGIS“场景编辑器”生成的全功能场景的集成。只需输入场景服务地址，即可调出数字孪生场景并开始调试',
+          imgSrc: require('../assets/images/tsq-img1.png')
+        },
+        {
+          tagName: '双重渲染',
+          title: '双重渲染架构和统一逻辑代码',
+          content: '原生支持末端/流渲染的双渲染架构。一套代码可以兼容同一地理位置的不同场景服务，场景服务可以自由切换，便于移植',
+          imgSrc: require('../assets/images/tsq-img2.png')
+        },
+        {
+          tagName: '材料编辑',
+          title: '两种测试模式:单一和集成',
+          content: 'API调用调试复杂逻辑代码，灵活满足各种开发需求',
+          imgSrc: require('../assets/images/tsq-img3.png')
+        },
+        {
+          tagName: '数据打印导出',
+          title: '数据打印和代码数据导出',
+          content: '可在3D场景中进行可定制的点/线/多边形绘图。基于绘图数据，可以自动生成几十个API调用代码。还支持填充模拟演示数据，有效提高数据绘制效率',
+          imgSrc: require('../assets/images/tsq-img4.png')
+        }
+      ]
     }
   },
    mounted() {
@@ -313,7 +283,7 @@ export default {
 .unified-debugging {
   display: flex;
   flex-direction: column;
-  .main-box, .step-one-box {
+  .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
@@ -467,18 +437,14 @@ export default {
     }
   }
   .step-one-box {
-    .right-text-box {
-      right: 128px;
-      left: auto;
-    }
-    .left-video {
-      left: 128px;
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-  .step-one-box {
-    background-image: none;
-    margin-top: 0;
+  .step-one-box, .step-two-box {
     .text-title-box {
+      margin-bottom: 24px;
+      margin-top: 32px;
       .num {
         color: #76777C;
         font-size: 14px;
@@ -489,112 +455,6 @@ export default {
         font-size: 24px;
         font-weight: 700;
         color: #B665E9;
-      }
-    }
-    .text-box {
-      top: 280px;
-      .text-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 88px;
-        height: 32px;
-        border-radius: 4px;
-        background: #C776F9;
-        box-shadow: 0px 4px 10px 0px #C676F8;
-        color: #000;
-        font-size: 14px;
-        font-weight: 700;
-        font-family: Inter Tight, sans-serif;
-      }
-    }
-  }
-  .step-two-box {
-    padding: 40px 128px;
-    .text-title-box {
-      .num {
-        color: #76777C;
-        font-size: 14px;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #B665E9;
-      }
-    }
-    .solution-box {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 60px;
-      margin-right: -32px;
-      .solution-item {
-        position: relative;
-        width: calc(25% - 32px);
-        aspect-ratio: 304 / 200;
-        margin-right: 32px;
-        margin-bottom: 32px;
-        border-radius: 8px;
-        transition: transform 1s ease-in;
-        cursor: pointer;
-        &:hover {
-          .solution-content {
-            transform: translateY(-10px);
-          }
-          .solution-img {
-            transform: scale(1.05);
-          }
-        }
-        .solution-img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-          opacity: 0.6; /* 设置图片不透明度 */
-          filter: alpha(opacity=60); /* 兼容IE */
-          background-size: 100% 100%; 
-          transition: transform 0.5s ease;
-          &:nth-child(4n) {
-            margin-right: 0; /* 每四张图片后不设置右边距 */
-          }
-        }
-        .solution-content {
-          position: absolute;
-          left: 24px;
-          bottom: 28px;
-          display: flex;
-          flex-direction: row;
-          align-items: flex-start;
-        }
-        .solution-item-icon {
-          width: 16px;
-          height: 16px;
-          margin-right: 4px;
-        }
-        .title-box {
-          display: flex;
-          flex-direction: column;
-          .title {
-            color: #fff;
-            font-size: 18px;
-            line-height: 16px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            font-family: Inter Tight, sans-serif;
-          }
-          .tip {
-            color:#fff;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 23px;
-          }
-        }
       }
     }
   }
@@ -696,15 +556,6 @@ export default {
         aspect-ratio: 1024 / 576 !important;
       }
     }
-    .step-one-box {
-      .right-text-box {
-        right: 64px !important;
-        left: auto !important;
-      }
-      .left-video {
-        left: 64px !important;
-      }
-    }
     .step-two-box {
       padding: 40px 64px !important;
     }
@@ -761,6 +612,13 @@ export default {
           }
         }
       }
+    }
+  }
+  @media screen and (max-width: 960px)  {
+    .step-one-box {
+      padding: 40px 24px !important;
+      align-items: normal !important;
+      justify-content: normal !important;
     }
   }
   @media screen and (max-width: 768px){
