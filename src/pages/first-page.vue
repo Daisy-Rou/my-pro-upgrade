@@ -26,39 +26,12 @@
       <div class="news-box" :class="{'mt160': showVideo}">
         <!-- 主标题组件 -->
         <main-title
-          title="全栈开发工具链"
-          small-title="数智国产数字孪生应用开发引擎，可满足数字孪生应用全流程开发需求，包括场景 编辑器、场景服务器、统一开发 API、统一接口调试器和应用程序编辑器，使用户能够构建个性化的数字孪生 应用程序以更灵活、更自主、更高质量和更高效的方式进行"
+          :title="titleObj.title1"
+          :small-title="titleObj.constent1"
         ></main-title>
         
         <!-- 工具链卡片列表 -->
-        <div class="news-card-box">
-          <div v-for="(item, index) in cardList" :key="index" class="news-card-item">
-            <!-- 响应式图片显示：小屏时偶数项在前，大屏时按正常顺序 -->
-            <div v-show="(!showNewsBig && index % 2 === 0) || index % 2 !== 0" class="img-box">
-              <img :src="item.imgSrc" :alt="item.title">
-            </div>
-            
-            <!-- 卡片内容区域 -->
-            <div class="news-card-item-title-box">
-              <div class="news-card-item-title">{{item.title}}</div>
-              <span class="news-card-item-content">{{item.content}}</span>
-              <!-- 功能链接列表 -->
-              <div class="news-card-item-go-box">
-                <div 
-                  class="news-card-item-go" 
-                  v-for="(itemc, indexc) in item.list" 
-                  :key="indexc"
-                  @click="handleItemClick(itemc)"
-                >{{itemc.name}}</div>
-              </div>
-            </div>
-            
-            <!-- 大屏模式下偶数项的图片显示在右侧 -->
-            <div v-show="showNewsBig && index % 2 === 0" class="img-box" style="border-radius: 0 24px 24px 0;">
-              <img style="border-radius: 0 24px 24px 0;" :src="item.imgSrc" :alt="item.title">
-            </div>
-          </div>
-        </div>
+        <big-card :list="cardList"></big-card>
         
         <!-- 左右布局卡片组件 -->
         <left-right-card :list="list"></left-right-card>
@@ -69,8 +42,8 @@
     <div class="study-box">
       <div class="solution-box">
         <main-title
-          title="为更多行业提供专属解决方案"
-          small-title="我们相信数字孪生的真正价值在于其实际应用，帮助各行各业的用户提高他们的 决策能力和科学性。Digital Hail 深耕可视化技术领域多年，拥有成熟完善的技术平台和丰富的 行业实施经验。我们为各个行业开发了一系列数字孪生产品，并已成功应用于 智慧城市、园区、公安、交通管理、监狱、电力、应急管理、航空航天战场等众多领域，助力 各行业的管理者提高他们的智能决策能力和效率"
+          :title="titleObj.title2"
+          :small-title="titleObj.content2"
         ></main-title>
         
         <!-- 悬停图片组件展示解决方案 -->
@@ -83,12 +56,14 @@
 <script>
 // 导入组件
 import MainTitle from '@/components/main-title.vue'
+import bigCard from '@/components/big-card.vue'
 import leftRightCard from '@/components/left-right-card.vue'
 import hoverImg from '@/components/hover-img.vue'
 export default {
   name: 'first-page',
   components: {
     MainTitle,
+    bigCard,
     leftRightCard,
     hoverImg
   },
@@ -96,6 +71,12 @@ export default {
     return {
       showVideo: true, // 控制视频显示位置（大屏右侧/小屏下方）
       showNewsBig: true, // 控制卡片布局（大屏左右布局/小屏上下布局）
+      titleObj: {
+        title1: '全栈开发工具链',
+        constent1: '数智国产数字孪生应用开发引擎，可满足数字孪生应用全流程开发需求，包括场景 编辑器、场景服务器、统一开发 API、统一接口调试器和应用程序编辑器，使用户能够构建个性化的数字孪生 应用程序以更灵活、更自主、更高质量和更高效的方式进行',
+        title2: '为更多行业提供专属解决方案',
+        content2: '我们相信数字孪生的真正价值在于其实际应用，帮助各行各业的用户提高他们的 决策能力和科学性。Digital Hail 深耕可视化技术领域多年，拥有成熟完善的技术平台和丰富的 行业实施经验。我们为各个行业开发了一系列数字孪生产品，并已成功应用于 智慧城市、园区、公安、交通管理、监狱、电力、应急管理、航空航天战场等众多领域，助力 各行业的管理者提高他们的智能决策能力和效率',
+      },
       // 工具链卡片数据
       cardList: [
         {
@@ -251,12 +232,6 @@ export default {
       // 判断屏幕宽度并返回是否显示元素的布尔值
       this.showVideo = screenWidth > 1280
       this.showNewsBig = screenWidth > 1280
-    },
-    // 处理卡片项点击事件
-    handleItemClick(item) {
-      if (item.path) {
-        this.$router.push(item.path)
-      }
     }
   }
 }
@@ -379,81 +354,6 @@ export default {
       display: flex;
       flex-direction: column;
       margin-top: 100px;
-      .news-card-box {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 60px;
-        /* 卡片样式 */
-        .news-card-item {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          margin-bottom: 32px;
-          border-radius: 24px;
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          background-color: rgba(255, 255, 255, 0.05);
-          transition: transform 0.5s ease;
-          // cursor: pointer;
-          // &:hover {
-          //   background-color: rgba(255, 255, 255, 0.1);
-          //   img {
-          //     transform: scale(1.1);
-          //   }
-          // }
-          /* 图片容器 */
-          .img-box {
-            display: flex;
-            flex-shrink: 0;
-            width: 50%;
-            height: auto;
-            aspect-ratio: 824 / 463;
-            border-radius: 24px 0 0 24px;
-            overflow: hidden;
-            img {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              border-radius: 24px 0 0 24px;
-            }
-          }
-           /* 卡片内容区域 */
-          .news-card-item-title-box {
-            display: flex;
-            flex-direction: column;
-            width: 50%;
-            padding: 64px;
-            .news-card-item-title {
-              color: #fff;
-              font-size: 32px;
-              font-weight: 700;
-              font-family: Inter Tight, sans-serif;
-              line-height: 38px;
-              margin-bottom: 24px;
-            }
-            .news-card-item-content {
-              color: rgba(255, 255, 255, .65);
-              font-size: 18px;
-              font-weight: 400;
-              line-height: 30px;
-            }
-            .news-card-item-go-box {
-              display: flex;
-              flex-direction: column;
-              margin-top: 32px;
-            }
-            /* 功能链接样式 */
-            .news-card-item-go {
-              color: rgb(38, 187, 255);
-              font-size: 16px;
-              font-weight: 400;
-              line-height: 26px;
-              margin-bottom: 12px;
-              cursor: pointer;
-            }
-          }
-        }
-      }
     }
   }
   /* 解决方案区域 */
@@ -522,21 +422,6 @@ export default {
     }
     .cosmos-video {
       margin-top: 54px !important;
-    }
-    .news-card-box {
-      .news-card-item {
-        flex-direction: column !important; // 卡片垂直布局
-        .img-box {
-          width: 100% !important;
-          border-radius: 24px 24px 0 0 !important;
-          img {
-            border-radius: 24px 24px 0 0 !important;
-          }
-        }
-        .news-card-item-title-box {
-          width: 100% !important;
-        }
-      }
     }
   }
   /* 响应式断点：768px以下（手机） */

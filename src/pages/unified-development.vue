@@ -1,22 +1,7 @@
 <template>
   <div class="unified-development">
     <!-- 主内容区域 -->
-    <div class="main-box">
-      <div class="text-box">
-        <!-- 标题图标/文字 -->
-        <div v-show="showVideo" class="text-icon">开发API</div>
-        <!-- 主标题（根据屏幕尺寸调整字体大小） -->
-        <div class="big-title" style="margin-top: 30px;">统一开发API</div>
-        <!-- 副标题（根据屏幕尺寸调整字体大小） -->
-        <span class="small-title">数智统一开发API是基于JavaScript语言开发的二次编程接口。用于在现代浏览器中加载和显示GraphGIS引擎提供的流渲染或端渲染3D场景，为开发者提供绘制业务数据、触发场景交互、控制场景中场景逻辑的功能。图形化统一开发API兼容当前主流的JavaScript前端框架，如Vue.js或React，前端开发者可以快速便捷地进行二次开发</span>
-        <!-- 按钮区域 -->
-        <div class="btn-box">
-          <div class="btn-blue">立即下载</div>
-        </div>
-      </div>
-      <!-- 右侧大图（在宽屏时显示在右侧） -->
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/tykf-img.png" alt="统一开发API">
-    </div>
+    <main-content :mainObj="mainObj"></main-content>
     <!--  :class="{'fixed': isFixed}" -->
      <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
@@ -99,23 +84,31 @@
 </template>
 
 <script>
+import mainContent from '@/components/main-content.vue';
 import mainTitle from '@/components/main-title.vue';
 import hoverImg from '@/components/hover-img.vue'
 export default {
   name: 'unified-development',
   components: {
     mainTitle,
+    mainContent,
     hoverImg
   },
   data() {
     return {
-      showVideo: true, // 控制是否显示右侧大图
       activeIndex: 0, // 当前激活的步骤索引
       scrollTop: 0, // 页面滚动位置
       stepTop: 0, // 步骤导航栏的顶部位置
       stepTtemTop1: 0, // 步骤1内容顶部位置
       stepTtemTop2: 0, // 步骤2内容顶部位置
       isFixed: false, // 步骤导航栏是否固定
+      // 主内容数据
+      mainObj: {
+        text: '开发API',
+        title: '统一开发API',
+        content: '数智统一开发API是基于JavaScript语言开发的二次编程接口。用于在现代浏览器中加载和显示GraphGIS引擎提供的流渲染或端渲染3D场景，为开发者提供绘制业务数据、触发场景交互、控制场景中场景逻辑的功能。图形化统一开发API兼容当前主流的JavaScript前端框架，如Vue',
+        imgSrc: require('../assets/images/tykf-img.png')
+      },
       // 步骤列表数据
       stepList: [{
         num: '01',
@@ -196,9 +189,7 @@ export default {
       this.handleStepScroll()
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showVideo = screenWidth > 1280
+      // const screenWidth = window.innerWidth;
       // 获取步骤导航栏位置
       this.stepTop = this.getElementTop(this.$refs.stepBox)
     },
@@ -249,106 +240,6 @@ export default {
 .unified-development {
   display: flex;
   flex-direction: column;
-  /* 主内容区样式 */
-  .main-box {
-    position: relative;
-    width: 100%;
-    max-width: 1920px;
-    // aspect-ratio: 1920 / 600;
-    // height: auto;
-    height: 100%;
-    min-height: 860px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 72px;
-    padding: 96px 128px;
-    background-image: url('../assets/images/znls-bg.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    /* 文字区域样式 */
-    .text-box {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 80px;
-      left: 128px;
-      z-index: 10;
-      .small-title {
-        max-width: 680px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 30px;
-        margin-top: 32px;
-      }
-      .big-title {
-        color: #fff;
-        font-size: 64px;
-        font-weight: 700;
-        font-family: Inter Tight, sans-serif;
-        line-height: 78px;
-      }
-    }
-
-    .text-icon {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 30px;
-      margin-top: 164px;
-      font-family: Inter Tight, sans-serif;
-    }
-    
-    .btn-box {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 34px;
-      .btn-blue {
-        color: #101014;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 10px;
-        padding: 12px 20px;
-        background: #26bbff;
-        margin-right: 14px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        &:hover {
-          background: #60c6f5;
-        }
-      }
-      .btn-solid {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 10px;
-        padding: 12px 20px;
-        border: 1px solid rgba(255, 255, 255, .35);
-        background: transparent;
-        margin-bottom: 12px;
-        cursor: pointer;
-        &:hover {
-          background: rgba(255, 255, 255, 0.15);
-        }
-      }
-    }
-    .cosmos-video {
-      margin-top: 344px;
-      border-radius: 12px;
-      aspect-ratio: 1252 / 704;
-      border-radius: 24px;
-    }
-    .right-video {
-      position: absolute;
-      right: 128px;
-      top: 24px;
-      width: 1252px;
-      max-width: 1252px;
-      margin-top: 64px !important;
-    }
-  }
   /* 步骤导航栏样式 */
   .step-box {
     width: 100%;
@@ -488,19 +379,6 @@ export default {
   }
   /* 响应式媒体查询 */
   @media screen and (max-width: 1905px) {
-    .main-box {
-      padding: 96px 64px !important;
-      .text-box {
-        left: 64px !important;
-      }
-      .right-video {
-        right: 64px !important;
-        width: 1024px !important;
-        max-width: 1024px !important;
-        top: 96px !important;
-        aspect-ratio: 1024 / 576 !important;
-      }
-    }
     .step-two-box {
       padding: 40px 64px !important;
     }
@@ -509,9 +387,6 @@ export default {
     }
   }
   @media screen  and (max-width: 1440px) {
-    .main-box {
-      padding: 80px 64px !important;
-    }
     .step-two-bg-box {
       padding: 24px 64px !important;
       .big-title {
@@ -521,22 +396,6 @@ export default {
     }
   }
   @media screen and (max-width: 1280px) {
-    .main-box {
-      .text-box {
-        position: static !important;
-        .big-title {
-          font-size: 40px !important;
-          line-height: 48px !important;
-        }
-        .small-title {
-          font-size: 16px !important;
-          line-height: 26px !important;
-        }
-      }
-      .cosmos-video {
-        margin-top: 54px !important;
-      }
-    }
     .step-two-bg-box {
       .big-title {
         font-size: 40px !important;
@@ -554,16 +413,6 @@ export default {
     }
   }
   @media screen and (max-width: 768px){
-    .main-box {
-      padding: 80px 24px !important;
-      .text-box {
-        left: 24px !important;
-        .big-title {
-          font-size: 32px !important;
-          line-height: 40px !important;
-        }
-      }
-    }
     .step-two-box {
       padding: 40px 24px !important;
     }

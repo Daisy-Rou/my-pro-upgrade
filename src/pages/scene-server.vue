@@ -1,22 +1,7 @@
 <template>
   <div class="scene-server">
     <!-- 主展示区域 -->
-    <div class="main-box">
-      <div class="text-box">
-        <!-- 场景服务器标题 -->
-        <div v-show="showVideo" class="text-icon">场景服务器</div>
-        <!-- 主标题（响应式字体大小） -->
-        <div class="big-title" style="margin-top: 30px;">数智场景服务器</div>
-        <!-- 副标题（响应式字体大小） -->
-        <span class="small-title">提供一站式基于云的场景托管服务，在云端实现数字孪生场景的分布式渲染。用户可以通过任何现代网络浏览器访问高质量的数字孪生应用程序，而无需安装或下载任何内容。它支持终端用户和云应用之间的实时交互，为用户提供了一个轻量级、高效、便捷的云渲染解决方案</span>
-        <!-- 按钮区域 -->
-        <div class="btn-box">
-          <div class="btn-blue">立即下载</div>
-        </div>
-      </div>
-      <!-- 主展示图片（响应式位置） -->
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/cjfwq-img.png" alt="智能孪生">
-    </div>
+    <main-content :mainObj="mainObj"></main-content>
     <!--  :class="{'fixed': isFixed}" -->
      <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
@@ -161,15 +146,16 @@
 </template>
 
 <script>
+import mainContent from '@/components/main-content.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'scene-server',
   components: {
+    mainContent,
     contentIntroduction
   },
   data() {
     return {
-      showVideo: true, // 控制大屏元素显示
       activeIndex: 0,   // 当前激活的步骤索引
       scrollTop: 0,     // 页面滚动位置
       stepTop: 0,       // 步骤导航栏位置
@@ -179,6 +165,13 @@ export default {
       stepItemTop3: 0,
       stepItemTop4: 0,
       isFixed: false,    // 是否固定导航栏
+      // 主内容数据
+      mainObj: {
+        text: '场景服务器',
+        title: '数智场景服务器',
+        content: '提供一站式基于云的场景托管服务，在云端实现数字孪生场景的分布式渲染。用户可以通过任何现代网络浏览器访问高质量的数字孪生应用程序，而无需安装或下载任何内容。它支持终端用户和云应用之间的实时交互，为用户提供了一个轻量级、高效、便捷的云渲染解决方案',
+        imgSrc: require('../assets/images/cjfwq-img.png')
+      },
       // 步骤列表数据
       stepList: [{
         num: '01',
@@ -240,9 +233,8 @@ export default {
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
+      // const screenWidth = window.innerWidth;
       // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showVideo = screenWidth > 1280
       // 更新步骤导航栏位置
       this.stepTop = this.getElementTop(this.$refs.stepBox)
     },
@@ -293,107 +285,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  .main-box {
-    max-width: 1920px;
-    position: relative;
-    width: 100%;
-    // aspect-ratio: 1920 / 600;
-    // height: auto;
-    height: 100%;
-    min-height: 860px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 72px;
-    padding: 96px 128px;
-    background-image: url('../assets/images/znls-bg.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    // 标题
-    .text-box {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 80px;
-      left: 128px;
-      z-index: 10;
-      .small-title {
-        max-width: 680px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 30px;
-        margin-top: 32px;
-      }
-      .big-title {
-        color: #fff;
-        font-size: 64px;
-        font-weight: 700;
-        font-family: Inter Tight, sans-serif;
-        line-height: 78px;
-      }
-    }
-    // 场景服务器标题
-    .text-icon {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 30px;
-      margin-top: 164px;
-      font-family: Inter Tight, sans-serif;
-    }
-    // 按钮区域
-    .btn-box {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 34px;
-      .btn-blue {
-        color: #101014;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 10px;
-        padding: 12px 20px;
-        background: #26bbff;
-        margin-right: 14px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        &:hover {
-          background: #60c6f5;
-        }
-      }
-      .btn-solid {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 10px;
-        padding: 12px 20px;
-        border: 1px solid rgba(255, 255, 255, .35);
-        background: transparent;
-        margin-bottom: 12px;
-        cursor: pointer;
-        &:hover {
-          background: rgba(255, 255, 255, 0.15);
-        }
-      }
-    }
-    // 主展示图片（响应式位置）
-    .cosmos-video {
-      margin-top: 344px;
-      border-radius: 12px;
-      aspect-ratio: 1252 / 704;
-      border-radius: 24px;
-    }
-    // 主展示图片（响应式位置）
-    .right-video {
-      position: absolute;
-      right: 128px;
-      top: 24px;
-      width: 1252px;
-      max-width: 1252px;
-      margin-top: 64px !important;
-    }
-  }
   // 步骤导航栏
   .step-box {
     width: 100%;
@@ -664,19 +555,6 @@ export default {
   }
   // 媒体查询
   @media screen and (max-width: 1905px) {
-    .main-box {
-      padding: 96px 64px !important;
-      .text-box {
-        left: 64px !important;
-      }
-      .right-video {
-        right: 64px !important;
-        width: 1024px !important;
-        max-width: 1024px !important;
-        top: 96px !important;
-        aspect-ratio: 1024 / 576 !important;
-      }
-    }
     .step-two-box, .step-three-box {
       padding: 40px 64px !important;
     }
@@ -688,9 +566,6 @@ export default {
     }
   }
   @media screen  and (max-width: 1440px) {
-    .main-box {
-      padding: 80px 64px !important;
-    }
     .step-two-bg-box, .step-three-bg-box {
       padding: 24px 64px !important;
       .big-title {
@@ -700,22 +575,6 @@ export default {
     }
   }
   @media screen and (max-width: 1280px) {
-    .main-box {
-      .text-box {
-        position: static !important;
-        .big-title {
-          font-size: 40px !important;
-          line-height: 48px !important;
-        }
-        .small-title {
-          font-size: 16px !important;
-          line-height: 26px !important;
-        }
-      }
-      .cosmos-video {
-        margin-top: 54px !important;
-      }
-    }
     .step-two-box, .step-three-box {
       .big-title {
         font-size: 40px !important;
@@ -740,16 +599,6 @@ export default {
     }
   }
   @media screen and (max-width: 768px){
-    .main-box {
-      padding: 80px 24px !important;
-      .text-box {
-        left: 24px !important;
-        .big-title {
-          font-size: 32px !important;
-          line-height: 40px !important;
-        }
-      }
-    }
     .step-box {
       justify-content: inherit !important;
     }

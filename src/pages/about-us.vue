@@ -225,12 +225,15 @@ export default {
             margin-top: 32px;
           }
           .news-card-item-go {
-            color: rgb(38, 187, 255);
+            color: #2CBDFF;
             font-size: 16px;
             font-weight: 400;
             line-height: 26px;
             margin-bottom: 12px;
             cursor: pointer;
+            &:hover {
+              color: #60c6f5;
+            }
           }
         }
       }

@@ -1,21 +1,7 @@
 <template>
   <div class="application-editor">
     <!-- 主展示区域 -->
-    <div class="main-box">
-      <div class="text-box">
-        <!-- 响应式显示的标题 -->
-        <div v-show="showVideo" class="text-icon">应用程序编辑器</div>
-        <div class="big-title" style="margin-top: 30px;">应用程序编辑器</div>
-        <!-- 产品描述 -->
-        <span class="small-title">应用编辑器是一款基于B/S架构，围绕数字双胞胎全功能场景，帮助用户轻松快速构建专业级数字双胞胎应用的专用产品。它原生支持基于云和本地的多源异构数据，具有丰富的可视化组件、便捷的配置管理工具、全面的可定义对象属性、非凡的实时渲染效果，并支持二次开发、部署和发布功能。它可广泛用于构建各种行业的数字孪生应用</span>
-        <!-- 下载按钮 -->
-        <div class="btn-box">
-          <div class="btn-blue">立即下载</div>
-        </div>
-      </div>
-      <!-- 产品展示图（响应式位置） -->
-      <img  class="cosmos-video" :class="{'right-video': showVideo}" src="../assets/images/yycx-img.png" alt="应用程序编辑器">
-    </div>
+    <main-content :mainObj="mainObj"></main-content>
     <!--  :class="{'fixed': isFixed}" -->
     <!-- 步骤导航栏 -->
     <div class="step-box" ref="stepBox">
@@ -95,21 +81,29 @@
 </template>
 
 <script>
+import mainContent from '@/components/main-content.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'application-editor',
   components: {
+    mainContent,
     contentIntroduction
   },
   data() {
     return {
-      showVideo: true,      // 控制大屏展示模式
       activeIndex: 0,       // 当前激活的导航项
       scrollTop: 0,         // 页面滚动位置
       stepTop: 0,           // 导航栏位置
       stepTtemTop1: 0,      // 特性模块位置
       stepTtemTop2: 0,      // 优势模块位置
       isFixed: false,       // 导航栏是否固定
+      // 主内容数据
+      mainObj: {
+        text: '应用程序编辑器',
+        title: '应用程序编辑器',
+        content: 'S架构，围绕数字双胞胎全功能场景，帮助用户轻松快速构建专业级数字双胞胎应用的专用产品。它原生支持基于云和本地的多源异构数据，具有丰富的可视化组件、便捷的配置管理工具、全面的可定义对象属性、非凡的实时渲染效果，并支持二次开发、部署和发布功能。它可广泛用于构建各种行业的数字孪生应用',
+        imgSrc: require('../assets/images/yycx-img.png')
+      },
       // 导航项数据
       stepList: [{
         num: '01',
@@ -164,9 +158,7 @@ export default {
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showVideo = screenWidth > 1280
+      // const screenWidth = window.innerWidth;
       this.stepTop = this.getElementTop(this.$refs.stepBox)
     },
     debounce(fn, delay = 500) {
@@ -206,105 +198,6 @@ export default {
 .application-editor {
   display: flex;
   flex-direction: column;
-  // 主展示区域
-  .main-box {
-    position: relative;
-    width: 100%;
-    max-width: 1920px;
-    // aspect-ratio: 1920 / 600;
-    // height: auto;
-    height: 100%;
-    min-height: 860px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 72px;
-    padding: 96px 128px;
-    background-image: url('../assets/images/znls-bg.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    object-fit: cover;
-    .text-box {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 80px;
-      left: 128px;
-      z-index: 10;
-      .small-title {
-        max-width: 680px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 400;
-        line-height: 30px;
-        margin-top: 32px;
-      }
-      .big-title {
-        color: #fff;
-        font-size: 64px;
-        font-weight: 700;
-        font-family: Inter Tight, sans-serif;
-        line-height: 78px;
-      }
-    }
-    
-    .text-icon {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
-      line-height: 30px;
-      margin-top: 164px;
-      font-family: Inter Tight, sans-serif;
-    }
-    
-    .btn-box {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 34px;
-      .btn-blue {
-        color: #101014;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 10px;
-        padding: 12px 20px;
-        background: #26bbff;
-        margin-right: 14px;
-        margin-bottom: 12px;
-        cursor: pointer;
-        &:hover {
-          background: #60c6f5;
-        }
-      }
-      .btn-solid {
-        color: #fff;
-        font-size: 14px;
-        font-weight: 500;
-        border-radius: 10px;
-        padding: 12px 20px;
-        border: 1px solid rgba(255, 255, 255, .35);
-        background: transparent;
-        margin-bottom: 12px;
-        cursor: pointer;
-        &:hover {
-          background: rgba(255, 255, 255, 0.15);
-        }
-      }
-    }
-    .cosmos-video {
-      margin-top: 344px;
-      border-radius: 12px;
-      aspect-ratio: 1252 / 704;
-      border-radius: 24px;
-    }
-    .right-video {
-      position: absolute;
-      right: 128px;
-      top: 24px;
-      width: 1252px;
-      max-width: 1252px;
-      margin-top: 64px !important;
-    }
-  }
   // 步骤导航栏
   .step-box {
     width: 100%;
@@ -464,19 +357,6 @@ export default {
    - 1280px以下：单列布局，标题字号调整
    - 768px以下：移动端适配 */
   @media screen and (max-width: 1905px) {
-    .main-box {
-      padding: 96px 64px !important;
-      .text-box {
-        left: 64px !important;
-      }
-      .right-video {
-        right: 64px !important;
-        width: 1024px !important;
-        max-width: 1024px !important;
-        top: 96px !important;
-        aspect-ratio: 1024 / 576 !important;
-      }
-    }
     .step-two-box {
       padding: 40px 64px !important;
     }
@@ -485,9 +365,6 @@ export default {
     }
   }
   @media screen  and (max-width: 1440px) {
-    .main-box {
-      padding: 80px 64px !important;
-    }
     .step-two-bg-box {
       padding: 24px 64px !important;
       .big-title {
@@ -497,22 +374,6 @@ export default {
     }
   }
   @media screen and (max-width: 1280px) {
-    .main-box {
-      .text-box {
-        position: static !important;
-        .big-title {
-          font-size: 40px !important;
-          line-height: 48px !important;
-        }
-        .small-title {
-          font-size: 16px !important;
-          line-height: 26px !important;
-        }
-      }
-      .cosmos-video {
-        margin-top: 54px !important;
-      }
-    }
     .step-two-box {
       .big-title {
         font-size: 40px !important;
@@ -543,16 +404,6 @@ export default {
     }
   }
   @media screen and (max-width: 768px){
-    .main-box {
-      padding: 80px 24px !important;
-      .text-box {
-        left: 24px !important;
-        .big-title {
-          font-size: 32px !important;
-          line-height: 40px !important;
-        }
-      }
-    }
     .step-two-box {
       padding: 40px 24px !important;
       .big-title {
