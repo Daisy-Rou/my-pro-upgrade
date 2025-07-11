@@ -175,47 +175,7 @@
         </div>
       </div>
     </div>
-    <div class="step-two-bg-box">
-      <div class="big-title">产品优势</div>
-      <div class="card-box">
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhyq-cpys1.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">非凡的效果</div>
-            <span class="card-item-content">超精细还原真实世界场景纹理细节，照片级细节显示精度；从太阳系到一颗螺丝钉的超大型场景的全方位还原，大尺度时空态势的展示；具有高真实感渲染效果和电影级实时渲染效果，有效提升了作战指挥中心的视觉体验和决策应用效率</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhyq-cpys2.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">完整工具链交付</div>
-            <span class="card-item-content">拥有成熟完整的产品配置工具和交付能力，为3D场景构建、场景服务调试、twin应用开发提供一站式全流程开发工具链；全元素场景、多源数据和业务逻辑的无缝集成使用户能够更灵活、独立、高质量和高效率地构建数字孪生应用</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhyq-cpys3.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">强大的功能</div>
-            <span class="card-item-content">它具有态势监控、应急指挥、显示报告、过程管理、决策辅助等多种功能。它承担着决策中心、预警中心、治理中心、指挥中心、展示中心等多种功能，充分满足用户复杂的应用场景，为其商业决策提供有力支持</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/zhyq-cpys4.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">跨平台支持</div>
-            <span class="card-item-content">双渲染引擎支持，可以选择使用高并发WebGL架构或高渲染效果Web流架构。它拥有强大的跨平台发布能力和灵活的云部署解决方案。既可以发布私有云部署版本，也可以发布公有云在线版本，充分满足用户的不同使用场景</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <top-bottom-card :list="cpysList"></top-bottom-card>
     <!-- 推荐产品卡片区域 -->
     <div class="step-two-box" ref="stepItem3">
       <div class="text-box">
@@ -235,6 +195,7 @@
 import mainContent from '@/components/main-content.vue';
 import mainTitle from '@/components/main-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
+import topBottomCard from '@/components/top-bottom-card.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'smart-transportation',
@@ -242,6 +203,7 @@ export default {
     mainContent,
     mainTitle,
     leftRightCard,
+    topBottomCard,
     contentIntroduction
   },
   data() {
@@ -279,6 +241,33 @@ export default {
       },{
         name: '基础平台'
       }],
+      // 产品优势数据
+      cpysList: {
+        title: '产品优势',
+        bgSrc: require('../assets/images/tykf-bg.png'),
+        list: [
+          {
+            title: '非凡的效果',
+            content: '超精细还原真实世界场景纹理细节，照片级细节显示精度；从太阳系到一颗螺丝钉的超大型场景的全方位还原，大尺度时空态势的展示；<span class="purple">具有高真实感渲染效果和电影级实时渲染效果</span>，有效提升了作战指挥中心的视觉体验和决策应用效率',
+            imgSrc: require('../assets/images/zhyq-cpys1.png')
+          },
+          {
+            title: '完整工具链交付',
+            content: '拥有成熟完整的产品配置工具和交付能力，为3D场景构建、<span class="purple">场景服务调试、twin应用开发提供一站式全流程开发工具链</span>；全元素场景、多源数据和业务逻辑的无缝集成使用户能够更灵活、独立、高质量和高效率地构建数字孪生应用',
+            imgSrc: require('../assets/images/zhyq-cpys2.png')
+          },
+          {
+            title: '强大的功能',
+            content: '它具有态势监控、应急指挥、显示报告、过程管理、决策辅助等多种功能。<span class="purple">它承担着决策中心、预警中心、治理中心、指挥中心、展示中心等多种功能</span>，充分满足用户复杂的应用场景，为其商业决策提供有力支持',
+            imgSrc: require('../assets/images/zhyq-cpys3.png')
+          },
+          {
+            title: '跨平台支持',
+            content: '双渲染引擎支持，可以选择使用高并发WebGL架构或高渲染效果Web流架构。<span class="purple">它拥有强大的跨平台发布能力和灵活的云部署解决方案</span>。既可以发布私有云部署版本，也可以发布公有云在线版本，充分满足用户的不同使用场景',
+            imgSrc: require('../assets/images/zhyq-cpys4.png')
+          }
+        ]
+      },
       // 卡片数据
       list: [
         {
@@ -590,81 +579,6 @@ export default {
       }
     }
   }
-  // 推荐产品卡片区域
-  .step-two-bg-box {
-    display: flex;
-    flex-direction: column;
-    padding: 64px 128px;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url(../assets/images/tykf-bg.png);
-    aspect-ratio: 1920 / 687;
-    object-fit: cover;
-    background-size: 100% 100%;
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
-      text-align: center;
-    }
-    .card-box {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-top: 40px;
-      margin-right: -24px;
-      .card-item {
-        display: flex;
-        flex-direction: column;
-        width: calc(25% - 24px);
-        margin-right: 24px;
-        margin-bottom: 24px;
-        &:nth-child(4n) {
-          margin-right: 0;
-        }
-        .img-box {
-          display: flex;
-          flex-shrink: 0;
-          // max-width: 191px;
-          width: 100%;
-          height: auto;
-          aspect-ratio: 295 / 166;
-          border-radius: 16px;
-          overflow: hidden;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 16px;
-          }
-        }
-        .card-item-title-box {
-          display: flex;
-          flex-direction: column;
-          padding: 24px;
-          .card-item-title {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-            font-family: Inter Tight, sans-serif;
-            line-height: 25px;
-            margin-bottom: 12px;
-          }
-          .card-item-content {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 23px;
-            color: rgba(255, 255, 255, .65);
-            // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-            // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-            // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-            // -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-            // -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-          }
-        }
-      }
-    }
-  }
   .step-two-box {
     padding: 40px 128px;
     .big-title {
@@ -683,40 +597,13 @@ export default {
     .step-two-box {
       padding: 40px 64px !important;
     }
-    .step-two-bg-box {
-      padding: 64px !important;
-    }
   }
   @media screen  and (max-width: 1440px) {
-    .step-two-bg-box {
-      padding: 24px 64px !important;
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-    }
     .szls-item {
       width: calc(50% - 24px) !important;
         margin-right: 24px !important;
         &:nth-child(2n) {
         margin-right: 0 !important;
-      }
-    }
-  }
-  @media screen and (max-width: 1280px) {
-    .step-two-bg-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-      .card-box {
-        .card-item {
-          width: calc(50% - 24px) !important;
-          margin-right: 24px !important;
-          &:nth-child(2n) {
-            margin-right: 0 !important;
-          }
-        }
       }
     }
   }
@@ -750,20 +637,6 @@ export default {
       .szls-item-box {
         width: 100% !important;
         .szls-item {
-          width: 100% !important;
-          margin-right: 0 !important;
-        }
-      }
-    }
-    .step-two-bg-box {
-      padding: 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
-      }
-      .card-box {
-        width: 100% !important;
-        .card-item {
           width: 100% !important;
           margin-right: 0 !important;
         }

@@ -35,61 +35,21 @@
         </div>
       </div>
     </div>
-     <!-- 产品优势卡片区域 -->
-    <div class="card-container">
-      <div class="step-two-bg-box">
-        <div class="big-title">产品优势</div>
-        <div class="card-box">
-          <div class="card-item">
-            <div class="img-box">
-              <img src="../assets/images/cpys-img1.png" alt="">
-            </div>
-            <div class="card-item-title-box">
-              <div class="card-item-title">应用程序编辑器</div>
-              <span class="card-item-content">添加图表小部件、配置交互式逻辑和发布数字孪生应用程序</span>
-            </div>
-          </div>
-          <div class="card-item">
-            <div class="img-box">
-              <img src="../assets/images/cpys-img2.png" alt="">
-            </div>
-            <div class="card-item-title-box">
-              <div class="card-item-title">全面的场景配置属性</div>
-              <span class="card-item-content">具有全面的可配置属性，配置结果随时可见，为用户提供便捷高效的场景构建能力</span>
-            </div>
-          </div>
-          <div class="card-item">
-            <div class="img-box">
-              <img src="../assets/images/cpys-img3.png" alt="">
-            </div>
-            <div class="card-item-title-box">
-              <div class="card-item-title">用户友好的配置环境</div>
-              <span class="card-item-content">易于使用的图形编辑界面，允许根据用户需求进行灵活方便的修改和调整</span>
-            </div>
-          </div>
-          <div class="card-item">
-            <div class="img-box">
-              <img src="../assets/images/cpys-img4.png" alt="">
-            </div>
-            <div class="card-item-title-box">
-              <div class="card-item-title">非凡的场景渲染效果</div>
-              <span class="card-item-content">内置图像渲染效果，可以重新创建逼真的场景元素。配置简单，轻松实现非凡的视觉效果</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- 产品优势卡片区域 -->
+    <top-bottom-card :list="cpysList"></top-bottom-card>
   </div>
 </template>
 
 <script>
 import mainContent from '@/components/main-content.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
+import topBottomCard from '@/components/top-bottom-card.vue';
 export default {
   name: 'scene-editor',
   components: {
     mainContent,
-    contentIntroduction
+    contentIntroduction,
+    topBottomCard
   },
   data() {
     return {
@@ -140,7 +100,34 @@ export default {
           content: '支持复杂的层次结构和模型节点定义，允许同时控制多个结构节点。支持为模型定义数据驱动的逻辑和复杂的动画，允许用户输入简单的值来实现对3D对象的复杂控制',
           imgSrc: require('../assets/images/cptx-img4.png')
         }
-      ]
+      ],
+      // 产品优势数据
+      cpysList: {
+        title: '产品优势',
+        bgSrc: require('../assets/images/cpys-bg.png'),
+        list: [
+          {
+            title: '应用程序编辑器',
+            content: '添加图表小部件、配置交互式逻辑和发布数字孪生应用程序',
+            imgSrc: require('../assets/images/cpys-img1.png')
+          },
+          {
+            title: '全面的场景配置属性',
+            content: '具有全面的可配置属性，配置结果随时可见，为用户提供便捷高效的场景构建能力',
+            imgSrc: require('../assets/images/cpys-img2.png')
+          },
+          {
+            title: '用户友好的配置环境',
+            content: '易于使用的图形编辑界面，允许根据用户需求进行灵活方便的修改和调整',
+            imgSrc: require('../assets/images/cpys-img3.png')
+          },
+          {
+            title: '非凡的场景渲染效果',
+            content: '内置图像渲染效果，可以重新创建逼真的场景元素。配置简单，轻松实现非凡的视觉效果',
+            imgSrc: require('../assets/images/cpys-img4.png')
+          }
+        ]
+      }
     }
   },
   mounted() {
@@ -219,13 +206,10 @@ export default {
   // 进度条样式
   .step-box {
     width: 100%;
-    // max-width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    // flex-wrap: nowrap;
-    // overflow-x: auto;
     background-color: rgba(255, 255, 255, .05);
     &.fixed {
       position: fixed;
@@ -287,85 +271,6 @@ export default {
       }
     }
   }
-  .card-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-image: url(../assets/images/cpys-bg.png);
-    // aspect-ratio: 1920 / 687;
-    object-fit: cover;
-    background-size: 100% 100%;
-    .step-two-bg-box {
-      padding: 64px 128px;
-      max-width: 1920px;
-      display: flex;
-      flex-direction: column;
-    }
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
-      text-align: center;
-    }
-    .card-box {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-top: 40px;
-      margin-right: -24px;
-      .card-item {
-        display: flex;
-        flex-direction: column;
-        width: calc(25% - 24px);
-        margin-right: 24px;
-        margin-bottom: 24px;
-        &:nth-child(4n) {
-          margin-right: 0;
-        }
-        .img-box {
-          display: flex;
-          flex-shrink: 0;
-          width: 100%;
-          height: auto;
-          border-radius: 16px;
-          overflow: hidden;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 16px;
-          }
-        }
-        .card-item-title-box {
-          display: flex;
-          flex-direction: column;
-          padding: 24px;
-          .card-item-title {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-            font-family: Inter Tight, sans-serif;
-            line-height: 25px;
-            margin-bottom: 12px;
-          }
-          .card-item-content {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 23px;
-            color: rgba(255, 255, 255, .65);
-            overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-            text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-            display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-            -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-            -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-          }
-        }
-      }
-    }
-  }
   .step-two-box {
     padding: 40px 128px;
     .big-title {
@@ -381,39 +286,12 @@ export default {
     .step-two-box {
       padding: 40px 64px !important;
     }
-    .step-two-bg-box {
-      padding: 64px !important;
-    }
-  }
-  @media screen  and (max-width: 1440px) {
-    .step-two-bg-box {
-      padding: 24px 64px !important;
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-    }
   }
   @media screen and (max-width: 1280px) {
     .step-two-box {
       .big-title {
         font-size: 40px !important;
         line-height: 48px !important;
-      }
-    }
-    .step-two-bg-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-      .card-box {
-        .card-item {
-          width: calc(50% - 24px) !important;
-          margin-right: 24px !important;
-          &:nth-child(2n) {
-            margin-right: 0 !important;
-          }
-        }
       }
     }
   }
@@ -430,20 +308,6 @@ export default {
       .big-title {
         font-size: 32px !important;
         line-height: 40px !important;
-      }
-    }
-    .step-two-bg-box {
-      padding: 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
-      }
-      .card-box {
-        width: 100% !important;
-        .card-item {
-          width: 100% !important;
-          margin-right: 0 !important;
-        }
       }
     }
   }

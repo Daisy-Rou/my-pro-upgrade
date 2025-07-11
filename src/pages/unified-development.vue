@@ -39,47 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="step-two-bg-box">
-      <div class="big-title">产品优势</div>
-      <div class="card-box">
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/tykf-img1.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">实时渲染交互</div>
-            <span class="card-item-content">利用视频流技术将高性能的3D渲染图像实时传输给用户，打破了终端的限制，支持终端用户与云应用随时随地的实时交互</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/tykf-img2.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">方便易用</div>
-            <span class="card-item-content">通过调用封装良好的JS SDK，可以方便快捷地将各种图层接口添加到3D场景中，快速定制符合业务需求的API接口</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/tykf-img3.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">完整的文档</div>
-            <span class="card-item-content">提供详细全面的开发文档和使用教程，为用户开发和使用提供完整的参考，帮助用户无忧开发</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/tykf-img4.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">非凡的效果</div>
-            <span class="card-item-content">全功能数据层经过精心优化设计，借助图形化场景编辑器，可以实现非凡的3D渲染效果</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <top-bottom-card :list="cpysList"></top-bottom-card>
   </div>
 </template>
 
@@ -87,12 +47,14 @@
 import mainContent from '@/components/main-content.vue';
 import mainTitle from '@/components/main-title.vue';
 import hoverImg from '@/components/hover-img.vue'
+import topBottomCard from '@/components/top-bottom-card.vue';
 export default {
   name: 'unified-development',
   components: {
     mainTitle,
     mainContent,
-    hoverImg
+    hoverImg,
+    topBottomCard
   },
   data() {
     return {
@@ -167,7 +129,35 @@ export default {
           tip: '用于表示行政区划、区域边界等',
           path: ''
         }
-      ]
+      ],
+      // 产品优势数据
+      cpysList: {
+        title: '产品优势',
+        bgSrc: require('../assets/images/tykf-bg.png'),
+        list: [
+          {
+            title: '实时渲染交互',
+            content: '利用视频流技术将高性能的3D渲染图像实时传输给用户，打破了<span class="purple">终端的限制</span>，支持终端用户与云应用随时随地的实时交互',
+            // purpleContent: '终端的限制',
+            imgSrc: require('../assets/images/tykf-img1.png')
+          },
+          {
+            title: '方便易用',
+            content: '通过调用封装<span class="purple">良好的JS SDK</span>，可以方便快捷地将各种图层接口添加到3D场景中，快速定制符合业务需求的API接口',
+            imgSrc: require('../assets/images/tykf-img2.png')
+          },
+          {
+            title: '完整的文档',
+            content: '提供<span class="purple">详细全面的开发文档和使用教程</span>，为用户开发和使用提供完整的参考，帮助用户无忧开发',
+            imgSrc: require('../assets/images/tykf-img3.png')
+          },
+          {
+            title: '非凡的效果',
+            content: '全功能数据层经过精心优化设计，<span class="purple">借助图形化场景编辑器</span>，可以实现非凡的3D渲染效果',
+            imgSrc: require('../assets/images/tykf-img4.png')
+          }
+        ]
+      }
     }
   },
    mounted() {
@@ -302,133 +292,15 @@ export default {
       }
     }
   }
-  /* 产品优势区域样式 */
-  .step-two-bg-box {
-    display: flex;
-    flex-direction: column;
-    padding: 64px 128px;
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url(../assets/images/tykf-bg.png);
-    aspect-ratio: 1920 / 687;
-    object-fit: cover;
-    background-size: 100% 100%;
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
-      text-align: center;
-    }
-    .card-box {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-top: 40px;
-      margin-right: -24px;
-      .card-item {
-        display: flex;
-        flex-direction: column;
-        width: calc(25% - 24px);
-        margin-right: 24px;
-        margin-bottom: 24px;
-        &:nth-child(4n) {
-          margin-right: 0;
-        }
-        .img-box {
-          display: flex;
-          flex-shrink: 0;
-          // max-width: 191px;
-          width: 100%;
-          height: auto;
-          aspect-ratio: 295 / 166;
-          border-radius: 16px;
-          overflow: hidden;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 16px;
-          }
-        }
-        .card-item-title-box {
-          display: flex;
-          flex-direction: column;
-          padding: 24px;
-          .card-item-title {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-            font-family: Inter Tight, sans-serif;
-            line-height: 25px;
-            margin-bottom: 12px;
-          }
-          .card-item-content {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 23px;
-            color: rgba(255, 255, 255, .65);
-            // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-            // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-            // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-            // -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-            // -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-          }
-        }
-      }
-    }
-  }
   /* 响应式媒体查询 */
   @media screen and (max-width: 1905px) {
     .step-two-box {
       padding: 40px 64px !important;
     }
-    .step-two-bg-box {
-      padding: 64px !important;
-    }
-  }
-  @media screen  and (max-width: 1440px) {
-    .step-two-bg-box {
-      padding: 24px 64px !important;
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-    }
-  }
-  @media screen and (max-width: 1280px) {
-    .step-two-bg-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-      .card-box {
-        .card-item {
-          width: calc(50% - 24px) !important;
-          margin-right: 24px !important;
-          &:nth-child(2n) {
-            margin-right: 0 !important;
-          }
-        }
-      }
-    }
   }
   @media screen and (max-width: 768px){
     .step-two-box {
       padding: 40px 24px !important;
-    }
-    .step-two-bg-box {
-      padding: 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
-      }
-      .card-box {
-        width: 100% !important;
-        .card-item {
-          width: 100% !important;
-          margin-right: 0 !important;
-        }
-      }
     }
   }
 }
