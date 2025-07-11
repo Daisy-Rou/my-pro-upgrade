@@ -522,6 +522,7 @@ export default {
   }
   // 进度条区域
   .step-box {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;

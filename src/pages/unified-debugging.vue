@@ -62,7 +62,6 @@
           <span class="num">03</span>
           <span class="title">产品优势</span>
         </div>
-        <!-- <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">产品优势</div> -->
       </div>
     </div>
     <!-- 产品优势区域（带背景） -->
@@ -389,6 +388,7 @@ export default {
   }
   // 步骤导航栏固定样式
   .step-box {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;

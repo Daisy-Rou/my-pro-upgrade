@@ -6,9 +6,9 @@
         <!-- 顶部图标/文字 -->
         <div v-show="showVideo" class="text-icon">场景编辑器</div>
         <!-- 主标题 -->
-        <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">智能孪生</div>
+        <div class="big-title" style="margin-top: 30px;">智能孪生</div>
         <!-- 副标题描述 -->
-        <span class="small-title" :class="{'fs18': showVideo}">全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！</span>
+        <span class="small-title">全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！</span>
         <!-- 操作按钮 -->
         <div class="btn-box">
           <div class="btn-blue">立即下载</div>
@@ -49,7 +49,7 @@
         <span class="num">02</span>
         <span class="title">开发人员之旅</span>
       </div>
-      <div class="big-title" :class="{'fs64': showVideo}" style="margin-top: 30px;">开发人员之旅</div>
+      <div class="big-title" style="margin-top: 30px;">开发人员之旅</div>
     </div>
     <!-- 第二步背景区域 -->
     <div class="step-two-bg-box"></div>
@@ -251,13 +251,6 @@ export default {
     background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
     /* 文本区域样式 */
     .text-box {
       display: flex;
@@ -432,6 +425,7 @@ export default {
   }
   /* 第二步和第三步标题样式 */
   .step-two-box, .step-three-box {
+    max-width: 1920px;
     padding: 40px 128px;
     .big-title {
       color: #fff;

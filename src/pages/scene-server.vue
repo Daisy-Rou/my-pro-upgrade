@@ -54,32 +54,34 @@
       </div>
     </div>
     <!-- 优势卡片区域 -->
-    <div class="step-two-bg-box">
-      <div class="card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys1.png" alt="">
+    <div class="card-container">
+      <div class="step-two-bg-box">
+        <div class="card-item">
+          <div class="img-box">
+            <img src="../assets/images/server-cpys1.png" alt="">
+          </div>
+          <div class="card-item-title-box">
+            <div class="card-item-title">实时渲染交互</div>
+            <span class="card-item-content">利用视频流技术将高性能的3D渲染图像实时传输给用户，打破了终端的限制，支持终端用户与云应用随时随地的实时交互</span>
+          </div>
         </div>
-        <div class="card-item-title-box">
-          <div class="card-item-title">实时渲染交互</div>
-          <span class="card-item-content">利用视频流技术将高性能的3D渲染图像实时传输给用户，打破了终端的限制，支持终端用户与云应用随时随地的实时交互</span>
+        <div class="card-item">
+          <div class="img-box">
+            <img src="../assets/images/server-cpys2.png" alt="">
+          </div>
+          <div class="card-item-title-box">
+            <div class="card-item-title">安全可靠</div>
+            <span class="card-item-content">原生支持web应用防火墙，保护用户数据隐私；租户数据物理隔离，数据网络传输端到端加密，符合行业专业标准，经第三方安全实验室检测，确保安全可信</span>
+          </div>
         </div>
-      </div>
-      <div class="card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys2.png" alt="">
-        </div>
-        <div class="card-item-title-box">
-          <div class="card-item-title">安全可靠</div>
-          <span class="card-item-content">原生支持web应用防火墙，保护用户数据隐私；租户数据物理隔离，数据网络传输端到端加密，符合行业专业标准，经第三方安全实验室检测，确保安全可信</span>
-        </div>
-      </div>
-      <div class="card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys3.png" alt="">
-        </div>
-        <div class="card-item-title-box">
-          <div class="card-item-title">稳定可靠</div>
-          <span class="card-item-content">云平台建立在GPU虚拟化之上，支持动态限速和灾难备份；具有高数据可靠性，高I/O吞吐能力，确保数据的可靠性</span>
+        <div class="card-item">
+          <div class="img-box">
+            <img src="../assets/images/server-cpys3.png" alt="">
+          </div>
+          <div class="card-item-title-box">
+            <div class="card-item-title">稳定可靠</div>
+            <span class="card-item-content">云平台建立在GPU虚拟化之上，支持动态限速和灾难备份；具有高数据可靠性，高I/O吞吐能力，确保数据的可靠性</span>
+          </div>
         </div>
       </div>
     </div>
@@ -290,10 +292,11 @@ export default {
 .scene-server {
   display: flex;
   flex-direction: column;
+  align-items: center;
   .main-box {
+    max-width: 1920px;
     position: relative;
     width: 100%;
-    max-width: 1920px;
     // aspect-ratio: 1920 / 600;
     // height: auto;
     height: 100%;
@@ -393,7 +396,11 @@ export default {
   }
   // 步骤导航栏
   .step-box {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -409,6 +416,8 @@ export default {
     }
     .step-item {
       display: flex;
+      flex-shrink: 0;
+      width: fit-content;
       align-items: center;
       margin-right: 42px;
       padding: 14px 0;
@@ -460,12 +469,19 @@ export default {
     }
   }
   // 优势卡片区域
+  .card-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .step-two-bg-box {
+    max-width: 1920px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 64px 128px;
     margin-right: -24px;
+    padding: 64px 128px;
     .card-item {
       display: flex;
       flex-direction: column;
@@ -518,6 +534,8 @@ export default {
     }
   }
   .step-two-box, .step-three-box {
+    width: 100%;
+    max-width: 1920px;
     padding: 40px 128px;
     .big-title {
       color: #fff;
@@ -529,6 +547,8 @@ export default {
   }
   // 平台适应卡片区域
   .step-three-bg-box {
+    width: 100%;
+    max-width: 1920px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -578,6 +598,8 @@ export default {
   }
   // 视觉效果卡片区域
   .news-small-card-box {
+    width: 100%;
+    max-width: 1920px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -728,6 +750,9 @@ export default {
         }
       }
     }
+    .step-box {
+      justify-content: inherit !important;
+    }
     .step-two-box, .step-three-box {
       padding: 40px 24px !important;
       .big-title {
@@ -738,6 +763,7 @@ export default {
     .step-two-bg-box, .step-three-bg-box {
       width: 100% !important;
       padding: 24px !important;
+      margin-right: 0 !important;
       .card-item {
         width: 100% !important;
         margin-right: 0 !important;

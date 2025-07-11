@@ -49,43 +49,45 @@
       </div>
     </div>
      <!-- 产品优势卡片区域 -->
-    <div class="step-two-bg-box">
-      <div class="big-title">产品优势</div>
-      <div class="card-box">
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/cpys-img1.png" alt="">
+    <div class="card-container">
+      <div class="step-two-bg-box">
+        <div class="big-title">产品优势</div>
+        <div class="card-box">
+          <div class="card-item">
+            <div class="img-box">
+              <img src="../assets/images/cpys-img1.png" alt="">
+            </div>
+            <div class="card-item-title-box">
+              <div class="card-item-title">应用程序编辑器</div>
+              <span class="card-item-content">添加图表小部件、配置交互式逻辑和发布数字孪生应用程序</span>
+            </div>
           </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">应用程序编辑器</div>
-            <span class="card-item-content">添加图表小部件、配置交互式逻辑和发布数字孪生应用程序</span>
+          <div class="card-item">
+            <div class="img-box">
+              <img src="../assets/images/cpys-img2.png" alt="">
+            </div>
+            <div class="card-item-title-box">
+              <div class="card-item-title">全面的场景配置属性</div>
+              <span class="card-item-content">具有全面的可配置属性，配置结果随时可见，为用户提供便捷高效的场景构建能力</span>
+            </div>
           </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/cpys-img2.png" alt="">
+          <div class="card-item">
+            <div class="img-box">
+              <img src="../assets/images/cpys-img3.png" alt="">
+            </div>
+            <div class="card-item-title-box">
+              <div class="card-item-title">用户友好的配置环境</div>
+              <span class="card-item-content">易于使用的图形编辑界面，允许根据用户需求进行灵活方便的修改和调整</span>
+            </div>
           </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">全面的场景配置属性</div>
-            <span class="card-item-content">具有全面的可配置属性，配置结果随时可见，为用户提供便捷高效的场景构建能力</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/cpys-img3.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">用户友好的配置环境</div>
-            <span class="card-item-content">易于使用的图形编辑界面，允许根据用户需求进行灵活方便的修改和调整</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/cpys-img4.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">非凡的场景渲染效果</div>
-            <span class="card-item-content">内置图像渲染效果，可以重新创建逼真的场景元素。配置简单，轻松实现非凡的视觉效果</span>
+          <div class="card-item">
+            <div class="img-box">
+              <img src="../assets/images/cpys-img4.png" alt="">
+            </div>
+            <div class="card-item-title-box">
+              <div class="card-item-title">非凡的场景渲染效果</div>
+              <span class="card-item-content">内置图像渲染效果，可以重新创建逼真的场景元素。配置简单，轻松实现非凡的视觉效果</span>
+            </div>
           </div>
         </div>
       </div>
@@ -215,14 +217,16 @@ export default {
 <style lang="scss" scoped>
 /* 响应式布局样式 */
 .scene-editor {
+  width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  // 主模块样式
   .main-box {
     position: relative;
     width: 100%;
     max-width: 1920px;
-    // aspect-ratio: 1920 / 600;
-    // height: auto;
     height: 100%;
     min-height: 860px;
     display: flex;
@@ -257,11 +261,6 @@ export default {
       }
     }
     
-    // .text-icon {
-    //   width: 120px;
-    //   height: 38px;
-    //   margin-top: 164px;
-    // }
     .text-icon {
       color: #fff;
       font-size: 18px;
@@ -322,10 +321,14 @@ export default {
   }
   // 进度条样式
   .step-box {
+    width: 100%;
+    // max-width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    // flex-wrap: nowrap;
+    // overflow-x: auto;
     background-color: rgba(255, 255, 255, .05);
     &.fixed {
       position: fixed;
@@ -387,14 +390,21 @@ export default {
       }
     }
   }
-  .step-two-bg-box {
+  .card-container {
+    width: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
-    padding: 64px 128px;
     background-image: url(../assets/images/cpys-bg.png);
-    aspect-ratio: 1920 / 687;
+    // aspect-ratio: 1920 / 687;
     object-fit: cover;
     background-size: 100% 100%;
+    .step-two-bg-box {
+      padding: 64px 128px;
+      max-width: 1920px;
+      display: flex;
+      flex-direction: column;
+    }
     .big-title {
       color: #fff;
       font-size: 64px;
@@ -421,10 +431,8 @@ export default {
         .img-box {
           display: flex;
           flex-shrink: 0;
-          // max-width: 191px;
           width: 100%;
           height: auto;
-          // aspect-ratio: 1 / 1;
           border-radius: 16px;
           overflow: hidden;
           img {
@@ -562,6 +570,9 @@ export default {
         }
       }
     }
+    // .step-box {
+    //   justify-content: inherit !important;
+    // }
     .step-two-box {
       padding: 40px 24px !important;
       .big-title {
