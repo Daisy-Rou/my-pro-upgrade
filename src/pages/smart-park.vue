@@ -36,137 +36,13 @@
         </div>
       </div>
     </div>
-    <div class="step-one-box">
       <!-- 特性列表组件 -->
+    <div class="step-one-box">
       <!-- 商业决策 -->
       <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
     </div>
-    <!-- 数字孪生 -->
-    <div v-if="activeBtnIndex === 1" class="szls-box">
-      <main-title
-        title="数字孪生赋权"
-        small-title="实时呈现所有元素的完整范围和最高精度，提供电影级视觉效果以增强用户体验"
-      ></main-title>
-      <div class="szls-item-box">
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">集成全元件场景</div>
-          </div>
-          <div class="content">内核级支持加载全要素场景对象，包括矢量地理空间数据、建筑模型数据、城市设施、空间实体、数据层、自定义对象等，构建多源信息融合分析的综合城市要素体系</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">强大的多源数据融合</div>
-          </div>
-          <div class="content">支持各种数据库、数据平台、云服务平台、物联网、视频监控、融合通信等多源数据访问，并与 AI、行业特定分析计算模型等有效集成，实现多源数据的智能关联分析</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">多类型地图数据融合</div>
-          </div>
-          <div class="content">支持各种常用的全球地图数据（如政治图/地形图/卫星影像等）、多种投影坐标系、公安地理信息系统PGIS/Tianditu等专用地图、高精度高程数据、倾斜摄影、无人机航拍、BIM等</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">全尺寸 3D 孪生渲染</div>
-          </div>
-          <div class="content">真实场景纹理细节的超精细还原和大场景的全尺寸还原;凭借高逼真的动态照明、基于信息的雾、光、光、雨雪渲染效果，实现电影级的实时渲染效果</div>
-        </div>
-      </div>
-    </div>
-    <!-- 智能运维 -->
-    <div v-if="activeBtnIndex === 2" class="szls-box szls-bg-znyw">
-      <main-title
-        title="智能运维赋能"
-        small-title="在最大范围内实时渲染所有元素，提供电影级视觉效果，提升用户体验"
-      ></main-title>
-      <div class="szls-item-box">
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">智能预警</div>
-          </div>
-          <div class="content">支持基于时间、空间、数据等多维度，为各类焦点事件建立阈值告警触发规则，自动监控各类焦点事件的发展状态，结合告警模型进行风险评估，提前下发预警告警</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">智能感知</div>
-          </div>
-          <div class="content">支持集成 12345、122、AI、IoT 等平台的数据和技术应用，全天对城市全要素物体进行智能监控和自动巡检，对各种异常事件自动感知、分析并及时预警</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">智能处置</div>
-          </div>
-          <div class="content">支持集成通信指挥平台，根据应急预案流程智能调度指挥事件，智能过滤查看事件详情和处置状态，方便指挥人员及时跟踪、推进和反馈</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">智能评估</div>
-          </div>
-          <div class="content">支持对监管事件全过程进行全程跟踪监控，整合事件监管相关信息，建立科学评价体系，智能量化评价事件处置效果，为精细化管理提供科学依据</div>
-        </div>
-      </div>
-    </div>
-    <!-- 基础平台 -->
-    <div v-if="activeBtnIndex === 3" class="szls-box szls-bg-jcpt">
-      <!-- 主标题组件 -->
-      <main-title
-        title="基础平台赋能"
-        small-title="强大的跨业务平台集成能力，将数据、技术、设备和业务需求紧密结合，全面赋能用户业务应用"
-      ></main-title>
-      <div class="szls-item-box">
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">融合通信</div>
-          </div>
-          <div class="content">支持深度集成视频会议、手持电台、电话会议、实时指挥技术，实现各种系统应用的互联互通和远程通信协作</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">人工智能识别</div>
-          </div>
-          <div class="content">支持AI智能检测、识别和判断算法的深度集成，通过对现有信息资源和人工智能计算结果进行并行和串行分析，提供智能决策支持</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">视频监控</div>
-          </div>
-          <div class="content">支持与海康威视、大华、华为等视频平台深度融合。，以及AI/AR/鹰眼/高点/云台/IVS等系统应用，轻松调取相应的监控视频</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">商务系统</div>
-          </div>
-          <div class="content">支持将多个部门、不同平台的数据整合到系统中，实现跨业务系统信息的集成展示和关联分析</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">物联网感知</div>
-          </div>
-          <div class="content">支持聚合各种物联网感知和智能识别技术应用，实现全态势要素的全面采集、精准反映、智能感知</div>
-        </div>
-        <div class="szls-item">
-          <div class="title-box">
-            <img class="logo" src="../assets/images/szls-logo.png" alt="">
-            <div class="title">多屏联动</div>
-          </div>
-          <div class="content">支持多终端操作，支持同源大中小屏数据可视化显示，同屏互动操作一体化联动，满足用户多屏互动显示需求</div>
-        </div>
-      </div>
-    </div>
+    <!-- 数字孪生、智能运维、基础平台 -->
+    <transparent-card v-if="activeBtnIndex" :listObj="compList"></transparent-card>
     <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
       <div class="text-box">
@@ -198,6 +74,7 @@ import mainTitle from '@/components/main-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
 import topBottomCard from '@/components/top-bottom-card.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
+import transparentCard from '@/components/transparent-card.vue';
 export default {
   name: 'smart-park',
   components: {
@@ -205,7 +82,23 @@ export default {
     mainTitle,
     leftRightCard,
     topBottomCard,
-    contentIntroduction
+    contentIntroduction,
+    transparentCard
+  },
+  computed: {
+    compList() {
+      let list = []
+      if (this.activeBtnIndex === 1) {
+        list = this.szlsList
+      }
+      if (this.activeBtnIndex === 2) {
+        list = this.znywList
+      }
+      if (this.activeBtnIndex === 3) {
+        list = this.jcptList
+      }
+      return list
+    }
   },
   data() {
     return {
@@ -334,7 +227,101 @@ export default {
           content: '支持对园区内各种设备设施的位置、分布、状态的实时监控；通过三维建模，在三维仿真中展示设备的外观和复杂的机械结构，辅助管理人员掌握设备的运行状态，提高设备运维效率',
           imgSrc: require('../assets/images/zhyq-img4.png')
         }
-      ]
+      ],
+      // 数字孪生数据
+      szlsList: {
+        title: '数字孪生赋权',
+        content: '实时呈现所有元素的完整范围和最高精度，提供电影级视觉效果以增强用户体验',
+        bgSrc: require('../assets/images/zhyq-szls.png'),
+        list: [
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '集成全元件场景',
+            content: '内核级支持加载全要素场景对象，包括矢量地理空间数据、建筑模型数据、城市设施、空间实体、数据层、自定义对象等，构建多源信息融合分析的综合城市要素体系，进行多源信息融合分析'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '强大的多源数据融合',
+            content: '支持各种数据库、数据平台、云服务平台、物联网、视频监控、融合通信等多源数据访问，并与 AI、行业特定分析计算模型等有效集成，实现多源数据的智能关联分析'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '多类型地图数据融合',
+            content: '支持各种常用的全球地图数据（如政治图/地形图/卫星影像等）、多种投影坐标系、公安地理信息系统PGIS/Tianditu等专用地图、高精度高程数据、倾斜摄影、无人机航拍、BIM等'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '全尺寸 3D 孪生渲染',
+            content: '真实场景纹理细节的超精细还原，大场景的全方位还原；具有高真实感的动态光照、信息化的雾、辉光、灯光、雨雪渲染效果，达到电影级的实时渲染效果'
+          }
+        ]
+      },
+      // 智能运维数据
+      znywList: {
+        title: '智能运维赋能',
+        content: '在最大范围内实时渲染所有元素，提供电影级视觉效果，提升用户体验',
+        bgSrc: require('../assets/images/zhyq-znyw.png'),
+        list: [
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '智能预警',
+            content: '支持基于时间、空间、数据等多维度，为各类焦点事件建立阈值告警触发规则，自动监控各类焦点事件的发展状态，结合告警模型进行风险评估，提前下发预警告警'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '智能感知',
+            content: '支持集成 12345、122、AI、IoT 等平台的数据和技术应用，全天对城市全要素物体进行智能监控和自动巡检，对各种异常事件自动感知、分析并及时预警 支持集成 12345、122、AI、IoT 等平台的数据和技术应用，全天对城市全要素物体进行智能监控和自动巡检，对各种异常事件自动感知、分析并及时预警'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '智能处置',
+            content: '支持集成通信指挥平台，根据应急预案流程智能调度指挥事件，智能过滤查看事件详情和处置状态，方便指挥人员及时跟踪、推进和反馈'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '智能评估',
+            content: '支持对监管事件全过程进行全程跟踪监控，整合事件监管相关信息，建立科学评价体系，智能量化评价事件处置效果，为精细化管理提供科学依据'
+          }
+        ]
+      },
+      // 基础平台数据
+      jcptList: {
+        title: '基础平台赋能',
+        content: '强大的跨业务平台集成能力，将数据、技术、设备和业务需求紧密结合，全面赋能用户业务应用',
+        bgSrc: require('../assets/images/zhyq-jcpt.png'),
+        list: [
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '融合通信',
+            content: '支持深度集成视频会议、手持电台、电话会议、实时指挥技术，实现各种系统应用的互联互通和远程通信协作'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '人工智能识别',
+            content: '支持AI智能检测、识别和判断算法的深度集成，通过对现有信息资源和人工智能计算结果进行并行和串行分析，提供智能决策支持'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '视频监控',
+            content: '支持与海康威视、大华、华为等视频平台深度融合。以及AI/AR/鹰眼/高点/云台/IVS等系统应用，轻松调取相应的监控视频'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '商务系统',
+            content: '支持将多个部门、不同平台的数据整合到系统中，实现跨业务系统信息的集成展示和关联分析'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '物联网感知',
+            content: '支持聚合各种物联网感知和智能识别技术应用，实现全态势要素的全面采集、精准反映、智能感知'
+          },
+          {
+            logo: require('../assets/images/szls-logo.png'),
+            title: '多屏联动',
+            content: '支持多终端操作，支持同源大中小屏数据可视化显示，同屏互动操作一体化联动，满足用户多屏互动显示需求'
+          }
+        ]
+      }
     }
   },
    mounted() {
@@ -521,67 +508,6 @@ export default {
       }
     }
   }
-  // 数字孪生
-  .szls-box {
-    display: flex;
-    flex-direction: column;
-    padding: 40px 128px;
-    // background-image: linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url(../assets/images/zhyq-szls.png);
-    // aspect-ratio: 1920 / 687;
-    // object-fit: cover;
-    // background-size: 100% 100%;
-    min-height: 687px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url(../assets/images/zhyq-szls.png) no-repeat center/cover;
-    &.szls-bg-znyw {
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url(../assets/images/zhyq-znyw.png);
-    }
-    &.szls-bg-jcpt {
-      background-image: linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url(../assets/images/zhyq-jcpt.png);
-    }
-    .szls-item-box {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      margin-right: -24px;
-    }
-    .szls-item {
-      width: calc(33.3% - 24px);
-      margin-right: 24px;
-      padding: 24px 32px;
-      border-radius: 16px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255, 255, 255, .15);
-      background: rgba(0, 0, 0, .05); /* 半透明背景 */
-      -webkit-backdrop-filter: blur(5px); /* Safari浏览器兼容 */
-      backdrop-filter: blur(5px); /* 模糊效果 */
-      &:nth-child(3n) {
-        margin-right: 0;
-      }
-      .title-box {
-        display: flex;
-        align-items: center;
-        margin-bottom: 24px;
-        .logo {
-          width: 32px;
-          height: 32px;
-          margin-right: 8px;
-        }
-        .title {
-          color: #fff;
-          font-size: 20px;
-          font-weight: 700;
-          line-height: 32px;
-          font-weight: Inter Tight, sans-serif;
-        }
-      }
-      .content {
-        color: rgba(255, 255, 255, .65);
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 23px;
-      }
-    }
-  }
   .step-two-box {
     padding: 40px 128px;
     .big-title {
@@ -594,20 +520,8 @@ export default {
   }
   // 媒体查询区域
   @media screen and (max-width: 1905px) {
-    .szls-box {
-      padding: 40px 64px !important;
-    }
     .step-two-box {
       padding: 40px 64px !important;
-    }
-  }
-  @media screen  and (max-width: 1440px) {
-    .szls-item {
-      width: calc(50% - 24px) !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-        margin-right: 0 !important;
-      }
     }
   }
   @media screen and (max-width: 960px)  {
@@ -633,16 +547,6 @@ export default {
       .big-title {
         font-size: 32px !important;
         line-height: 40px !important;
-      }
-    }
-    .szls-box {
-      padding: 40px 24px !important;
-      .szls-item-box {
-        width: 100% !important;
-        .szls-item {
-          width: 100% !important;
-          margin-right: 0 !important;
-        }
       }
     }
   }
