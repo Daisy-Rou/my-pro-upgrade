@@ -42,10 +42,12 @@ export default {
 
 <style lang="scss" scoped>
 .transparent-card {
+  width: 100%;
+  max-width: 1920px;
   display: flex;
   flex-direction: column;
   padding: 40px 128px;
-  aspect-ratio: 1920 / 687;
+  // aspect-ratio: 1920 / 687;
   object-fit: cover;
   background-size: 100% 100%;
   .szls-item-box {

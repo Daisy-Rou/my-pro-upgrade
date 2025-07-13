@@ -18,33 +18,22 @@
       </div>
     </div>
      <!-- 第一步内容区域 -->
-    <div class="step-two-box" ref="stepItem1">
-      <div class="text-title-box">
-        <span class="num">01</span>
-        <span class="title">愿景与使命</span>
-      </div>
+    <div class="step-one-box" ref="stepItem1">
+      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
     </div>
-    <div class="step-one-box">
-      <!-- 特性列表组件 -->
-      <content-introduction :list="list"></content-introduction>
-    </div>
+    <!-- 特性列表组件 -->
+    <content-introduction :list="list"></content-introduction>
     <!-- 第二步内容区域 -->
     <div class="step-two-box" ref="stepItem2">
-      <div class="text-title-box">
-        <span class="num">02</span>
-        <span class="title">开发人员之旅</span>
-      </div>
-      <div class="big-title" style="margin-top: 30px;">开发人员之旅</div>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
+      <main-title title="开发人员之旅"></main-title>
     </div>
     <!-- 第二步背景区域 -->
     <div class="step-two-bg-box"></div>
      <!-- 第三步内容区域 -->
     <div class="step-three-box" ref="stepItem3">
-      <div class="text-title-box">
-        <span class="num">03</span>
-        <span class="title">权益</span>
-      </div>
-      <div class="big-title" style="margin-top: 30px;">权益</div>
+      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
+      <main-title title="权益"></main-title>
     </div>
     <!-- 左右布局卡片组件 -->
     <div class="news-small-card-box">
@@ -56,12 +45,16 @@
 <script>
 // 组件引入
 import mainContent from '@/components/main-content.vue';
+import mainTitle from '@/components/main-title.vue';
+import stepTitle from '@/components/step-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
 import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'digital-twin',
   components: {
     mainContent,
+    mainTitle,
+    stepTitle,
     leftRightCard,
     contentIntroduction
   },
@@ -275,29 +268,16 @@ export default {
       }
     }
   }
-  // 产品特性模块
-  .step-one-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   /* 步骤内容区域通用样式 */
   .step-one-box, .step-two-box, .step-three-box {
     width: 100%;
-    .text-title-box {
-      margin-bottom: 24px;
+    max-width: 1920px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 128px;
+    ::v-deep .big-title{
+      margin-bottom: 0;
       margin-top: 32px;
-      .num {
-        color: #76777C;
-        font-size: 14px;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #B665E9;
-      }
     }
   }
   /* 第二步背景区域 */
@@ -309,47 +289,19 @@ export default {
     object-fit: cover;
     background-size: 100% 100%;
   }
-  /* 第二步和第三步标题样式 */
-  .step-two-box, .step-three-box {
-    max-width: 1920px;
-    padding: 40px 128px;
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
-    }
-  }
   .news-small-card-box {
     max-width: 1920px;
     display: flex;
     flex-direction: column;
-    padding: 24px 128px;
+    padding: 0 128px;
   }
   /* 响应式设计 - 1905px以下 */
   @media screen and (max-width: 1905px) {
-    .step-two-box, .step-three-box {
+    .step-one-box, .step-two-box, .step-three-box {
       padding: 40px 64px !important;
     }
     .news-small-card-box {
-      padding: 24px 64px !important;
-    }
-  }
-  /* 响应式设计 - 1280px以下（平板） */
-  @media screen and (max-width: 1280px) {
-    .step-two-box, .step-three-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-    }
-  }
-  @media screen and (max-width: 960px)  {
-    .step-one-box {
-      padding: 40px 24px !important;
-      align-items: normal !important;
-      justify-content: normal !important;
+      padding: 0 64px !important;
     }
   }
   /* 响应式设计 - 768px以下（手机） */
@@ -357,15 +309,11 @@ export default {
     .step-box {
       justify-content: inherit !important;
     }
-    .step-two-box, .step-three-box {
+    .step-one-box, .step-two-box, .step-three-box {
       padding: 40px 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
-      }
     }
     .news-small-card-box {
-      padding: 24px !important;
+      padding: 0 24px !important;
     }
   }
 }

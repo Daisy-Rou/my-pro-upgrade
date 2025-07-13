@@ -46,7 +46,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 36px;
+  // margin-top: 36px;
   margin-right: -24px;
   .news-small-card-item {
     display: flex;

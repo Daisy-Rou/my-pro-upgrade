@@ -18,23 +18,13 @@
     </div>
     <!-- 产品特性模块 -->
     <div class="step-two-box" ref="stepItem1">
-      <div class="text-title-box">
-        <span class="num">01</span>
-        <span class="title">产品特性</span>
-      </div>
+      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
     </div>
-    <div class="step-one-box">
-      <!-- 特性列表组件 -->
-      <content-introduction :list="list"></content-introduction>
-    </div>
+    <!-- 特性列表组件 -->
+    <content-introduction :list="list"></content-introduction>
     <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">02</span>
-          <span class="title">产品优势</span>
-        </div>
-      </div>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
     <top-bottom-card :list="cpysList"></top-bottom-card>
   </div>
@@ -42,12 +32,14 @@
 
 <script>
 import mainContent from '@/components/main-content.vue';
+import stepTitle from '@/components/step-title.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 import topBottomCard from '@/components/top-bottom-card.vue';
 export default {
   name: 'application-editor',
   components: {
     mainContent,
+    stepTitle,
     contentIntroduction,
     topBottomCard
   },
@@ -187,6 +179,7 @@ export default {
 .application-editor {
   display: flex;
   flex-direction: column;
+  align-items: center;
   // 步骤导航栏
   .step-box {
     width: 100%;
@@ -232,37 +225,14 @@ export default {
       }
     }
   }
-  // 产品特性模块
-  .step-one-box {
+  .step-one-box, .step-two-box {
+    width: 100%;
+    max-width: 1920px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  .step-one-box, .step-two-box {
-    .text-title-box {
-      margin-bottom: 24px;
-      margin-top: 32px;
-      .num {
-        color: #76777C;
-        font-size: 14px;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #B665E9;
-      }
-    }
-  }
-  .step-two-box {
     padding: 40px 128px;
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
+    ::v-deep .big-title{
+      margin-top: 32px;
     }
   }
   /* 响应式设计：
@@ -271,32 +241,13 @@ export default {
    - 1280px以下：单列布局，标题字号调整
    - 768px以下：移动端适配 */
   @media screen and (max-width: 1905px) {
-    .step-two-box {
+    .step-one-box, .step-two-box {
       padding: 40px 64px !important;
     }
   }
-  @media screen and (max-width: 1280px) {
-    .step-two-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-    }
-  }
-  @media screen and (max-width: 960px)  {
-    .step-one-box {
-      padding: 40px 24px !important;
-      align-items: normal !important;
-      justify-content: normal !important;
-    }
-  }
   @media screen and (max-width: 768px){
-    .step-two-box {
+    .step-one-box, .step-two-box {
       padding: 40px 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
-      }
     }
   }
 }

@@ -17,12 +17,9 @@
       </div>
     </div>
     <!-- 产品特性模块 -->
-    <div class="step-two-box" ref="stepItem1">
+    <div class="step-one-box" ref="stepItem1">
       <div class="top-title-box">
-        <div class="text-title-box">
-          <span class="num">01</span>
-          <span class="title">产品功能介绍</span>
-        </div>
+        <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
         <div class="step-btn-box">
           <div
             class="btn-item"
@@ -36,32 +33,20 @@
         </div>
       </div>
     </div>
-    <div class="step-one-box">
-      <!-- 特性列表组件 -->
-      <!-- 商业决策 -->
-      <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
-    </div>
+    <!-- 特性列表组件 -->
+    <!-- 商业决策 -->
+    <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
     <!-- 数字孪生、智能运维、基础平台 -->
     <transparent-card v-if="activeBtnIndex" :listObj="compList"></transparent-card>
     <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">02</span>
-          <span class="title">产品优势</span>
-        </div>
-      </div>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
     <top-bottom-card :list="cpysList"></top-bottom-card>
     <!-- 推荐产品卡片区域 -->
-    <div class="step-two-box" ref="stepItem3">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">03</span>
-          <span class="title">推荐产品</span>
-        </div>
-        <div class="big-title" style="margin-top: 30px;">推荐产品</div>
-      </div>
+    <div class="step-three-box" ref="stepItem3">
+      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
+      <main-title title="推荐产品"></main-title>
       <!-- 左右布局卡片组件 -->
       <left-right-card :list="list"></left-right-card>
     </div>
@@ -70,6 +55,7 @@
 
 <script>
 import mainContent from '@/components/main-content.vue';
+import stepTitle from '@/components/step-title.vue';
 import mainTitle from '@/components/main-title.vue';
 import leftRightCard from '@/components/left-right-card.vue'
 import topBottomCard from '@/components/top-bottom-card.vue';
@@ -79,6 +65,7 @@ export default {
   name: 'smart-transportation',
   components: {
     mainContent,
+    stepTitle,
     mainTitle,
     leftRightCard,
     topBottomCard,
@@ -387,6 +374,7 @@ export default {
 .smart-transportation {
   display: flex;
   flex-direction: column;
+  align-items: center;
   // 进度条区域
   .step-box {
     width: 100%;
@@ -432,33 +420,23 @@ export default {
       }
     }
   }
-  // 商业决策
-  .step-one-box {
+  // 步骤区域
+  .step-one-box, .step-two-box, .step-three-box {
+    width: 100%;
+    max-width: 1920px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  // 产品优势卡片区域
-  .step-one-box, .step-two-box {
+    padding: 40px 128px;
+    ::v-deep .big-title{
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
     .top-title-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 24px;
       margin-top: 32px;
-    }
-    .text-title-box {
-      .num {
-        color: #76777C;
-        font-size: 14px;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #B665E9;
-      }
     }
     .step-btn-box {
       display: flex;
@@ -489,49 +467,17 @@ export default {
         }
       }
     }
-    .text-box {
-      top: 280px;
-      .text-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        width: 88px;
-        height: 32px;
-        border-radius: 4px;
-        background: #C776F9;
-        box-shadow: 0px 4px 10px 0px #C676F8;
-        color: #000;
-        font-size: 14px;
-        font-weight: 700;
-        font-family: Inter Tight, sans-serif;
-      }
-    }
-  }
-  .step-two-box {
-    padding: 40px 128px;
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
-    }
   }
   // 媒体查询区域
   @media screen and (max-width: 1905px) {
-    .step-two-box {
+    .step-one-box, .step-two-box, .step-three-box {
       padding: 40px 64px !important;
     }
   }
-  @media screen and (max-width: 960px)  {
-    .step-one-box {
-      padding: 40px 24px !important;
-      align-items: normal !important;
-      justify-content: normal !important;
-    }
-  }
   @media screen and (max-width: 768px){
+    .step-one-box, .step-two-box, .step-three-box {
+      padding: 40px 24px !important;
+    }
     .top-title-box {
       flex-direction: column !important;
       align-items: flex-start !important;
@@ -540,13 +486,6 @@ export default {
         .btn-item {
           margin-bottom: 12px !important;
         }
-      }
-    }
-    .step-two-box {
-      padding: 40px 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
       }
     }
   }

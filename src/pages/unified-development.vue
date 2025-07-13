@@ -16,14 +16,10 @@
       </div>
     </div>
     <!-- 步骤1内容 -->
-    <div class="step-two-box" ref="stepItem1">
-      <div class="text-title-box">
-        <span class="num">01</span>
-        <span class="title">产品特性</span>
-      </div>
+    <div class="step-one-box" ref="stepItem1">
+      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
       <!-- 主标题组件 -->
       <main-title
-        style="margin-top: 32px;"
         title="全面方便的API接口调用"
         small-title="提供完整的接口API，实现多类型特征数据的加载、显示、交互分析，如设置场景摄像头、图表交互、信息标签交互等。开发人员可以基于业务逻辑轻松实现三维可视化场景的展示和交互分析"
       ></main-title>
@@ -32,12 +28,7 @@
     </div>
     <!-- 步骤2内容 -->
     <div class="step-two-box" ref="stepItem2">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">02</span>
-          <span class="title">产品优势</span>
-        </div>
-      </div>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
     <top-bottom-card :list="cpysList"></top-bottom-card>
   </div>
@@ -45,6 +36,7 @@
 
 <script>
 import mainContent from '@/components/main-content.vue';
+import stepTitle from '@/components/step-title.vue';
 import mainTitle from '@/components/main-title.vue';
 import hoverImg from '@/components/hover-img.vue'
 import topBottomCard from '@/components/top-bottom-card.vue';
@@ -52,6 +44,7 @@ export default {
   name: 'unified-development',
   components: {
     mainTitle,
+    stepTitle,
     mainContent,
     hoverImg,
     topBottomCard
@@ -230,6 +223,7 @@ export default {
 .unified-development {
   display: flex;
   flex-direction: column;
+  align-items: center;
   /* 步骤导航栏样式 */
   .step-box {
     width: 100%;
@@ -276,30 +270,24 @@ export default {
     }
   }
   /* 步骤内容区样式 */
-  .step-two-box {
+  .step-one-box, .step-two-box {
+    width: 100%;
+    max-width: 1920px;
+    display: flex;
+    flex-direction: column;
     padding: 40px 128px;
-    .text-title-box {
-      .num {
-        color: #76777C;
-        font-size: 14px;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #B665E9;
-      }
+    ::v-deep .big-title{
+      margin-top: 32px;
     }
   }
   /* 响应式媒体查询 */
   @media screen and (max-width: 1905px) {
-    .step-two-box {
+    .step-one-box, .step-two-box {
       padding: 40px 64px !important;
     }
   }
   @media screen and (max-width: 768px){
-    .step-two-box {
+    .step-one-box, .step-two-box {
       padding: 40px 24px !important;
     }
   }

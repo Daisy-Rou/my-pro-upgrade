@@ -52,10 +52,10 @@ export default {
   }
   .big-title {
     color: #fff;
-    font-size: 64px;
+    font-size: 52px;
     font-weight: 700;
     font-family: Inter Tight, sans-serif;
-    line-height: 78px;
+    line-height: 62px;
     text-align: center;
   }
   .card-box {
@@ -128,10 +128,6 @@ export default {
   @media screen  and (max-width: 1440px) {
     .step-two-bg-box {
       padding: 24px 64px !important;
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
     }
   }
   @media screen and (max-width: 1280px) {

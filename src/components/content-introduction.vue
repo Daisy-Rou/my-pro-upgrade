@@ -1,17 +1,26 @@
 <template>
+  <!-- 内容介绍组件容器 -->
   <div class="content-introduction">
+    <!-- 循环渲染内容项 -->
     <div
       class="content-item"
       v-for="(item, index) in list"
       :key="index"
     >
+      <!-- 右侧图片（在非顶部显示且奇数索引时显示） -->
       <img v-show="(!showTop && index % 2 !== 0)" class="right-img" :src="item.imgSrc" alt="">
+      <!-- 左侧内容盒子 -->
       <div class="left-box">
+        <!-- 标签（如果有） -->
         <div class="tag" v-if="item.tagName">{{item.tagName}}</div>
+        <!-- 标题 -->
         <div class="title">{{item.title}}</div>
+         <!-- 内容1 -->
         <div class="content">{{item.content}}</div>
+         <!-- 内容2（如果有） -->
         <div class="content" v-if="item.content1">{{item.content1}}</div>
       </div>
+       <!-- 右侧图片（在偶数索引或顶部显示时显示） -->
       <img v-show="index % 2 === 0 || showTop" class="right-img" :src="item.imgSrc" alt="">
     </div>
   </div>
@@ -21,6 +30,7 @@
 export default {
   name: 'content-introduction',
   props: {
+    // 内容列表数据
     list: {
       type: Array,
       default: () => []
@@ -28,6 +38,7 @@ export default {
   },
   data() {
     return {
+      // 是否在顶部显示图片（用于响应式布局）
       showTop: false,
     }
   },
@@ -53,7 +64,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* 内容介绍组件样式 */
 .content-introduction {
+  --primary-color: rgb(199, 118, 249);
+  --text-color: #fff;
+  --tag-text-color: #000;
+  max-width: 1920px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +83,7 @@ export default {
       .tag {
         width: fit-content;
         padding: 4px 10px;
-        color: #000;
+        color: var(--tag-text-color);
         font-size: 16px;
         font-weight: 700;
         line-height: 18px;
@@ -87,7 +103,8 @@ export default {
         margin-bottom: 24px;
       }
       .content {
-        color: #fff;
+        // color: #fff;
+        color: rgb(219, 222, 227);
         font-family: Inter, arial;
         font-weight: 400;
         letter-spacing: 0px;
@@ -113,6 +130,7 @@ export default {
     }
   }
   @media screen and (max-width: 1470px) {
+    padding: 0 32px;
     .content-item {
       .left-box {
         width: 464px !important;
@@ -133,7 +151,16 @@ export default {
       }
     }
   }
+  @media screen and (max-width: 1280px) {
+    .left-box {
+      .title {
+        font-size: 26px !important;
+        line-height: 34px !important;
+      }
+    }
+  }
   @media screen and (max-width: 960px) {
+    padding: 0 64px;
     .content-item {
       flex-direction: column !important;
       margin-bottom: 80px !important;
@@ -143,10 +170,6 @@ export default {
       .left-box {
         padding: 0 !important;
         width: 100% !important;
-        .title {
-          font-size: 26px !important;
-          line-height: 34px !important;
-        }
       }
       .right-img {
         width: 100% !important;
@@ -156,6 +179,9 @@ export default {
         background-size: 100% 100% !important;
       }
     }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 0 24px;
   }
 }
 </style>

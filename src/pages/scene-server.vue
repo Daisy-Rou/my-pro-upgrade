@@ -18,25 +18,14 @@
       </div>
     </div>
     <!-- 步骤1：产品特性 -->
-    <div class="step-two-box" ref="stepItem1">
-      <div class="text-title-box">
-        <span class="num">01</span>
-        <span class="title">产品特性</span>
-      </div>
+    <div class="step-one-box" ref="stepItem1">
+      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
     </div>
-    <div class="step-one-box">
-      <!-- 特性列表组件 -->
-      <content-introduction :list="list"></content-introduction>
-    </div>
+    <!-- 特性列表组件 -->
+    <content-introduction :list="list"></content-introduction>
     <!-- 步骤2：产品优势 -->
     <div class="step-two-box" ref="stepItem2">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">02</span>
-          <span class="title">产品优势</span>
-        </div>
-        <div class="big-title" style="margin-top: 30px;">高速传输</div>
-      </div>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
     <!-- 优势卡片区域 -->
     <div class="card-container">
@@ -72,13 +61,7 @@
     </div>
     <!-- 步骤3：多平台适应 -->
     <div class="step-three-box" ref="stepItem3">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">03</span>
-          <span class="title">产品优势</span>
-        </div>
-        <div class="big-title" style="margin-top: 30px;">多平台适应</div>
-      </div>
+      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
     </div>
      <!-- 平台适应卡片区域 -->
     <div class="step-three-bg-box">
@@ -94,14 +77,9 @@
       </div>
     </div>
     <!-- 步骤4：视觉效果 -->
-    <div class="step-three-box" ref="stepItem4">
-      <div class="text-box">
-        <div class="text-title-box">
-          <span class="num">04</span>
-          <span class="title">产品优势</span>
-        </div>
-        <div class="big-title" style="margin-top: 30px;">非凡的视觉效果</div>
-      </div>
+    <div class="step-four-box" ref="stepItem4">
+      <step-title :num="stepList[3].num" :title="stepList[3].title"></step-title>
+      <main-title title="非凡的视觉效果"></main-title>
     </div>
     <!-- 视觉效果卡片区域 -->
     <div class="news-small-card-box">
@@ -111,7 +89,7 @@
         </div>
         <div class="news-small-card-item-title-box">
           <div class="news-small-card-item-title">电影级视觉效果渲染</div>
-          <span class="news-small-card-item-content">三维场景渲染由高性能云渲染服务器完成，可提供光照、大气、雨雪、天空、云层、白昼/黄昏/黄昏、水体、地形、地貌等高度逼真、精细细致的渲染效果。此外，它还提供了丰富的特效，如景深、HDR绽放和空间反射，以实现行业级的影视制作实时渲染视觉效果。还可以提供写实、信息化等不同风格，满足各种使用需求</span>
+          <div class="news-small-card-item-content">三维场景渲染由高性能云渲染服务器完成，可提供光照、大气、雨雪、天空、云层、白昼/黄昏/黄昏、水体、地形、地貌等高度逼真、精细细致的渲染效果。此外，它还提供了丰富的特效，如景深、HDR绽放和空间反射，以实现行业级的影视制作实时渲染视觉效果。还可以提供写实、信息化等不同风格，满足各种使用需求</div>
         </div>
       </div>
       <div class="news-small-card-item">
@@ -120,7 +98,7 @@
         </div>
         <div class="news-small-card-item-title-box">
           <div class="news-small-card-item-title">高性能全元素场景加载</div>
-          <span class="news-small-card-item-content">基于真实世界信息，内核级支持全要素场景对象加载，包括矢量地理信息数据、建筑模型数据、城市设施、空间实体对象、数据图层、自定义对象等。，以最大限度地恢复完整数据。拥有稳定可靠的大数据吞吐能力，超凡的显示性能，满足超大规模场景的渲染和交互性能需求，保障系统高效运行</span>
+          <div class="news-small-card-item-content">基于真实世界信息，内核级支持全要素场景对象加载，包括矢量地理信息数据、建筑模型数据、城市设施、空间实体对象、数据图层、自定义对象等。，以最大限度地恢复完整数据。拥有稳定可靠的大数据吞吐能力，超凡的显示性能，满足超大规模场景的渲染和交互性能需求，保障系统高效运行</div>
         </div>
       </div>
       <div class="news-small-card-item">
@@ -129,7 +107,7 @@
         </div>
         <div class="news-small-card-item-title-box">
           <div class="news-small-card-item-title">大规模场景加载</div>
-          <span class="news-small-card-item-content">支持无限视野和超大规模三维场景显示，动态加载多源地图数据。它提供了从外太空到超大规模城市场景的全尺寸场景的连续渲染和平滑显示，以及建筑物和设备等细节。它通过利用细节层次(LOD)技术的智能全尺度加载，实现了全元素、全范围和全精度的实时渲染</span>
+          <div class="news-small-card-item-content">支持无限视野和超大规模三维场景显示，动态加载多源地图数据。它提供了从外太空到超大规模城市场景的全尺寸场景的连续渲染和平滑显示，以及建筑物和设备等细节。它通过利用细节层次(LOD)技术的智能全尺度加载，实现了全元素、全范围和全精度的实时渲染</div>
         </div>
       </div>
       <div class="news-small-card-item">
@@ -138,7 +116,7 @@
         </div>
         <div class="news-small-card-item-title-box">
           <div class="news-small-card-item-title">像素级超细细节显示</div>
-          <span class="news-small-card-item-content">能够精确再现设备、建筑等物体的外观、材质、纹理细节、内部结构、零件、管道等复杂结构，支持结构和动作可移动的数据驱动模型对象。无论是宏观的情境，还是微观结构的精准操作，都能以超精细的细节准确再现真实世界的纹理细节</span>
+          <div class="news-small-card-item-content">能够精确再现设备、建筑等物体的外观、材质、纹理细节、内部结构、零件、管道等复杂结构，支持结构和动作可移动的数据驱动模型对象。无论是宏观的情境，还是微观结构的精准操作，都能以超精细的细节准确再现真实世界的纹理细节</div>
         </div>
       </div>
     </div>
@@ -147,11 +125,15 @@
 
 <script>
 import mainContent from '@/components/main-content.vue';
+import mainTitle from '@/components/main-title.vue';
+import stepTitle from '@/components/step-title.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 export default {
   name: 'scene-server',
   components: {
     mainContent,
+    mainTitle,
+    stepTitle,
     contentIntroduction
   },
   data() {
@@ -335,28 +317,16 @@ export default {
       }
     }
   }
-  // 步骤1：产品特性
-  .step-one-box {
+  // 步骤
+  .step-one-box, .step-two-box, .step-three-box, .step-four-box {
+    width: 100%;
+    max-width: 1920px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  // 步骤2：产品优势
-  .step-one-box, .step-two-box, .step-three-box {
-    .text-title-box {
-      margin-bottom: 24px;
+    padding: 40px 128px;
+    ::v-deep .big-title{
+      margin-bottom: 0;
       margin-top: 32px;
-      .num {
-        color: #76777C;
-        font-size: 14px;
-        font-weight: 700;
-        margin-right: 4px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: 700;
-        color: #B665E9;
-      }
     }
   }
   // 优势卡片区域
@@ -422,18 +392,6 @@ export default {
           -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
         }
       }
-    }
-  }
-  .step-two-box, .step-three-box {
-    width: 100%;
-    max-width: 1920px;
-    padding: 40px 128px;
-    .big-title {
-      color: #fff;
-      font-size: 64px;
-      font-weight: 700;
-      font-family: Inter Tight, sans-serif;
-      line-height: 78px;
     }
   }
   // 平台适应卡片区域
@@ -555,7 +513,7 @@ export default {
   }
   // 媒体查询
   @media screen and (max-width: 1905px) {
-    .step-two-box, .step-three-box {
+    .step-one-box, .step-two-box, .step-three-box, .step-four-box {
       padding: 40px 64px !important;
     }
     .step-two-bg-box, .step-three-bg-box {
@@ -568,19 +526,9 @@ export default {
   @media screen  and (max-width: 1440px) {
     .step-two-bg-box, .step-three-bg-box {
       padding: 24px 64px !important;
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
     }
   }
   @media screen and (max-width: 1280px) {
-    .step-two-box, .step-three-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
-      }
-    }
     .step-two-bg-box {
       .card-item {
         width: calc(50% - 24px) !important;
@@ -591,23 +539,12 @@ export default {
       }
     }
   }
-  @media screen and (max-width: 960px)  {
-    .step-one-box {
-      padding: 40px 24px !important;
-      align-items: normal !important;
-      justify-content: normal !important;
-    }
-  }
   @media screen and (max-width: 768px){
     .step-box {
       justify-content: inherit !important;
     }
-    .step-two-box, .step-three-box {
+    .step-one-box, .step-two-box, .step-three-box, .step-four-box {
       padding: 40px 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
-      }
     }
     .step-two-bg-box, .step-three-bg-box {
       width: 100% !important;

@@ -1,15 +1,28 @@
 <template>
   <div class="main-title">
-    <div class="big-title">{{ title || '' }}</div>
-    <div class="small-title">{{ smallTitle || '' }}</div>
-    <div class="small-title">{{ smallTitleTwo || '' }}</div>
+    <div class="big-title" v-if="title">{{ title }}</div>
+    <div class="small-title" v-if="smallTitle">{{ smallTitle }}</div>
+    <div class="small-title" v-if="smallTitleTwo">{{ smallTitleTwo }}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'main-title',
-  props: ['title', 'smallTitle', 'smallTitleTwo']
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    smallTitle: {
+      type: String,
+      default: ''
+    },
+    smallTitleTwo: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>
 
