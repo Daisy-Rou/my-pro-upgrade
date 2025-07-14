@@ -363,7 +363,8 @@ export default {
     align-items: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, .05); 
+    // background-color: rgba(255, 255, 255, .05); 
+    // background-color: #18181c;
     .solution-box {
       padding: 80px 128px;
       width: 100%;

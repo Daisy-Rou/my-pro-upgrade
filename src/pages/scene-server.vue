@@ -27,38 +27,8 @@
     <div class="step-two-box" ref="stepItem2">
       <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
-    <!-- 优势卡片区域 -->
-    <div class="card-container">
-      <div class="step-two-bg-box">
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/server-cpys1.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">实时渲染交互</div>
-            <span class="card-item-content">利用视频流技术将高性能的3D渲染图像实时传输给用户，打破了终端的限制，支持终端用户与云应用随时随地的实时交互</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/server-cpys2.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">安全可靠</div>
-            <span class="card-item-content">原生支持web应用防火墙，保护用户数据隐私；租户数据物理隔离，数据网络传输端到端加密，符合行业专业标准，经第三方安全实验室检测，确保安全可信</span>
-          </div>
-        </div>
-        <div class="card-item">
-          <div class="img-box">
-            <img src="../assets/images/server-cpys3.png" alt="">
-          </div>
-          <div class="card-item-title-box">
-            <div class="card-item-title">稳定可靠</div>
-            <span class="card-item-content">云平台建立在GPU虚拟化之上，支持动态限速和灾难备份；具有高数据可靠性，高I/O吞吐能力，确保数据的可靠性</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- 产品优势卡片区域 -->
+    <top-bottom-card :list="cpysList"></top-bottom-card>
     <!-- 步骤3：多平台适应 -->
     <div class="step-three-box" ref="stepItem3">
       <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
@@ -82,44 +52,7 @@
       <main-title title="非凡的视觉效果"></main-title>
     </div>
     <!-- 视觉效果卡片区域 -->
-    <div class="news-small-card-box">
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys-img1.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">电影级视觉效果渲染</div>
-          <div class="news-small-card-item-content">三维场景渲染由高性能云渲染服务器完成，可提供光照、大气、雨雪、天空、云层、白昼/黄昏/黄昏、水体、地形、地貌等高度逼真、精细细致的渲染效果。此外，它还提供了丰富的特效，如景深、HDR绽放和空间反射，以实现行业级的影视制作实时渲染视觉效果。还可以提供写实、信息化等不同风格，满足各种使用需求</div>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys-img2.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">高性能全元素场景加载</div>
-          <div class="news-small-card-item-content">基于真实世界信息，内核级支持全要素场景对象加载，包括矢量地理信息数据、建筑模型数据、城市设施、空间实体对象、数据图层、自定义对象等。，以最大限度地恢复完整数据。拥有稳定可靠的大数据吞吐能力，超凡的显示性能，满足超大规模场景的渲染和交互性能需求，保障系统高效运行</div>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys-img3.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">大规模场景加载</div>
-          <div class="news-small-card-item-content">支持无限视野和超大规模三维场景显示，动态加载多源地图数据。它提供了从外太空到超大规模城市场景的全尺寸场景的连续渲染和平滑显示，以及建筑物和设备等细节。它通过利用细节层次(LOD)技术的智能全尺度加载，实现了全元素、全范围和全精度的实时渲染</div>
-        </div>
-      </div>
-      <div class="news-small-card-item">
-        <div class="img-box">
-          <img src="../assets/images/server-cpys-img4.png" alt="">
-        </div>
-        <div class="news-small-card-item-title-box">
-          <div class="news-small-card-item-title">像素级超细细节显示</div>
-          <div class="news-small-card-item-content">能够精确再现设备、建筑等物体的外观、材质、纹理细节、内部结构、零件、管道等复杂结构，支持结构和动作可移动的数据驱动模型对象。无论是宏观的情境，还是微观结构的精准操作，都能以超精细的细节准确再现真实世界的纹理细节</div>
-        </div>
-      </div>
-    </div>
+    <bottom-line-card :list="sjxgList"></bottom-line-card>
   </div>
 </template>
 
@@ -128,13 +61,17 @@ import mainContent from '@/components/main-content.vue';
 import mainTitle from '@/components/main-title.vue';
 import stepTitle from '@/components/step-title.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
+import topBottomCard from '@/components/top-bottom-card.vue';
+import bottomLineCard from '@/components/bottom-line-card.vue';
 export default {
   name: 'scene-server',
   components: {
     mainContent,
     mainTitle,
     stepTitle,
-    contentIntroduction
+    contentIntroduction,
+    topBottomCard,
+    bottomLineCard
   },
   data() {
     return {
@@ -193,6 +130,50 @@ export default {
           title: '联合动画',
           content: '支持复杂的层次结构和模型节点定义，允许同时控制多个结构节点。支持为模型定义数据驱动的逻辑和复杂的动画，允许用户输入简单的值来实现对3D对象的复杂控制',
           imgSrc: require('../assets/images/server-cptx4.png')
+        }
+      ],
+      // 产品优势数据
+      cpysList: {
+        title: '高速传输',
+        bgSrc: '',
+        list: [
+          {
+            title: '实时渲染交互',
+            content: '利用视频流技术将高性能的3D渲染图像实时传输给用户，打破了终端的限制，支持终端用户与云应用随时随地的实时交互',
+            imgSrc: require('../assets/images/server-cpys1.png')
+          },
+          {
+            title: '安全可靠',
+            content: '具有全面的可配置属性，配置结果随时可见，为用户提供便捷高效的场景构建能力',
+            imgSrc: require('../assets/images/server-cpys2.png')
+          },
+          {
+            title: '稳定可靠',
+            content: '云平台建立在GPU虚拟化之上，支持动态限速和灾难备份；具有高数据可靠性，高I/O吞吐能力，确保数据的可靠性',
+            imgSrc: require('../assets/images/server-cpys3.png')
+          }
+        ]
+      },
+      sjxgList: [
+        {
+          imgSrc: require('../assets/images/server-cpys-img1.png'),
+          title: '电影级视觉效果渲染',
+          content: '三维场景渲染由高性能云渲染服务器完成，可提供光照、大气、雨雪、天空、云层、白昼、黄昏、水体、地形、地貌等高度逼真、精细细致的渲染效果。此外，它还提供了丰富的特效，如景深、HDR绽放和空间反射，以实现行业级的影视制作实时渲染视觉效果。还可以提供写实、信息化等不同风格，满足各种使用需求'
+        },
+        {
+          imgSrc: require('../assets/images/server-cpys-img2.png'),
+          title: '高性能全元素场景加载',
+          content: '基于真实世界信息，内核级支持全要素场景对象加载，包括矢量地理信息数据、建筑模型数据、城市设施、空间实体对象、数据图层、自定义对象等。以最大限度地恢复完整数据。拥有稳定可靠的大数据吞吐能力，超凡的显示性能，满足超大规模场景的渲染和交互性能需求，保障系统高效运行'
+        },
+        {
+          imgSrc: require('../assets/images/server-cpys-img3.png'),
+          title: '大规模场景加载',
+          content: '支持无限视野和超大规模三维场景显示，动态加载多源地图数据。它提供了从外太空到超大规模城市场景的全尺寸场景的连续渲染和平滑显示，以及建筑物和设备等细节。它通过利用细节层次'
+        },
+        {
+          imgSrc: require('../assets/images/server-cpys-img4.png'),
+          title: '像素级超细细节显示',
+          content: '能够精确再现设备、建筑等物体的外观、材质、纹理细节、内部结构、零件、管道等复杂结构，支持结构和动作可移动的数据驱动模型对象。无论是宏观的情境，还是微观结构的精准操作，都能以超精细的细节准确再现真实世界的纹理细节'
         }
       ]
     }
@@ -330,67 +311,15 @@ export default {
     }
   }
   // 优势卡片区域
-  .card-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .step-two-bg-box {
-    max-width: 1920px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-right: -24px;
-    padding: 64px 128px;
-    .card-item {
-      display: flex;
-      flex-direction: column;
+  ::v-deep .top-bottom-card {
+    .step-two-bg-box {
+      padding: 24px 128px !important;
+    }
+    .card-box .card-item {
       width: calc(33.3% - 24px);
       margin-right: 24px;
-      margin-bottom: 24px;
       &:nth-child(3n) {
         margin-right: 0;
-      }
-      .img-box {
-        display: flex;
-        flex-shrink: 0;
-        // max-width: 191px;
-        width: 100%;
-        height: auto;
-        aspect-ratio: 410 / 230;
-        border-radius: 16px;
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 16px;
-        }
-      }
-      .card-item-title-box {
-        display: flex;
-        flex-direction: column;
-        padding: 24px;
-        .card-item-title {
-          color: #fff;
-          font-size: 20px;
-          font-weight: 700;
-          font-family: Inter Tight, sans-serif;
-          line-height: 25px;
-          margin-bottom: 12px;
-        }
-        .card-item-content {
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 23px;
-          color: rgba(255, 255, 255, .65);
-          overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-          text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-          display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-          -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-          -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-        }
       }
     }
   }
@@ -445,124 +374,44 @@ export default {
       }
     }
   }
-  // 视觉效果卡片区域
-  .news-small-card-box {
-    width: 100%;
-    max-width: 1920px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    // margin-top: 36px;
-    margin-right: -24px;
-    padding: 24px 128px;
-    .news-small-card-item {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      padding-bottom: 24px;
-      margin-bottom: 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-      transition: transform 0.5s ease;
-      cursor: pointer;
-      &:last-child {
-        border-bottom: none;
-      }
-      .img-box {
-        display: flex;
-        flex-shrink: 0;
-        height: auto;
-        aspect-ratio: 340 / 192;
-        max-width: 340px;
-        border-radius: 16px;
-        overflow: hidden;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 16px;
-        }
-      }
-      .news-small-card-item-title-box {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        padding: 24px;
-        .news-small-card-item-title {
-          color: #fff;
-          font-size: 20px;
-          font-weight: 700;
-          font-family: Inter Tight, sans-serif;
-          line-height: 25px;
-          margin-bottom: 24px;
-        }
-        .news-small-card-item-content {
-          max-width: 80%;
-          min-width: 300px;
-          font-size: 14px;
-          font-weight: 400;
-          line-height: 23px;
-          color: rgba(255, 255, 255, .65);
-          // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-          // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-          // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-          // -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-          // -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
-        }
-      }
-    }
-  }
   // 媒体查询
   @media screen and (max-width: 1905px) {
     .step-one-box, .step-two-box, .step-three-box, .step-four-box {
       padding: 40px 64px !important;
     }
-    .step-two-bg-box, .step-three-bg-box {
-      padding: 64px !important;
+    ::v-deep .top-bottom-card {
+      .step-two-bg-box {
+        padding: 24px 64px !important;
+      }
     }
-    .news-small-card-box {
-      padding: 24px 64px !important;
+    .step-three-bg-box {
+      padding: 64px !important;
     }
   }
   @media screen  and (max-width: 1440px) {
-    .step-two-bg-box, .step-three-bg-box {
+    .step-three-bg-box {
       padding: 24px 64px !important;
-    }
-  }
-  @media screen and (max-width: 1280px) {
-    .step-two-bg-box {
-      .card-item {
-        width: calc(50% - 24px) !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-          margin-right: 0 !important;
-        }
-      }
     }
   }
   @media screen and (max-width: 768px){
     .step-box {
       justify-content: inherit !important;
     }
+    ::v-deep .top-bottom-card {
+      .step-two-bg-box {
+        padding: 24px !important;
+      }
+    }
     .step-one-box, .step-two-box, .step-three-box, .step-four-box {
       padding: 40px 24px !important;
     }
-    .step-two-bg-box, .step-three-bg-box {
+    .step-three-bg-box {
       width: 100% !important;
       padding: 24px !important;
       margin-right: 0 !important;
       .card-item {
         width: 100% !important;
         margin-right: 0 !important;
-      }
-    }
-    .news-small-card-box {
-      padding: 24px !important;
-      .news-small-card-item {
-        flex-direction: column !important;
-        .img-box {
-          width: calc(100% - 24px);
-          max-width: 700px !important;
-        }
       }
     }
   }
