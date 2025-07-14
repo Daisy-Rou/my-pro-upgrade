@@ -1,10 +1,10 @@
 <template>
   <div 
     class="top-bottom-card"
-    :style="{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url('${list.bgSrc}')` }"
+    :style="{ backgroundImage: list.bgSrc ?  `linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url('${list.bgSrc}')` : '' }"
   >
     <div class="step-two-bg-box">
-      <div class="big-title">{{list.title || ''}}</div>
+      <div class="big-title" v-if="list.title">{{list.title}}</div>
       <div class="card-box" v-if="list.list.length">
         <div 
           class="card-item"

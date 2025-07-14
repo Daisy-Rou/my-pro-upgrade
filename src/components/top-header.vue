@@ -1,10 +1,13 @@
 <template>
   <div class="top-header">
+    <!-- 顶部导航栏容器 -->
     <div class="top-left">
-      <img v-show="showRightMenu" class="jysz" src="../assets/images/jysz.png" alt="">
-      <img v-show="!showRightMenu" class="jysz-icon" src="../assets/images/jysz-logo.png" alt="">
-      <!-- <img class="jysz-icon" src="../assets/2.svg" alt=""> -->
+      <!-- 左侧区域：Logo + 导航菜单 -->
+      <!-- 根据屏幕尺寸显示不同Logo -->
+      <img v-show="showRightMenu" class="jysz" src="../assets/images/jysz.png" alt="企业Logo">
+      <img v-show="!showRightMenu" class="jysz-icon" src="../assets/images/jysz-logo.png" alt="企业图标">
       <div class="left-two">
+        <!-- Element UI导航菜单 -->
         <el-menu
           class="custom-menu"
           mode="horizontal"
@@ -47,11 +50,15 @@
         </el-menu>
       </div>
     </div>
+    <!-- 右侧功能区 -->
     <div class="top-right">
+      <!-- 小屏菜单按钮 -->
       <svg v-show="showRightMenu" @click="showAllMenu = true" class="right-menu" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M2.25 5A.75.75 0 0 1 3 4.25h18a.75.75 0 0 1 0 1.5H3A.75.75 0 0 1 2.25 5m0 7a.75.75 0 0 1 .75-.75h18a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75m0 7a.75.75 0 0 1 .75-.75h18a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75" clip-rule="evenodd"></path>
       </svg>
+      <!-- 大屏功能区域 -->
       <div class="search-box" v-show="!showRightMenu">
+        <!-- 搜索框（大屏显示） -->
         <el-input
           v-show="showSearch"
           class="search-input"
@@ -59,16 +66,20 @@
           prefix-icon="el-icon-search"
           v-model="searchVal">
         </el-input>
+        <!-- 搜索图标（小屏显示） -->
         <svg v-show="!showSearch" class="search-icon"  fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M11.5 2.25a8.25 8.25 0 1 0 5.28 14.59l4.69 4.69a.75.75 0 1 0 1.06-1.06l-4.69-4.69A8.25 8.25 0 0 0 11.5 2.25M4.75 10.5a6.75 6.75 0 1 1 13.5 0 6.75 6.75 0 0 1-13.5 0" clip-rule="evenodd"></path>
         </svg>
+        <!-- 语言切换图标 -->
         <svg class="global-icon" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M3.784 11.25H8.01c.065-2.256.423-4.31.985-5.869.166-.457.352-.882.561-1.263a8.26 8.26 0 0 0-5.773 7.132m8.216-9c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25m0 1.5c-.146 0-.383.08-.695.444-.309.362-.62.93-.898 1.697-.494 1.368-.83 3.243-.896 5.359h4.978c-.066-2.116-.402-3.991-.896-5.36-.277-.766-.59-1.334-.898-1.696-.312-.364-.55-.444-.695-.444m3.99 7.5c-.066-2.256-.424-4.31-.986-5.869a9 9 0 0 0-.561-1.263 8.26 8.26 0 0 1 5.773 7.132zm-1.501 1.5H9.51c.065 2.116.402 3.991.896 5.36.277.766.59 1.334.898 1.696.312.364.55.444.695.444.146 0 .383-.08.695-.444.309-.362.62-.93.898-1.697.494-1.368.83-3.243.896-5.359m-.046 7.132a9 9 0 0 0 .56-1.263c.563-1.559.92-3.613.986-5.869h4.227a8.26 8.26 0 0 1-5.773 7.132m-4.886 0a9 9 0 0 1-.56-1.263c-.563-1.559-.92-3.613-.986-5.869H3.784a8.26 8.26 0 0 0 5.773 7.132" clip-rule="evenodd"></path>
         </svg>
+        <!-- 操作按钮 -->
         <div class="login-btn">登录</div>
         <div class="download-btn">中文</div>
       </div>
     </div>
+    <!-- 小屏全屏抽屉菜单 -->
     <el-drawer
       title="我是标题"
       :visible.sync="showAllMenu"
@@ -79,9 +90,11 @@
       size="100%"
       style="background-color: #000;"
     >
+      <!-- 标题区域 -->
       <template #title>
         <img class="text-icon" src="../assets/images/jysz.png" alt="">
       </template>
+      <!-- 顶部按钮组 -->
       <div class="btn-box" v-show="!showSubMenu">
         <svg class="global-icon" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M3.784 11.25H8.01c.065-2.256.423-4.31.985-5.869.166-.457.352-.882.561-1.263a8.26 8.26 0 0 0-5.773 7.132m8.216-9c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25m0 1.5c-.146 0-.383.08-.695.444-.309.362-.62.93-.898 1.697-.494 1.368-.83 3.243-.896 5.359h4.978c-.066-2.116-.402-3.991-.896-5.36-.277-.766-.59-1.334-.898-1.696-.312-.364-.55-.444-.695-.444m3.99 7.5c-.066-2.256-.424-4.31-.986-5.869a9 9 0 0 0-.561-1.263 8.26 8.26 0 0 1 5.773 7.132zm-1.501 1.5H9.51c.065 2.116.402 3.991.896 5.36.277.766.59 1.334.898 1.696.312.364.55.444.695.444.146 0 .383-.08.695-.444.309-.362.62-.93.898-1.697.494-1.368.83-3.243.896-5.359m-.046 7.132a9 9 0 0 0 .56-1.263c.563-1.559.92-3.613.986-5.869h4.227a8.26 8.26 0 0 1-5.773 7.132m-4.886 0a9 9 0 0 1-.56-1.263c-.563-1.559-.92-3.613-.986-5.869H3.784a8.26 8.26 0 0 0 5.773 7.132" clip-rule="evenodd"></path>
@@ -91,6 +104,7 @@
           <div class="download-btn">中文</div>
         </div>
       </div>
+      <!-- 返回按钮 -->
       <div class="btn-box" v-show="showSubMenu" @click="goBack">
         <div class="left-btn-box">
           <svg class="btn-back" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -99,7 +113,9 @@
           <span class="text-back">返回</span>
         </div>
       </div>
+      <!-- 菜单标题 -->
       <div class="menu-title">{{menuTitle}}</div>
+      <!-- 主菜单列表 -->
       <div class="menu-box" v-show="!showSubMenu">
         <div v-for="(item, index) in menuList" :key="index" class="menu-item" @click="handleClickItem(item)">
           <span class="menu-item-title">{{item.name}}</span>
@@ -108,6 +124,7 @@
           </svg>
         </div>
       </div>
+      <!-- 子菜单列表 -->
       <template v-if="showSubMenu">
         <div class="menu-box" v-for="(item, index) in subList" :key="index" @click="handleClickItem(item)">
           <div class="menu-item">
@@ -128,15 +145,12 @@ export default {
   },
   data() {
     return {
-      showAllMenu: false,
-      showProductMenu: false,
-      showSolutionMenu: false,
-      searchVal: '',
-      hover: false,
-      isInside: false,
-      showRightMenu: false,
-      showMore: false,
-      showSearch: true,
+      showAllMenu: false,      // 控制全屏菜单显示
+      showRightMenu: false,    // 是否显示移动端菜单按钮
+      showMore: false,         // 是否显示"更多"菜单
+      showSearch: true,        // 是否显示搜索框
+      searchVal: '',           // 搜索框值
+      /* 导航菜单数据 */
       menuList: [{
         name: '首页',
         showMore: false,
@@ -211,9 +225,23 @@ export default {
         path: '/about-us',
         subList: []
       }],
-      menuTitle: '菜单',
-      showSubMenu: false,
-      subList: []
+      menuTitle: '菜单',        // 当前菜单标题
+      showSubMenu: false,      // 是否显示子菜单
+      subList: [],              // 当前子菜单数据
+      routeMap: {
+        '1': '/jysz',
+        '2': '/digital-twin',
+        '3-1': '/scene-editor',
+        '3-2': '/scene-server',
+        '3-3': '/unified-development',
+        '3-4': '/unified-debugging',
+        '3-5': '/application-editor',
+        '4-1': '/smart-city',
+        '4-2': '/smart-park',
+        '4-3': '/smart-transportation',
+        '4-4': '/smart-factory',
+        '5': '/about-us'
+      }
     }
   },
   mounted() {
@@ -245,44 +273,11 @@ export default {
       this.showMore = screenWidth < 1100
       this.showSearch = screenWidth >= 960
     },
+    // 菜单选择处理
     handleSelect(key) {
-      if (key === '1') {
-        this.$router.push('/jysz')
-      }
-      if (key === '2') {
-        this.$router.push('/digital-twin')
-      }
-      if (key === '3-1') {
-        this.$router.push('/scene-editor')
-      }
-      if (key === '3-2') {
-        this.$router.push('/scene-server')
-      }
-      if (key === '3-3') {
-        this.$router.push('/unified-development')
-      }
-      if (key === '3-4') {
-        this.$router.push('/unified-debugging')
-      }
-      if (key === '3-5') {
-        this.$router.push('/application-editor')
-      }
-      if (key === '4-1') {
-        this.$router.push('/smart-city')
-      }
-      if (key === '4-2') {
-        this.$router.push('/smart-park')
-      }
-      if (key === '4-3') {
-        this.$router.push('/smart-transportation')
-      }
-      if (key === '4-4') {
-        this.$router.push('/smart-factory')
-      }
-      if (key === '5') {
-        this.$router.push('/about-us')
-      }
+      this.$router.push(this.routeMap[key] || '/')
     },
+    // 小屏菜单项点击
     handleClickItem(item) {
       if (item.showMoreIcon) {
         this.showSubMenu = true
@@ -293,11 +288,13 @@ export default {
         this.handleClose()
       }
     },
+    // 关闭抽屉菜单
     handleClose() {
       this.showAllMenu = false
       this.showSubMenu = false
       this.menuTitle = '菜单'
     },
+    // 返回主菜单
     goBack() {
       this.showSubMenu = false
       this.menuTitle = '菜单'
@@ -306,6 +303,7 @@ export default {
 }
 </script>
 <style lang="scss">
+/* 全局Element UI样式覆盖 */
 .el-menu--popup {
   min-width: 160px !important;
   border-radius: 16px !important;
@@ -498,11 +496,8 @@ export default {
       height: 29px;
     }
     .jysz-icon {
-      // width: 91px;
-      // height: 29px;
       height: 26px;
       width: 28px;
-      // margin-right: 150px;
     }
     .left-two {
       .el-menu--horizontal>.el-menu-item {
@@ -599,11 +594,6 @@ export default {
       &:hover {
         background-color: #60c6f5;
       }
-    }
-  }
-  @media screen and (max-width: 1100px) {
-    .jysz-icon {
-      // margin-right: 50px !important;
     }
   }
 }

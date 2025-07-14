@@ -148,7 +148,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 80px 128px;
-  background: #101014;
+  background: #18181c;
   .introduction-icon {
     width: 100px;
     height: 32px;
