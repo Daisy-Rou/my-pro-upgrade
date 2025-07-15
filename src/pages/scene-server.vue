@@ -2,21 +2,8 @@
   <div class="scene-server">
     <!-- 主展示区域 -->
     <main-content :mainObj="mainObj"></main-content>
-    <!--  :class="{'fixed': isFixed}" -->
-     <!-- 步骤导航栏 -->
-    <div class="step-box" ref="stepBox">
-      <div
-        class="step-item"
-        v-for="(item, index) in stepList"
-        :key="index"
-        @click="clickStepItem(index)"
-      >
-        <!-- 步骤序号（激活状态高亮） -->
-        <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
-        <!-- 步骤标题（激活状态高亮） -->
-        <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
-      </div>
-    </div>
+    <!-- 步骤导航栏 -->
+    <step-nav :list="stepList" @clickStep="clickStepItem"></step-nav>
     <!-- 步骤1：产品特性 -->
     <div class="step-one-box" ref="stepItem1">
       <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
@@ -35,15 +22,14 @@
     </div>
      <!-- 平台适应卡片区域 -->
     <div class="step-three-bg-box">
-      <div class="card-item">
-        <img src="../assets/images/server-cpys-logo1.png" alt="" class="card-item-logo">
-        <div class="card-item-title">一键式安装和部署</div>
-        <span class="card-item-content">支持一键式部署，实现快速安装，有效降低应用复杂性</span>
-      </div>
-      <div class="card-item">
-        <img src="../assets/images/server-cpys-logo2.png" alt="" class="card-item-logo">
-        <div class="card-item-title">开放API</div>
-        <span class="card-item-content">灵活配置，满足场景编辑器和流程渲染控件的集成；支持二次开发，为底层功能接口的开发提供支持，大大提高构建数字孪生应用的效率</span>
+      <div 
+        class="card-item"
+        v-for="(item, index) in dptList"
+        :key="index"
+      >
+        <img :src="item.logo" alt="" class="card-item-logo">
+        <div class="card-item-title">{{item.title}}</div>
+        <span class="card-item-content">{{item.content}}</span>
       </div>
     </div>
     <!-- 步骤4：视觉效果 -->
@@ -59,6 +45,7 @@
 <script>
 import mainContent from '@/components/main-content.vue';
 import mainTitle from '@/components/main-title.vue';
+import stepNav from '@/components/step-nav.vue';
 import stepTitle from '@/components/step-title.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 import topBottomCard from '@/components/top-bottom-card.vue';
@@ -68,6 +55,7 @@ export default {
   components: {
     mainContent,
     mainTitle,
+    stepNav,
     stepTitle,
     contentIntroduction,
     topBottomCard,
@@ -75,14 +63,6 @@ export default {
   },
   data() {
     return {
-      activeIndex: 0,   // 当前激活的步骤索引
-      scrollTop: 0,     // 页面滚动位置
-      stepTop: 0,       // 步骤导航栏位置
-      // 各步骤区域的位置
-      stepTtemTop1: 0,
-      stepTtemTop2: 0,
-      stepItemTop3: 0,
-      stepItemTop4: 0,
       isFixed: false,    // 是否固定导航栏
       // 主内容数据
       mainObj: {
@@ -132,6 +112,19 @@ export default {
           imgSrc: require('../assets/images/server-cptx4.png')
         }
       ],
+      // 多平台数据
+      dptList: [
+        {
+          logo: require('../assets/images/server-cpys-logo1.png'),
+          title: '一键式安装和部署',
+          content: '支持一键式部署，实现快速安装，有效降低应用复杂性'
+        },
+        {
+          logo: require('../assets/images/server-cpys-logo2.png'),
+          title: '开放API',
+          content: '灵活配置，满足场景编辑器和流程渲染控件的集成；支持二次开发，为底层功能接口的开发提供支持，大大提高构建数字孪生应用的效率'
+        }
+      ],
       // 产品优势数据
       cpysList: {
         title: '高速传输',
@@ -178,39 +171,8 @@ export default {
       ]
     }
   },
-   mounted() {
-    // 初始化响应式处理
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-    this.handleResize()
-    window.addEventListener('resize', this.handleResize);
-    // 添加滚动事件监听
-    window.addEventListener('scroll', this.handleStepScroll)
-  },
-  beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('scroll', this.handleStepScroll)
-  },
   methods: {
-    // 处理窗口大小变化
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      // const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      // 更新步骤导航栏位置
-      this.stepTop = this.getElementTop(this.$refs.stepBox)
-    },
-    debounce(fn, delay = 500) {
-      let timer = null
-      return function() {
-        if (timer) {
-          clearTimeout(timer)
-        }
-        timer = setTimeout(fn, delay)
-      }
-    },
-    // 获取元素距顶位置
+    // 获取元素距页面顶部距离
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -218,19 +180,14 @@ export default {
       }
       return 0;
     },
-    // 处理滚动事件
-    handleStepScroll() {
-      // 检测是否需要固定导航栏
-      this.scrollTop = document.documentElement.scrollTop
-      this.isFixed = this.scrollTop >= this.stepTop
-    },
     // 点击步骤导航项
     clickStepItem(index) {
-      this.activeIndex = index
       // 滚动到对应区域
       const targetRef = `stepItem${index + 1}`
       const targetTop = this.getElementTop(this.$refs[targetRef])
-      window.scrollTo({ top: targetTop, behavior: 'smooth' })
+      const menuHeight = 72
+      const stepHeihgt = 51
+      window.scrollTo({ top: targetTop - menuHeight - stepHeihgt, behavior: 'smooth' })
     }
   }
 }
@@ -248,56 +205,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // 步骤导航栏
-  .step-box {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, .05);
-    &.fixed {
-      position: fixed;
-      top: 72px;
-      width: 100%; /* 确保宽度是100%，以覆盖整个视口宽度 */
-      z-index: 1000; /* 确保在其他内容之上 */
-      background-color: #101014;
-      border-top: 1px solid rgba(255, 255, 255, .15);
-      border-bottom: 1px solid rgba(255, 255, 255, .15);
-    }
-    .step-item {
-      display: flex;
-      flex-shrink: 0;
-      width: fit-content;
-      align-items: center;
-      margin-right: 42px;
-      padding: 14px 0;
-      cursor: pointer;
-      .step-num {
-        font-size: 14px;
-        font-weight: 400;
-        color: rgba(255, 255, 255, .65);
-        margin-right: 4px;
-      }
-      .step-text {
-        font-size: 14px;
-        font-weight: 400;
-        color: #fff;
-        &:hover {
-          color: rgba(255, 255, 255, .65);
-        }
-      }
-      .active {
-        color: #B164E2;
-        &:hover {
-          color: #B164E2;
-        }
-      }
-    }
-  }
   // 步骤
   .step-one-box, .step-two-box, .step-three-box, .step-four-box {
     width: 100%;
@@ -394,9 +301,6 @@ export default {
     }
   }
   @media screen and (max-width: 768px){
-    .step-box {
-      justify-content: inherit !important;
-    }
     ::v-deep .top-bottom-card {
       .step-two-bg-box {
         padding: 24px !important;

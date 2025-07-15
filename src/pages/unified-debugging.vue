@@ -2,20 +2,8 @@
   <div class="unified-debugging">
     <!-- 主内容区域 -->
     <main-content :mainObj="mainObj"></main-content>
-    <!--  :class="{'fixed': isFixed}" -->
     <!-- 步骤导航栏 -->
-    <div class="step-box" ref="stepBox">
-      <div
-        class="step-item"
-        v-for="(item, index) in stepList"
-        :key="index"
-        @click="clickStepItem(index)"
-      >
-        <!-- 步骤序号和标题 -->
-        <span class="step-num" :class="{'active': activeIndex === index}">{{item.num}}</span>
-        <span class="step-text" :class="{'active': activeIndex === index}">{{item.title}}</span>
-      </div>
-    </div>
+    <step-nav :list="stepList" @clickStep="clickStepItem"></step-nav>
     <!-- 步骤1内容区 -->
     <div class="step-one-box" ref="stepItem1">
       <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
@@ -45,6 +33,7 @@
 <script>
 import mainContent from '@/components/main-content.vue';
 import mainTitle from '@/components/main-title.vue';
+import stepNav from '@/components/step-nav.vue';
 import stepTitle from '@/components/step-title.vue';
 import hoverImg from '@/components/hover-img.vue'
 import contentIntroduction from '@/components/content-introduction.vue';
@@ -54,6 +43,7 @@ export default {
   components: {
     mainContent,
     mainTitle,
+    stepNav,
     stepTitle,
     hoverImg,
     contentIntroduction,
@@ -61,13 +51,6 @@ export default {
   },
   data() {
     return {
-      activeIndex: 0,         // 当前激活的步骤索引
-      scrollTop: 0,           // 页面滚动位置
-      stepTop: 0,             // 步骤导航栏的顶部位置
-      stepTtemTop1: 0,        // 步骤1元素的顶部位置
-      stepTtemTop2: 0,        // 步骤2元素的顶部位置
-      stepTtemTop3: 0,        // 步骤3元素的顶部位置
-      isFixed: false,
       // 主内容数据
       mainObj: {
         text: '调试API',
@@ -193,36 +176,8 @@ export default {
       }
     }
   },
-   mounted() {
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-     // 初始化响应式布局
-    this.handleResize()
-    window.addEventListener('resize', this.handleResize);
-    window.addEventListener('scroll', this.handleStepScroll)
-  },
-  beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.handleResize);
-    window.removeEventListener('scroll', this.handleStepScroll)
-  },
   methods: {
-    // 响应窗口大小变化
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      // const screenWidth = window.innerWidth;
-      this.stepTop = this.getElementTop(this.$refs.stepBox)
-    },
-    debounce(fn, delay = 500) {
-      let timer = null
-      return function() {
-        if (timer) {
-          clearTimeout(timer)
-        }
-        timer = setTimeout(fn, delay)
-      }
-    },
-    // 获取元素绝对位置
+    // 获取元素距页面顶部距离
     getElementTop(el) {
       if (el) {
         const rect = el.getBoundingClientRect();
@@ -230,19 +185,14 @@ export default {
       }
       return 0;
     },
-    // 处理滚动事件
-    handleStepScroll() {
-      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      // 判断步骤导航是否应该固定
-      this.isFixed = this.scrollTop >= this.stepTop;
-      //  TODO: 根据滚动位置更新activeIndex
-    },
-    // 点击步骤项滚动到对应位置
+    // 点击步骤导航项
     clickStepItem(index) {
-      this.activeIndex = index
-      const refName = `stepItem${index + 1}`
-      const top = this.getElementTop(this.$refs[refName])
-      window.scrollTo({ top, behavior: 'smooth' })
+      // 滚动到对应区域
+      const targetRef = `stepItem${index + 1}`
+      const targetTop = this.getElementTop(this.$refs[targetRef])
+      const menuHeight = 72
+      const stepHeihgt = 51
+      window.scrollTo({ top: targetTop - menuHeight - stepHeihgt, behavior: 'smooth' })
     }
   }
 }
@@ -253,52 +203,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // 步骤导航栏固定样式
-  .step-box {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, .05);
-    &.fixed {
-      position: fixed;
-      top: 72px;
-      width: 100%; /* 确保宽度是100%，以覆盖整个视口宽度 */
-      z-index: 1000; /* 确保在其他内容之上 */
-      background-color: #101014;
-      border-top: 1px solid rgba(255, 255, 255, .15);
-      border-bottom: 1px solid rgba(255, 255, 255, .15);
-    }
-    .step-item {
-      display: flex;
-      align-items: center;
-      margin-right: 42px;
-      padding: 14px 0;
-      cursor: pointer;
-      .step-num {
-        font-size: 14px;
-        font-weight: 400;
-        color: rgba(255, 255, 255, .65);
-        margin-right: 4px;
-      }
-      .step-text {
-        font-size: 14px;
-        font-weight: 400;
-        color: #fff;
-        &:hover {
-          color: rgba(255, 255, 255, .65);
-        }
-      }
-      .active {
-        color: #B164E2;
-        &:hover {
-          color: #B164E2;
-        }
-      }
-    }
-  }
-
   // 步骤内容区
   .step-one-box, .step-two-box, .step-three-box {
     width: 100%;

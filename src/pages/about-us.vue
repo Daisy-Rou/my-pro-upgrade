@@ -88,7 +88,13 @@ export default {
 
 <style lang="scss" scoped>
 .about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
   .banner {
+    width: 100%;
+    // max-width: 1920px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -106,6 +112,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 80px 128px;
+    max-width: 1920px;
     .big-title {
       color: #fff;
       font-size: 52px;

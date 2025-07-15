@@ -21,7 +21,7 @@ export default {
   name: 'bottom-line-card',
   props: {
     list: {
-      type: Object,
+      type: Array,
       default: () => {}
     }
   }
