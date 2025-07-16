@@ -9,7 +9,7 @@
       <span class="small-title">{{ mainObj.content || '' }}</span>
       <!-- 操作按钮 -->
       <div class="btn-box">
-        <div class="btn-blue">立即下载</div>
+        <div class="btn-blue">{{ mainObj.btnText || '立即下载' }}</div>
       </div>
     </div>
     <!-- 右侧展示图片 -->

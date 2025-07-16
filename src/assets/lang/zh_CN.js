@@ -227,7 +227,7 @@ export default {
     btnText: '了解更多',
     // 标题
     titleObj: {
-      bigTitle: '数智建院',
+      bigTitle: '建院数智',
       bigTitle1: '国产数字孪生应用开发引擎',
       smallTitle: '我们提供数字孪生构建与发布，低成本，高效率，我们的渲染内核技术自主研发且可控，既支持单台服务器上数千次并发访问，又支持渲染效果卓越的大规模场景',
       title1: '全栈开发工具链',
@@ -375,5 +375,82 @@ export default {
         path: '/smart-factory'
       }
     ]
-  }
+  },
+  digitalTwin: {
+    // 主内容数据
+    mainObj: {
+      text: '场景编辑器',
+      title: '智能孪生',
+      content: '全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！',
+      imgSrc: require('@/assets/images/znls-img.png'),
+      btnText: '立即下载'
+    },
+    // 步骤导航数据
+    stepList: [{
+      num: '01',
+      title: '愿景与使命',
+      active: true
+    }, {
+      num: '02',
+      title: '开发者之旅',
+      active: false
+    },{
+      num: '03',
+      title: '权益',
+      active: false
+    }],
+    // 愿景与使命数据
+    list: [
+      {
+        tagName: '',
+        title: '愿景和使命',
+        content: '在元宇宙时代，5G、物联网、云计算、大数据和人工智能等新技术将带来众多数字孪生应用',
+        content1: '为了提高跨行业的决策能力，旨在构建一个开放共享的数字孪生生态系统，其平台为创作者开发和发布数字孪生应用程序提供了必要的工具和云服务',
+        imgSrc: require('@/assets/images/step-bg1.png')
+      }
+    ],
+    titleObj: {
+      title1: '开发人员之旅',
+      title2: '权益'
+    },
+    // 权益卡片数据
+    benefitList:  [
+      {
+        imgSrc: require('@/assets/images/qy-img1.png'),
+        title: '技能提高',
+        content: '',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img2.png'),
+        title: '分配计划',
+        content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img3.png'),
+        title: '品牌支持',
+        content: '认证可以获得途冠的线上线下营销支持，快速提升知名度',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img4.png'),
+        title: '技术支持',
+        content: '一站式数字双应用开发学习平台，快速提高开发技能，提升人才和扩大职业机会',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img5.png'),
+        title: '投资回报率',
+        content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img6.png'),
+        title: '资源效益',
+        content: '',
+        path: ''
+      }
+    ],
+  },
 }

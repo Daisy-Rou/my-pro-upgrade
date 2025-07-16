@@ -106,11 +106,11 @@ export default {
         font-weight: 400;
         line-height: 23px;
         color: rgba(255, 255, 255, .65);
-        overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
-        text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
-        display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
-        -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
-        -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
+        // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
+        // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
+        // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
+        // -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
+        // -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
       }
       .news-small-card-item-btn {
         display: flex;

@@ -66,9 +66,6 @@ export default {
 <style lang="scss" scoped>
 /* 内容介绍组件样式 */
 .content-introduction {
-  --primary-color: rgb(199, 118, 249);
-  --text-color: #fff;
-  --tag-text-color: #000;
   max-width: 1920px;
   display: flex;
   flex-direction: column;
@@ -83,7 +80,7 @@ export default {
       .tag {
         width: fit-content;
         padding: 4px 10px;
-        color: var(--tag-text-color);
+        color: #fff;
         font-size: 16px;
         font-weight: 700;
         line-height: 18px;

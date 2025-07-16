@@ -1,62 +1,14 @@
-$inblock: inline-block;
-$block: block;
-$vt: top;
-$vm: middle;
-$txtc: center;
-$txtl: left;
-$txtr: right;
-$f18: 18px;
-$f16: 16px;
-$f14: 14px;
-$f12: 12px;
-$f10:10px;
-$f20:20px;
-$medium:500;
-$medium:600;
-$regular:400;
-$color-black85:rgba(0, 0, 0, 0.85);
-$color-black65:rgba(0, 0, 0, 0.65);
-$color-black45:rgba(0, 0, 0, 0.45);
-$color-black25: rgba(0, 0, 0, 0.25);
-$color-black15: rgba(0, 0, 0, 0.15);
-$color-black10: rgba(0, 0, 0, 0.1);
-$color-black: rgba(0, 0, 0, 1);
+$color-blue: #2CBDFF;
+$color-blue-hover: #60c6f5;
+$color-blue-text: #101014;
 $color-white: #fff;
-$color-light: #999;
-$color-ccc: #ccc;
-$color-gray: rgba(0, 0, 0, 0.45);
-$color-text-bg:#F5F8FA;
-$color-text-red:#FA5B00;
-//$color-black: rgba(0, 0, 0, 0.65);
-$color-e6e6e6: #e6e6e6;
-$color-primary: rgba(0, 128, 255, 1);
-$color-href:rgba(0, 128, 255, 1);
-$color-primary-hover:rgba(0, 128, 255, 0.85);
-$color-primary10:rgba(0, 128, 255, 0.1);
-$color-success: rgba(109, 204, 41, 1);
-$color-success-hover:rgba(109, 204, 41, 0.4);
-$color-warning: rgba(109, 204, 41,1);
-$color-warning-hover:rgba(109, 204, 41, 0.4);
-$color-danger: rgba(255, 70, 64, 1);
-$color-danger-hover:rgba(255, 70, 64, 0.4);
-$color-risk-ts:#00C6CC;
-$color-risk-ts-border:rgba(95,231,234,.4);
-$color-risk-ts-bg:rgba(95,231,234,.1);
-$color-risk-gz:#0080ff;
-$color-risk-gz-border:rgba(0,128,255, 0.4);
-$color-risk-gz-bg:rgba(0,128,255, 0.1);
-$color-risk-yj:#F7B500;
-$color-risk-yj-border:rgba(247,181,0,.4);
-$color-risk-yj-bg:rgba(247,181,0,.1);
-$color-risk-td:#FE6A41;
-$color-risk-td-border:rgba(250,91,0,.4);
-$color-risk-td-bg:rgba(250,91,0,.1);
-$color-risk-wu:rgba(108,116,137,1);
-$color-risk-wu-border:rgba(108,116,137,.4);
-$color-risk-wu-bg:rgba(108,116,137,.1);
-$color-risk-fr:#3299FF; // 法人风险实体
-$color-risk-gd:#FF893B; // 股东风险实体
-$color-risk-zgs:#32C5FF; // 子公司风险实体
-$color-risk-glr:#7954FF; // 关联人
-$color-risk-zdy:#FFD35A; // 自定义关联企业
-
+$color-white65: rgba(255, 255, 255, .65);
+$color-white35: rgba(255, 255, 255, .35);
+$color-white15: rgba(255, 255, 255, .15);
+$color-white5: rgba(255, 255, 255, .05);
+$color-black: #000;
+$color-content: rgb(219, 222, 227);
+$color-step-bg: #202024;
+$color-step-num: rgb(219, 222, 227);
+$color-step-active: #B164E2;
+$color-step-title: rgb(182, 101, 233);

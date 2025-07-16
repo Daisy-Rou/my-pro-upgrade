@@ -1,30 +1,30 @@
 <template>
   <div class="digital-twin">
     <!-- 主展示区域 -->
-    <main-content :mainObj="mainObj"></main-content>
+    <main-content :mainObj="$t('digitalTwin.mainObj')"></main-content>
     <!-- 步骤导航栏 -->
-    <step-nav :list="stepList" @clickStep="clickStepItem"></step-nav>
+    <step-nav :list="$t('digitalTwin.stepList')" @clickStep="clickStepItem"></step-nav>
     <!-- 第一步内容区域 -->
     <div class="step-one-box" ref="stepItem1">
-      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
+      <step-title :num="$t('digitalTwin.stepList')[0].num" :title="$t('digitalTwin.stepList')[0].title"></step-title>
     </div>
     <!-- 特性列表组件 -->
-    <content-introduction :list="list"></content-introduction>
+    <content-introduction :list="$t('digitalTwin.list')"></content-introduction>
     <!-- 第二步内容区域 -->
     <div class="step-two-box" ref="stepItem2">
-      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
-      <main-title title="开发人员之旅"></main-title>
+      <step-title :num="$t('digitalTwin.stepList')[1].num" :title="$t('digitalTwin.stepList')[1].title"></step-title>
+      <main-title :title="$t('digitalTwin.titleObj.title1')"></main-title>
     </div>
     <!-- 第二步背景区域 -->
     <div class="step-two-bg-box"></div>
      <!-- 第三步内容区域 -->
     <div class="step-three-box" ref="stepItem3">
-      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
-      <main-title title="权益"></main-title>
+      <step-title :num="$t('digitalTwin.stepList')[2].num" :title="$t('digitalTwin.stepList')[2].title"></step-title>
+      <main-title :title="$t('digitalTwin.titleObj.title2')"></main-title>
     </div>
     <!-- 左右布局卡片组件 -->
     <div class="news-small-card-box">
-      <left-right-card :list="benefitList" :showBtn="false"></left-right-card>
+      <left-right-card :list="$t('digitalTwin.benefitList')" :showBtn="false"></left-right-card>
     </div>
   </div>
 </template>
@@ -49,76 +49,6 @@ export default {
   },
   data() {
     return {
-      // 主内容数据
-      mainObj: {
-        text: '场景编辑器',
-        title: '智能孪生',
-        content: '全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！',
-        imgSrc: require('@/assets/images/znls-img.png')
-      },
-      // 步骤导航数据
-      stepList: [{
-        num: '01',
-        title: '愿景与使命',
-        active: true
-      }, {
-        num: '02',
-        title: '开发者之旅',
-        active: false
-      },{
-        num: '03',
-        title: '权益',
-        active: false
-      }],
-      // 愿景与使命数据
-      list: [
-        {
-          tagName: '',
-          title: '愿景和使命',
-          content: '在元宇宙时代，5G、物联网、云计算、大数据和人工智能等新技术将带来众多数字孪生应用',
-          content1: '为了提高跨行业的决策能力，旨在构建一个开放共享的数字孪生生态系统，其平台为创作者开发和发布数字孪生应用程序提供了必要的工具和云服务',
-          imgSrc: require('@/assets/images/step-bg1.png')
-        }
-      ],
-      // 权益卡片数据
-      benefitList:  [
-        {
-          imgSrc: require('@/assets/images/qy-img1.png'),
-          title: '技能提高',
-          content: '',
-          path: ''
-        },
-        {
-          imgSrc: require('@/assets/images/qy-img2.png'),
-          title: '分配计划',
-          content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
-          path: ''
-        },
-        {
-          imgSrc: require('@/assets/images/qy-img3.png'),
-          title: '品牌支持',
-          content: '认证可以获得途冠的线上线下营销支持，快速提升知名度',
-          path: ''
-        },
-        {
-          imgSrc: require('@/assets/images/qy-img4.png'),
-          title: '技术支持',
-          content: '一站式数字双应用开发学习平台，快速提高开发技能，提升人才和扩大职业机会',
-          path: ''
-        },
-        {
-          imgSrc: require('@/assets/images/qy-img5.png'),
-          title: '投资回报率',
-          content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
-          path: ''
-        },
-        {
-          imgSrc: require('@/assets/images/qy-img6.png'),
-          title: '资源效益',
-          content: '',
-          path: ''
-        }
-      ],
     }
   },
   methods: {

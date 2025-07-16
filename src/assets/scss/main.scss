@@ -1,5 +1,5 @@
 /** // @charset "UTF-8";
-// @import "global";
+@import "./global.scss";
 // @import "../fonts/iconfont.css"; **/
 
 @font-face {
@@ -69,10 +69,10 @@ input[type="text"], input[type="email"], input[type="date"], input[type="passwor
 	padding: 0 5px;
 }
 input:-webkit-autofill {
-	-webkit-box-shadow: 0 0 0 400px $color-white inset;
+	-webkit-box-shadow: 0 0 0 400px #fff inset;
 }
 a {
-	color: $color-black;
+	color: #000;
 }
 a:hover {
 	text-decoration: none;

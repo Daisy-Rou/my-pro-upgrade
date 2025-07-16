@@ -375,5 +375,83 @@ export default {
         path: '/smart-factory'
       }
     ]
+  },
+  // 智能孪生
+  digitalTwin: {
+    // 主内容数据
+    mainObj: {
+      text: 'Scene Editor',
+      title: 'Intelligent Twin',
+      content: 'The co-creation and sharing of intelligent twin engineering across all scenarios is reshaping the digital twin world for the real world. Everyone can participate.',
+      imgSrc: require('@/assets/images/znls-img.png'),
+      btnText: 'Download'
+    },
+    // 步骤导航数据
+    stepList: [{
+      num: '01',
+      title: 'Vision and Mission',
+      active: true
+    }, {
+      num: '02',
+      title: 'The Journey of Developers',
+      active: false
+    },{
+      num: '03',
+      title: 'Rights',
+      active: false
+    }],
+    // 愿景与使命数据
+    list: [
+      {
+        tagName: '',
+        title: 'Vision and Mission',
+        content: 'In the era of the metaverse, new technologies such as 5G, the Internet of Things, cloud computing, big data, and artificial intelligence will bring numerous digital twin applications.',
+        content1: 'In order to enhance decision-making capabilities across industries, the aim is to build an open and shared digital twin ecosystem, where the platform provides essential tools and cloud services for creators to develop and publish digital twin applications.',
+        imgSrc: require('@/assets/images/step-bg1.png')
+      }
+    ],
+    titleObj: {
+      title1: 'The Journey of Developers',
+      title2: 'Rights'
+    },
+    // 权益卡片数据
+    benefitList:  [
+      {
+        imgSrc: require('@/assets/images/qy-img1.png'),
+        title: 'Skills Improvement',
+        content: '',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img2.png'),
+        title: 'Allocation Plan',
+        content: 'Join the soil management allocation program, participate in the implementation of joint projects, and earn part-time income easily.',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img3.png'),
+        title: 'Brand Support',
+        content: "Certification can receive Tuguan's online and offline marketing support, quickly enhancing visibility.",
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img4.png'),
+        title: 'Technical Support',
+        content: 'A one-stop digital twin application development learning platform that rapidly enhances development skills, cultivates talent, and expands career opportunities.',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img5.png'),
+        title: 'Return on Investment',
+        content: 'Join the soil management allocation program, participate in the implementation of joint projects, and earn part-time income easily.',
+        path: ''
+      },
+      {
+        imgSrc: require('@/assets/images/qy-img6.png'),
+        title: 'Resource Efficiency',
+        content: '',
+        path: ''
+      }
+    ],
   }
 }

@@ -4,8 +4,8 @@
     <div class="top-left">
       <!-- 左侧区域：Logo + 导航菜单 -->
       <!-- 根据屏幕尺寸显示不同Logo -->
-      <img v-show="showRightMenu" class="jysz" src="@/assets/images/jysz.png" alt="企业Logo">
-      <img v-show="!showRightMenu" class="jysz-icon" src="@/assets/images/jysz-logo.png" alt="企业图标">
+      <img v-show="showRightMenu" class="jysz" src="@/assets/images/jysz-white.png" alt="企业Logo">
+      <img v-show="!showRightMenu" class="jysz-icon" src="@/assets/images/jysz-white-logo.png" alt="企业图标">
       <div class="left-two">
         <!-- Element UI导航菜单 -->
         <el-menu
@@ -412,12 +412,14 @@ export default {
     align-items: center;
     flex-shrink: 1;
     .jysz {
-      width: 91px;
-      height: 29px;
+      // width: 91px;
+      // height: 29px;
+      width: 98px;
+      height: 42px;
     }
     .jysz-icon {
       height: 26px;
-      width: 28px;
+      width: 26px;
     }
     .left-two {
       .el-menu--horizontal>.el-menu-item {
