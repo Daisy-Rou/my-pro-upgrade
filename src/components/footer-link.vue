@@ -1,6 +1,6 @@
 <template>
   <div class="introduction-box">
-    <img class="introduction-icon" src="@/assets/images/jysz.png" alt="">
+    <img class="introduction-icon" src="@/assets/images/jysz-white.png" alt="">
     <div v-show="showIntroductionList" class="introduction-container">
       <div
         class="introduction-item"
@@ -85,8 +85,10 @@ export default {
   padding: 80px 128px;
   background: #18181c;
   .introduction-icon {
-    width: 100px;
-    height: 32px;
+    // width: 100px;
+    // height: 32px;
+    width: 114px;
+    height: 48px;
     margin-bottom: 40px;
   }
   .introduction-container {

@@ -5,7 +5,8 @@
       <!-- 左侧文本区域 -->
       <div class="text-box">
         <!-- 顶部图标（大屏显示） -->
-        <img v-show="showVideo" class="text-icon" src="@/assets/2.svg" alt="数智建院图标">
+        <!-- <img v-show="showVideo" class="text-icon" src="@/assets/2.svg" alt="数智建院图标"> -->
+        <img v-show="showVideo" class="text-icon" src="@/assets/images/jysz-white.png" alt="数智建院图标">
         <!-- 主标题 -->
         <div class="big-title">{{ $t('firstPage.titleObj.bigTitle') }}</div>
         <div class="big-title">{{ $t('firstPage.titleObj.bigTitle1') }}</div>
@@ -147,10 +148,11 @@ export default {
     }
     /* 顶部图标 */
     .text-icon {
-      width: 200px;
-      height: 140px;
+      width: 100px;
+      height: 42px;
       margin-top: 124px;
-      margin-left: -30px;
+      // margin-left: -30px;
+      margin-bottom: 24px;
     }
     /* 按钮容器 */
     .btn-box {
