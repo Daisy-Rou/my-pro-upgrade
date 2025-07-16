@@ -70,8 +70,14 @@ export default {
       width: calc(25% - 24px);
       margin-right: 24px;
       margin-bottom: 24px;
+      transition: transform 0.5s ease;
       &:nth-child(4n) {
         margin-right: 0;
+      }
+      &:hover {
+        img {
+          transform: scale(1.05);
+        }
       }
       .img-box {
         display: flex;
@@ -91,7 +97,7 @@ export default {
       .card-item-title-box {
         display: flex;
         flex-direction: column;
-        padding: 24px;
+        padding: 24px 0;
         .card-item-title {
           color: #fff;
           font-size: 20px;
@@ -103,7 +109,7 @@ export default {
         .card-item-content {
           font-size: 14px;
           font-weight: 400;
-          line-height: 23px;
+          line-height: 26px;
           color: rgba(255, 255, 255, .65);
           // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
           // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/

@@ -1,8 +1,8 @@
 <template>
   <div class="dropdown-list">
-    <div class="list-container" v-for="(item, index) in  list" :key="index">
+    <div class="list-container" v-for="(item, index) in  $t('footer.list')" :key="index">
       <div class="list-item-box" @click="handleItemClick(item)">
-        <div class="list-item-title">{{item.bigTitle}}</div>
+        <div class="list-item-title">{{item.name}}</div>
         <svg class="list-item-arrow" :class="item.isShow ? 'list-item-arrow-bottom' :'list-item-arrow'" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M19.53 8.97a.75.75 0 0 1 0 1.06L12 17.56l-7.53-7.53a.75.75 0 1 1 1.06-1.06L12 15.44l6.47-6.47a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path>
         </svg>
@@ -34,98 +34,13 @@ export default {
   name: 'dropdown-list',
   data() {
     return {
-      shouldSubListShow: false,
-      list: [
-        {
-          isShow: false,
-          bigTitle: '首页',
-          subList: [
-            {
-              name: '智能孪生',
-              path: '/digital-twin'
-            },
-            {
-              name: '关于我们',
-              path: '/about-us'
-            }
-          ]
-        },
-        {
-          isShow: false,
-          bigTitle: '产品',
-          subList: [
-            {
-              name: '场景编辑器',
-              path: '/scene-editor'
-            }, {
-              name: '场景服务器',
-              path: '/scene-server'
-            }, {
-              name: '统一开发API',
-              path: '/unified-development'
-            }, {
-              name: '统一API调试器',
-              path: '/unified-debugging'
-            }, {
-              name: '应用程序编辑器',
-              path: '/application-editor'
-            }
-          ]
-        },
-        {
-          isShow: false,
-          bigTitle: '服务',
-          subList: [
-            {
-              name: '场景搭建服务'
-            },
-            {
-              name: '应用服务'
-            },
-            {
-              name: '技术支持'
-            }
-          ]
-        },
-        {
-          isShow: false,
-          bigTitle: '解决方案',
-          subList: [
-            {
-              name: '智慧城市',
-              path: '/smart-city'
-            }, {
-              name: '智慧园区',
-              path: '/smart-park'
-            }, {
-              name: '智能交通',
-              path: '/smart-transportation'
-            }, {
-              name: '智慧工厂',
-              path: '/smart-factory'
-            }
-          ]
-        },
-        {
-          isShow: false,
-          bigTitle: '联系方式',
-          subList: [
-            {
-              name: 'Email：',
-              blueName: 'support@cryptodashboard.com'
-            },
-            {
-              name: 'Phone：',
-              blueName: '+1 (123) 456-7890'
-            },
-            {
-              name: 'Address： ',
-              blueName: '安徽合肥高新区'
-            }
-          ]
-        }
-      ]
+      shouldSubListShow: false
     }
+  },
+  mounted() {
+    this.$t('footer.list').forEach(item => {
+      item.isShow = false
+    })
   },
   methods: {
     handleItemClick(item) {
@@ -134,6 +49,9 @@ export default {
     handleSubItemClick(item) {
       if (item.path) {
         this.$router.push(item.path)
+        this.$t('footer.list').forEach(item => {
+          item.isShow = false
+        })
       }
     }
   }

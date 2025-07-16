@@ -85,7 +85,7 @@ export default {
         text: '智能工厂数字双IOC',
         title: '智能工厂数字双IOC',
         content: '智能工厂数字双IOC系统是为工业工厂管理部门设计的。支持工业生产制造各系统数据的集成，深度融合5G、大数据、云计算、AI、融合通信等前沿技术，将信息、技术、能效管理、仓储物流管理等多个业务领域。，赋能用户的业务应用，实现“智能感知、智能调度、智能处置、智能评估、智能改进”，有效提升跨部门决策和资源协调效率',
-        imgSrc: require('../assets/images/zhyq-img.png')
+        imgSrc: require('@/assets/images/zhyq-img.png')
       },
       // 进度条列表
       stepList: [{
@@ -111,64 +111,64 @@ export default {
       // 产品优势数据
       cpysList: {
         title: '产品优势',
-        bgSrc: require('../assets/images/tykf-bg.png'),
+        bgSrc: require('@/assets/images/tykf-bg.png'),
         list: [
           {
             title: '非凡的效果',
             content: '超精细还原真实世界场景纹理细节，照片级细节显示精度；从太阳系到一颗螺丝钉的超大型场景的全方位还原，大尺度时空态势的展示；<span class="purple">具有高真实感渲染效果和电影级实时渲染效果</span>，有效提升了作战指挥中心的视觉体验和决策应用效率',
-            imgSrc: require('../assets/images/zhyq-cpys1.png')
+            imgSrc: require('@/assets/images/zhyq-cpys1.png')
           },
           {
             title: '完整工具链交付',
             content: '拥有成熟完整的产品配置工具和交付能力，为3D场景构建、<span class="purple">场景服务调试、twin应用开发提供一站式全流程开发工具链</span>；全元素场景、多源数据和业务逻辑的无缝集成使用户能够更灵活、独立、高质量和高效率地构建数字孪生应用',
-            imgSrc: require('../assets/images/zhyq-cpys2.png')
+            imgSrc: require('@/assets/images/zhyq-cpys2.png')
           },
           {
             title: '强大的功能',
             content: '它具有态势监控、应急指挥、显示报告、过程管理、决策辅助等多种功能。<span class="purple">它承担着决策中心、预警中心、治理中心、指挥中心、展示中心等多种功能</span>，充分满足用户复杂的应用场景，为其商业决策提供有力支持',
-            imgSrc: require('../assets/images/zhyq-cpys3.png')
+            imgSrc: require('@/assets/images/zhyq-cpys3.png')
           },
           {
             title: '跨平台支持',
             content: '双渲染引擎支持，可以选择使用高并发WebGL架构或高渲染效果Web流架构。<span class="purple">它拥有强大的跨平台发布能力和灵活的云部署解决方案</span>。既可以发布私有云部署版本，也可以发布公有云在线版本，充分满足用户的不同使用场景',
-            imgSrc: require('../assets/images/zhyq-cpys4.png')
+            imgSrc: require('@/assets/images/zhyq-cpys4.png')
           }
         ]
       },
       // 卡片数据
       list: [
         {
-          imgSrc: require('../assets/images/zhcs-tjcp1.png'),
+          imgSrc: require('@/assets/images/zhcs-tjcp1.png'),
           title: '场景编辑器',
           content: '创建数字孪生场景，并将孪生场景作为服务进行部署',
           path: '/scene-editor'
         },
         {
-          imgSrc: require('../assets/images/zhcs-tjcp2.png'),
+          imgSrc: require('@/assets/images/zhcs-tjcp2.png'),
           title: '应用程序编辑器',
           content: '添加图表小部件、配置交互逻辑和部署数字孪生应用程序',
           path: '/application-editor'
         },
         {
-          imgSrc: require('../assets/images/zhcs-tjcp3.png'),
+          imgSrc: require('@/assets/images/zhcs-tjcp3.png'),
           title: '场景服务器',
           content: '提供场景托管和高效便捷的流式渲染服务',
           path: '/scene-server'
         },
         {
-          imgSrc: require('../assets/images/zhcs-tjcp4.png'),
+          imgSrc: require('@/assets/images/zhcs-tjcp4.png'),
           title: '统一开发API',
           content: '为控制逻辑的高效编码和数据可视化提供全面的API系统',
           path: '/unified-development'
         },
         {
-          imgSrc: require('../assets/images/zhcs-tjcp5.png'),
+          imgSrc: require('@/assets/images/zhcs-tjcp5.png'),
           title: '服务',
           content: '提供端到端支持服务，促进无忧开发',
           path: ''
         },
         {
-          imgSrc: require('../assets/images/zhcs-tjcp6.png'),
+          imgSrc: require('@/assets/images/zhcs-tjcp6.png'),
           title: '统一API调试器',
           content: '学习、编写和调试数字双数据显示和控制逻辑代码',
           path: '/unified-debugging'
@@ -180,50 +180,50 @@ export default {
           tagName: '商业决策授权',
           title: '综合态势监控',
           content: '支持基于地理信息系统对工业厂房的位置、分布、边界进行监控，整合工厂现有数据资源，对生产进度、设施运维、能效管理、仓储物流、安全管理等各个领域的运行提示进行全面监控和分析，辅助管理者全面掌握厂区运行状态',
-          imgSrc: require('../assets/images/zhgc-img1.png')
+          imgSrc: require('@/assets/images/zhgc-img1.png')
         },
         {
           tagName: '商业决策授权',
           title: '生产管理监控',
           content: '它支持复制各种生产线、重要设备、操作流程等。基于真实的生产线场景，对生产流程、运行状态、生产进度、生产数据等进行监控和分析。，帮助管理者实时掌握生产进度，提高生产效率',
-          imgSrc: require('../assets/images/zhgc-img2.png')
+          imgSrc: require('@/assets/images/zhgc-img2.png')
         },
         {
           tagName: '商业决策授权',
           title: '设备运行和维护监控',
           content: '它支持通过3D建模再现设备和设施的外观、结构和操作。它可以实时监控设备的运行环境和状态。还支持设备运行异常的实时报警通知，提供设备性能、维修记录、视频监控图像、报警详情等详细信息。协助管理人员直观掌握设备的运行状态',
-          imgSrc: require('../assets/images/zhgc-img3.png')
+          imgSrc: require('@/assets/images/zhgc-img3.png')
         },
         {
           tagName: '商业决策授权',
           title: '全面的安全监控',
           content: '它支持整合工厂安全和预防管理系统的数据，并提供全面的安全监控图。它支持对厂区内的关键区域、人员、车辆、报警事件和其他元素进行实时监控。安全报警事件快速显示和定位，周边监控视频可实时访问，协助管理者有效提升工厂安全控制的有效性',
-          imgSrc: require('../assets/images/zhgc-img4.png')
+          imgSrc: require('@/assets/images/zhgc-img4.png')
         }
       ],
       // 数字孪生数据
       szlsList: {
         title: '数字孪生赋权',
         content: '实时呈现所有元素的完整范围和最高精度，提供电影级视觉效果以增强用户体验',
-        bgSrc: require('../assets/images/zhjt-szls.png'),
+        bgSrc: require('@/assets/images/zhjt-szls.png'),
         list: [
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '集成全元件场景',
             content: '内核级支持加载全要素场景对象，包括矢量地理空间数据、建筑模型数据、城市设施、空间实体、数据层、自定义对象等，构建多源信息融合分析的综合城市要素体系，进行多源信息融合分析'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '强大的多源数据融合',
             content: '支持各种数据库、数据平台、云服务平台、物联网、视频监控、融合通信等多源数据访问，并与 AI、行业特定分析计算模型等有效集成，实现多源数据的智能关联分析'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '多类型地图数据融合',
             content: '支持各种常用的全球地图数据（如政治图/地形图/卫星影像等）、多种投影坐标系、公安地理信息系统PGIS/Tianditu等专用地图、高精度高程数据、倾斜摄影、无人机航拍、BIM等'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '全尺寸 3D 孪生渲染',
             content: '真实场景纹理细节的超精细还原，大场景的全方位还原；具有高真实感的动态光照、信息化的雾、辉光、灯光、雨雪渲染效果，达到电影级的实时渲染效果'
           }
@@ -233,25 +233,25 @@ export default {
       znywList: {
         title: '智能运维赋能',
         content: '建立智能运维“智能预警-智能感知-智能处置-智能评估-智能改善”的端到端一体化业务环路',
-        bgSrc: require('../assets/images/zhgc-znyw.png'),
+        bgSrc: require('@/assets/images/zhgc-znyw.png'),
         list: [
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '智能预警',
             content: '支持基于时间、空间、数据等多维度，为各类焦点事件建立阈值告警触发规则，自动监控各类焦点事件的发展状态，结合告警模型进行风险评估，提前下发预警告警'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '智能感知',
             content: '支持整合12345、122、AI、IoT等平台的数据和技术应用，对城市全要素物体进行全天智能监控和自动巡检，对各种异常事件自动感知、分析、及时发布预警提示'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '智能处置',
             content: '支持集成通信指挥平台，基于应急预案流程智能调度指挥事件，智能过滤查看事件详情和处置状态，方便指挥人员及时跟踪、推进、反馈'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '智能评估',
             content: '支持对监管事件的全过程进行全面跟踪和监控，整合事件监管的相关信息，建立科学的评估体系，智能量化和评估事件处理的有效性，为精细化管理提供科学依据'
           }
@@ -261,35 +261,35 @@ export default {
       jcptList: {
         title: '基础平台赋能',
         content: '强大的跨业务平台集成能力，紧密集成数据、技术、设备和业务需求，全面赋能用户业务应用',
-        bgSrc: require('../assets/images/zhgc-jcpt.png'),
+        bgSrc: require('@/assets/images/zhgc-jcpt.png'),
         list: [
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '融合通信',
             content: '支持深度集成视频会议、手持电台、电话会议、实时指挥技术，实现各种系统应用的互联互通和远程通信协作'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '人工智能识别',
             content: '支持AI智能检测、识别和判断算法的深度集成，通过对现有信息资源和人工智能计算结果进行并行和串行分析，提供智能决策支持'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '视频监控',
             content: '支持与海康威视、大华、华为等视频平台深度融合。以及AI/AR/鹰眼/高点/云台/IVS等系统应用，轻松调取相应的监控视频'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '商务系统',
             content: '支持将多个部门、不同平台的数据整合到系统中，实现跨业务系统信息的集成展示和关联分析'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '物联网感知',
             content: '支持聚合各种物联网感知和智能识别技术应用，实现全态势要素的全面采集、精准反映、智能感知'
           },
           {
-            logo: require('../assets/images/szls-logo.png'),
+            logo: require('@/assets/images/szls-logo.png'),
             title: '多屏联动',
             content: '支持多终端操作，支持同源大中小屏数据可视化显示，同屏互动操作一体化联动，满足用户多屏互动显示需求'
           }

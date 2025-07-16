@@ -4,8 +4,8 @@
     <div class="top-left">
       <!-- 左侧区域：Logo + 导航菜单 -->
       <!-- 根据屏幕尺寸显示不同Logo -->
-      <img v-show="showRightMenu" class="jysz" src="../assets/images/jysz.png" alt="企业Logo">
-      <img v-show="!showRightMenu" class="jysz-icon" src="../assets/images/jysz-logo.png" alt="企业图标">
+      <img v-show="showRightMenu" class="jysz" src="@/assets/images/jysz.png" alt="企业Logo">
+      <img v-show="!showRightMenu" class="jysz-icon" src="@/assets/images/jysz-logo.png" alt="企业图标">
       <div class="left-two">
         <!-- Element UI导航菜单 -->
         <el-menu
@@ -16,37 +16,13 @@
           active-text-color="#ffd04b"
           @select="handleSelect"
         >
-          <el-menu-item index="1" v-show="!showRightMenu">首页</el-menu-item>
-          <el-menu-item index="2" v-show="!showRightMenu">智能孪生</el-menu-item>
-          <el-submenu index="3" v-show="!showRightMenu">
-            <template slot="title">产品</template>
-            <el-menu-item index="3-1">场景编辑器</el-menu-item>
-            <el-menu-item index="3-2">场景服务器</el-menu-item>
-            <el-menu-item index="3-3">统一开发API</el-menu-item>
-            <el-menu-item index="3-4">统一API调试器</el-menu-item>
-            <el-menu-item index="3-5">应用程序编辑器</el-menu-item>
-          </el-submenu>
-          <!--  v-show="!showMore" -->
-          <el-submenu index="4" v-show="!showRightMenu">
-            <template slot="title">解决方案</template>
-            <el-menu-item index="4-1">智慧城市</el-menu-item>
-            <el-menu-item index="4-2">智慧园区</el-menu-item>
-            <el-menu-item index="4-3">智慧交通</el-menu-item>
-            <el-menu-item index="4-4">智慧工厂</el-menu-item>
-          </el-submenu>
-          <!--  v-show="!showMore" -->
-          <el-menu-item index="5" v-show="!showRightMenu">关于我们</el-menu-item>
-          <el-submenu index="6" v-show="showMore && !showRightMenu && false">
-            <template slot="title">更多</template>
-            <el-submenu index="6-1" v-show="showMore">
-              <template slot="title">解决方案</template>
-              <el-menu-item index="6-1-1">智慧城市</el-menu-item>
-              <el-menu-item index="6-1-2">智慧园区</el-menu-item>
-              <el-menu-item index="6-1-3">智慧交通</el-menu-item>
-              <el-menu-item index="6-1-3">智慧工厂</el-menu-item>
+          <template v-for="item in $t('user.menuData')">
+            <el-submenu v-if="item.children && item.children.length && !showRightMenu" :key="item.id" :index="item.id">
+              <template slot="title">{{item.label}}</template>
+              <el-menu-item v-for="(itemc, indexc) in item.children" :key="indexc" :index="itemc.id">{{itemc.label}}</el-menu-item>
             </el-submenu>
-            <el-menu-item index="6-2">关于我们</el-menu-item>
-          </el-submenu>
+            <el-menu-item v-if="!item.children && !showRightMenu" :key="item.id" :index="item.id">{{item.label}}</el-menu-item>
+          </template>
         </el-menu>
       </div>
     </div>
@@ -62,7 +38,7 @@
         <el-input
           v-show="showSearch"
           class="search-input"
-          placeholder="搜索"
+          :placeholder="$t('user.placeholder')"
           prefix-icon="el-icon-search"
           v-model="searchVal">
         </el-input>
@@ -75,8 +51,8 @@
           <path fill-rule="evenodd" d="M3.784 11.25H8.01c.065-2.256.423-4.31.985-5.869.166-.457.352-.882.561-1.263a8.26 8.26 0 0 0-5.773 7.132m8.216-9c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25m0 1.5c-.146 0-.383.08-.695.444-.309.362-.62.93-.898 1.697-.494 1.368-.83 3.243-.896 5.359h4.978c-.066-2.116-.402-3.991-.896-5.36-.277-.766-.59-1.334-.898-1.696-.312-.364-.55-.444-.695-.444m3.99 7.5c-.066-2.256-.424-4.31-.986-5.869a9 9 0 0 0-.561-1.263 8.26 8.26 0 0 1 5.773 7.132zm-1.501 1.5H9.51c.065 2.116.402 3.991.896 5.36.277.766.59 1.334.898 1.696.312.364.55.444.695.444.146 0 .383-.08.695-.444.309-.362.62-.93.898-1.697.494-1.368.83-3.243.896-5.359m-.046 7.132a9 9 0 0 0 .56-1.263c.563-1.559.92-3.613.986-5.869h4.227a8.26 8.26 0 0 1-5.773 7.132m-4.886 0a9 9 0 0 1-.56-1.263c-.563-1.559-.92-3.613-.986-5.869H3.784a8.26 8.26 0 0 0 5.773 7.132" clip-rule="evenodd"></path>
         </svg>
         <!-- 操作按钮 -->
-        <div class="login-btn">登录</div>
-        <div class="download-btn">中文</div>
+        <div class="login-btn">{{$t('user.login')}}</div>
+        <div class="download-btn" @click="changeLanguage($t('user.language'))">{{ $t('user.language') }}</div>
       </div>
     </div>
     <!-- 小屏全屏抽屉菜单 -->
@@ -92,7 +68,7 @@
     >
       <!-- 标题区域 -->
       <template #title>
-        <img class="text-icon" src="../assets/images/jysz.png" alt="">
+        <img class="text-icon" src="@/assets/images/jysz.png" alt="">
       </template>
       <!-- 顶部按钮组 -->
       <div class="btn-box" v-show="!showSubMenu">
@@ -100,8 +76,8 @@
           <path fill-rule="evenodd" d="M3.784 11.25H8.01c.065-2.256.423-4.31.985-5.869.166-.457.352-.882.561-1.263a8.26 8.26 0 0 0-5.773 7.132m8.216-9c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25m0 1.5c-.146 0-.383.08-.695.444-.309.362-.62.93-.898 1.697-.494 1.368-.83 3.243-.896 5.359h4.978c-.066-2.116-.402-3.991-.896-5.36-.277-.766-.59-1.334-.898-1.696-.312-.364-.55-.444-.695-.444m3.99 7.5c-.066-2.256-.424-4.31-.986-5.869a9 9 0 0 0-.561-1.263 8.26 8.26 0 0 1 5.773 7.132zm-1.501 1.5H9.51c.065 2.116.402 3.991.896 5.36.277.766.59 1.334.898 1.696.312.364.55.444.695.444.146 0 .383-.08.695-.444.309-.362.62-.93.898-1.697.494-1.368.83-3.243.896-5.359m-.046 7.132a9 9 0 0 0 .56-1.263c.563-1.559.92-3.613.986-5.869h4.227a8.26 8.26 0 0 1-5.773 7.132m-4.886 0a9 9 0 0 1-.56-1.263c-.563-1.559-.92-3.613-.986-5.869H3.784a8.26 8.26 0 0 0 5.773 7.132" clip-rule="evenodd"></path>
         </svg>
         <div class="right-btn-box">
-          <div class="login-btn">登录</div>
-          <div class="download-btn">中文</div>
+          <div class="login-btn">{{$t('user.login')}}</div>
+          <div class="download-btn" @click="changeLanguage($t('user.language'))">{{ $t('user.language') }}</div>
         </div>
       </div>
       <!-- 返回按钮 -->
@@ -110,14 +86,14 @@
           <svg class="btn-back" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M19.53 8.97a.75.75 0 0 1 0 1.06L12 17.56l-7.53-7.53a.75.75 0 1 1 1.06-1.06L12 15.44l6.47-6.47a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path>
           </svg>
-          <span class="text-back">返回</span>
+          <span class="text-back">{{$t('user.backText')}}</span>
         </div>
       </div>
       <!-- 菜单标题 -->
       <div class="menu-title">{{menuTitle}}</div>
       <!-- 主菜单列表 -->
       <div class="menu-box" v-show="!showSubMenu">
-        <div v-for="(item, index) in menuList" :key="index" class="menu-item" @click="handleClickItem(item)">
+        <div v-for="(item, index) in $t('user.menuList')" :key="index" class="menu-item" @click="handleClickItem(item)">
           <span class="menu-item-title">{{item.name}}</span>
           <svg v-show="item.showMoreIcon" class="menu-item-icon" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M19.53 8.97a.75.75 0 0 1 0 1.06L12 17.56l-7.53-7.53a.75.75 0 1 1 1.06-1.06L12 15.44l6.47-6.47a.75.75 0 0 1 1.06 0" clip-rule="evenodd"></path>
@@ -150,82 +126,7 @@ export default {
       showMore: false,         // 是否显示"更多"菜单
       showSearch: true,        // 是否显示搜索框
       searchVal: '',           // 搜索框值
-      /* 导航菜单数据 */
-      menuList: [{
-        name: '首页',
-        showMore: false,
-        showMoreIcon: false,
-        path: '/jysz',
-        subList: []
-      }, {
-        name: '智能孪生',
-        showMore: false,
-        showMoreIcon: false,
-        path: '/digital-twin',
-        subList: []
-      }, {
-        name: '产品',
-        showMore: false,
-        showMoreIcon: true,
-        subList: [{
-          name: '场景编辑器',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/scene-editor',
-        }, {
-          name: '场景服务器',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/scene-server',
-        }, {
-          name: '统一开发API',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/unified-development',
-        }, {
-          name: '统一API调试器',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/unified-debugging',
-        }, {
-          name: '应用程序编辑器',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/application-editor',
-        }]
-      }, {
-        name: '解决方案',
-        showMore: false,
-        showMoreIcon: true,
-        subList: [{
-          name: '智慧城市',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/smart-city',
-        }, {
-          name: '智慧园区',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/smart-park',
-        }, {
-          name: '智慧交通',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/smart-transportation',
-        }, {
-          name: '智慧工厂',
-          showMore: false,
-          showMoreIcon: false,
-          path: '/smart-factory',
-        }]
-      }, {
-        name: '关于我们',
-        showMore: false,
-        showMoreIcon: false,
-        path: '/about-us',
-        subList: []
-      }],
-      menuTitle: '菜单',        // 当前菜单标题
+      menuTitle: '',        // 当前菜单标题
       showSubMenu: false,      // 是否显示子菜单
       subList: [],              // 当前子菜单数据
       routeMap: {
@@ -245,6 +146,7 @@ export default {
     }
   },
   mounted() {
+    this.changeMenuTitle()
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
     window.addEventListener('resize', this.handleResize);
@@ -269,9 +171,27 @@ export default {
       // 获取屏幕宽度
       const screenWidth = window.innerWidth;
       // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showRightMenu = screenWidth < 720;
+      this.showRightMenu = screenWidth < 800;
       this.showMore = screenWidth < 1100
       this.showSearch = screenWidth >= 960
+    },
+    changeMenuTitle() {
+      const lang = localStorage.getItem('lang') || 'zh_CN'
+      if (lang === 'zh_CN') {
+        this.menuTitle = '菜单'
+      } else {
+        this.menuTitle = 'Menus'
+      }
+    },
+    changeLanguage(lang) {
+      if (lang === '中文') {
+        this.$i18n.locale = 'EN'
+        localStorage.setItem('lang', 'EN'); // 保存到localStorage
+      } else {
+        this.$i18n.locale = 'zh_CN'
+        localStorage.setItem('lang', 'zh_CN'); // 保存到localStorage
+      }
+      this.changeMenuTitle()
     },
     // 菜单选择处理
     handleSelect(key) {
@@ -292,12 +212,12 @@ export default {
     handleClose() {
       this.showAllMenu = false
       this.showSubMenu = false
-      this.menuTitle = '菜单'
+      this.changeMenuTitle()
     },
     // 返回主菜单
     goBack() {
       this.showSubMenu = false
-      this.menuTitle = '菜单'
+      this.changeMenuTitle()
     }
   }
 }

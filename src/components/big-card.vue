@@ -42,7 +42,29 @@ export default {
       default: () => []
     }
   },
+  data() {
+    return {
+      showNewsBig: true, // 控制卡片布局（大屏左右布局/小屏上下布局）
+    }
+  },
+  mounted() {
+    // 初始调整布局
+    this.handleResize()
+    // 添加窗口大小变化监听
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeDestroy() {
+    // 组件销毁前移除监听器
+    window.removeEventListener('resize', this.handleResize);
+  },
   methods: {
+    // 响应窗口大小变化
+    handleResize() {
+      // 获取屏幕宽度
+      const screenWidth = window.innerWidth;
+      // 判断屏幕宽度并返回是否显示元素的布尔值
+      this.showNewsBig = screenWidth > 1280
+    },
     // 处理卡片项点击事件
     handleItemClick(item) {
       if (item.path) {

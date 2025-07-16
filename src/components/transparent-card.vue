@@ -62,10 +62,14 @@ export default {
     padding: 24px 32px;
     border-radius: 16px;
     margin-bottom: 24px;
-    border: 1px solid rgba(255, 255, 255, .15);
-    background: rgba(0, 0, 0, .05); /* 半透明背景 */
-    -webkit-backdrop-filter: blur(5px); /* Safari浏览器兼容 */
-    backdrop-filter: blur(5px); /* 模糊效果 */
+    // border: 1px solid rgba(255, 255, 255, .15);
+    // background: rgba(0, 0, 0, .05); /* 半透明背景 */
+    // -webkit-backdrop-filter: blur(5px); /* Safari浏览器兼容 */
+    // backdrop-filter: blur(5px); /* 模糊效果 */
+    border: 1px solid hsla(0, 0%, 100%, .05);
+    background: hsla(0, 0%, 100%, .05);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px); /* Safari浏览器兼容 */
     &:nth-child(3n) {
       margin-right: 0;
     }

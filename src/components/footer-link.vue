@@ -1,10 +1,10 @@
 <template>
   <div class="introduction-box">
-    <img class="introduction-icon" src="../assets/images/jysz.png" alt="">
+    <img class="introduction-icon" src="@/assets/images/jysz.png" alt="">
     <div v-show="showIntroductionList" class="introduction-container">
       <div
         class="introduction-item"
-        v-for="(item, index) in list"
+        v-for="(item, index) in $t('footer.list')"
         :key="index"
       >
         <div class="introduction-title">{{item.name}}</div>
@@ -22,10 +22,10 @@
     <dropdown-list v-if="!showIntroductionList"></dropdown-list>
     <div class="copyright-box">
       <span class="introduction-copyright">
-        版权所有 建院数智所有2021-2025   公安部备案号：11010602006763 | 京ICP备 19018737号-2 | 经营许可证编号：京B2-20230029
+        {{ $t('footer.copyright') }}
       </span>
       <div class="go-top-btn" @click="goTop">
-        <span class="go-top-text">返回顶端</span>
+        <span class="go-top-text">{{ $t('footer.btnText') }}</span>
         <svg class="go-to-icon" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.25 16a.75.75 0 0 0 1.5 0V9.81l2.22 2.22a.75.75 0 1 0 1.06-1.06L12 6.94l-4.03 4.03a.75.75 0 1 0 1.06 1.06l2.22-2.22z"></path>
           <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25M3.75 12a8.25 8.25 0 1 1 16.5 0 8.25 8.25 0 0 1-16.5 0" clip-rule="evenodd"></path>
@@ -44,71 +44,6 @@ export default {
   data() {
     return {
       showIntroductionList: true,
-      list: [{
-        name: '首页',
-        subList: [{
-          name: '智能孪生',
-          path: '/digital-twin'
-        }, {
-          name: '关于我们',
-          path: '/about-us'
-        }]
-      }, {
-        name: '产品',
-        subList: [{
-          name: '场景编辑器',
-          path: '/scene-editor'
-        }, {
-          name: '场景服务器',
-          path: '/scene-server'
-        }, {
-          name: '统一开发API',
-          path: '/unified-development'
-        }, {
-          name: '统一API调试器',
-          path: '/unified-debugging'
-        }, {
-          name: '应用程序编辑器',
-          path: '/application-editor'
-        }]
-      }, {
-        name: '服务',
-        subList: [{
-          name: '场景搭建服务',
-        }, {
-          name: '应用服务',
-        }, {
-          name: '技术支持',
-        }]
-      }, {
-        name: '解决方案',
-        subList: [{
-          name: '智慧城市',
-          path: '/smart-city'
-        }, {
-          name: '智慧园区',
-          path: '/smart-park'
-        }, {
-          name: '智能交通',
-          path: '/smart-transportation'
-        }, {
-          name: '智慧工厂',
-          path: '/smart-factory'
-        }]
-      }, {
-        name: '联系方式',
-        subList: [{
-          name: 'Email：'
-        }, {
-          blueName: 'support@cryptodashboard.com'
-        }, {
-          name: 'Phone：',
-          blueName: '+1 (123) 456-7890'
-        }, {
-          name: 'Address：',
-          blueName: '安徽合肥高新区'
-        }]
-      }]
     }
   },
   mounted() {
@@ -214,7 +149,7 @@ export default {
     margin-right: 24px;
   }
   .go-top-btn {
-    width: 125px;
+    width: fit-content;
     display: flex;
     align-items: center;
     flex-shrink: 0;

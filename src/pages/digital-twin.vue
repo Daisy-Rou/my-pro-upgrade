@@ -54,7 +54,7 @@ export default {
         text: '场景编辑器',
         title: '智能孪生',
         content: '全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！',
-        imgSrc: require('../assets/images/znls-img.png')
+        imgSrc: require('@/assets/images/znls-img.png')
       },
       // 步骤导航数据
       stepList: [{
@@ -77,43 +77,43 @@ export default {
           title: '愿景和使命',
           content: '在元宇宙时代，5G、物联网、云计算、大数据和人工智能等新技术将带来众多数字孪生应用',
           content1: '为了提高跨行业的决策能力，旨在构建一个开放共享的数字孪生生态系统，其平台为创作者开发和发布数字孪生应用程序提供了必要的工具和云服务',
-          imgSrc: require('../assets/images/step-bg1.png')
+          imgSrc: require('@/assets/images/step-bg1.png')
         }
       ],
       // 权益卡片数据
       benefitList:  [
         {
-          imgSrc: require('../assets/images/qy-img1.png'),
+          imgSrc: require('@/assets/images/qy-img1.png'),
           title: '技能提高',
           content: '',
           path: ''
         },
         {
-          imgSrc: require('../assets/images/qy-img2.png'),
+          imgSrc: require('@/assets/images/qy-img2.png'),
           title: '分配计划',
           content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
           path: ''
         },
         {
-          imgSrc: require('../assets/images/qy-img3.png'),
+          imgSrc: require('@/assets/images/qy-img3.png'),
           title: '品牌支持',
           content: '认证可以获得途冠的线上线下营销支持，快速提升知名度',
           path: ''
         },
         {
-          imgSrc: require('../assets/images/qy-img4.png'),
+          imgSrc: require('@/assets/images/qy-img4.png'),
           title: '技术支持',
           content: '一站式数字双应用开发学习平台，快速提高开发技能，提升人才和扩大职业机会',
           path: ''
         },
         {
-          imgSrc: require('../assets/images/qy-img5.png'),
+          imgSrc: require('@/assets/images/qy-img5.png'),
           title: '投资回报率',
           content: '加入土管分配计划，参与联合项目实施，兼职轻松挣钱',
           path: ''
         },
         {
-          imgSrc: require('../assets/images/qy-img6.png'),
+          imgSrc: require('@/assets/images/qy-img6.png'),
           title: '资源效益',
           content: '',
           path: ''
@@ -164,7 +164,7 @@ export default {
   .step-two-bg-box {
     width: 100%;
     max-width: 1920px;
-    background-image: url(../assets/images/step-bg222.png);
+    background-image: url(@/assets/images/step-bg222.png);
     aspect-ratio: 1920 / 488;
     object-fit: cover;
     background-size: 100% 100%;

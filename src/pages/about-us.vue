@@ -9,7 +9,7 @@
       <div class="news-card-box">
         <div class="news-card-item">
           <div class="img-box">
-            <img src="../assets/images/qzkf-img1.png" alt="">
+            <img src="@/assets/images/qzkf-img1.png" alt="">
           </div>
           <!-- <div class="news-card-item-title-box">
             <div class="news-card-item-title">场景服务</div>
@@ -38,7 +38,7 @@
         </div>
         <div class="news-card-item">
           <div v-show="!showNewsBig" class="img-box">
-            <img src="../assets/images/qzkf-img2.png" alt="">
+            <img src="@/assets/images/qzkf-img2.png" alt="">
           </div>
           <div class="news-card-item-title-box">
             <div class="news-card-item-title">零代码</div>
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div v-show="showNewsBig" class="img-box" style="border-radius: 0 24px 24px 0;">
-            <img style="border-radius: 0 24px 24px 0;" src="../assets/images/qzkf-img2.png" alt="">
+            <img style="border-radius: 0 24px 24px 0;" src="@/assets/images/qzkf-img2.png" alt="">
           </div>
         </div>
       </div>
@@ -105,7 +105,7 @@ export default {
     font-weight: 700;
     font-family: Inter Tight, sans-serif;
     line-height: 78px;
-    background: url(../assets/images/banner.png) no-repeat center/cover;
+    background: url(@/assets/images/banner.png) no-repeat center/cover;
     margin-top: 72px;
   }
   .main-box {

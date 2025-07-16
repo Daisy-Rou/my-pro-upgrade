@@ -8,7 +8,7 @@
     >
       <img class="solution-img" :src="item.imgSrc" alt="">
       <div class="solution-content">
-        <img class="solution-item-icon" src="../assets/images/circle-right-arrow.png" alt="">
+        <img class="solution-item-icon" src="@/assets/images/circle-right-arrow.png" alt="">
         <div class="title-box">
           <div class="title">{{item.name}}</div>
           <div class="tip">{{item.tip || ''}}</div>

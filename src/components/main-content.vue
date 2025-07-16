@@ -65,7 +65,7 @@ export default {
   flex-direction: column;
   margin-top: 72px;
   padding: 96px 128px;
-  background-image: url('../assets/images/znls-bg.png');
+  background-image: url('@/assets/images/znls-bg.png');
   background-size: cover;
   background-repeat: no-repeat;
   object-fit: cover;
