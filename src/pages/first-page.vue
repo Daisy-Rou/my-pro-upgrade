@@ -295,19 +295,6 @@ export default {
           line-height: 40px !important;
         }
       }
-      .news-box {
-        .news-card-item-title-box {
-          padding: 32px;
-          .news-card-item-title {
-            font-size: 24px !important;
-            line-height: 28px !important;
-          }
-          .news-card-item-content {
-            font-size: 16px !important;
-            line-height: 26px !important;
-          }
-        }
-      }
     }
   }
 }

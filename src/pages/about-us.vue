@@ -1,24 +1,15 @@
 <template>
   <div class="about-us">
     <div class="banner">
-      建院数智介绍
+      {{$t('about.titleObj.title')}}
     </div>
     <div class="main-box">
-      <div class="big-title">关于建院数智</div>
-      <div class="small-title">建院数智国产数字孪生应用开发引擎，提供云端三维场景构建、全要素数据融合、场景效果设计、场景服务发布全流程工具，以及基于用户自定义场景的二次开发 SDK，是用户构建数字孪生应用的强有力软件工具包。建院数智具有兼顾高渲染效果和大并发访问的双渲染内核，具备大中小屏投放的跨终端渲染能力，渲染内核技术完全自研可控，不受外国技术制约，充分确保用户系统建设的安全需要。</div>
+      <main-title :title="$t('about.titleObj.title1')" :small-title="$t('about.titleObj.content1')"></main-title>
       <div class="news-card-box">
         <div class="news-card-item">
           <div class="img-box">
             <img src="@/assets/images/qzkf-img1.png" alt="">
           </div>
-          <!-- <div class="news-card-item-title-box">
-            <div class="news-card-item-title">场景服务</div>
-            <span class="news-card-item-content">将 Scene Server 发布为公有云或私有云数字孪生服务，为后续应用程序开发提供支持</span>
-            <div class="news-card-item-go-box">
-              <div class="news-card-item-go">场景编辑器</div>
-              <div class="news-card-item-go">数智场景服务器</div>
-            </div>
-          </div> -->
           <div class="introduction-card-list">
             <ul>
               <li title="2020年 首席数据官联盟•金数榜">2020年 首席数据官联盟•金数榜</li>
@@ -58,8 +49,12 @@
 </template>
 
 <script>
+import mainTitle from '@/components/main-title.vue';
 export default {
   name: 'about-us',
+  components: {
+    mainTitle
+  },
   data() {
     return {
       showNewsBig: true,
