@@ -1,15 +1,22 @@
 <template>
+  <!-- 底部线条卡片组件容器 -->
   <div class="bottom-line-card">
+    <!-- 卡片项 - 使用v-for循环渲染列表数据 -->
     <div
       class="card-item"
       v-for="(item, index) in list"
-      :key="index"
+      :key="item.id || index"
     >
+      <!-- 图片容器 -->
       <div class="img-box">
-        <img :src="item.imgSrc" alt="">
+        <!-- 动态绑定图片源 -->
+        <img v-lazy="item.imgSrc" alt="item.title">
       </div>
+      <!-- 卡片标题和内容容器 -->
       <div class="card-item-title-box">
+        <!-- 卡片标题 -->
         <div class="card-item-title">{{item.title}}</div>
+        <!-- 卡片内容 -->
         <div class="card-item-content">{{item.content}}</div>
       </div>
     </div>
@@ -19,9 +26,12 @@
 <script>
 export default {
   name: 'bottom-line-card',
+  // 组件属性定义
   props: {
+    // 列表数据 - 数组类型
     list: {
       type: Array,
+      required: true,
       default: () => {}
     }
   }
@@ -29,16 +39,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// 视觉效果卡片区域
+// 底部线条卡片区域样式
 .bottom-line-card {
   width: 100%;
+  // 最大宽度限制
   max-width: 1920px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  // margin-top: 36px;
+  // 抵消子元素的右外边距
   margin-right: -24px;
   padding: 24px 128px;
+  // 卡片项样式
   .card-item {
     display: flex;
     flex-direction: row;
@@ -46,11 +58,14 @@ export default {
     padding-bottom: 24px;
     margin-bottom: 24px;
     border-bottom: 1px solid $color-white15;
+    // 过渡动画
     transition: transform 0.5s ease;
     cursor: pointer;
+    // 最后一项去除底部边框
     &:last-child {
       border-bottom: none;
     }
+    // 图片容器样式
     .img-box {
       display: flex;
       flex-shrink: 0;
@@ -66,11 +81,13 @@ export default {
         border-radius: 16px;
       }
     }
+    // 标题内容容器样式
     .card-item-title-box {
       display: flex;
       flex-direction: column;
       flex: 1;
       padding: 24px;
+      // 标题样式
       .card-item-title {
         color: $color-white;
         font-size: 20px;
@@ -79,6 +96,7 @@ export default {
         line-height: 25px;
         margin-bottom: 24px;
       }
+      // 内容样式
       .card-item-content {
         max-width: 80%;
         min-width: 300px;
@@ -94,16 +112,18 @@ export default {
       }
     }
   }
+  // 响应式样式 - 大屏设备(1905px以下)
   @media screen and (max-width: 1905px) {
-    padding: 24px 64px !important;
+    padding: 24px 64px;
   }
+  // 响应式样式 - 移动端(768px以下)
   @media screen and (max-width: 768px) {
-    padding: 24px !important;
+    padding: 24px;
     .card-item {
-      flex-direction: column !important;
+      flex-direction: column;
       .img-box {
         width: calc(100% - 24px);
-        max-width: 700px !important;
+        max-width: 700px;
       }
       .card-item-title-box {
         width: 100%;

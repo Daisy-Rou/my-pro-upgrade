@@ -1,19 +1,25 @@
 <template>
+  <!-- 步骤标题组件 - 用于显示带编号的标题 -->
   <div class="step-title">
+    <!-- 步骤编号 -->
     <span class="num">{{num}}</span>
+    <!-- 步骤标题文本 -->
     <span class="title">{{title}}</span>
   </div>
 </template>
 
 <script>
+// 步骤标题组件 - 展示带有序号的章节标题
 export default {
   name: 'step-title',
+  // 组件属性
   props: ['num', 'title']
 }
 </script>
 
 <style lang="scss" scoped>
 .step-title {
+  // 步骤编号样式
   .num {
     color: rgb(219, 222, 227);
     font-size: 15px;
@@ -24,6 +30,7 @@ export default {
     opacity: 0.5;
     margin-right: 8px;
   }
+  // 标题文本样式
   .title {
     color: rgb(182, 101, 233);
     font-size: 20px;

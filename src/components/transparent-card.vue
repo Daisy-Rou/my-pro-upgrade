@@ -15,7 +15,7 @@
         :key="index"
       >
         <div class="title-box">
-          <img class="logo" :src="item.logo" alt="">
+          <img class="logo" v-lazy="item.logo" alt="">
           <div class="title">{{item.title}}</div>
         </div>
         <div class="content">{{item.content}}</div>

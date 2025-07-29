@@ -8,7 +8,7 @@
       :key="index"
     >
       <!-- 右侧图片（在非顶部显示且奇数索引时显示） -->
-      <img v-show="(!showTop && index % 2 !== 0)" class="right-img" :src="item.imgSrc" alt="">
+      <img v-show="(!showTop && index % 2 !== 0)" class="right-img" v-lazy="item.imgSrc" alt="">
       <!-- 左侧内容盒子 -->
       <div class="left-box">
         <!-- 标签（如果有） -->
@@ -21,7 +21,7 @@
         <div class="content" v-if="item.content1">{{item.content1}}</div>
       </div>
        <!-- 右侧图片（在偶数索引或顶部显示时显示） -->
-      <img v-show="index % 2 === 0 || showTop" class="right-img" :src="item.imgSrc" alt="">
+      <img v-show="index % 2 === 0 || showTop" class="right-img" v-lazy="item.imgSrc" alt="">
     </div>
   </div>
 </template>

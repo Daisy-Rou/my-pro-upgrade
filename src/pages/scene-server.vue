@@ -27,7 +27,7 @@
         v-for="(item, index) in $t('sceneServer.dptList')"
         :key="index"
       >
-        <img :src="item.logo" alt="" class="card-item-logo">
+        <img v-lazy="item.logo" alt="" class="card-item-logo">
         <div class="card-item-title">{{item.title}}</div>
         <span class="card-item-content">{{item.content}}</span>
       </div>

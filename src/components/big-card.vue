@@ -7,7 +7,7 @@
     >
       <!-- 响应式图片显示：小屏时偶数项在前，大屏时按正常顺序 -->
       <div v-show="(!showNewsBig && index % 2 === 0) || index % 2 !== 0" class="img-box">
-        <img :src="item.imgSrc" :alt="item.title">
+        <img v-lazy="item.imgSrc" :alt="item.title">
       </div>
       
       <!-- 卡片内容区域 -->
@@ -27,7 +27,7 @@
       
       <!-- 大屏模式下偶数项的图片显示在右侧 -->
       <div v-show="showNewsBig && index % 2 === 0" class="img-box" style="border-radius: 0 24px 24px 0;">
-        <img style="border-radius: 0 24px 24px 0;" :src="item.imgSrc" :alt="item.title">
+        <img style="border-radius: 0 24px 24px 0;" v-lazy="item.imgSrc" :alt="item.title">
       </div>
     </div>
   </div>
