@@ -112,7 +112,7 @@ export default {
     margin-top: 72px;
     padding: 96px 128px;
     /* 渐变背景 */
-    background: linear-gradient(45deg, #101014 76%, #1e0d1a 84%, #0f141b 95%);
+    background: linear-gradient(45deg, $color-bg 76%, #1e0d1a 84%, #0f141b 95%);
     /* 响应式间距调整类 */
     .mt160 {
       font-family: Inter Tight, sans-serif;
@@ -131,7 +131,7 @@ export default {
       z-index: 10;
       .small-title {
         max-width: 680px; // 限制描述文本宽度
-        color: #fff;
+        color: $color-white;
         font-size: 18px;
         font-weight: 400;
         line-height: 30px;
@@ -139,7 +139,7 @@ export default {
       }
       /* 主标题样式 */
       .big-title {
-        color: #fff;
+        color: $color-white;
         font-size: 64px;
         font-weight: 700;
         font-family: Inter Tight, sans-serif;
@@ -162,31 +162,31 @@ export default {
       margin-top: 34px;
       /* 主按钮样式 */
       .btn-blue {
-        color: #101014;
+        color: $color-blue-btn-text;
         font-size: 14px;
         font-weight: 500;
         border-radius: 10px;
         padding: 12px 20px;
-        background: #26bbff;
+        background: $color-blue-btn;
         margin-right: 14px;
         margin-bottom: 12px;
         cursor: pointer;
         &:hover {
-          background: #60c6f5; // 悬停效果
+          background: $color-blue-hover; // 悬停效果
         }
       }
       .btn-solid {
-        color: #fff;
+        color: $color-white;
         font-size: 14px;
         font-weight: 500;
         border-radius: 10px;
         padding: 12px 20px;
-        border: 1px solid rgba(255, 255, 255, .35);
+        border: 1px solid $color-white35;
         background: transparent;
         margin-bottom: 12px;
         cursor: pointer;
         &:hover {
-          background: rgba(255, 255, 255, 0.15);
+          background: $color-white15;
         }
       }
     }

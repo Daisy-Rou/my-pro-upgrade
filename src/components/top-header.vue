@@ -281,7 +281,7 @@ export default {
   .el-icon-close {
     font-size: 24px !important;
     font-weight: 400 !important;
-    color: #fff;
+    color: $color-white;
   }
   .el-drawer__body {
     padding: 0 20px 20px;
@@ -308,25 +308,25 @@ export default {
         flex-shrink: 0;
         padding: 6px 12px;
         font-weight: 500;
-        color: #fff;
-        background-color: rgba(255, 255, 255, .15);
+        color: $color-white;
+        background-color: $color-white15;
         border-radius: 6px;
         margin-right: 16px;
         cursor: pointer;
       }
       .login-btn {
         &:hover {
-          background-color: rgba(255, 255, 255, 0.35);
+          background-color: $color-white35;
         }
       }
       .download-btn {
         color: #000;
-        background-color: #26bbff;
+        background-color: $color-blue-btn;
         margin-right: 0;
         margin-right: 4px;
         cursor: pointer;
         &:hover {
-          background-color: #60c6f5;
+          background-color: $color-blue-hover;
         }
       }
     }
@@ -341,7 +341,7 @@ export default {
         transform: rotate(90deg);
       }
       .text-back {
-        color: #fff;
+        color: $color-white;
         font-size: 16px;
         font-weight: 400;
       }
@@ -352,7 +352,7 @@ export default {
     font-weight: 900;
     font-family: Inter Tight, sans-serif;
     line-height: 32px;
-    color: #fff;
+    color: $color-white;
     margin-top: 24px;
     margin-bottom: 32px;
     margin-left: 8px;
@@ -367,11 +367,11 @@ export default {
       padding: 14px 8px;
       cursor: pointer;
       &:hover {
-        background-color: rgba(255, 255, 255, .15);
+        background-color: $color-white15;
         border-radius: 12px;
       }
       .menu-item-title {
-        color: #fff;
+        color: $color-white;
         font-size: 16px;
         line-height: 20px;
 
@@ -396,12 +396,12 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  background-color: #101014;
+  background-color: $color-bg;
   z-index: 99;
   // background-color: rgba(16, 16, 20, 0.7);
   .custom-menu .el-menu-item:hover {
     color: rgba(255, 255, 255, .65) !important;
-    background-color: #101014 !important;
+    background-color: $color-bg !important;
   }
   /deep/ .el-menu.el-menu--horizontal {
     display: flex;
@@ -429,7 +429,7 @@ export default {
       /deep/ .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
         border-bottom: none !important;
         color: #fff !important;
-        background-color: #101014 !important;
+        background-color: $color-bg !important;
         &:hover {
           color: rgba(255, 255, 255, .65) !important;
         }
@@ -465,8 +465,8 @@ export default {
       max-width: 50% !important;
       /deep/ .el-input__inner {
         border-radius: 24px !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.35) !important;
+        background-color: $color-white5 !important;
+        border: 1px solid $color-white35 !important;
       }
       /deep/ .el-input__icon {
         font-size: 16px;
@@ -496,25 +496,25 @@ export default {
       flex-shrink: 0;
       padding: 6px 12px;
       font-weight: 500;
-      color: #fff;
-      background-color: rgba(255, 255, 255, .15);
+      color: $color-white;
+      background-color: $color-white15;
       border-radius: 6px;
       margin-right: 16px;
       cursor: pointer;
     }
     .login-btn {
       &:hover {
-        background-color: rgba(255, 255, 255, 0.35);
+        background-color: $color-white35;
       }
     }
     .download-btn {
       color: #000;
-      background-color: #26bbff;
+      background-color: $color-blue-btn;
       margin-right: 0;
       margin-right: 4px;
       cursor: pointer;
       &:hover {
-        background-color: #60c6f5;
+        background-color: $color-blue-hover;
       }
     }
   }

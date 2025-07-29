@@ -101,7 +101,7 @@ export default {
   margin-right: 18px;
   z-index: 9999;
   .arrow-icon {
-    color: #fff;
+    color: $color-white;
     font-size: 12px;
     margin-left: 4px;
     cursor: pointer;
@@ -130,7 +130,7 @@ export default {
       font-weight: 700;
       letter-spacing: -0.3px;
       line-height: 24px;
-      color: #fff;
+      color: $color-white;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -141,7 +141,7 @@ export default {
       align-items: center;
       height: 40px;
       padding: 0 8px;
-      color: #fff;
+      color: $color-white;
       border-radius: 8px;
       cursor: pointer;
       &:hover {

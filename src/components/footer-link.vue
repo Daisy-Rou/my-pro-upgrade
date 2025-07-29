@@ -96,15 +96,15 @@ export default {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    border-top: 1px solid rgba(255, 255, 255, .15);
-    border-bottom: 1px solid rgba(255, 255, 255, .15);
+    border-top: 1px solid $color-white15;
+    border-bottom: 1px solid $color-white15;
     .introduction-item {
       display: flex;
       flex-direction: column;
       width: 20%;
       margin-bottom: 40px;
       .introduction-title {
-        color: #fff;
+        color: $color-white;
         font-size: 20px;
         font-weight: 700;
         font-family: Inter Tight, sans-serif;
@@ -112,7 +112,7 @@ export default {
         margin-bottom: 24px;
       }
       .introduction-small-title {
-        color: rgba(255, 255, 255, .65);
+        color: $color-white65;
         font-size: 14px;
         font-weight: 400;
         line-height: 24px;
@@ -122,13 +122,13 @@ export default {
           margin-bottom: 0;
         }
         &:hover {
-          color: #fff;
+          color: $color-white;
         }
       }
       .blue {
-        color: #2CBDFF;
+        color: $color-blue;
         &:hover {
-          color: #60c6f5;
+          color: $color-blue-hover;
         }
       }
     }
@@ -146,7 +146,7 @@ export default {
     font-weight: 400;
     line-height: 18px;
     overflow-wrap: break-word;
-    color: rgba(255, 255, 255, .65);
+    color: $color-white65;
     letter-spacing: 0.24px;
     margin-right: 24px;
   }
@@ -157,10 +157,10 @@ export default {
     flex-shrink: 0;
     padding: 12px 20px;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, .15);
+    background-color: $color-white15;
     cursor: pointer;
     .go-top-text {
-      color: #fff;
+      color: $color-white;
       font-size: 14px;
       font-weight: 400;
       margin-right: 8px;
@@ -170,7 +170,7 @@ export default {
       height: 20px;
     }
     &:hover {
-      background-color: rgba(255, 255, 255, 0.35);
+      background-color: $color-white35;
     }
   }
 }

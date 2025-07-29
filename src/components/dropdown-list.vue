@@ -107,7 +107,7 @@ export default {
     padding: 20px 0;
     cursor: pointer;
     .list-item-title {
-      color: #fff;
+      color: $color-white;
       font-size: 20px;
       font-weight: 700;
       font-family: Inter Tight, sans-serif;
@@ -130,25 +130,25 @@ export default {
       font-size: 14px;
       font-weight: 400;
       line-height: 32px;
-      color: rgba(255, 255, 255, .65);
+      color: $color-white65;
       cursor: pointer;
       &:hover {
-        color: #fff;
+        color: $color-white;
       }
       &:last-child {
         margin-bottom: 20px;
       }
       .blue {
-        color: #2CBDFF;
+        color: $color-blue;
         &:hover {
-          color: #60c6f5;
+          color: $color-blue-hover;
         }
       }
     }
   }
   .list-line {
     width: 100%;
-    border-bottom: 1px solid rgba(255, 255, 255, .15);
+    border-bottom: 1px solid $color-white15;
   }
 }
 

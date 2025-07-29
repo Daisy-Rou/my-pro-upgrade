@@ -60,7 +60,7 @@ export default {
         flex-direction: column;
         align-items: start;
         .text-icon {
-          color: #fff;
+          color: $color-white;
           font-size: 16px;
           font-weight: 700;
           line-height: 20px;
@@ -68,7 +68,7 @@ export default {
           margin-bottom: 32px;
         }
         .big-title {
-          color: #fff;
+          color: $color-white;
           font-size: 52px;
           font-weight: 700;
           font-family: Inter Tight, sans-serif;
@@ -76,7 +76,7 @@ export default {
           margin-bottom: 24px;
         }
         .small-title {
-          color: #fff;
+          color: $color-white;
           font-size: 16px;
           font-weight: 400;
           line-height: 26px;
@@ -89,31 +89,31 @@ export default {
           flex-wrap: wrap;
           margin-bottom: 32px;
           .btn-blue {
-            color: #101014;
+            color: $color-blue-btn-text;
             font-size: 14px;
             font-weight: 500;
             border-radius: 10px;
             padding: 12px 20px;
-            background: #26bbff;
+            background: $color-blue-btn;
             margin-right: 14px;
             margin-bottom: 12px;
             cursor: pointer;
             &:hover {
-              background: #60c6f5;
+              background: $color-blue-hover;
             }
           }
           .btn-solid {
-            color: #fff;
+            color: $color-white;
             font-size: 14px;
             font-weight: 500;
             border-radius: 10px;
             padding: 12px 20px;
-            border: 1px solid rgba(255, 255, 255, .35);
+            border: 1px solid $color-white35;
             background: transparent;
             margin-bottom: 12px;
             cursor: pointer;
             &:hover {
-              background: rgba(255, 255, 255, 0.15);
+              background: $color-white15;
             }
           }
         }

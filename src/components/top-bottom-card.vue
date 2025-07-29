@@ -51,7 +51,7 @@ export default {
     flex-direction: column;
   }
   .big-title {
-    color: #fff;
+    color: $color-white;
     font-size: 52px;
     font-weight: 700;
     font-family: Inter Tight, sans-serif;
@@ -99,7 +99,7 @@ export default {
         flex-direction: column;
         padding: 24px 0;
         .card-item-title {
-          color: #fff;
+          color: $color-white;
           font-size: 20px;
           font-weight: 700;
           font-family: Inter Tight, sans-serif;
@@ -110,7 +110,7 @@ export default {
           font-size: 14px;
           font-weight: 400;
           line-height: 26px;
-          color: rgba(255, 255, 255, .65);
+          color: $color-white65;
           // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
           // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
           // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/

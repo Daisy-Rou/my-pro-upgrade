@@ -45,7 +45,7 @@ export default {
     width: 100%;
     padding-bottom: 24px;
     margin-bottom: 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid $color-white15;
     transition: transform 0.5s ease;
     cursor: pointer;
     &:last-child {
@@ -72,7 +72,7 @@ export default {
       flex: 1;
       padding: 24px;
       .card-item-title {
-        color: #fff;
+        color: $color-white;
         font-size: 20px;
         font-weight: 700;
         font-family: Inter Tight, sans-serif;
@@ -85,7 +85,7 @@ export default {
         font-size: 14px;
         font-weight: 400;
         line-height: 23px;
-        color: rgba(255, 255, 255, .65);
+        color: $color-white65;
         // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
         // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
         // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/

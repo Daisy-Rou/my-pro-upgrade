@@ -140,8 +140,8 @@ export default {
         flex-shrink: 0;
         padding: 6px 16px;
         font-weight: 500;
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.15);
+        color: $color-white;
+        background-color: $color-white15;
         border-radius: 16px;
         margin-right: 16px;
         cursor: pointer;
@@ -149,13 +149,13 @@ export default {
           margin-right: 0;
         }
         &:hover {
-          background-color: rgba(255, 255, 255, 0.35);
+          background-color: $color-white35;
         }
         &.active {
           color: #000;
-          background-color: #26bbff;
+          background-color: $color-blue-btn;
           &:hover {
-            background-color: #60c6f5;
+            background-color: $color-blue-hover;
           }
         }
       }

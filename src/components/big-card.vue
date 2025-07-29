@@ -88,8 +88,8 @@ export default {
     flex-direction: row;
     margin-bottom: 32px;
     border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-white15;
+    background-color: $color-white5;
     transition: transform 0.5s ease;
     // cursor: pointer;
     // &:hover {
@@ -121,7 +121,7 @@ export default {
       width: 50%;
       padding: 64px;
       .news-card-item-title {
-        color: #fff;
+        color: $color-white;
         font-size: 32px;
         font-weight: 700;
         font-family: Inter Tight, sans-serif;
@@ -129,7 +129,7 @@ export default {
         margin-bottom: 24px;
       }
       .news-card-item-content {
-        color: rgba(255, 255, 255, .65);
+        color: $color-white65;
         font-size: 18px;
         font-weight: 400;
         line-height: 30px;
@@ -141,14 +141,14 @@ export default {
       }
       /* 功能链接样式 */
       .news-card-item-go {
-        color: #2CBDFF;
+        color: $color-blue;
         font-size: 16px;
         font-weight: 400;
         line-height: 26px;
         margin-bottom: 12px;
         cursor: pointer;
         &:hover {
-          color: #60c6f5;
+          color: $color-blue-hover;
         }
       }
     }

@@ -147,7 +147,7 @@ export default {
         margin-right: 0;
       }
       &:last-child {
-        background-color: #fff;
+        background-color: $color-white;
       }
       .card-item-logo {
         width: 24px;

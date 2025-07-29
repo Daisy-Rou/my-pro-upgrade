@@ -21,6 +21,6 @@ export default {
   overflow-y: auto;
   overflow-x: hidden;
   font-family: Inter Tight, sans-serif;
-  background-color: #101014;
+  background-color: $color-bg;
 }
 </style>

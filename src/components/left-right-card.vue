@@ -55,8 +55,8 @@ export default {
     margin-right: 24px;
     margin-bottom: 24px;
     border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-white15;
+    background-color: $color-white5;
     transition: transform 0.5s ease;
     cursor: pointer;
     &:nth-child(3n) {
@@ -89,7 +89,7 @@ export default {
       flex: 1;
       padding: 24px;
       .news-small-card-item-title {
-        color: #fff;
+        color: $color-white;
         font-size: 20px;
         font-weight: 700;
         font-family: Inter Tight, sans-serif;
@@ -105,7 +105,7 @@ export default {
         font-size: 14px;
         font-weight: 400;
         line-height: 23px;
-        color: rgba(255, 255, 255, .65);
+        color: $color-white65;
         // overflow : hidden;/*必须结合的属性,当内容溢出元素框时发生的事情*/
         // text-overflow: ellipsis;/*可以用来多行文本的情况下，用省略号“…”隐藏超出范围的文本 。*/
         // display: -webkit-box;/*必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。*/
@@ -121,8 +121,8 @@ export default {
         height: 24px;
         font-size: 12px;
         font-weight: 400;
-        color: #fff;
-        background-color: rgba(255, 255, 255, .15);
+        color: $color-white;
+        background-color: $color-white15;
         border-radius: 12px;
         margin-top: 24px;
         // cursor: pointer;

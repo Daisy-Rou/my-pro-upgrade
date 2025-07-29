@@ -95,7 +95,7 @@ export default {
       display: flex;
       flex-direction: column;
       .title {
-        color: #fff;
+        color: $color-white;
         font-size: 18px;
         line-height: 16px;
         font-weight: 700;
@@ -103,7 +103,7 @@ export default {
         font-family: Inter Tight, sans-serif;
       }
       .tip {
-        color:#fff;
+        color:$color-white;
         font-size: 14px;
         font-weight: 500;
         line-height: 23px;

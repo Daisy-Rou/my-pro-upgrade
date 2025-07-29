@@ -109,7 +109,7 @@ export default {
   justify-content: center;
   flex-wrap: nowrap;
   overflow-x: auto;
-  background-color: rgba(255, 255, 255, .05);
+  background-color: $color-white5;
   &.fixed {
     position: fixed;
     top: 72px;
@@ -138,10 +138,10 @@ export default {
       font-size: 14px;
       font-weight: 300;
       letter-spacing: 1px;
-      color: #fff;
+      color: $color-white;
       line-height: 18px;
       &:hover {
-        color: rgba(255, 255, 255, .65);
+        color: $color-white65;
       }
     }
     /* 激活状态样式 */

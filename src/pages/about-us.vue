@@ -95,7 +95,7 @@ export default {
     justify-content: center;
     // aspect-ratio: 1920 / 320;
     height: 320px;
-    color: #fff;
+    color: $color-white;
     font-size: 64px;
     font-weight: 700;
     font-family: Inter Tight, sans-serif;
@@ -109,7 +109,7 @@ export default {
     padding: 80px 128px;
     max-width: 1920px;
     .big-title {
-      color: #fff;
+      color: $color-white;
       font-size: 52px;
       font-weight: 700;
       line-height: 62px;
@@ -118,7 +118,7 @@ export default {
     }
     .small-title {
       max-width: 840px;
-      color: rgba(255, 255, 255, .65);
+      color: $color-white65;
       font-size: 18px;
       font-weight: 400;
       line-height: 30px;
@@ -134,8 +134,8 @@ export default {
         flex-direction: row;
         margin-bottom: 32px;
         border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid $color-white15;
+        background-color: $color-white5;
         transition: transform 0.5s ease;
         // cursor: pointer;
         // &:hover {
@@ -170,7 +170,7 @@ export default {
             text-align: left;
             list-style: none;
             position: relative;
-            color: rgba(255, 255, 255, .65);
+            color: $color-white65;
             &:last-child {
               &::after {
                 position: absolute;
@@ -185,7 +185,7 @@ export default {
               width: 8px;
               height: 8px;
               border-radius: 4px;
-              background-color: #26bbff;
+              background-color: $color-blue-btn;
               top: 12px;
               left: -32px;
               z-index: 1;
@@ -196,7 +196,7 @@ export default {
               width: 2px;
               min-height: 34px;
               height: 100%;
-              background-color: rgba(255, 255, 255, 0.35);
+              background-color: $color-white35;
               top: 12px;
               left: -29px;
             }
@@ -208,7 +208,7 @@ export default {
           width: 50%;
           padding: 64px;
           .news-card-item-title {
-            color: #fff;
+            color: $color-white;
             font-size: 32px;
             font-weight: 700;
             font-family: Inter Tight, sans-serif;
@@ -216,7 +216,7 @@ export default {
             margin-bottom: 24px;
           }
           .news-card-item-content {
-            color: rgba(255, 255, 255, .65);
+            color: $color-white65;
             font-size: 18px;
             font-weight: 400;
             line-height: 30px;
@@ -227,14 +227,14 @@ export default {
             margin-top: 32px;
           }
           .news-card-item-go {
-            color: #2CBDFF;
+            color: $color-blue;
             font-size: 16px;
             font-weight: 400;
             line-height: 26px;
             margin-bottom: 12px;
             cursor: pointer;
             &:hover {
-              color: #60c6f5;
+              color: $color-blue-hover;
             }
           }
         }

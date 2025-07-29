@@ -80,7 +80,7 @@ export default {
       .tag {
         width: fit-content;
         padding: 4px 10px;
-        color: #fff;
+        color: $color-white;
         font-size: 16px;
         font-weight: 700;
         line-height: 18px;
@@ -91,7 +91,7 @@ export default {
         box-shadow: rgba(199, 118, 249, 0.69) 0px 0px 20px 4px;
       }
       .title {
-        color: #fff;
+        color: $color-white;
         font-family: Inter, arial;
         font-weight: 700;
         font-size: 34px;
@@ -100,7 +100,6 @@ export default {
         margin-bottom: 24px;
       }
       .content {
-        // color: #fff;
         color: rgb(219, 222, 227);
         font-family: Inter, arial;
         font-weight: 400;

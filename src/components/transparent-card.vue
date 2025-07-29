@@ -83,7 +83,7 @@ export default {
         margin-right: 8px;
       }
       .title {
-        color: #fff;
+        color: $color-white;
         font-size: 20px;
         font-weight: 700;
         line-height: 32px;
@@ -91,7 +91,7 @@ export default {
       }
     }
     .content {
-      color: rgba(255, 255, 255, .65);
+      color: $color-white65;
       font-size: 14px;
       font-weight: 400;
       line-height: 23px;

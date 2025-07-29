@@ -33,13 +33,13 @@ export default {
     font-weight: 700;
     font-family: Inter Tight, sans-serif;
     line-height: 62px;
-    color: #fff;
+    color: $color-white;
     margin-bottom: 12px;
   }
   .small-title {
     font-size: 18px;
     font-weight: 400;
-    color: rgba(255, 255, 255, .65);
+    color: $color-white65;
     line-height: 30px;
     max-width: 840px;
     margin-bottom: 36px;
