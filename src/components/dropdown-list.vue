@@ -2,9 +2,16 @@
   <!-- 下拉列表组件容器 -->
   <div class="dropdown-list">
     <!-- 列表容器 - 循环渲染国际化页脚列表数据 -->
-    <div class="list-container" v-for="(item, index) in  $t('footer.list')" :key="index">
+    <div 
+      class="list-container" 
+      v-for="(item, index) in footerList" 
+      :key="item.id || index"
+    >
       <!-- 列表项标题框 - 点击展开/折叠子列表 -->
-      <div class="list-item-box" @click="handleItemClick(item)">
+      <div 
+        class="list-item-box" 
+        @click="handleItemClick(item)"
+      >
         <!-- 列表项标题文本 -->
         <div class="list-item-title">{{item.name}}</div>
         <!-- 展开/折叠箭头图标 - 根据isShow状态切换旋转角度 -->
@@ -13,25 +20,24 @@
         </svg>
       </div>
       <!-- 子列表项容器 - 根据isShow状态显示/隐藏 -->
-      <div
-        class="list-subitem-box"
-        :class="[
-          {'show': item.isShow},
-          {'hidden': !item.isShow}
-        ]"
-      >
-        <!-- 子列表项 - 循环渲染子列表数据 -->
+      <transition name="slide">
         <div
-          v-for="(itemc, indexc) in item.subList" 
-          :key="indexc" 
-          class="list-subitem"
-          @click="handleSubItemClick(itemc)"
+          class="list-subitem-box"
+          v-if="item.isShow"
         >
-          {{itemc.name}}
-          <!-- 蓝色高亮文本 -->
-          <span class="blue" v-if="itemc.blueName">{{itemc.blueName}}</span>
+          <!-- 子列表项 - 循环渲染子列表数据 -->
+          <div
+            v-for="(itemc, indexc) in item.subList" 
+            :key="itemc.id || indexc"
+            class="list-subitem"
+            @click="handleSubItemClick(itemc)"
+          >
+            {{itemc.name}}
+            <!-- 蓝色高亮文本 -->
+            <span class="blue" v-if="itemc.blueName">{{itemc.blueName}}</span>
+          </div>
         </div>
-      </div>
+      </transition>
       <!-- 分隔线 -->
       <div class="list-line"></div>
     </div>
@@ -41,11 +47,18 @@
 <script>
 export default {
   name: 'dropdown-list',
+  data() {
+    return {
+      footerList: []
+    }
+  },
   mounted() {
     // 初始化所有列表项为收起状态
-    this.$t('footer.list').forEach(item => {
-      item.isShow = false
-    })
+    // 避免直接修改国际化数据，创建本地响应式数据副本
+    this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list'))).map(item => ({
+      ...item,
+      isShow: false
+    }))
   },
   methods: {
     // 处理列表项点击 - 切换展开/折叠状态
@@ -56,7 +69,8 @@ export default {
     handleSubItemClick(item) {
       if (item.path) {
         this.$router.push(item.path)
-        this.$t('footer.list').forEach(item => {
+        // 关闭所有下拉菜单
+        this.footerList.forEach(item => {
           item.isShow = false
         })
       }
@@ -66,45 +80,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// 下拉展开动画
-@keyframes slide-down {
-  // 初始状态：高度为0
-  0% {
-    transform: scale(1,0);
-  }
-  // 结束状态：完全展开
-  100% {
-    transform: scale(1,1);
-  }
+// 简化过渡动画
+.slide-enter-active,
+.slide-leave-active {
+  transition: max-height 0.3s ease;
 }
-// WebKit浏览器兼容的下拉动画
-@-webkit-keyframes slide-down {
-  0% {
-    -webkit-transform: scale(1,0);
-  }
-  100% {
-    -webkit-transform: scale(1,1);
-  }
-}
-// 上拉收起动画
-@keyframes slide-up {
-  // 初始状态：完全展开
-  0% {
-    transform: scale(1,1);
-  }
-  // 结束状态：高度为0
-  100% {
-    transform: scale(1,0);
-  }
-}
-// WebKit浏览器兼容的上拉动画
-@-webkit-keyframes slide-up {
-  0% {
-    -webkit-transform: scale(1,1);
-  }
-  100% {
-    -webkit-transform: scale(1,0);
-  }
+
+.slide-enter-from,
+.slide-leave-to {
+  max-height: 0;
+  overflow: hidden;
 }
 // 下拉列表容器样式
 .dropdown-list {
@@ -144,6 +129,8 @@ export default {
   // 子列表项容器样式
   .list-subitem-box {
     width: 100%;
+    max-height: 500px; // 设置一个足够大的值
+    overflow: hidden;
     // 子列表项样式
     .list-subitem {
       display: flex;
@@ -176,31 +163,5 @@ export default {
     width: 100%;
     border-bottom: 1px solid $color-white15;
   }
-}
-
-// 显示状态样式
-.show {
-  height: 100%;
-  // 过渡动画
-  transition: all .3s ease-in;
-  // 变换原点（顶部中心）
-  transform-origin: 50% 0;
-  // 应用下拉动画
-  animation: slide-down 0.3s ease-in;
-  -webkit-animation: slide-down 0.3s ease-in;
-}
-// 隐藏状态样式
-.hidden {
-  // 高度为0（隐藏内容）
-  height: 0px;
-  // 溢出内容自动处理
-  overflow: auto;
-  // 变换原点（顶部中心）
-  transform-origin: 50% 0;
-  // 过渡动画
-  transition: all .3s ease-out;
-  // 应用上拉动画
-  animation: slide-up 0.3s ease-out;
-  -webkit-animation: slide-up 0.3s ease-out;
 }
 </style>

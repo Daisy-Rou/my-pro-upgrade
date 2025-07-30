@@ -13,12 +13,13 @@
         <!-- 卡片项 - 循环渲染列表数据 -->
         <div 
           class="card-item"
-          v-for="(item, index) in list.list"
-          :key="index"
+          v-for="item in list.list"
+          :key="item.id || item.title" 
         >
           <!-- 卡片图片容器 -->
           <div class="img-box">
-            <img v-lazy="item.imgSrc" alt="">
+            <!-- 图片懒加载，带有加载状态和错误处理 -->
+            <img v-lazy="item.imgSrc" :alt="item.title || '卡片图片'">
           </div>
           <!-- 卡片内容区域 -->
           <div class="card-item-title-box">
@@ -40,6 +41,7 @@ export default {
   props: {
     list: {
       type: Object,
+      required: true,
       default: () => {}
     }
   }
@@ -147,28 +149,28 @@ export default {
   // 超宽屏适配
   @media screen and (max-width: 1905px) {
     .step-two-bg-box {
-      padding: 64px !important;
+      padding: 64px;
     }
   }
   // 大屏适配
   @media screen  and (max-width: 1440px) {
     .step-two-bg-box {
-      padding: 24px 64px !important;
+      padding: 24px 64px;
     }
   }
   // 中屏适配 - 2列布局
   @media screen and (max-width: 1280px) {
     .step-two-bg-box {
       .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
+        font-size: 40px;
+        line-height: 48px;
       }
       .card-box {
         .card-item {
-          width: calc(50% - 24px) !important;
-          margin-right: 24px !important;
+          width: calc(50% - 24px);
+          margin-right: 24px;
           &:nth-child(2n) {
-            margin-right: 0 !important;
+            margin-right: 0;
           }
         }
       }
@@ -177,16 +179,16 @@ export default {
   // 小屏适配 - 单列布局
   @media screen and (max-width: 768px){
     .step-two-bg-box {
-      padding: 24px !important;
+      padding: 24px;
       .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
+        font-size: 32px;
+        line-height: 40px;
       }
       .card-box {
-        width: 100% !important;
+        width: 100%;
         .card-item {
-          width: 100% !important;
-          margin-right: 0 !important;
+          width: 100%;
+          margin-right: 0;
         }
       }
     }

@@ -5,12 +5,12 @@
     <div 
       class="news-small-card-item"
       v-for="(item, index) in list"
-      :key="index"
+      :key="item.id || index"
       @click="handleItemClick(item)"
     >
       <!-- 图片容器 -->
       <div class="img-box">
-        <img v-lazy="item.imgSrc" alt="">
+        <img v-lazy="item.imgSrc" :alt="item.title">
       </div>
       <!-- 卡片标题和内容容器 -->
       <div class="news-small-card-item-title-box">
@@ -28,10 +28,21 @@
 <script>
 export default {
   name: 'left-right-card',
-  // 组件属性定义
+  /**
+   * 左右布局卡片容器组件
+   * @component
+   * @param {Array} list - 卡片数据列表
+   * @param {Object} list[].id - 卡片唯一标识
+   * @param {string} list[].imgSrc - 卡片图片地址
+   * @param {string} list[].title - 卡片标题
+   * @param {string} list[].content - 卡片内容
+   * @param {string} [list[].path] - 点击跳转路径
+   * @param {boolean} [showBtn=true] - 是否显示"更多"按钮
+  */
   props: {
     list: {
       type: Array,
+      required: true,
       default: () => []
     },
     showBtn: {
@@ -42,7 +53,7 @@ export default {
   methods: {
     // 处理卡片点击事件 - 导航到指定路径
     handleItemClick(item) {
-      if (item.path) {
+      if (item?.path) {
         this.$router.push(item.path)
       }
     }
@@ -153,10 +164,13 @@ export default {
   // 响应式样式 - 中等屏幕(1440px以下)
   @media screen  and (max-width: 1440px) {
     .news-small-card-item {
-      width: calc(50% - 24px) !important;
-      margin-right: 24px !important;
+      width: calc(50% - 24px);
+      margin-right: 24px;
+      &:nth-child(3n) {
+        margin-right: 24px;
+      }
       &:nth-child(2n) {
-        margin-right: 0 !important;
+        margin-right: 0;
       }
     }
   }
@@ -164,13 +178,13 @@ export default {
   @media screen and (max-width: 1020px) {
     .news-small-card-item {
       // 单列布局
-      width: 100% !important;
-      margin-right: 24px !important;
+      width: 100%;
+      margin-right: 24px;
       &:nth-child(2n) {
-        margin-right: 24px !important;
+        margin-right: 24px;
       }
       .img-box {
-        max-width: 120px !important;
+        max-width: 120px;
       }
     }
   }

@@ -8,8 +8,8 @@
       <!-- 介绍项 - 循环渲染国际化页脚列表数据 -->
       <div
         class="introduction-item"
-        v-for="(item, index) in $t('footer.list')"
-        :key="index"
+        v-for="(item, index) in footerList"
+        :key="item.id || index"
       >
         <!-- 主标题 -->
         <div class="introduction-title">{{item.name}}</div>
@@ -17,7 +17,7 @@
         <div
           class="introduction-small-title" 
           v-for="(itemc, indexc) in item.subList" 
-          :key="indexc"
+          :key="itemc.id || indexc"
           @click="handleItemClick(itemc)"
         >
            <!-- 普通文本标题 -->
@@ -50,6 +50,7 @@
 <script>
 // 导入下拉列表组件
 import DropdownList from '@/components/dropdown-list'
+import { debounce } from '@/assets/utils';
 export default {
   name: 'footer-link',
   // 注册子组件
@@ -60,17 +61,28 @@ export default {
     return {
       // 控制介绍列表显示状态的响应式变量
       showIntroductionList: true,
+      footerList: []
     }
   },
+  created() {
+    // 创建防抖函数 (延迟100ms执行)
+    this.debouncedHandleResize = debounce(this.handleResize, 100);
+    this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list')))
+  },
   mounted() {
-    // 初始化响应式布局
-    this.handleResize()
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-    window.addEventListener('resize', this.handleResize);
+    // 创建ResizeObserver实例
+    this.resizeObserver = new ResizeObserver(entries => {
+      // 防抖处理
+      this.debouncedHandleResize();
+    });
+    // 监听根元素尺寸变化
+    this.resizeObserver.observe(document.documentElement);
   },
   beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.handleResize);
+    // 断开ResizeObserver连接
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   },
   methods: {
     // 处理窗口大小变化 - 响应式布局控制
@@ -78,8 +90,9 @@ export default {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
       const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showIntroductionList = screenWidth > 768
+      // 使用CSS媒体查询的断点值作为常量
+      const BREAKPOINT = 768
+      this.showIntroductionList = screenWidth > BREAKPOINT
     },
     // 处理子项点击事件 - 导航到指定路径
     handleItemClick(item) {
@@ -212,34 +225,34 @@ export default {
 // 响应式样式 - 大屏设备(1905px以下)
 @media screen and (max-width: 1905px) {
   .introduction-box {
-    padding: 96px 64px !important;
+    padding: 96px 64px;
   }
 }
 // 响应式样式 - 中等屏幕(1440px以下)
-@media screen  and (max-width: 1440px) {
+@media screen and (max-width: 1440px) {
   .introduction-box {
-    padding: 80px 64px !important;
+    padding: 80px 64px;
     // 改为3列布局
-    .introduction-item {
-      width: 33.3% !important;
+    .introduction-container .introduction-item {
+      width: 33.3%;
     }
   }
 }
 // 响应式样式 - 移动端(768px以下)
 @media screen and (max-width: 768px){
   .introduction-box {
-    padding: 80px 24px !important;
+    padding: 80px 24px;
     .copyright-box {
-      justify-content: center !important;
-      flex-direction: column !important;
-      align-items: center !important;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       .introduction-copyright {
-        text-align: center !important;
-        width: 100% !important;
-        margin-right: 0 !important;
+        text-align: center;
+        width: 100%;
+        margin-right: 0;
       }
       .go-top-btn {
-        margin-top: 40px !important;
+        margin-top: 40px;
       }
     }
   }

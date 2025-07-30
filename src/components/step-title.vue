@@ -13,7 +13,18 @@
 export default {
   name: 'step-title',
   // 组件属性
-  props: ['num', 'title']
+  props: {
+    // 步骤编号
+    num: {
+      type: [Number, String],
+      required: true
+    },
+    // 步骤标题
+    title: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 

@@ -23,7 +23,7 @@
     </div>
     <!-- 特性列表组件 -->
     <!-- 商业决策 -->
-    <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
+    <content-introduction v-if="activeBtnIndex === 0" :list="$t('smartFactory.listSYJC')"></content-introduction>
     <!-- 数字孪生、智能运维、基础平台 -->
     <transparent-card v-if="activeBtnIndex" :listObj="compList"></transparent-card>
     <!-- 产品优势卡片区域 -->

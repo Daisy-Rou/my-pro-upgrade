@@ -5,11 +5,11 @@
     <div
       class="solution-item"
       v-for="(item, index) in list"
-      :key="index"
+      :key="item.id || index"
       @click="handleItemClick(item)"
     >
       <!-- 解决方案图片 - 动态绑定图片源 -->
-      <img class="solution-img" v-lazy="item.imgSrc" alt="">
+      <img class="solution-img" v-lazy="item.imgSrc" :alt="item.name">
       <!-- 解决方案内容区域 -->
       <div class="solution-content">
         <!-- 右侧箭头图标 -->
@@ -33,6 +33,7 @@ export default {
   props: {
     list: {
       type: Array,
+      required: true,
       default: () => []
     }
   },
@@ -127,7 +128,7 @@ export default {
       }
       // 提示文本样式
       .tip {
-        color:$color-white;
+        color: $color-white;
         font-size: 14px;
         font-weight: 500;
         line-height: 23px;
@@ -138,11 +139,11 @@ export default {
   @media screen and (max-width: 1280px) {
     .solution-item {
       // 两列布局
-      width: calc(50% - 32px) !important;
-      margin-bottom: 32px !important;
+      width: calc(50% - 32px);
+      margin-bottom: 32px;
       img {
         &:nth-child(2n) {
-          margin-right: 0 !important; /* 每四张图片后不设置右边距 */
+          margin-right: 0; /* 每四张图片后不设置右边距 */
         }
       }
     }
@@ -151,7 +152,7 @@ export default {
   @media screen and (max-width: 768px){
     .solution-item {
       // 单列布局
-      width: 100% !important;
+      width: 100%;
     }
   }
 }

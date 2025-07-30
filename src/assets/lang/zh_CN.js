@@ -383,7 +383,7 @@ export default {
       text: '场景编辑器',
       title: '数智场景编辑器',
       content: '数智场景编辑器是一款基于 HTML5 和 WebGL 技术的专用产品，用于配置交互式、实时渲染的 3D 场景效果。 产品具有强大的数据集成能力，用户友好的配置环境，丰富的可定义场景属性，非凡实时渲染效果，并且可以将配置的 3D 场景发布为公有云服务。开发者助力行业智能化升级！',
-      imgSrc: require('@/assets/images/cjbjq-img.png'),
+      imgSrc: require('@/assets/images/znls-img.png'),
       btnText: '立即下载'
     },
     // 步骤导航数据
@@ -461,7 +461,7 @@ export default {
       text: '场景编辑器',
       title: '智能孪生',
       content: '全场景共创共享智能孪生工程，为现实世界重塑数字孪生世界。每个人都可以 开发者助力行业智能化升级！',
-      imgSrc: require('@/assets/images/znls-img.png'),
+      imgSrc: require('@/assets/images/cjbjq-img.png'),
       btnText: '立即下载'
     },
     // 步骤导航数据

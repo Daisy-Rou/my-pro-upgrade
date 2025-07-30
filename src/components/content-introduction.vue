@@ -5,10 +5,9 @@
     <div
       class="content-item"
       v-for="(item, index) in list"
-      :key="index"
+      :key="item.id || index"
+      :class="{ 'reverse-layout': shouldReverseLayout(index) }"
     >
-      <!-- 右侧图片（在非顶部显示且奇数索引时显示） -->
-      <img v-show="(!showTop && index % 2 !== 0)" class="right-img" v-lazy="item.imgSrc" alt="">
       <!-- 左侧内容盒子 -->
       <div class="left-box">
         <!-- 标签（如果有） -->
@@ -20,20 +19,27 @@
          <!-- 内容2（如果有） -->
         <div class="content" v-if="item.content1">{{item.content1}}</div>
       </div>
-       <!-- 右侧图片（在偶数索引或顶部显示时显示） -->
-      <img v-show="index % 2 === 0 || showTop" class="right-img" v-lazy="item.imgSrc" alt="">
+      <!-- 统一图片显示逻辑 -->
+      <img class="right-img" v-lazy="item.imgSrc" :alt="item.title">
     </div>
   </div>
 </template>
 
 <script>
+import { debounce } from '@/assets/utils';
 export default {
   name: 'content-introduction',
   props: {
     // 内容列表数据
     list: {
       type: Array,
+      required: true,
       default: () => []
+    }
+  },
+  computed: {
+    shouldReverseLayout() {
+      return (index) => !this.showTop && index % 2 !== 0;
     }
   },
   data() {
@@ -42,23 +48,40 @@ export default {
       showTop: false,
     }
   },
+  created() {
+    // 创建防抖函数 (延迟100ms执行)
+    this.debouncedHandleResize = debounce(this.handleResize, 100);
+  },
   mounted() {
     // 添加窗口大小改变的监听器，以便动态更新计算属性
-    this.handleResize()
-    window.addEventListener('resize', this.handleResize)
+    // this.handleResize()
+    // window.addEventListener('resize', this.debouncedHandleResize)
+    // 创建ResizeObserver实例
+    this.resizeObserver = new ResizeObserver(entries => {
+      // 防抖处理
+      this.debouncedHandleResize();
+    });
+    // 监听根元素尺寸变化
+    this.resizeObserver.observe(document.documentElement);
   },
   beforeDestroy() {
     // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.handleResize)
+    // window.removeEventListener('resize', this.debouncedHandleResize)
+    // 断开ResizeObserver连接
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   },
   methods: {
     handleResize() {
       // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
       // 获取屏幕宽度
       const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showTop = screenWidth < 960
-    },
+      // 仅在值变化时更新，减少不必要的重渲染
+      if (this.showTop !== (screenWidth <= 960)) {
+        this.showTop = screenWidth <= 960;
+      }
+    }
   }
 }
 </script>
@@ -74,6 +97,9 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
+    &.reverse-layout {
+      flex-direction: row-reverse;
+    }
     .left-box {
       width: 496px;
       padding: 32px;
@@ -118,10 +144,10 @@ export default {
   @media screen and (max-width: 1905px) {
     .content-item {
       .left-box {
-        width: 464px !important;
+        width: 464px;
       }
       .right-img {
-        width: 928px !important;
+        width: 928px;
       }
     }
   }
@@ -129,50 +155,50 @@ export default {
     padding: 0 32px;
     .content-item {
       .left-box {
-        width: 464px !important;
+        width: 464px;
       }
       .right-img {
-        flex: 1 !important;
-        width: auto !important;
+        flex: 1;
+        width: auto;
       }
     }
   }
   @media screen and (max-width: 1445px) {
     .content-item {
       .left-box {
-        width: 33.3% !important;
+        width: 33.3%;
       }
       .right-img {
-        width: 64.7% !important;
+        width: 64.7%;
       }
     }
   }
   @media screen and (max-width: 1280px) {
-    .left-box {
+     .content-item .left-box {
       .title {
-        font-size: 26px !important;
-        line-height: 34px !important;
+        font-size: 26px;
+        line-height: 34px;
       }
     }
   }
   @media screen and (max-width: 960px) {
     padding: 0 64px;
     .content-item {
-      flex-direction: column !important;
-      margin-bottom: 80px !important;
+      flex-direction: column;
+      margin-bottom: 80px;
       &:last-child {
-        margin-bottom: 0 !important;
+        margin-bottom: 0;
       }
       .left-box {
-        padding: 0 !important;
-        width: 100% !important;
+        padding: 0;
+        width: 100%;
       }
       .right-img {
-        width: 100% !important;
-        margin-top: 64px !important;
-        padding: 0 !important;
-        aspect-ratio: 16 / 9 !important;
-        background-size: 100% 100% !important;
+        width: 100%;
+        margin-top: 64px;
+        padding: 0;
+        aspect-ratio: 16 / 9;
+        background-size: 100% 100%;
       }
     }
   }

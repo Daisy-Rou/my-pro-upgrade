@@ -4,7 +4,7 @@
       <!-- 顶部图标/文字 -->
       <div v-show="showVideo" class="text-icon">{{mainObj.text || ''}}</div>
       <!-- 主标题 -->
-      <div class="big-title" style="margin-top: 30px;">{{mainObj.title || ''}}</div>
+      <div class="big-title">{{mainObj.title || ''}}</div>
       <!-- 副标题描述 -->
       <span class="small-title">{{ mainObj.content || '' }}</span>
       <!-- 操作按钮 -->
@@ -13,16 +13,28 @@
       </div>
     </div>
     <!-- 右侧展示图片 -->
-    <img v-if="mainObj.imgSrc"  class="cosmos-video" :class="{'right-video': showVideo}" :src="mainObj.imgSrc" alt="智能孪生">
+    <img v-if="mainObj.imgSrc"  class="cosmos-video" :class="{'right-video': showVideo}" :src="mainObj.imgSrc" :alt="mainObj.title">
   </div>
 </template>
 
 <script>
+import { debounce } from '@/assets/utils';
 export default {
   name: 'main-content',
+  /**
+   * 主内容展示组件
+   * @component
+   * @param {Object} mainObj - 主内容数据对象
+   * @param {string} [mainObj.text] - 顶部图标/文字
+   * @param {string} [mainObj.title] - 主标题
+   * @param {string} [mainObj.content] - 副标题描述
+   * @param {string} [mainObj.btnText] - 按钮文本
+   * @param {string} [mainObj.imgSrc] - 右侧展示图片地址
+ */
   props: {
     mainObj: {
       type: Object,
+      required: true,
       default: () => {}
     }
   },
@@ -31,15 +43,24 @@ export default {
       showVideo: true,      // 控制响应式布局显示
     }
   },
+  created() {
+    // 创建防抖函数 (延迟100ms执行)
+    this.debouncedHandleResize = debounce(this.handleResize, 100);
+  },
   mounted() {
-    // 初始化响应式布局
-    this.handleResize()
-    // 添加窗口大小改变监听
-    window.addEventListener('resize', this.handleResize);
+    // 创建ResizeObserver实例
+    this.resizeObserver = new ResizeObserver(entries => {
+      // 防抖处理
+      this.debouncedHandleResize();
+    });
+    // 监听根元素尺寸变化
+    this.resizeObserver.observe(document.documentElement);
   },
   beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.handleResize);
+    // 断开ResizeObserver连接
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
   },
   methods: {
     // 处理窗口大小变化
@@ -91,6 +112,7 @@ export default {
       font-weight: 700;
       font-family: Inter Tight, sans-serif;
       line-height: 78px;
+      margin-top: 30px;
     }
   }
   .text-icon {
@@ -153,46 +175,46 @@ export default {
   }
   /* 响应式设计 - 1905px以下 */
   @media screen and (max-width: 1905px) {
-    padding: 96px 64px !important;
+    padding: 96px 64px;
     .text-box {
-      left: 64px !important;
+      left: 64px;
     }
     .right-video {
-      right: 64px !important;
-      width: 1024px !important;
-      max-width: 1024px !important;
-      top: 96px !important;
-      aspect-ratio: 1024 / 576 !important;
+      right: 64px;
+      width: 1024px;
+      max-width: 1024px;
+      top: 96px;
+      aspect-ratio: 1024 / 576;
     }
   }
   /* 响应式设计 - 1440px以下 */
   @media screen  and (max-width: 1440px) {
-    padding: 80px 64px !important;
+    padding: 80px 64px;
   }
   /* 响应式设计 - 1280px以下（平板） */
   @media screen and (max-width: 1280px) {
     .text-box {
-      position: static !important;
+      position: static;
       .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
+        font-size: 40px;
+        line-height: 48px;
       }
       .small-title {
-        font-size: 16px !important;
-        line-height: 26px !important;
+        font-size: 16px;
+        line-height: 26px;
       }
     }
     .cosmos-video {
-      margin-top: 54px !important;
+      margin-top: 54px;
     }
   }
   @media screen and (max-width: 768px){
-    padding: 80px 24px !important;
+    padding: 80px 24px;
     .text-box {
-      left: 24px !important;
+      left: 24px;
       .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
+        font-size: 32px;
+        line-height: 40px;
       }
     }
   }

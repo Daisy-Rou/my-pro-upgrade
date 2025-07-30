@@ -1,7 +1,7 @@
 <template>
   <div 
     class="transparent-card"
-    :style="{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url('${listObj.bgSrc}')` }"
+    :style="backgroundStyle"
   >
     <!-- 主标题组件 -->
     <main-title
@@ -12,10 +12,10 @@
       <div
         class="szls-item"
         v-for="(item, index) in listObj.list"
-        :key="index"
+        :key="item.id || item.title + index"
       >
         <div class="title-box">
-          <img class="logo" v-lazy="item.logo" alt="">
+          <img class="logo" v-lazy="item.logo" :alt="item.title">
           <div class="title">{{item.title}}</div>
         </div>
         <div class="content">{{item.content}}</div>
@@ -31,10 +31,24 @@ export default {
   components: {
     mainTitle
   },
+  computed: {
+    // 计算背景图样式
+    backgroundStyle() {
+      return {
+        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url('${this.listObj.bgSrc}')`
+      };
+    }
+  },
   props: {
     listObj: {
       type: Object,
-      default: () => {}
+      required: true,
+      default: () => ({
+        bgSrc: '',
+        title: '',
+        content: '',
+        list: []
+      })
     }
   }
 }
@@ -99,24 +113,27 @@ export default {
   }
   // 媒体查询区域
   @media screen and (max-width: 1905px) {
-    padding: 40px 64px !important;
+    padding: 40px 64px;
   }
   @media screen  and (max-width: 1440px) {
     .szls-item {
-      width: calc(50% - 24px) !important;
-        margin-right: 24px !important;
-        &:nth-child(2n) {
-        margin-right: 0 !important;
+      width: calc(50% - 24px);
+      margin-right: 24px;
+      &:nth-child(3n) {
+        margin-right: 24px;
+      }
+      &:nth-child(2n) {
+        margin-right: 0;
       }
     }
   }
   @media screen and (max-width: 768px){
-    padding: 40px 24px !important;
+    padding: 40px 24px;
     .szls-item-box {
-      width: 100% !important;
+      width: 100%;
       .szls-item {
-        width: 100% !important;
-        margin-right: 0 !important;
+        width: 100%;
+        margin-right: 0;
       }
     }
   }

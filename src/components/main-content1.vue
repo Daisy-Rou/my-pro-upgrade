@@ -6,17 +6,17 @@
           <!-- 顶部图标/文字 -->
           <div v-show="showVideo" class="text-icon">{{mainObj.text || ''}}</div>
           <!-- 主标题 -->
-          <div class="big-title" style="margin-top: 30px;">{{mainObj.title || ''}}</div>
+          <div class="big-title">{{mainObj.title || ''}}</div>
           <!-- 副标题描述 -->
           <span class="small-title">{{ mainObj.content || '' }}</span>
           <!-- 操作按钮 -->
           <div class="btn-box">
-            <div class="btn-blue">立即下载</div>
+            <div class="btn-blue">{{ mainObj.btnText || '立即下载' }}</div>
           </div>
         </div>
       </div>
       <!-- 右侧展示图片 -->
-      <img v-if="mainObj.imgSrc"  class="cosmos-video" :src="mainObj.imgSrc" alt="智能孪生">
+      <img v-if="mainObj.imgSrc"  class="cosmos-video" :src="mainObj.imgSrc" :alt="mainObj.title">
     </div>
   </div>
 </template>
@@ -24,9 +24,20 @@
 <script>
 export default {
   name: 'main-content',
+  /**
+   * 主内容展示组件 (版本1)
+   * @component
+   * @param {Object} mainObj - 主内容数据对象
+   * @param {string} [mainObj.text] - 顶部图标/文字
+   * @param {string} [mainObj.title] - 主标题
+   * @param {string} [mainObj.content] - 副标题描述
+   * @param {string} [mainObj.btnText] - 按钮文本
+   * @param {string} [mainObj.imgSrc] - 右侧展示图片地址
+ */
   props: {
     mainObj: {
       type: Object,
+      required: true,
       default: () => {}
     }
   }
@@ -74,6 +85,7 @@ export default {
           font-family: Inter Tight, sans-serif;
           line-height: 62px;
           margin-bottom: 24px;
+          margin-top: 30px;
         }
         .small-title {
           color: $color-white;
@@ -128,40 +140,43 @@ export default {
   }
   /* 响应式设计 - 1905px以下 */
   @media screen and (max-width: 1905px) {
-    padding: 96px 64px !important;
+    padding: 96px 64px;
   }
   /* 响应式设计 - 1440px以下 */
   @media screen  and (max-width: 1440px) {
-    padding: 80px 64px !important;
-    .text-box {
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
+    padding: 80px 64px;
+    .main-box {
+      .left-box .text-box {
+        .big-title {
+          font-size: 40px;
+          line-height: 48px;
+        }
       }
     }
   }
   /* 响应式设计 - 1280px以下（平板） */
   @media screen and (max-width: 1280px) {
     .main-box {
-      flex-direction: column !important;
+      flex-direction: column;
       // align-items: inherit !important;
       .left-box {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100%;
+        max-width: 100%;
       }
       .cosmos-video {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100%;
+        max-width: 100%;
       }
     }
   }
   @media screen and (max-width: 768px){
-    padding: 80px 24px !important;
-    .text-box {
-      left: 24px !important;
-      .big-title {
-        font-size: 32px !important;
-        line-height: 40px !important;
+    padding: 80px 24px;
+    .main-box {
+      .left-box .text-box {
+        .big-title {
+          font-size: 32px;
+          line-height: 40px;
+        }
       }
     }
   }
