@@ -50,6 +50,7 @@ import leftRightCard from '@/components/left-right-card.vue'
 import topBottomCard from '@/components/top-bottom-card.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 import transparentCard from '@/components/transparent-card.vue';
+import { getElementTop } from '@/assets/utils'
 export default {
   name: 'smart-park',
   components: {
@@ -83,19 +84,11 @@ export default {
     }
   },
   methods: {
-    // 获取元素距页面顶部距离
-    getElementTop(el) {
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        return rect.top + window.pageYOffset || document.documentElement.scrollTop;
-      }
-      return 0;
-    },
     // 点击步骤导航项
     clickStepItem(index) {
       // 滚动到对应区域
       const targetRef = `stepItem${index + 1}`
-      const targetTop = this.getElementTop(this.$refs[targetRef])
+      const targetTop = getElementTop(this.$refs[targetRef])
       const menuHeight = 72
       const stepHeihgt = 51
       window.scrollTo({ top: targetTop - menuHeight - stepHeihgt, behavior: 'smooth' })

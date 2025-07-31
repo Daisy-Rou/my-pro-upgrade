@@ -18,7 +18,7 @@
 
 <script>
 // 导入防抖工具函数
-import { debounce } from '@/assets/utils';
+import { debounce, getElementTop } from '@/assets/utils';
 export default {
   name: 'step-nav',
   props: {
@@ -69,13 +69,13 @@ export default {
     calculatePositions() {
       // 只在非固定状态下更新stepTop
       if (!this.isFixed) {
-        this.stepTop = this.getElementTop(this.$refs.stepNav)
+        this.stepTop = getElementTop(this.$refs.stepNav)
       }
       // 计算每个步骤项的位置
       this.list.forEach((item, index) => {
         const targetRef = `stepItem${index + 1}`
         if (this.$parent && this.$parent.$refs[targetRef]) {
-          this.stepItemTopArr[index] = this.getElementTop(this.$parent.$refs[targetRef])
+          this.stepItemTopArr[index] = getElementTop(this.$parent.$refs[targetRef])
         } else {
           this.stepItemTopArr[index] = 0
         }
@@ -86,19 +86,10 @@ export default {
     // 处理窗口大小变化
     handleResize() {
       // 获取元素距离顶部位置
-      this.stepTop = this.getElementTop(this.$refs.stepNav)
+      this.stepTop = getElementTop(this.$refs.stepNav)
       // 重新检查滚动位置
       this.scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       this.isFixed = this.scrollTop + this.menuHeight >= this.stepTop;
-    },
-    // 获取元素距页面顶部距离
-    getElementTop(el) {
-      if (el) {
-        const rect = el.getBoundingClientRect();
-        // 元素位置 = rect.top + 当前滚动位置
-        return rect.top + window.pageYOffset;
-      }
-      return 0;
     },
     // 点击步骤导航项
     clickStepItem(index) {
