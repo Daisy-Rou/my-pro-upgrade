@@ -8,11 +8,12 @@ module.exports = defineConfig({
   },
   css: {
     loaderOptions: {
-      sass: {
-        prependData: `@import "@/assets/scss/global.scss";`
-      },
+      // sass: {
+      //   prependData: `@import "@/assets/scss/global.scss";`
+      // },
       scss: {
-        prependData: `@import "@/assets/scss/global.scss";`
+        // prependData: `@import "@/assets/scss/global.scss";`
+        additionalData: `@import "@/assets/scss/global.scss";`
       }
     }
   }

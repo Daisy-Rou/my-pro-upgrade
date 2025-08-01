@@ -136,7 +136,7 @@ export default {
           // -webkit-line-clamp: 2;/*用来限制在一个块元素显示的文本的行数。*/
           // -webkit-box-orient: vertical;/*必须结合的属性 ，设置或检索伸缩盒对象的子元素的排*/
           // 穿透scoped限制修改内部样式
-          /deep/ .purple {
+          ::v-deep .purple {
             font-size: 14px;
             font-weight: 400;
             color: #B164E2;

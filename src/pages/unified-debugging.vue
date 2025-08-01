@@ -1,43 +1,44 @@
 <template>
   <div class="unified-debugging">
     <!-- 主内容区域 -->
-    <main-content :mainObj="$t('unifiedDebugging.mainObj')"></main-content>
+    <main-content :mainObj="mainObj"></main-content>
     <!-- 步骤导航栏 -->
-    <step-nav :list="$t('unifiedDebugging.stepList')" @clickStep="clickStepItem"></step-nav>
+    <step-nav :list="stepList" @clickStep="clickStepItem"></step-nav>
     <!-- 步骤1内容区 -->
     <div class="step-one-box" ref="stepItem1">
-      <step-title :num="$t('unifiedDebugging.stepList')[0].num" :title="$t('unifiedDebugging.stepList')[0].title"></step-title>
+      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
     </div>
     <!-- 特性列表组件 -->
-    <content-introduction :list="$t('unifiedDebugging.list')"></content-introduction>
+    <content-introduction :list="list"></content-introduction>
     <!-- 步骤2内容区 -->
     <div class="step-two-box" ref="stepItem2">
-      <step-title :num="$t('unifiedDebugging.stepList')[1].num" :title="$t('unifiedDebugging.stepList')[1].title"></step-title>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
       <!-- 主标题组件 -->
       <main-title
-        :title="$t('unifiedDebugging.titleObj.title1')"
-        :small-title="$t('unifiedDebugging.titleObj.content1')"
+        :title="titleObj.title1"
+        :small-title="titleObj.content1"
       ></main-title>
       <!-- 图片悬停展示组件 -->
-      <hover-img :list="$t('unifiedDebugging.listSolution')"></hover-img>
+      <hover-img :list="listSolution"></hover-img>
     </div>
     <!-- 步骤3内容区 -->
     <div class="step-three-box" ref="stepItem3">
-      <step-title :num="$t('unifiedDebugging.stepList')[2].num" :title="$t('unifiedDebugging.stepList')[2].title"></step-title>
+      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
     </div>
     <!-- 产品优势区域（带背景） -->
-    <top-bottom-card :list="$t('unifiedDebugging.cpysList')"></top-bottom-card>
+    <top-bottom-card :list="cpysList"></top-bottom-card>
   </div>
 </template>
 
 <script>
-import mainContent from '@/components/main-content.vue';
-import mainTitle from '@/components/main-title.vue';
-import stepNav from '@/components/step-nav.vue';
-import stepTitle from '@/components/step-title.vue';
-import hoverImg from '@/components/hover-img.vue'
-import contentIntroduction from '@/components/content-introduction.vue';
-import topBottomCard from '@/components/top-bottom-card.vue';
+// 组件懒加载
+const mainContent = () => import('@/components/main-content.vue');
+const stepNav = () => import('@/components/step-nav.vue');
+const stepTitle = () => import('@/components/step-title.vue');
+const mainTitle = () => import('@/components/main-title.vue');
+const hoverImg = () => import('@/components/hover-img.vue');
+const contentIntroduction = () => import('@/components/content-introduction.vue');
+const topBottomCard = () => import('@/components/top-bottom-card.vue');
 import { getElementTop } from '@/assets/utils'
 export default {
   name: 'unified-debugging',
@@ -50,9 +51,32 @@ export default {
     contentIntroduction,
     topBottomCard
   },
+  computed: {
+    // 缓存国际化数据
+    mainObj() {
+      return this.$t('unifiedDebugging.mainObj');
+    },
+    stepList() {
+      return this.$t('unifiedDebugging.stepList') || [];
+    },
+    list() {
+      return this.$t('unifiedDebugging.list') || [];
+    },
+    titleObj() {
+      return this.$t('unifiedDebugging.titleObj') || {};
+    },
+    listSolution() {
+      return this.$t('unifiedDebugging.listSolution') || [];
+    },
+    cpysList() {
+      return this.$t('unifiedDebugging.cpysList') || [];
+    }
+  },
   data() {
     return {
-      
+      // 菜单和步骤导航高度可以配置化
+      menuHeight: 72,
+      stepHeight: 51
     }
   },
   methods: {
@@ -61,9 +85,10 @@ export default {
       // 滚动到对应区域
       const targetRef = `stepItem${index + 1}`
       const targetTop = getElementTop(this.$refs[targetRef])
-      const menuHeight = 72
-      const stepHeihgt = 51
-      window.scrollTo({ top: targetTop - menuHeight - stepHeihgt, behavior: 'smooth' })
+      // 使用requestAnimationFrame优化滚动性能
+      window.requestAnimationFrame(() => {
+        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
+      })
     }
   }
 }
@@ -88,12 +113,12 @@ export default {
   // 媒体查询
   @media screen and (max-width: 1905px) {
     .step-one-box, .step-two-box, .step-three-box {
-      padding: 40px 64px !important;
+      padding: 40px 64px;
     }
   }
   @media screen and (max-width: 768px){
     .step-one-box, .step-two-box, .step-three-box {
-      padding: 40px 24px !important;
+      padding: 40px 24px;
     }
   }
 }

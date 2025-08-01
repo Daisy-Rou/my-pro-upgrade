@@ -8,34 +8,34 @@
         <!-- <img v-show="showVideo" class="text-icon" src="@/assets/2.svg" alt="数智建院图标"> -->
         <img v-show="showVideo" class="text-icon" src="@/assets/images/jysz-white.png" alt="数智建院图标">
         <!-- 主标题 -->
-        <div class="big-title">{{ $t('firstPage.titleObj.bigTitle') }}</div>
-        <div class="big-title">{{ $t('firstPage.titleObj.bigTitle1') }}</div>
+        <div class="big-title">{{ titleObj.bigTitle }}</div>
+        <div class="big-title">{{ titleObj.bigTitle1 }}</div>
         <!-- 副标题描述 -->
-        <span class="small-title">{{ $t('firstPage.titleObj.smallTitle') }}</span>
+        <span class="small-title">{{ titleObj.smallTitle }}</span>
         <!-- 操作按钮 -->
         <div class="btn-box">
-          <div class="btn-blue">{{ $t('firstPage.btnText') }}</div>
+          <div class="btn-blue">{{ btnText }}</div>
         </div>
       </div>
 
       <!-- 背景视频区域 -->
-      <video class="cosmos-video" :class="{'right-video': showVideo}" controls muted autoplay loop>
-        <source src="@/assets/images/big-bg-compress.mp4" type="video/mp4">
+      <video class="cosmos-video" :class="{'right-video': showVideo}" controls muted autoplay loop preload="auto">
+        <source :src="videoSource" type="video/mp4">
       </video>
 
       <!-- 工具链展示区域 -->
       <div class="news-box" :class="{'mt160': showVideo}">
         <!-- 主标题组件 -->
         <main-title
-          :title="$t('firstPage.titleObj.title1')"
-          :small-title="$t('firstPage.titleObj.constent1')"
+          :title="titleObj.title1"
+          :small-title="titleObj.constent1"
         ></main-title>
         
         <!-- 工具链卡片列表 -->
-        <big-card :list="$t('firstPage.cardList')"></big-card>
+        <big-card :list="cardList"></big-card>
         
         <!-- 左右布局卡片组件 -->
-        <left-right-card :list="$t('firstPage.list')"></left-right-card>
+        <left-right-card :list="list"></left-right-card>
       </div>
     </div>
 
@@ -43,23 +43,24 @@
     <div class="study-box">
       <div class="solution-box">
         <main-title
-          :title="$t('firstPage.titleObj.title2')"
-          :small-title="$t('firstPage.titleObj.content2')"
+          :title="titleObj.title2"
+          :small-title="titleObj.content2"
         ></main-title>
         
         <!-- 悬停图片组件展示解决方案 -->
-        <hover-img :list="$t('firstPage.listSolution')"></hover-img>
+        <hover-img :list="listSolution"></hover-img>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// 导入组件
-import MainTitle from '@/components/main-title.vue'
-import bigCard from '@/components/big-card.vue'
-import leftRightCard from '@/components/left-right-card.vue'
-import hoverImg from '@/components/hover-img.vue'
+// 组件懒加载
+const MainTitle = () => import('@/components/main-title.vue');
+const bigCard = () => import('@/components/big-card.vue');
+const leftRightCard = () => import('@/components/left-right-card.vue');
+const hoverImg = () => import('@/components/hover-img.vue');
+import { debounce } from '@/assets/utils';
 export default {
   name: 'first-page',
   components: {
@@ -67,6 +68,28 @@ export default {
     bigCard,
     leftRightCard,
     hoverImg
+  },
+  computed: {
+    // 视频源路径
+    videoSource() {
+      return require('@/assets/images/big-bg-compress.mp4');
+    },
+    // 翻译数据缓存
+    titleObj() {
+      return this.$t('firstPage.titleObj');
+    },
+    cardList() {
+      return this.$t('firstPage.cardList');
+    },
+    list() {
+      return this.$t('firstPage.list');
+    },
+    listSolution() {
+      return this.$t('firstPage.listSolution');
+    },
+    btnText() {
+      return this.$t('firstPage.btnText');
+    }
   },
   data() {
     return {
@@ -77,11 +100,16 @@ export default {
     // 初始调整布局
     this.handleResize()
     // 添加窗口大小变化监听
-    window.addEventListener('resize', this.handleResize);
+    this.resizeObserver = new ResizeObserver(entries => {
+      debounce(this.handleResize(), 100)
+    })
+    this.resizeObserver.observe(document.documentElement)
   },
   beforeDestroy() {
-    // 组件销毁前移除监听器
-    window.removeEventListener('resize', this.handleResize);
+    // 销毁ResizeObserver实例
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+    }
   },
   methods: {
     // 响应窗口大小变化
@@ -113,14 +141,6 @@ export default {
     padding: 96px 128px;
     /* 渐变背景 */
     background: linear-gradient(45deg, $color-bg 76%, #1e0d1a 84%, #0f141b 95%);
-    /* 响应式间距调整类 */
-    .mt160 {
-      font-family: Inter Tight, sans-serif;
-      margin-top: 820px !important;
-    }
-    .mr0 {
-      margin-right: 0 !important;
-    }
     /* 左侧文本区域 */
     .text-box {
       display: flex;
@@ -210,6 +230,11 @@ export default {
       display: flex;
       flex-direction: column;
       margin-top: 100px;
+      /* 响应式间距调整类 */
+      &.mt160 {
+        font-family: Inter Tight, sans-serif;
+        margin-top: 820px;
+      }
     }
   }
   /* 解决方案区域 */
@@ -228,73 +253,78 @@ export default {
       display: flex;
       flex-direction: column;
     }
-    /deep/ .solution-item {
+    ::v-deep .solution-item {
       aspect-ratio: 314 / 176 !important;
     }
   }
   /* 响应式断点：1905px以下 */
   @media screen and (max-width: 1905px) {
-    .main-box, .solution-box  {
-      padding: 96px 64px !important;
-    }
-    
     .main-box {
+      padding: 96px 64px;
       .text-box {
-        left: 64px !important;
+        left: 64px;
+      }
+      .right-video {
+        right: 64px;
+        width: 1024px;
+        max-width: 1024px;
+        top: 96px;
+        aspect-ratio: 1024 / 576;
       }
     }
-    .right-video {
-      right: 64px !important;
-      width: 1024px !important;
-      max-width: 1024px !important;
-      top: 96px !important;
-      aspect-ratio: 1024 / 576 !important;
+    .study-box .solution-box  {
+      padding: 96px 64px;
     }
   }
   /* 响应式断点：1440px以下 */
   @media screen  and (max-width: 1440px) {
-    .main-box, .solution-box {
-      padding: 80px 64px !important;
+    .main-box {
+      padding: 80px 64px;
+      .right-video {
+        right: 64px;
+        width: 818px;
+        max-width: 818px;
+        top: 136px;
+        aspect-ratio: 818 / 460;
+      }
     }
-    .right-video {
-      right: 64px !important;
-      width: 818px !important;
-      max-width: 818px !important;
-      top: 136px !important;
-      aspect-ratio: 818 / 460 !important;
+    .study-box .solution-box {
+      padding: 80px 64px;
     }
   }
   /* 响应式断点：1280px以下（平板/手机） */
   @media screen and (max-width: 1280px) {
-    .text-box {
-      position: static !important;
-      .big-title {
-        font-size: 40px !important;
-        line-height: 48px !important;
+    .main-box {
+      .text-box {
+        position: static;
+        .big-title {
+          font-size: 40px;
+          line-height: 48px;
+        }
+        .small-title {
+          font-size: 16px;
+          line-height: 26px;
+        }
       }
-      .small-title {
-        font-size: 16px !important;
-        line-height: 26px !important;
+      .cosmos-video {
+        margin-top: 54px;
       }
-    }
-    .cosmos-video {
-      margin-top: 54px !important;
     }
   }
   /* 响应式断点：768px以下（手机） */
   @media screen and (max-width: 768px){
     /* 调整内边距和字体大小 */
     .main-box, .solution-box {
-      padding: 80px 24px !important;
-    }
-    .main-box {
+      padding: 80px 24px;
       .text-box {
-        left: 24px !important;
         .big-title {
-          font-size: 32px !important;
-          line-height: 40px !important;
+          font-size: 32px;
+          line-height: 40px;
         }
       }
+    }
+    .study-box .solution-box {
+      padding: 80px 24px;
     }
   }
 }

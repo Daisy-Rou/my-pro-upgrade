@@ -20,7 +20,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
 /* 导入全局样式文件 */
 @import '@/assets/scss/main.scss';
 </style>

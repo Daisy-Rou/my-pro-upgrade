@@ -52,7 +52,7 @@ export default {
     window.addEventListener('scroll', debounce(this.handleStepScroll, 100))
     // 使用ResizeObserver替代window.resize事件监听
     this.resizeObserver = new ResizeObserver(entries => {
-      this.handleResize()
+      debounce(this.handleResize(), 100)
     })
     this.resizeObserver.observe(document.documentElement)
   },

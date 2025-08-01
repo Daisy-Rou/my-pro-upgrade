@@ -1,46 +1,44 @@
-/** // @charset "UTF-8";
-// @import "../fonts/iconfont.css"; **/
 
 @font-face {
   font-family: Inter;
   font-display: swap;
   font-weight: 300;
-  src: local("Inter Light"),local("Inter-Light"),url(../fonts/Inter-Light.woff2) format("woff");
+  src: local("Inter Light"),local("Inter-Light"),url(@/assets/fonts/Inter-Light.woff2) format("woff");
 }
 
 @font-face {
   font-family: Inter;
   font-display: swap;
   font-weight: 400;
-  src: local("Inter Regular"),local("Inter-Regular"),url(../fonts/Inter-Regular.woff2) format("woff");
+  src: local("Inter Regular"),local("Inter-Regular"),url(@/assets/fonts/Inter-Regular.woff2) format("woff");
 }
 
 @font-face {
   font-family: Inter;
   font-display: swap;
   font-weight: 500;
-  src: local("Inter Medium"),local("Inter-Medium"),url(../fonts/Inter-Medium.woff2) format("woff");
+  src: local("Inter Medium"),local("Inter-Medium"),url(@/assets/fonts/Inter-Medium.woff2) format("woff");
 }
 
 @font-face {
   font-family: Inter;
   font-display: swap;
   font-weight: 700;
-  src: local("Inter Bold"),local("Inter-Bold"),url(../fonts/Inter-Bold.woff2) format("woff");
+  src: local("Inter Bold"),local("Inter-Bold"),url(@/assets/fonts/Inter-Bold.woff2) format("woff");
 }
 
 @font-face {
   font-family: Inter Tight;
   font-display: swap;
   font-weight: 700;
-  src: local("Inter Tight Bold"),local("InterTight-Bold"),url(../fonts/InterTight-Bold.woff2) format("woff");
+  src: local("Inter Tight Bold"),local("InterTight-Bold"),url(@/assets/fonts/InterTight-Bold.woff2) format("woff");
 }
 
 @font-face {
   font-family: Inter Tight;
   font-display: swap;
   font-weight: 900;
-  src: local("Inter Tight Black"),local("InterTight-Black"),url(../fonts/InterTight-Black.woff2) format("woff");
+  src: local("Inter Tight Black"),local("InterTight-Black"),url(@/assets/fonts/InterTight-Black.woff2) format("woff");
 }
 * {
   font-size: 12px;

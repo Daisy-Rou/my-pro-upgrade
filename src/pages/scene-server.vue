@@ -1,70 +1,97 @@
 <template>
   <div class="scene-server">
     <!-- 主展示区域 -->
-    <main-content :mainObj="$t('sceneServer.mainObj')"></main-content>
+    <main-content :mainObj="mainObj"></main-content>
     <!-- 步骤导航栏 -->
-    <step-nav :list="$t('sceneServer.stepList')" @clickStep="clickStepItem"></step-nav>
+    <step-nav :list="stepList" @clickStep="clickStepItem"></step-nav>
     <!-- 步骤1：产品特性 -->
     <div class="step-one-box" ref="stepItem1">
-      <step-title :num="$t('sceneServer.stepList')[0].num" :title="$t('sceneServer.stepList')[0].title"></step-title>
+      <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
     </div>
     <!-- 特性列表组件 -->
-    <content-introduction :list="$t('sceneServer.list')"></content-introduction>
+    <content-introduction :list="featureList"></content-introduction>
     <!-- 步骤2：产品优势 -->
     <div class="step-two-box" ref="stepItem2">
-      <step-title :num="$t('sceneServer.stepList')[1].num" :title="$t('sceneServer.stepList')[1].title"></step-title>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
     <!-- 产品优势卡片区域 -->
-    <top-bottom-card :list="$t('sceneServer.cpysList')"></top-bottom-card>
+    <top-bottom-card :list="advantagesList"></top-bottom-card>
     <!-- 步骤3：多平台适应 -->
     <div class="step-three-box" ref="stepItem3">
-      <step-title :num="$t('sceneServer.stepList')[2].num" :title="$t('sceneServer.stepList')[2].title"></step-title>
+      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
     </div>
      <!-- 平台适应卡片区域 -->
     <div class="step-three-bg-box">
       <div 
         class="card-item"
-        v-for="(item, index) in $t('sceneServer.dptList')"
-        :key="index"
+        v-for="(item, index) in platformList"
+        :key="item.id || index"
       >
-        <img v-lazy="item.logo" alt="" class="card-item-logo">
+        <img v-lazy="item.logo" :alt="item.title" class="card-item-logo">
         <div class="card-item-title">{{item.title}}</div>
         <span class="card-item-content">{{item.content}}</span>
       </div>
     </div>
     <!-- 步骤4：视觉效果 -->
     <div class="step-four-box" ref="stepItem4">
-      <step-title :num="$t('sceneServer.stepList')[3].num" :title="$t('sceneServer.stepList')[3].title"></step-title>
-      <main-title :title="$t('sceneServer.titleObj.title1')"></main-title>
+      <step-title :num="stepList[3].num" :title="stepList[3].title"></step-title>
+      <main-title :title="visualTitle"></main-title>
     </div>
     <!-- 视觉效果卡片区域 -->
-    <bottom-line-card :list="$t('sceneServer.sjxgList')"></bottom-line-card>
+    <bottom-line-card :list="visualEffectsList"></bottom-line-card>
   </div>
 </template>
 
 <script>
-import mainContent from '@/components/main-content.vue';
-import mainTitle from '@/components/main-title.vue';
-import stepNav from '@/components/step-nav.vue';
-import stepTitle from '@/components/step-title.vue';
-import contentIntroduction from '@/components/content-introduction.vue';
-import topBottomCard from '@/components/top-bottom-card.vue';
-import bottomLineCard from '@/components/bottom-line-card.vue';
+// 组件懒加载
+const MainContent = () => import('@/components/main-content.vue');
+const MainTitle = () => import('@/components/main-title.vue');
+const StepNav = () => import('@/components/step-nav.vue');
+const StepTitle = () => import('@/components/step-title.vue');
+const ContentIntroduction = () => import('@/components/content-introduction.vue');
+const TopBottomCard = () => import('@/components/top-bottom-card.vue');
+const BottomLineCard = () => import('@/components/bottom-line-card.vue');
 import { getElementTop } from '@/assets/utils'
 export default {
   name: 'scene-server',
   components: {
-    mainContent,
-    mainTitle,
-    stepNav,
-    stepTitle,
-    contentIntroduction,
-    topBottomCard,
-    bottomLineCard
+    MainContent,
+    MainTitle,
+    StepNav,
+    StepTitle,
+    ContentIntroduction,
+    TopBottomCard,
+    BottomLineCard
+  },
+  computed: {
+    // 缓存国际化数据
+    mainObj() {
+      return this.$t('sceneServer.mainObj');
+    },
+    stepList() {
+      return this.$t('sceneServer.stepList');
+    },
+    featureList() {
+      return this.$t('sceneServer.list');
+    },
+    advantagesList() {
+      return this.$t('sceneServer.cpysList');
+    },
+    platformList() {
+      return this.$t('sceneServer.dptList');
+    },
+    visualTitle() {
+      return this.$t('sceneServer.titleObj.title1');
+    },
+    visualEffectsList() {
+      return this.$t('sceneServer.sjxgList');
+    }
   },
   data() {
     return {
-      
+      // 菜单和步骤导航高度可以配置化
+      menuHeight: 72,
+      stepHeight: 51
     }
   },
   methods: {
@@ -73,9 +100,10 @@ export default {
       // 滚动到对应区域
       const targetRef = `stepItem${index + 1}`
       const targetTop = getElementTop(this.$refs[targetRef])
-      const menuHeight = 72
-      const stepHeihgt = 51
-      window.scrollTo({ top: targetTop - menuHeight - stepHeihgt, behavior: 'smooth' })
+      // 使用requestAnimationFrame优化滚动性能
+      window.requestAnimationFrame(() => {
+        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
+      })
     }
   }
 }
@@ -108,7 +136,7 @@ export default {
   // 优势卡片区域
   ::v-deep .top-bottom-card {
     .step-two-bg-box {
-      padding: 24px 128px !important;
+      padding: 24px 128px;
     }
     .card-box .card-item {
       width: calc(33.3% - 24px);
@@ -120,7 +148,7 @@ export default {
   }
   // 平台适应卡片区域
   .step-three-bg-box {
-    width: 100%;
+    width: calc(100% + 24px);
     max-width: 1920px;
     display: flex;
     flex-direction: row;
@@ -172,38 +200,38 @@ export default {
   // 媒体查询
   @media screen and (max-width: 1905px) {
     .step-one-box, .step-two-box, .step-three-box, .step-four-box {
-      padding: 40px 64px !important;
+      padding: 40px 64px;
     }
     ::v-deep .top-bottom-card {
       .step-two-bg-box {
-        padding: 24px 64px !important;
+        padding: 24px 64px;
       }
     }
     .step-three-bg-box {
-      padding: 64px !important;
+      padding: 64px;
     }
   }
   @media screen  and (max-width: 1440px) {
     .step-three-bg-box {
-      padding: 24px 64px !important;
+      padding: 24px 64px;
     }
   }
   @media screen and (max-width: 768px){
     ::v-deep .top-bottom-card {
       .step-two-bg-box {
-        padding: 24px !important;
+        padding: 24px;
       }
     }
     .step-one-box, .step-two-box, .step-three-box, .step-four-box {
-      padding: 40px 24px !important;
+      padding: 40px 24px;
     }
     .step-three-bg-box {
-      width: 100% !important;
-      padding: 24px !important;
-      margin-right: 0 !important;
+      width: 100%;
+      padding: 24px;
+      margin-right: 0;
       .card-item {
-        width: 100% !important;
-        margin-right: 0 !important;
+        width: 100%;
+        margin-right: 0;
       }
     }
   }

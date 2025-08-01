@@ -1,18 +1,18 @@
 <template>
   <div class="smart-factory">
     <!-- 顶部展示区 -->
-    <main-content :mainObj="$t('smartFactory.mainObj')"></main-content>
+    <main-content :mainObj="mainObj"></main-content>
     <!-- 步骤导航 -->
-    <step-nav :list="$t('smartFactory.stepList')" @clickStep="clickStepItem"></step-nav>
+    <step-nav :list="stepList" @clickStep="clickStepItem"></step-nav>
     <!-- 产品特性模块 -->
     <div class="step-one-box" ref="stepItem1">
       <div class="top-title-box">
-        <step-title :num="$t('smartFactory.stepList')[0].num" :title="$t('smartFactory.stepList')[0].title"></step-title>
+        <step-title :num="stepList[0].num" :title="stepList[0].title"></step-title>
         <div class="step-btn-box">
           <div
             class="btn-item"
             :class="{'active': activeBtnIndex === index}"
-            v-for="(item, index) in $t('smartFactory.stepBtnList')" 
+            v-for="(item, index) in stepBtnList" 
             :key="index"
             @click="handleBtnClick(index)"
           >
@@ -23,33 +23,34 @@
     </div>
     <!-- 特性列表组件 -->
     <!-- 商业决策 -->
-    <content-introduction v-if="activeBtnIndex === 0" :list="$t('smartFactory.listSYJC')"></content-introduction>
+    <content-introduction v-if="activeBtnIndex === 0" :list="listSYJC"></content-introduction>
     <!-- 数字孪生、智能运维、基础平台 -->
     <transparent-card v-if="activeBtnIndex" :listObj="compList"></transparent-card>
     <!-- 产品优势卡片区域 -->
     <div class="step-two-box" ref="stepItem2">
-      <step-title :num="$t('smartFactory.stepList')[1].num" :title="$t('smartFactory.stepList')[1].title"></step-title>
+      <step-title :num="stepList[1].num" :title="stepList[1].title"></step-title>
     </div>
-    <top-bottom-card :list="$t('smartFactory.cpysList')"></top-bottom-card>
+    <top-bottom-card :list="cpysList"></top-bottom-card>
     <!-- 推荐产品卡片区域 -->
     <div class="step-two-box" ref="stepItem3">
-      <step-title :num="$t('smartFactory.stepList')[2].num" :title="$t('smartFactory.stepList')[2].title"></step-title>
-      <main-title :title="$t('smartFactory.titleObj.title1')"></main-title>
+      <step-title :num="stepList[2].num" :title="stepList[2].title"></step-title>
+      <main-title :title="titleObj.title1"></main-title>
       <!-- 左右布局卡片组件 -->
-      <left-right-card :list="$t('smartFactory.list')"></left-right-card>
+      <left-right-card :list="list"></left-right-card>
     </div>
   </div>
 </template>
 
 <script>
-import mainContent from '@/components/main-content.vue';
-import stepNav from '@/components/step-nav.vue';
-import stepTitle from '@/components/step-title.vue';
-import mainTitle from '@/components/main-title.vue';
-import leftRightCard from '@/components/left-right-card.vue'
-import topBottomCard from '@/components/top-bottom-card.vue';
-import contentIntroduction from '@/components/content-introduction.vue';
-import transparentCard from '@/components/transparent-card.vue';
+// 组件懒加载
+const mainContent = () => import('@/components/main-content.vue');
+const stepNav = () => import('@/components/step-nav.vue');
+const stepTitle = () => import('@/components/step-title.vue');
+const mainTitle = () => import('@/components/main-title.vue');
+const leftRightCard = () => import('@/components/left-right-card.vue');
+const topBottomCard = () => import('@/components/top-bottom-card.vue');
+const contentIntroduction = () => import('@/components/content-introduction.vue');
+const transparentCard = () => import('@/components/transparent-card.vue');
 import { getElementTop } from '@/assets/utils'
 export default {
   name: 'smart-factory',
@@ -64,6 +65,28 @@ export default {
     transparentCard
   },
   computed: {
+    // 缓存国际化数据
+    mainObj() {
+      return this.$t('smartFactory.mainObj');
+    },
+    stepList() {
+      return this.$t('smartFactory.stepList');
+    },
+    stepBtnList() {
+      return this.$t('smartFactory.stepBtnList');
+    },
+    listSYJC() {
+      return this.$t('smartFactory.listSYJC') || [];
+    },
+    cpysList() {
+      return this.$t('smartFactory.cpysList') || [];
+    },
+    titleObj() {
+      return this.$t('smartFactory.titleObj') || {};
+    },
+    list() {
+      return this.$t('smartFactory.list') || [];
+    },
     compList() {
       let list = []
       if (this.activeBtnIndex === 1) {
@@ -81,6 +104,9 @@ export default {
   data() {
     return {
       activeBtnIndex: 0,   // 当前高亮按钮
+      // 菜单和步骤导航高度可以配置化
+      menuHeight: 72,
+      stepHeight: 51
     }
   },
   methods: {
@@ -89,9 +115,10 @@ export default {
       // 滚动到对应区域
       const targetRef = `stepItem${index + 1}`
       const targetTop = getElementTop(this.$refs[targetRef])
-      const menuHeight = 72
-      const stepHeihgt = 51
-      window.scrollTo({ top: targetTop - menuHeight - stepHeihgt, behavior: 'smooth' })
+      // 使用requestAnimationFrame优化滚动性能
+      window.requestAnimationFrame(() => {
+        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
+      })
     },
     // 按钮切换
     handleBtnClick(index) {
@@ -157,22 +184,26 @@ export default {
   // 媒体查询区域
   @media screen and (max-width: 1905px) {
     .step-one-box, .step-two-box, .step-three-box {
-      padding: 40px 64px !important;
+      padding: 40px 64px;
+    }
+  }
+  @media screen and (max-width: 1440px) {
+    .step-one-box {
+      .top-title-box {
+        flex-direction: column;
+        align-items: flex-start;
+        .step-btn-box {
+          margin-top: 24px;
+          .btn-item {
+            margin-bottom: 12px;
+          }
+        }
+      }
     }
   }
   @media screen and (max-width: 768px){
     .step-one-box, .step-two-box, .step-three-box {
-      padding: 40px 24px !important;
-    }
-    .top-title-box {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      .step-btn-box {
-        margin-top: 24px !important;
-        .btn-item {
-          margin-bottom: 12px !important;
-        }
-      }
+      padding: 40px 24px;
     }
   }
 }

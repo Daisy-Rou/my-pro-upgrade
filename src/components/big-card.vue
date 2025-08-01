@@ -50,18 +50,20 @@ export default {
       showNewsBig: true, // 控制卡片布局（大屏左右布局/小屏上下布局）
     }
   },
-  created() {
-    // 创建防抖函数 (延迟100ms执行)
-    this.debouncedHandleResize = debounce(this.handleResize, 100);
-  },
   mounted() {
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
-    window.addEventListener('resize', this.debouncedHandleResize)
+    // 添加窗口大小变化监听
+    this.resizeObserver = new ResizeObserver(entries => {
+      debounce(this.handleResize(), 100)
+    })
+    this.resizeObserver.observe(document.documentElement)
   },
   beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.debouncedHandleResize)
+    // 销毁ResizeObserver实例
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+    }
   },
   methods: {
     // 响应窗口大小变化

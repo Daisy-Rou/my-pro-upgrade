@@ -111,11 +111,17 @@ export default {
     this.$refs.drawerMenu.changeMenuTitle()
     // 添加窗口大小改变的监听器，以便动态更新计算属性
     this.handleResize()
-    window.addEventListener('resize', debounce(this.handleResize, 100));
+    // 添加窗口大小变化监听
+    this.resizeObserver = new ResizeObserver(entries => {
+      debounce(this.handleResize(), 100)
+    })
+    this.resizeObserver.observe(document.documentElement)
   },
   beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', debounce(this.handleResize, 100));
+    // 销毁ResizeObserver实例
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+    }
   },
 
   methods: {
@@ -206,7 +212,7 @@ export default {
     color: rgba(255, 255, 255, .65) !important;
     background-color: $color-bg !important;
   }
-  /deep/ .el-menu.el-menu--horizontal {
+  ::v-deep .el-menu.el-menu--horizontal {
     display: flex;
     border-bottom: none !important;
   }
@@ -229,7 +235,7 @@ export default {
         border-bottom: none !important;
       }
       .el-menu--horizontal>.el-menu-item.is-active,
-      /deep/ .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
+      ::v-deep .el-menu--horizontal>.el-submenu.is-active .el-submenu__title {
         border-bottom: none !important;
         color: #fff !important;
         background-color: $color-bg !important;
@@ -266,15 +272,15 @@ export default {
       margin-right: 14px;
       min-width: 50%;
       max-width: 50%;
-      /deep/ .el-input__inner {
+      ::v-deep .el-input__inner {
         border-radius: 24px;
         background-color: $color-white5;
         border: 1px solid $color-white35;
       }
-      /deep/ .el-input__icon {
+      ::v-deep .el-input__icon {
         font-size: 16px;
       }
-      /deep/ .el-input--prefix .el-input__inner {
+      ::v-deep .el-input--prefix .el-input__inner {
         padding-left: 40px;
       }
     }
