@@ -47,23 +47,29 @@
 <script>
 export default {
   name: 'dropdown-list',
-  data() {
-    return {
-      footerList: []
-    }
-  },
-  mounted() {
+  computed: {
     // 初始化所有列表项为收起状态
-    // 避免直接修改国际化数据，创建本地响应式数据副本
-    this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list'))).map(item => ({
-      ...item,
-      isShow: false
-    }))
+    // 缓存国际化数据
+    footerList() {
+      return JSON.parse(JSON.stringify(this.$t('footer.list'))).map(item => ({
+        ...item,
+        isShow: false
+      }))
+    },
   },
+  // mounted() {
+  //   // 初始化所有列表项为收起状态
+  //   // 避免直接修改国际化数据，创建本地响应式数据副本
+  //   this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list'))).map(item => ({
+  //     ...item,
+  //     isShow: false
+  //   }))
+  // },
   methods: {
     // 处理列表项点击 - 切换展开/折叠状态
     handleItemClick(item) {
       item.isShow = !item.isShow
+      this.$forceUpdate()
     },
     // 处理子列表项点击 - 导航到指定路径
     handleSubItemClick(item) {
@@ -73,6 +79,7 @@ export default {
         this.footerList.forEach(item => {
           item.isShow = false
         })
+        this.$forceUpdate()
       }
     }
   }

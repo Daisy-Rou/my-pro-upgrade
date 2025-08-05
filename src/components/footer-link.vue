@@ -57,17 +57,21 @@ export default {
   components: {
     DropdownList
   },
+  computed: {
+    // 缓存国际化数据
+    footerList() {
+      return this.$t('footer.list');
+    },
+  },
   data() {
     return {
       // 控制介绍列表显示状态的响应式变量
       showIntroductionList: true,
-      footerList: []
     }
   },
   created() {
     // 创建防抖函数 (延迟100ms执行)
     this.debouncedHandleResize = debounce(this.handleResize, 100);
-    this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list')))
   },
   mounted() {
     // 创建ResizeObserver实例
