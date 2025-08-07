@@ -33,19 +33,20 @@
   </div>
 </template>
 
-<script>
-// 顶部底部卡片组件 - 用于展示带图片和描述的卡片列表
-export default {
-  name: 'top-bottom-card',
-  // 组件属性定义
-  props: {
-    list: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
+<script setup>
+import { defineProps } from 'vue'
+
+// 定义组件属性
+const props = defineProps({
+  list: {
+    type: Object,
+    required: true,
+    default: () => ({})
   }
-}
+})
+
+// 解构props以简化使用
+const { list } = props
 </script>
 
 <style lang="scss" scoped>

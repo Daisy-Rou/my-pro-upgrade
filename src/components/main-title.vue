@@ -12,33 +12,32 @@
   </div>
 </template>
 
-<script>
+<script setup>
 // 主标题组件 - 展示页面主标题和副标题
-export default {
-  name: 'main-title',
-  /**
-   * 主标题组件 - 用于页面顶部展示层级标题
-   * @component
-   * @param {string} title - 主标题文本（必需）
-   * @param {string} [smallTitle] - 副标题文本
-   * @param {string} [smallTitleTwo] - 补充说明文本
-  */
-  props: {
-    title: {
-      type: String,
-      required: true,
-      default: ''
-    },
-    smallTitle: {
-      type: String,
-      default: ''
-    },
-    smallTitleTwo: {
-      type: String,
-      default: ''
-    }
+import { defineProps } from 'vue';
+
+/**
+ * 主标题组件 - 用于页面顶部展示层级标题
+ * @component
+ * @param {string} title - 主标题文本（必需）
+ * @param {string} [smallTitle] - 副标题文本
+ * @param {string} [smallTitleTwo] - 补充说明文本
+*/
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  smallTitle: {
+    type: String,
+    default: ''
+  },
+  smallTitleTwo: {
+    type: String,
+    default: ''
   }
-}
+});
 </script>
 
 <style lang="scss" scoped>

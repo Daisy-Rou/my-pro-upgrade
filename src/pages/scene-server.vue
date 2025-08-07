@@ -42,71 +42,54 @@
   </div>
 </template>
 
-<script>
-// 组件懒加载
-const MainContent = () => import('@/components/main-content.vue');
-const MainTitle = () => import('@/components/main-title.vue');
-const StepNav = () => import('@/components/step-nav.vue');
-const StepTitle = () => import('@/components/step-title.vue');
-const ContentIntroduction = () => import('@/components/content-introduction.vue');
-const TopBottomCard = () => import('@/components/top-bottom-card.vue');
-const BottomLineCard = () => import('@/components/bottom-line-card.vue');
-import { getElementTop } from '@/assets/utils'
-export default {
-  name: 'scene-server',
-  components: {
-    MainContent,
-    MainTitle,
-    StepNav,
-    StepTitle,
-    ContentIntroduction,
-    TopBottomCard,
-    BottomLineCard
-  },
-  computed: {
-    // 缓存国际化数据
-    mainObj() {
-      return this.$t('sceneServer.mainObj');
-    },
-    stepList() {
-      return this.$t('sceneServer.stepList');
-    },
-    featureList() {
-      return this.$t('sceneServer.list');
-    },
-    advantagesList() {
-      return this.$t('sceneServer.cpysList');
-    },
-    platformList() {
-      return this.$t('sceneServer.dptList');
-    },
-    visualTitle() {
-      return this.$t('sceneServer.titleObj.title1');
-    },
-    visualEffectsList() {
-      return this.$t('sceneServer.sjxgList');
-    }
-  },
-  data() {
-    return {
-      // 菜单和步骤导航高度可以配置化
-      menuHeight: 72,
-      stepHeight: 51
-    }
-  },
-  methods: {
-    // 点击步骤导航项
-    clickStepItem(index) {
-      // 滚动到对应区域
-      const targetRef = `stepItem${index + 1}`
-      const targetTop = getElementTop(this.$refs[targetRef])
-      // 使用requestAnimationFrame优化滚动性能
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
-      })
-    }
+<script setup>
+import { ref, computed, getCurrentInstance } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { getElementTop } from '@/assets/utils';
+
+// 组件导入
+import mainContent from '@/components/main-content.vue';
+import mainTitle from '@/components/main-title.vue';
+import stepNav from '@/components/step-nav.vue';
+import stepTitle from '@/components/step-title.vue';
+import contentIntroduction from '@/components/content-introduction.vue';
+import topBottomCard from '@/components/top-bottom-card.vue';
+import bottomLineCard from '@/components/bottom-line-card.vue';
+
+// 获取组件实例
+const instance = getCurrentInstance();
+
+// 获取i18n实例
+const { tm } = useI18n();
+
+// 状态
+const menuHeight = ref(72);
+const stepHeight = ref(51);
+
+// 国际化数据
+const mainObj = computed(() => tm('sceneServer.mainObj'));
+const stepList = computed(() => tm('sceneServer.stepList'));
+const featureList = computed(() => tm('sceneServer.list') || []);
+const advantagesList = computed(() => tm('sceneServer.cpysList') || []);
+const platformList = computed(() => tm('sceneServer.dptList') || []);
+const visualTitle = computed(() => tm('sceneServer.titleObj')?.title1 || '');
+const visualEffectsList = computed(() => tm('sceneServer.sjxgList') || []);
+
+// 方法
+const clickStepItem = (index) => {
+  // 滚动到对应区域
+  const targetRef = `stepItem${index + 1}`;
+  if (instance && instance.proxy) {
+    const targetTop = getElementTop(instance.proxy.$refs[targetRef]);
+    // 使用requestAnimationFrame优化滚动性能
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: targetTop - menuHeight.value - stepHeight.value,
+        behavior: 'smooth'
+      });
+    });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -33,56 +33,69 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useRouter } from 'vue-router';
 import { debounce } from '@/assets/utils';
-export default {
-  name: 'big-card',
-  // 组件属性定义
-  props: {
-    list: {
-      type: Array,
-      require: true,
-      default: () => []
-    }
-  },
-  data() {
-    return {
-      showNewsBig: true, // 控制卡片布局（大屏左右布局/小屏上下布局）
-    }
-  },
-  mounted() {
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-    this.handleResize()
-    // 添加窗口大小变化监听
-    this.resizeObserver = new ResizeObserver(entries => {
-      debounce(this.handleResize(), 100)
-    })
-    this.resizeObserver.observe(document.documentElement)
-  },
-  beforeDestroy() {
-    // 销毁ResizeObserver实例
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect()
-    }
-  },
-  methods: {
-    // 响应窗口大小变化
-    handleResize() {
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 仅在值变化时更新，减少不必要的重渲染
-      if (this.showNewsBig !== (screenWidth < 960)) {
-        this.showNewsBig = screenWidth > 1280
-      }
-    },
-    // 处理卡片项点击事件
-    handleItemClick(item) {
-      if (item.path) {
-        this.$router.push(item.path)
-      }
-    }
+
+// 定义组件属性
+const props = defineProps({
+  list: {
+    type: Array,
+    required: true,
+    default: () => []
   }
-}
+});
+
+// 响应式数据
+const showNewsBig = ref(true); // 控制卡片布局（大屏左右布局/小屏上下布局）
+
+// 路由实例
+const router = useRouter();
+
+// 处理卡片项点击事件
+const handleItemClick = (item) => {
+  if (item.path) {
+    router.push(item.path);
+  }
+};
+
+// 响应窗口大小变化
+const handleResize = () => {
+  // 获取屏幕宽度
+  const screenWidth = window.innerWidth;
+  // 仅在值变化时更新，减少不必要的重渲染
+  if (showNewsBig.value !== (screenWidth > 1280)) {
+    showNewsBig.value = screenWidth > 1280;
+  }
+};
+
+// 生命周期 - 挂载
+onMounted(() => {
+  // 初始化调用一次
+  handleResize();
+
+  // 创建ResizeObserver实例
+  const resizeObserver = new ResizeObserver(entries => {
+    // 使用防抖处理
+    debounce(handleResize, 100)();
+  });
+
+  // 监听根元素尺寸变化
+  resizeObserver.observe(document.documentElement);
+
+  // 存储引用以便在卸载时清理
+  window.__bigCardResizeObserver = resizeObserver;
+});
+
+// 生命周期 - 卸载前
+onBeforeUnmount(() => {
+  // 销毁ResizeObserver实例
+  if (window.__bigCardResizeObserver) {
+    window.__bigCardResizeObserver.disconnect();
+    delete window.__bigCardResizeObserver;
+  }
+});
 </script>
 
 <style lang="scss" scoped>

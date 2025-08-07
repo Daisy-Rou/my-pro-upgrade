@@ -14,13 +14,14 @@
           background-color="#101014"
           text-color="#fff"
           active-text-color="#ffd04b"
+          :ellipsis="false"
           @select="handleSelect"
         >
           <template v-for="item in menuData">
-            <el-submenu v-if="item.children && item.children.length && !showRightMenu" :key="item.id" :index="item.id">
-              <template slot="title">{{item.label}}</template>
-              <el-menu-item v-for="(itemc, indexc) in item.children" :key="itemc.id || indexc" :index="itemc.id">{{itemc.label}}</el-menu-item>
-            </el-submenu>
+            <el-sub-menu v-if="item.children && item.children.length && !showRightMenu" :key="item.id" :index="item.id">
+              <template #title>{{item.label}}</template>
+              <el-menu-item v-for="itemc in item.children" :key="itemc.id" :index="itemc.id">{{itemc.label}}</el-menu-item>
+            </el-sub-menu>
             <el-menu-item v-if="!item.children && !showRightMenu" :key="item.id" :index="item.id">{{item.label}}</el-menu-item>
           </template>
         </el-menu>
@@ -29,7 +30,7 @@
     <!-- 右侧功能区 -->
     <div class="top-right">
       <!-- 小屏菜单按钮 -->
-      <svg v-show="showRightMenu" @click="showAllMenu = true" class="right-menu" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg v-show="showRightMenu" @click="showDrawMenu" class="right-menu" fill="#fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M2.25 5A.75.75 0 0 1 3 4.25h18a.75.75 0 0 1 0 1.5H3A.75.75 0 0 1 2.25 5m0 7a.75.75 0 0 1 .75-.75h18a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75m0 7a.75.75 0 0 1 .75-.75h18a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1-.75-.75" clip-rule="evenodd"></path>
       </svg>
       <!-- 大屏功能区域 -->
@@ -39,7 +40,7 @@
           v-show="showSearch"
           class="search-input"
           :placeholder="placeholder"
-          prefix-icon="el-icon-search"
+          prefix-icon="Search"
           v-model="searchVal">
         </el-input>
         <!-- 搜索图标（小屏显示） -->
@@ -55,142 +56,177 @@
         <div class="download-btn" @click="changeLanguage(language)">{{ language }}</div>
       </div>
     </div>
-    <drawer-menu ref="drawerMenu" :showAllMenu="showAllMenu"></drawer-menu>
+    <drawer-menu ref="drawerMenuRef"></drawer-menu>
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount, getCurrentInstance } from 'vue'
+import { useI18n } from 'vue-i18n'
 import drawerMenu from './drawer-menu.vue'
-import { debounce } from '@/assets/utils';
-export default {
-  name: 'top-header',
-  components: {
-    drawerMenu
-  },
-  data() {
-    return {
-      showAllMenu: false,      // 控制全屏菜单显示
-      showRightMenu: false,    // 是否显示移动端菜单按钮
-      showMore: false,         // 是否显示"更多"菜单
-      showSearch: true,        // 是否显示搜索框
-      searchVal: '',           // 搜索框值
-    }
-  },
-  computed: {
-    // 搜索框提示
-    placeholder() {
-      return this.$t('user.placeholder')
-    },
-    // 语言
-    language() {
-      return this.$t('user.language')
-    },
-    // 菜单数据（从i18n获取）
-    menuData() {
-      return this.$t('user.menuData');
-    },
-    // 路由映射
-    routeMap() {
-      return {
-        '1': '/jysz',
-        '2': '/digital-twin',
-        '3-1': '/scene-editor',
-        '3-2': '/scene-server',
-        '3-3': '/unified-development',
-        '3-4': '/unified-debugging',
-        '3-5': '/application-editor',
-        '4-1': '/smart-city',
-        '4-2': '/smart-park',
-        '4-3': '/smart-transportation',
-        '4-4': '/smart-factory',
-        '5': '/about-us'
-      }
-    }
-  },
-  mounted() {
-    this.$refs.drawerMenu.changeMenuTitle()
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-    this.handleResize()
-    // 添加窗口大小变化监听
-    this.resizeObserver = new ResizeObserver(entries => {
-      debounce(this.handleResize(), 100)
-    })
-    this.resizeObserver.observe(document.documentElement)
-  },
-  beforeDestroy() {
-    // 销毁ResizeObserver实例
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect()
-    }
-  },
+import { debounce } from '@/assets/utils'
 
-  methods: {
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showRightMenu = screenWidth < 800;
-      this.showMore = screenWidth < 1100
-      this.showSearch = screenWidth >= 960
-    },
-    changeLanguage(lang) {
-      if (lang === '中文') {
-        this.$i18n.locale = 'EN'
-        localStorage.setItem('lang', 'EN'); // 保存到localStorage
-      } else {
-        this.$i18n.locale = 'zh_CN'
-        localStorage.setItem('lang', 'zh_CN'); // 保存到localStorage
-      }
-      this.$refs.drawerMenu.changeMenuTitle()
-    },
-    // 菜单选择处理
-    handleSelect(key) {
-      this.$router.push(this.routeMap[key] || '/')
-    },
+// 获取组件实例
+const instance = getCurrentInstance()
+const { t, tm, locale } = useI18n()
+
+// 定义响应式状态
+// const showAllMenu = ref(false)
+const showRightMenu = ref(false)
+const showMore = ref(false)
+const showSearch = ref(true)
+const searchVal = ref('')
+const drawerMenuRef = ref(null)
+
+// 计算属性
+const placeholder = computed(() => t('user.placeholder'))
+const language = computed(() => t('user.language'))
+const menuData = computed(() => tm('user.menuData') || [])
+const routeMap = computed(() => ({
+  '1': '/jysz',
+  '2': '/digital-twin',
+  '3-1': '/scene-editor',
+  '3-2': '/scene-server',
+  '3-3': '/unified-development',
+  '3-4': '/unified-debugging',
+  '3-5': '/application-editor',
+  '4-1': '/smart-city',
+  '4-2': '/smart-park',
+  '4-3': '/smart-transportation',
+  '4-4': '/smart-factory',
+  '5': '/about-us'
+}))
+
+// 方法定义
+const handleResize = () => {
+  const screenWidth = window.innerWidth
+  showRightMenu.value = screenWidth < 800
+  showMore.value = screenWidth < 1100
+  showSearch.value = screenWidth >= 960
+}
+
+const changeLanguage = (lang) => {
+  if (lang === '中文') {
+    locale.value = 'EN'
+    localStorage.setItem('lang', 'EN')
+  } else {
+    locale.value = 'zh_CN'
+    localStorage.setItem('lang', 'zh_CN')
+  }
+  if (drawerMenuRef.value) {
+    drawerMenuRef.value.changeMenuTitle()
   }
 }
+
+const showDrawMenu = () => {
+  // 安全检查：确保drawerMenuRef.value存在
+  if (drawerMenuRef.value) {
+    // 使用子组件暴露的方法来更新状态，而不是直接修改属性
+    drawerMenuRef.value.openDrawer();
+  }
+}
+
+const handleSelect = (key) => {
+  if (instance?.proxy?.$router) {
+    instance.proxy.$router.push(routeMap.value[key] || '/')
+  }
+}
+
+// 生命周期钩子
+onMounted(() => {
+  handleResize()
+  if (drawerMenuRef.value) {
+    drawerMenuRef.value.changeMenuTitle()
+  }
+
+  // 使用ResizeObserver监听窗口大小变化
+  const resizeObserver = new ResizeObserver(entries => {
+    debounce(handleResize(), 100)
+  })
+  resizeObserver.observe(document.documentElement)
+
+  // 存储以便在卸载时清理
+  instance.proxy.resizeObserver = resizeObserver
+})
+
+onBeforeUnmount(() => {
+  if (instance?.proxy?.resizeObserver) {
+    instance.proxy.resizeObserver.disconnect()
+  }
+})
+
+// 暴露给模板的引用
+defineExpose({
+  drawerMenu: drawerMenuRef,
+  changeLanguage
+})
 </script>
 <style lang="scss">
 /* 全局Element UI样式覆盖 */
+.el-menu {
+  background-color: #101014 !important;
+}
+.el-popper.is-light, .el-popper.is-light>.el-popper__arrow:before {
+  background: transparent !important;
+  border: none !important;
+}
+// 子菜单背景样式
 .el-menu--popup {
   min-width: 160px !important;
   border-radius: 16px !important;
   background-color: rgba(48, 48, 52, 1) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
-.el-submenu .el-menu-item {
-  min-width: 160px !important;
-}
-.el-submenu__title {
-  padding: 0 10px !important;
-}
-.el-menu--popup-bottom-start {
-  margin-top: -5px !important;
-}
-.el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu .el-submenu__title {
-  background-color: rgba(48, 48, 52, 1) !important;
-  border-radius: 8px !important;
-}
+// .el-submenu .el-menu-item {
+//   min-width: 160px !important;
+// }
+
+// 每一项菜单背景色和字体样式
 .el-menu--horizontal .el-menu .el-menu-item, .el-menu--horizontal .el-menu .el-submenu__title {
   height: 42px !important;
   line-height: 42px !important;
   margin: 0 10px !important;
+  background-color: rgba(48, 48, 52, 1) !important;
+  border-radius: 8px !important;
 }
-.el-menu--horizontal .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
+
+// 子菜单hover背景色
+.el-menu--popup-container .el-menu-item:not(.is-disabled):focus, .el-menu--popup-container .el-menu-item:not(.is-disabled):hover {
   background-color: rgb(92, 92, 97) !important;
 }
-.el-menu--horizontal>.el-submenu .el-submenu__title {
+.el-menu--horizontal>.el-sub-menu .el-sub-menu__title {
   border-bottom: none !important;
 }
-.el-menu--horizontal>.el-submenu .el-submenu__title:hover {
-  color: rgba(255, 255, 255, .65) !important;
-  i {
-    color: rgba(255, 255, 255, .65) !important;
-  }
+
+.el-menu--horizontal .el-menu .el-menu-item.is-active, 
+.el-menu--horizontal .el-menu .el-menu-item.is-active:hover, 
+.el-menu--horizontal .el-menu .el-sub-menu.is-active>.el-sub-menu__title, 
+.el-menu--horizontal .el-menu .el-sub-menu.is-active>.el-sub-menu__title:hover {
+  color: #fff !important;
 }
-.el-menu--horizontal .el-menu .el-submenu.is-active>.el-submenu__title,
-.el-menu--horizontal .el-menu .el-menu-item.is-active {
+
+// 有子菜单的菜单项hover时颜色
+.el-menu--horizontal>.el-sub-menu:hover .el-sub-menu__title {
+  color: rgba(255, 255, 255, .65) !important;
+}
+
+// 父菜单项被选择颜色以及底部样式
+.el-menu--horizontal>.el-sub-menu.is-active .el-sub-menu__title {
+  border-bottom: none !important;
+  color: #fff !important;
+}
+.el-menu--horizontal>.el-sub-menu.is-active .el-sub-menu__title:hover {
+  color: rgba(255, 255, 255, .65) !important;
+}
+
+// 子菜单项被选择颜色以及底部样式
+.el-menu--popup-container>.el-sub-menu.is-active .el-sub-menu__title {
+  border-bottom: none !important;
+  color: #fff !important;
+}
+
+// 菜单项hover字体颜色
+.el-menu--horizontal .el-menu-item:not(.is-disabled):focus, .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
   color: #fff !important;
 }
 </style>
@@ -272,16 +308,26 @@ export default {
       margin-right: 14px;
       min-width: 50%;
       max-width: 50%;
-      ::v-deep .el-input__inner {
+      ::v-deep .el-input__wrapper {
+        height: 40px;
         border-radius: 24px;
         background-color: $color-white5;
         border: 1px solid $color-white35;
+        // box-shadow: 0 0 0 1px $color-white35 inset;
+        box-shadow: none;
+      }
+      ::v-deep .el-input__prefix-inner>:first-child, .el-input__prefix-inner>:first-child.el-input__icon {
+        font-size: 16px
       }
       ::v-deep .el-input__icon {
-        font-size: 16px;
+        svg {
+          width: 16px;
+          height: 16px;
+        }
       }
-      ::v-deep .el-input--prefix .el-input__inner {
-        padding-left: 40px;
+      ::v-deep .el-input__inner {
+        font-size: 14px;
+        color: #fff;
       }
     }
     .search-icon, .global-icon {

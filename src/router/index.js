@@ -1,8 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-Vue.use(VueRouter)
+// Vue.use(VueRouter)
 
 const routes = [
   {
@@ -74,35 +73,31 @@ const routes = [
     }]
   },
   // 404 路由
-  {
-    path: '*',
-    redirect: '/jysz'
-  }
+  { path: '/:pathMatch(.*)*', redirect: '/jysz' }
 ]
 
 // 解决 ElementUI 导航栏中的 vue-router 在 3.0 版本以上重复点菜单报错问题
-const originalPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push(location) {
-  return originalPush.call(this, location).catch((err) => err)
-}
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch((err) => err)
+// }
 
-const router = new VueRouter({
-  mode: 'hash',
-  base: process.env.BASE_URL,
+const router = createRouter({
+   history: createWebHashHistory(process.env.BASE_URL),
   scrollBehavior: (to, from, savedPosition) => {
     // 优化滚动行为
-    if (savedPosition) {
-      return savedPosition;
-    } else if (to.hash) {
+    // if (savedPosition) {
+    //   return savedPosition;
+    // } else 
+    if (to.hash) {
       return {
-        selector: to.hash,
+        el: to.hash,
         behavior: 'smooth'
       };
     } else {
-      return { y: 0 };
+      return { top: 0 };
     }
   },
-  // transitionOnLoad: true,
   routes
 })
 // 路由拦截守卫修改标题

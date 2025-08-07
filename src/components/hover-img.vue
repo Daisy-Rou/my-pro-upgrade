@@ -26,26 +26,27 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'hover-img',
-  // 组件属性定义
-  props: {
-    list: {
-      type: Array,
-      required: true,
-      default: () => []
-    }
-  },
-  methods: {
-    // 处理项点击事件 - 导航到指定路径
-    handleItemClick(item) {
-      if (item.path) {
-        this.$router.push(item.path)
-      }
-    }
+<script setup>
+import { useRouter } from 'vue-router';
+
+// 定义组件属性
+const props = defineProps({
+  list: {
+    type: Array,
+    required: true,
+    default: () => []
   }
-}
+});
+
+// 获取路由实例
+const router = useRouter();
+
+// 处理项点击事件 - 导航到指定路径
+const handleItemClick = (item) => {
+  if (item.path) {
+    router.push(item.path);
+  }
+};
 </script>
 
 <style lang="scss" scoped>

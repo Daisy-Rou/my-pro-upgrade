@@ -16,117 +16,126 @@
   </div>
 </template>
 
-<script>
-// 导入防抖工具函数
+<script setup>
+// 导入必要的API和工具函数
+import { ref, onMounted, onBeforeUnmount, computed, getCurrentInstance } from 'vue';
 import { debounce, getElementTop } from '@/assets/utils';
-export default {
-  name: 'step-nav',
-  props: {
-    // 步骤列表数据
-    list: {
-      type: Array,
-      require: true,
-      default: () => {}
-    }
-  },
-  data() {
-    return {
-      // 当前激活的步骤索引
-      activeIndex: '',
-      // 菜单高度
-      menuHeight: 72,
-      // 步骤导航栏高度
-      stepNavHeight: 51,
-      // 步骤导航栏距离页面顶部的距离
-      stepTop: 0,
-      // 各步骤项距离页面顶部的距离数组
-      stepItemTopArr: [],
-      // 是否固定定位
-      isFixed: false,
-    }
-  },
-  mounted() {
-    // 初始计算位置
-    this.calculatePositions()
-    // 添加滚动事件监听（带防抖处理）
-    window.addEventListener('scroll', debounce(this.handleStepScroll, 100))
-    // 使用ResizeObserver替代window.resize事件监听
-    this.resizeObserver = new ResizeObserver(entries => {
-      debounce(this.handleResize(), 100)
-    })
-    this.resizeObserver.observe(document.documentElement)
-  },
-  beforeDestroy() {
-    // 销毁ResizeObserver实例
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect()
-    }
-    // 移除滚动事件监听
-    window.removeEventListener('scroll', debounce(this.handleStepScroll, 100))
-  },
-  methods: {
-    // 计算位置的统一方法
-    calculatePositions() {
-      // 只在非固定状态下更新stepTop
-      if (!this.isFixed) {
-        this.stepTop = getElementTop(this.$refs.stepNav)
-      }
-      // 计算每个步骤项的位置
-      this.list.forEach((item, index) => {
-        const targetRef = `stepItem${index + 1}`
-        if (this.$parent && this.$parent.$refs[targetRef]) {
-          this.stepItemTopArr[index] = getElementTop(this.$parent.$refs[targetRef])
-        } else {
-          this.stepItemTopArr[index] = 0
-        }
-      })
-      // 设置最小高度
-      this.minHeight = this.stepItemTopArr[0] || 0
-    },
-    // 处理窗口大小变化
-    handleResize() {
-      // 获取元素距离顶部位置
-      this.stepTop = getElementTop(this.$refs.stepNav)
-      // 重新检查滚动位置
-      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      this.isFixed = this.scrollTop + this.menuHeight >= this.stepTop;
-    },
-    // 点击步骤导航项
-    clickStepItem(index) {
-      // 更新激活索引
-      this.activeIndex = index
-      // 触发点击事件
-      this.$emit('clickStep', index)
-    },
-    // 处理滚动事件
-    handleStepScroll() {
-      // 滚动距离
-      this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      // 计算位置
-      this.calculatePositions()
-      // 比较滚动位置和元素位置
-      this.isFixed = this.scrollTop + this.menuHeight >= this.stepTop;
-      // 使用requestAnimationFrame优化视觉更新
-      window.requestAnimationFrame(() => {
-        let newActiveIndex = ''
-        // 根据滚动位置更新activeIndex
-        for (let i = 0; i < this.stepItemTopArr.length; i++) {
-          if (this.scrollTop + this.menuHeight + this.stepNavHeight >= this.stepItemTopArr[i]) {
-            newActiveIndex = i
-          }
-        }
-        // 如果滚动位置在第一个步骤项之前，则不激活任何步骤
-        if (this.scrollTop + this.menuHeight + this.stepNavHeight < this.minHeight) {
-          newActiveIndex = ''
-        }
-        // 只有当activeIndex变化时才更新，减少不必要的渲染
-        if (newActiveIndex !== this.activeIndex) {
-          this.activeIndex = newActiveIndex
-        }
-      })
-    }
+
+// 定义组件属性
+const props = defineProps({
+  // 步骤列表数据
+  list: {
+    type: Array,
+    required: true,
+    default: () => []
   }
-}
+});
+
+// 获取组件实例
+const instance = getCurrentInstance();
+
+// 定义响应式变量
+const stepNav = ref(null);
+const activeIndex = ref('');
+const menuHeight = ref(72);
+const stepNavHeight = ref(51);
+const stepTop = ref(0);
+const stepItemTopArr = ref([]);
+const isFixed = ref(false);
+const minHeight = ref(0);
+const scrollTop = ref(0);
+let resizeObserver = null;
+
+// 计算位置的统一方法
+const calculatePositions = () => {
+  // 只在非固定状态下更新stepTop
+  if (!isFixed.value) {
+    stepTop.value = getElementTop(stepNav.value);
+  }
+  // 计算每个步骤项的位置
+  props.list.forEach((item, index) => {
+    const targetRef = `stepItem${index + 1}`;
+    if (instance.parent && instance.parent.refs[targetRef]) {
+      stepItemTopArr.value[index] = getElementTop(instance.parent.refs[targetRef]);
+    } else {
+      stepItemTopArr.value[index] = 0;
+    }
+  });
+  // 设置最小高度
+  minHeight.value = stepItemTopArr.value[0] || 0;
+};
+
+// 处理窗口大小变化
+const handleResize = () => {
+  // 获取元素距离顶部位置
+  stepTop.value = getElementTop(stepNav.value);
+  // 重新检查滚动位置
+  scrollTop.value = window.pageYOffset || document.documentElement.scrollTop;
+  isFixed.value = scrollTop.value + menuHeight.value >= stepTop.value;
+};
+
+// 点击步骤导航项
+const clickStepItem = (index) => {
+  // 更新激活索引
+  activeIndex.value = index;
+  // 触发点击事件
+  instance.emit('clickStep', index);
+};
+
+// 处理滚动事件
+const handleStepScroll = () => {
+  // 滚动距离
+  scrollTop.value = window.pageYOffset || document.documentElement.scrollTop;
+  // 计算位置
+  calculatePositions();
+  // 比较滚动位置和元素位置
+  isFixed.value = scrollTop.value + menuHeight.value >= stepTop.value;
+  // 使用requestAnimationFrame优化视觉更新
+  window.requestAnimationFrame(() => {
+    let newActiveIndex = '';
+    // 根据滚动位置更新activeIndex
+    for (let i = 0; i < stepItemTopArr.value.length; i++) {
+      if (scrollTop.value + menuHeight.value + stepNavHeight.value >= stepItemTopArr.value[i]) {
+        newActiveIndex = i;
+      }
+    }
+    // 如果滚动位置在第一个步骤项之前，则不激活任何步骤
+    if (scrollTop.value + menuHeight.value + stepNavHeight.value < minHeight.value) {
+      newActiveIndex = '';
+    }
+    // 只有当activeIndex变化时才更新，减少不必要的渲染
+    if (newActiveIndex !== activeIndex.value) {
+      activeIndex.value = newActiveIndex;
+    }
+  });
+};
+
+// 注册防抖处理后的滚动事件处理函数
+const debouncedHandleScroll = debounce(handleStepScroll, 100);
+const debouncedHandleResize = debounce(handleResize, 100);
+
+// 组件挂载时
+onMounted(() => {
+  // 初始计算位置
+  calculatePositions();
+  // 添加滚动事件监听（带防抖处理）
+  window.addEventListener('scroll', debouncedHandleScroll);
+  // 使用ResizeObserver替代window.resize事件监听
+  resizeObserver = new ResizeObserver(entries => {
+    debouncedHandleResize();
+  });
+  resizeObserver.observe(document.documentElement);
+});
+
+// 组件卸载前
+onBeforeUnmount(() => {
+  // 销毁ResizeObserver实例
+  if (resizeObserver) {
+    resizeObserver.disconnect();
+  }
+  // 移除滚动事件监听
+  window.removeEventListener('scroll', debouncedHandleScroll);
+});
 </script>
 
 <style lang="scss" scoped>

@@ -24,34 +24,30 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue';
 import mainTitle from '@/components/main-title.vue';
-export default {
-  name: 'transparent-card',
-  components: {
-    mainTitle
-  },
-  computed: {
-    // 计算背景图样式
-    backgroundStyle() {
-      return {
-        backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url('${this.listObj.bgSrc}')`
-      };
-    }
-  },
-  props: {
-    listObj: {
-      type: Object,
-      required: true,
-      default: () => ({
-        bgSrc: '',
-        title: '',
-        content: '',
-        list: []
-      })
-    }
+
+// 定义props
+const props = defineProps({
+  listObj: {
+    type: Object,
+    required: true,
+    default: () => ({
+      bgSrc: '',
+      title: '',
+      content: '',
+      list: []
+    })
   }
-}
+});
+
+// 计算背景图样式
+const backgroundStyle = computed(() => {
+  return {
+    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, .35), #000), url('${props.listObj?.bgSrc || ''}')`
+  };
+});
 </script>
 
 <style lang="scss" scoped>

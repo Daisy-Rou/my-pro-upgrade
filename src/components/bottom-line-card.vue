@@ -23,19 +23,16 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'bottom-line-card',
-  // 组件属性定义
-  props: {
-    // 列表数据 - 数组类型
-    list: {
-      type: Array,
-      required: true,
-      default: () => {}
-    }
+<script setup>
+// 定义组件属性
+const props = defineProps({
+  // 列表数据 - 数组类型
+  list: {
+    type: Array,
+    required: true,
+    default: () => []
   }
-}
+});
 </script>
 
 <style lang="scss" scoped>

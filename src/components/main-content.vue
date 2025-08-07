@@ -17,61 +17,62 @@
   </div>
 </template>
 
-<script>
+<script setup>
+// 主内容展示组件
+import { defineProps, ref, onMounted, onBeforeUnmount } from 'vue';
 import { debounce } from '@/assets/utils';
-export default {
-  name: 'main-content',
-  /**
-   * 主内容展示组件
-   * @component
-   * @param {Object} mainObj - 主内容数据对象
-   * @param {string} [mainObj.text] - 顶部图标/文字
-   * @param {string} [mainObj.title] - 主标题
-   * @param {string} [mainObj.content] - 副标题描述
-   * @param {string} [mainObj.btnText] - 按钮文本
-   * @param {string} [mainObj.imgSrc] - 右侧展示图片地址
+
+/**
+ * 主内容展示组件
+ * @component
+ * @param {Object} mainObj - 主内容数据对象
+ * @param {string} [mainObj.text] - 顶部图标/文字
+ * @param {string} [mainObj.title] - 主标题
+ * @param {string} [mainObj.content] - 副标题描述
+ * @param {string} [mainObj.btnText] - 按钮文本
+ * @param {string} [mainObj.imgSrc] - 右侧展示图片地址
  */
-  props: {
-    mainObj: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
-  },
-  data() {
-    return {
-      showVideo: true,      // 控制响应式布局显示
-    }
-  },
-  created() {
-    // 创建防抖函数 (延迟100ms执行)
-    this.debouncedHandleResize = debounce(this.handleResize, 100);
-  },
-  mounted() {
-    // 创建ResizeObserver实例
-    this.resizeObserver = new ResizeObserver(entries => {
-      // 防抖处理
-      this.debouncedHandleResize();
-    });
-    // 监听根元素尺寸变化
-    this.resizeObserver.observe(document.documentElement);
-  },
-  beforeDestroy() {
-    // 断开ResizeObserver连接
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  },
-  methods: {
-    // 处理窗口大小变化
-    handleResize() {
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showVideo = screenWidth > 1280
-    }
+const props = defineProps({
+  mainObj: {
+    type: Object,
+    required: true,
+    default: () => ({})
   }
-}
+});
+
+// 响应式状态
+const showVideo = ref(true); // 控制响应式布局显示
+let resizeObserver = null;
+
+// 处理窗口大小变化
+const handleResize = () => {
+  // 获取屏幕宽度
+  const screenWidth = window.innerWidth;
+  // 判断屏幕宽度并返回是否显示元素的布尔值
+  showVideo.value = screenWidth > 1280;
+};
+
+// 创建防抖函数 (延迟100ms执行)
+const debouncedHandleResize = debounce(handleResize, 100);
+
+// 生命周期钩子 - 挂载完成
+onMounted(() => {
+  // 创建ResizeObserver实例
+  resizeObserver = new ResizeObserver(entries => {
+    // 防抖处理
+    debouncedHandleResize();
+  });
+  // 监听根元素尺寸变化
+  resizeObserver.observe(document.documentElement);
+});
+
+// 生命周期钩子 - 卸载前
+onBeforeUnmount(() => {
+  // 断开ResizeObserver连接
+  if (resizeObserver) {
+    resizeObserver.disconnect();
+  }
+});
 </script>
 
 <style lang="scss" scoped>

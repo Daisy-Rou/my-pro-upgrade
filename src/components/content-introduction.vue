@@ -25,65 +25,63 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { debounce } from '@/assets/utils';
-export default {
-  name: 'content-introduction',
-  props: {
-    // 内容列表数据
-    list: {
-      type: Array,
-      required: true,
-      default: () => []
-    }
-  },
-  computed: {
-    shouldReverseLayout() {
-      return (index) => !this.showTop && index % 2 !== 0;
-    }
-  },
-  data() {
-    return {
-      // 是否在顶部显示图片（用于响应式布局）
-      showTop: false,
-    }
-  },
-  created() {
-    // 创建防抖函数 (延迟100ms执行)
-    this.debouncedHandleResize = debounce(this.handleResize, 100);
-  },
-  mounted() {
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-    // this.handleResize()
-    // window.addEventListener('resize', this.debouncedHandleResize)
-    // 创建ResizeObserver实例
-    this.resizeObserver = new ResizeObserver(entries => {
-      // 防抖处理
-      this.debouncedHandleResize();
-    });
-    // 监听根元素尺寸变化
-    this.resizeObserver.observe(document.documentElement);
-  },
-  beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    // window.removeEventListener('resize', this.debouncedHandleResize)
-    // 断开ResizeObserver连接
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  },
-  methods: {
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 仅在值变化时更新，减少不必要的重渲染
-      if (this.showTop !== (screenWidth <= 960)) {
-        this.showTop = screenWidth <= 960;
-      }
-    }
+
+// 定义props
+const props = defineProps({
+  // 内容列表数据
+  list: {
+    type: Array,
+    required: true,
+    default: () => []
   }
-}
+});
+
+// 响应式数据
+const showTop = ref(false);
+
+// 计算属性
+const shouldReverseLayout = computed(() => {
+  return (index) => !showTop.value && index % 2 !== 0;
+});
+
+// 处理窗口大小变化
+const handleResize = () => {
+  // 获取屏幕宽度
+  const screenWidth = window.innerWidth;
+  // 仅在值变化时更新，减少不必要的重渲染
+  if (showTop.value !== (screenWidth <= 960)) {
+    showTop.value = screenWidth <= 960;
+  }
+};
+
+// 创建防抖函数 (延迟100ms执行)
+const debouncedHandleResize = debounce(handleResize, 100);
+
+// 生命周期 - 挂载
+onMounted(() => {
+  // 创建ResizeObserver实例
+  const resizeObserver = new ResizeObserver(entries => {
+    // 防抖处理
+    debouncedHandleResize();
+  });
+  // 监听根元素尺寸变化
+  resizeObserver.observe(document.documentElement);
+
+  // 存储引用以便在卸载时清理
+  window.__contentIntroResizeObserver = resizeObserver;
+});
+
+// 生命周期 - 卸载前
+onBeforeUnmount(() => {
+  // 断开ResizeObserver连接
+  if (window.__contentIntroResizeObserver) {
+    window.__contentIntroResizeObserver.disconnect();
+    delete window.__contentIntroResizeObserver;
+  }
+});
 </script>
 
 <style lang="scss" scoped>

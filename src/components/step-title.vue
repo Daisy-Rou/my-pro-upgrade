@@ -8,24 +8,22 @@
   </div>
 </template>
 
-<script>
-// 步骤标题组件 - 展示带有序号的章节标题
-export default {
-  name: 'step-title',
-  // 组件属性
-  props: {
-    // 步骤编号
-    num: {
-      type: [Number, String],
-      required: true
-    },
-    // 步骤标题
-    title: {
-      type: String,
-      required: true
-    }
+<script setup>
+import { defineProps } from 'vue'
+
+// 定义组件属性
+const props = defineProps({
+  // 步骤编号
+  num: {
+    type: [Number, String],
+    required: true
+  },
+  // 步骤标题
+  title: {
+    type: String,
+    required: true
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

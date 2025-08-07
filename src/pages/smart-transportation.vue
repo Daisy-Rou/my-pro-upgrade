@@ -41,91 +41,78 @@
   </div>
 </template>
 
-<script>
-// 组件懒加载
-const mainContent = () => import('@/components/main-content.vue');
-const stepNav = () => import('@/components/step-nav.vue');
-const stepTitle = () => import('@/components/step-title.vue');
-const mainTitle = () => import('@/components/main-title.vue');
-const leftRightCard = () => import('@/components/left-right-card.vue');
-const topBottomCard = () => import('@/components/top-bottom-card.vue');
-const contentIntroduction = () => import('@/components/content-introduction.vue');
-const transparentCard = () => import('@/components/transparent-card.vue');
-import { getElementTop } from '@/assets/utils'
-export default {
-  name: 'smart-transportation',
-  components: {
-    mainContent,
-    stepNav,
-    stepTitle,
-    mainTitle,
-    leftRightCard,
-    topBottomCard,
-    transparentCard,
-    contentIntroduction
-  },
-  computed: {
-    // 缓存国际化数据
-    mainObj() {
-      return this.$t('smartTransportation.mainObj');
-    },
-    stepList() {
-      return this.$t('smartTransportation.stepList');
-    },
-    stepBtnList() {
-      return this.$t('smartTransportation.stepBtnList');
-    },
-    listSYJC() {
-      return this.$t('smartTransportation.listSYJC') || [];
-    },
-    cpysList() {
-      return this.$t('smartTransportation.cpysList') || [];
-    },
-    titleObj() {
-      return this.$t('smartTransportation.titleObj') || {};
-    },
-    list() {
-      return this.$t('smartTransportation.list') || [];
-    },
-    compList() {
-      let list = []
-      if (this.activeBtnIndex === 1) {
-        list = this.$t('smartTransportation.szlsList')
-      }
-      if (this.activeBtnIndex === 2) {
-        list = this.$t('smartTransportation.znywList')
-      }
-      if (this.activeBtnIndex === 3) {
-        list = this.$t('smartTransportation.jcptList')
-      }
-      return list
-    }
-  },
-  data() {
-    return {
-      activeBtnIndex: 0,   // 当前高亮按钮
-      // 菜单和步骤导航高度可以配置化
-      menuHeight: 72,
-      stepHeight: 51
-    }
-  },
-  methods: {
-    // 点击步骤导航项
-    clickStepItem(index) {
-      // 滚动到对应区域
-      const targetRef = `stepItem${index + 1}`
-      const targetTop = getElementTop(this.$refs[targetRef])
-      // 使用requestAnimationFrame优化滚动性能
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
-      })
-    },
-    // 按钮切换
-    handleBtnClick(index) {
-      this.activeBtnIndex = index
-    }
+<script setup>
+// 导入组件
+import MainContent from '@/components/main-content.vue';
+import StepNav from '@/components/step-nav.vue';
+import StepTitle from '@/components/step-title.vue';
+import MainTitle from '@/components/main-title.vue';
+import LeftRightCard from '@/components/left-right-card.vue';
+import TopBottomCard from '@/components/top-bottom-card.vue';
+import ContentIntroduction from '@/components/content-introduction.vue';
+import TransparentCard from '@/components/transparent-card.vue';
+import { ref, computed, getCurrentInstance } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { getElementTop } from '@/assets/utils';
+
+// 获取组件实例
+const instance = getCurrentInstance();
+
+// 获取i18n实例
+const { tm } = useI18n();
+
+// 响应式变量
+const activeBtnIndex = ref(0);
+const menuHeight = ref(72);
+const stepHeight = ref(51);
+
+// 引用DOM元素
+const stepItem1 = ref(null);
+const stepItem2 = ref(null);
+const stepItem3 = ref(null);
+
+// 计算属性
+const mainObj = computed(() => tm('smartTransportation.mainObj'));
+const stepList = computed(() => tm('smartTransportation.stepList'));
+const stepBtnList = computed(() => tm('smartTransportation.stepBtnList'));
+const listSYJC = computed(() => tm('smartTransportation.listSYJC') || []);
+const cpysList = computed(() => tm('smartTransportation.cpysList') || []);
+const titleObj = computed(() => tm('smartTransportation.titleObj') || {});
+const list = computed(() => tm('smartTransportation.list') || []);
+const compList = computed(() => {
+  let list = [];
+  if (activeBtnIndex.value === 1) {
+    list = tm('smartTransportation.szlsList');
   }
-}
+  if (activeBtnIndex.value === 2) {
+    list = tm('smartTransportation.znywList');
+  }
+  if (activeBtnIndex.value === 3) {
+    list = tm('smartTransportation.jcptList');
+  }
+  return list;
+});
+
+// 方法
+const clickStepItem = (index) => {
+  // 滚动到对应区域
+  const targetRef = `stepItem${index + 1}`;
+  // 在Vue 3中，我们通过instance.proxy访问$refs
+  if (instance && instance.proxy) {
+    const targetTop = getElementTop(instance.proxy.$refs[targetRef]);
+    // 使用requestAnimationFrame优化滚动性能
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: targetTop - menuHeight.value - stepHeight.value,
+        behavior: 'smooth'
+      });
+    });
+  }
+};
+
+const handleBtnClick = (index) => {
+  activeBtnIndex.value = index;
+};
 </script>
 
 <style lang="scss" scoped>

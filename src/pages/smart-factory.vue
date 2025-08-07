@@ -41,91 +41,75 @@
   </div>
 </template>
 
-<script>
-// 组件懒加载
-const mainContent = () => import('@/components/main-content.vue');
-const stepNav = () => import('@/components/step-nav.vue');
-const stepTitle = () => import('@/components/step-title.vue');
-const mainTitle = () => import('@/components/main-title.vue');
-const leftRightCard = () => import('@/components/left-right-card.vue');
-const topBottomCard = () => import('@/components/top-bottom-card.vue');
-const contentIntroduction = () => import('@/components/content-introduction.vue');
-const transparentCard = () => import('@/components/transparent-card.vue');
-import { getElementTop } from '@/assets/utils'
-export default {
-  name: 'smart-factory',
-  components: {
-    mainContent,
-    stepNav,
-    stepTitle,
-    mainTitle,
-    leftRightCard,
-    topBottomCard,
-    contentIntroduction,
-    transparentCard
-  },
-  computed: {
-    // 缓存国际化数据
-    mainObj() {
-      return this.$t('smartFactory.mainObj');
-    },
-    stepList() {
-      return this.$t('smartFactory.stepList');
-    },
-    stepBtnList() {
-      return this.$t('smartFactory.stepBtnList');
-    },
-    listSYJC() {
-      return this.$t('smartFactory.listSYJC') || [];
-    },
-    cpysList() {
-      return this.$t('smartFactory.cpysList') || [];
-    },
-    titleObj() {
-      return this.$t('smartFactory.titleObj') || {};
-    },
-    list() {
-      return this.$t('smartFactory.list') || [];
-    },
-    compList() {
-      let list = []
-      if (this.activeBtnIndex === 1) {
-        list = this.$t('smartFactory.szlsList')
-      }
-      if (this.activeBtnIndex === 2) {
-        list = this.$t('smartFactory.znywList')
-      }
-      if (this.activeBtnIndex === 3) {
-        list = this.$t('smartFactory.jcptList')
-      }
-      return list
-    }
-  },
-  data() {
-    return {
-      activeBtnIndex: 0,   // 当前高亮按钮
-      // 菜单和步骤导航高度可以配置化
-      menuHeight: 72,
-      stepHeight: 51
-    }
-  },
-  methods: {
-    // 点击步骤导航项
-    clickStepItem(index) {
-      // 滚动到对应区域
-      const targetRef = `stepItem${index + 1}`
-      const targetTop = getElementTop(this.$refs[targetRef])
-      // 使用requestAnimationFrame优化滚动性能
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
-      })
-    },
-    // 按钮切换
-    handleBtnClick(index) {
-      this.activeBtnIndex = index
-    }
+<script setup>
+import { ref, computed, getCurrentInstance } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { getElementTop } from '@/assets/utils';
+
+// 组件导入
+import mainContent from '@/components/main-content.vue';
+import stepNav from '@/components/step-nav.vue';
+import stepTitle from '@/components/step-title.vue';
+import mainTitle from '@/components/main-title.vue';
+import leftRightCard from '@/components/left-right-card.vue';
+import topBottomCard from '@/components/top-bottom-card.vue';
+import contentIntroduction from '@/components/content-introduction.vue';
+import transparentCard from '@/components/transparent-card.vue';
+
+// 获取组件实例
+const instance = getCurrentInstance();
+
+// 获取i18n实例
+const { tm } = useI18n();
+
+// 状态
+const activeBtnIndex = ref(0);
+const menuHeight = ref(72);
+const stepHeight = ref(51);
+
+// 国际化数据
+const mainObj = computed(() => tm('smartFactory.mainObj'));
+const stepList = computed(() => tm('smartFactory.stepList'));
+const stepBtnList = computed(() => tm('smartFactory.stepBtnList'));
+const listSYJC = computed(() => tm('smartFactory.listSYJC') || []);
+const cpysList = computed(() => tm('smartFactory.cpysList') || []);
+const titleObj = computed(() => tm('smartFactory.titleObj') || {});
+const list = computed(() => tm('smartFactory.list') || []);
+
+// 计算属性
+const compList = computed(() => {
+  let list = [];
+  if (activeBtnIndex.value === 1) {
+    list = tm('smartFactory.szlsList');
   }
-}
+  if (activeBtnIndex.value === 2) {
+    list = tm('smartFactory.znywList');
+  }
+  if (activeBtnIndex.value === 3) {
+    list = tm('smartFactory.jcptList');
+  }
+  return list;
+});
+
+// 方法
+const clickStepItem = (index) => {
+  // 滚动到对应区域
+  const targetRef = `stepItem${index + 1}`;
+  if (instance && instance.proxy) {
+    const targetTop = getElementTop(instance.proxy.$refs[targetRef]);
+    // 使用requestAnimationFrame优化滚动性能
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: targetTop - menuHeight.value - stepHeight.value,
+        behavior: 'smooth'
+      });
+    });
+  }
+};
+
+const handleBtnClick = (index) => {
+  activeBtnIndex.value = index;
+};
 </script>
 
 <style lang="scss" scoped>

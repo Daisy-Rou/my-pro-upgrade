@@ -7,19 +7,12 @@
     <router-view/>
   </div>
 </template>
-<script>
+
+<script setup>
 // 导入顶部导航栏组件
 import TopHeader from '@/components/top-header.vue'
-
-export default {
-  // 组件名称
-  name: 'HomeView',
-  // 注册子组件
-  components: {
-    TopHeader
-  }
-}
 </script>
+
 <style lang="scss">
 /* 导入全局样式文件 */
 @import '@/assets/scss/main.scss';

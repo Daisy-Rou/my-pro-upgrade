@@ -20,59 +20,56 @@
   </div>
 </template>
 
-<script>
-// 组件懒加载
-const MainContent = () => import('@/components/main-content.vue');
-const StepNav = () => import('@/components/step-nav.vue');
-const StepTitle = () => import('@/components/step-title.vue');
-const ContentIntroduction = () => import('@/components/content-introduction.vue');
-const TopBottomCard = () => import('@/components/top-bottom-card.vue');
+<script setup>
+import { ref, computed, onMounted, getCurrentInstance } from 'vue'
+import { useI18n } from 'vue-i18n'
+// 组件导入
+import MainContent from '@/components/main-content.vue'
+import StepNav from '@/components/step-nav.vue'
+import StepTitle from '@/components/step-title.vue'
+import ContentIntroduction from '@/components/content-introduction.vue'
+import TopBottomCard from '@/components/top-bottom-card.vue'
 import { getElementTop } from '@/assets/utils'
-export default {
-  name: 'scene-editor',
-  components: {
-    MainContent,
-    StepNav,
-    StepTitle,
-    ContentIntroduction,
-    TopBottomCard
-  },
-   computed: {
-    // 缓存国际化数据
-    mainObj() {
-      return this.$t('sceneEditor.mainObj');
-    },
-    stepList() {
-      return this.$t('sceneEditor.stepList');
-    },
-    featureList() {
-      return this.$t('sceneEditor.list');
-    },
-    advantagesList() {
-      return this.$t('sceneEditor.cpysList');
-    }
-  },
-  data() {
-    return {
-      // 菜单和步骤导航高度可以配置化
-      menuHeight: 72,
-      stepHeight: 51
-    }
-  },
 
-  methods: {
-    // 点击步骤导航项
-    clickStepItem(index) {
-      // 滚动到对应区域
-      const targetRef = `stepItem${index + 1}`
-      const targetTop = getElementTop(this.$refs[targetRef])
-      // 使用requestAnimationFrame优化滚动性能
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
-      })
-    }
+// 获取国际化工具
+const { tm } = useI18n()
+// 获取组件实例
+const instance = getCurrentInstance()
+
+// 定义响应式引用
+const stepItem1 = ref(null)
+const stepItem2 = ref(null)
+
+// 定义常量
+const menuHeight = 72
+const stepHeight = 51
+
+// 计算属性
+const mainObj = computed(() => tm('sceneEditor.mainObj') || {})
+const stepList = computed(() => tm('sceneEditor.stepList') || [])
+const featureList = computed(() => tm('sceneEditor.list') || [])
+const advantagesList = computed(() => tm('sceneEditor.cpysList') || [])
+
+// 方法定义
+const clickStepItem = (index) => {
+  // 滚动到对应区域
+  const targetRef = `stepItem${index + 1}`
+  const targetElement = instance?.proxy?.$refs[targetRef]
+  if (targetElement) {
+    const targetTop = getElementTop(targetElement)
+    // 使用requestAnimationFrame优化滚动性能
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: targetTop - menuHeight - stepHeight, behavior: 'smooth' })
+    })
   }
 }
+
+// 组件挂载时执行
+onMounted(() => {
+  // 将ref暴露给组件实例的$refs
+  instance.proxy.$refs.stepItem1 = stepItem1.value
+  instance.proxy.$refs.stepItem2 = stepItem2.value
+})
 </script>
 
 <style lang="scss" scoped>

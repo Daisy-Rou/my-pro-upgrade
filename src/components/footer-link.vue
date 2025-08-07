@@ -47,68 +47,81 @@
     </div>
   </div>
 </template>
-<script>
-// 导入下拉列表组件
-import DropdownList from '@/components/dropdown-list'
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { debounce } from '@/assets/utils';
-export default {
-  name: 'footer-link',
-  // 注册子组件
-  components: {
-    DropdownList
-  },
-  data() {
-    return {
-      // 控制介绍列表显示状态的响应式变量
-      showIntroductionList: true,
-      footerList: []
-    }
-  },
-  created() {
-    // 创建防抖函数 (延迟100ms执行)
-    this.debouncedHandleResize = debounce(this.handleResize, 100);
-    this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list')))
-  },
-  mounted() {
-    // 创建ResizeObserver实例
-    this.resizeObserver = new ResizeObserver(entries => {
-      // 防抖处理
-      this.debouncedHandleResize();
-    });
-    // 监听根元素尺寸变化
-    this.resizeObserver.observe(document.documentElement);
-  },
-  beforeDestroy() {
-    // 断开ResizeObserver连接
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  },
-  methods: {
-    // 处理窗口大小变化 - 响应式布局控制
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 使用CSS媒体查询的断点值作为常量
-      const BREAKPOINT = 768
-      this.showIntroductionList = screenWidth > BREAKPOINT
-    },
-    // 处理子项点击事件 - 导航到指定路径
-    handleItemClick(item) {
-      if (item.path) {
-        this.$router.push(item.path)
-      }
-    },
-    // 平滑滚动到页面顶部
-    goTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
-    }
+
+// 导入下拉列表组件
+import DropdownList from '@/components/dropdown-list';
+
+// 获取国际化实例
+const { tm } = useI18n();
+
+// 获取路由实例
+const router = useRouter();
+
+// 控制介绍列表显示状态的响应式变量
+const showIntroductionList = ref(true);
+
+// 缓存国际化数据
+const footerList = computed(() => {
+  return tm('footer.list');
+});
+
+// 处理窗口大小变化 - 响应式布局控制
+const handleResize = () => {
+  // 获取屏幕宽度
+  const screenWidth = window.innerWidth;
+  // 使用CSS媒体查询的断点值作为常量
+  const BREAKPOINT = 768;
+  showIntroductionList.value = screenWidth > BREAKPOINT;
+};
+
+// 创建防抖函数 (延迟100ms执行)
+const debouncedHandleResize = debounce(handleResize, 100);
+
+// 定义ResizeObserver变量
+let resizeObserver;
+
+// 组件挂载时执行
+onMounted(() => {
+  // 初始化显示状态
+  handleResize();
+  
+  // 创建ResizeObserver实例
+  resizeObserver = new ResizeObserver(entries => {
+    // 防抖处理
+    debouncedHandleResize();
+  });
+  
+  // 监听根元素尺寸变化
+  resizeObserver.observe(document.documentElement);
+});
+
+// 组件卸载前执行
+onBeforeUnmount(() => {
+  // 断开ResizeObserver连接
+  if (resizeObserver) {
+    resizeObserver.disconnect();
   }
-}
+});
+
+// 处理子项点击事件 - 导航到指定路径
+const handleItemClick = (item) => {
+  if (item.path) {
+    router.push(item.path);
+  }
+};
+
+// 平滑滚动到页面顶部
+const goTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+};
 </script>
 <style lang="scss" scoped>
 // 页脚链接区域样式

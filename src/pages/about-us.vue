@@ -48,37 +48,33 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import mainTitle from '@/components/main-title.vue';
-export default {
-  name: 'about-us',
-  components: {
-    mainTitle
-  },
-  data() {
-    return {
-      showNewsBig: true,
-    }
-  },
-  beforeDestroy() {
-    // 移除监听器以避免内存泄漏
-    window.removeEventListener('resize', this.handleResize);
-  },
-  mounted() {
-    // 添加窗口大小改变的监听器，以便动态更新计算属性
-    this.handleResize()
-    window.addEventListener('resize', this.handleResize);
-  },
-  methods: {
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showNewsBig = screenWidth > 1280
-    }
-  }
-}
+
+// 状态定义
+const showNewsBig = ref(true);
+
+// 方法定义
+const handleResize = () => {
+  // 获取屏幕宽度
+  const screenWidth = window.innerWidth;
+  // 判断屏幕宽度并返回是否显示元素的布尔值
+  showNewsBig.value = screenWidth > 1280;
+};
+
+// 生命周期钩子
+onMounted(() => {
+  // 初始调整
+  handleResize();
+  // 添加窗口大小改变的监听器
+  window.addEventListener('resize', handleResize);
+});
+
+onBeforeUnmount(() => {
+  // 移除监听器以避免内存泄漏
+  window.removeEventListener('resize', handleResize);
+});
 </script>
 
 <style lang="scss" scoped>

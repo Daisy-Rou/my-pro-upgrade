@@ -5,15 +5,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
+// 导入组件后自动注册，无需在components对象中声明
 import FooterLink from '@/components/footer-link.vue'
-export default {
-  name: 'HomeView',
-  components: {
-    FooterLink
-  }
-}
 </script>
+
 <style lang="scss" scoped>
 .home {
   display: flex;

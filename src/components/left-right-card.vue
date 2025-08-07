@@ -25,40 +25,43 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'left-right-card',
-  /**
-   * 左右布局卡片容器组件
-   * @component
-   * @param {Array} list - 卡片数据列表
-   * @param {Object} list[].id - 卡片唯一标识
-   * @param {string} list[].imgSrc - 卡片图片地址
-   * @param {string} list[].title - 卡片标题
-   * @param {string} list[].content - 卡片内容
-   * @param {string} [list[].path] - 点击跳转路径
-   * @param {boolean} [showBtn=true] - 是否显示"更多"按钮
-  */
-  props: {
-    list: {
-      type: Array,
-      required: true,
-      default: () => []
-    },
-    showBtn: {
-      type: Boolean,
-      default: true
-    }
+<script setup>
+// 左右布局卡片容器组件
+import { defineProps } from 'vue';
+import { useRouter } from 'vue-router';
+
+/**
+ * 左右布局卡片容器组件
+ * @component
+ * @param {Array} list - 卡片数据列表
+ * @param {Object} list[].id - 卡片唯一标识
+ * @param {string} list[].imgSrc - 卡片图片地址
+ * @param {string} list[].title - 卡片标题
+ * @param {string} list[].content - 卡片内容
+ * @param {string} [list[].path] - 点击跳转路径
+ * @param {boolean} [showBtn=true] - 是否显示"更多"按钮
+ */
+const props = defineProps({
+  list: {
+    type: Array,
+    required: true,
+    default: () => []
   },
-  methods: {
-    // 处理卡片点击事件 - 导航到指定路径
-    handleItemClick(item) {
-      if (item?.path) {
-        this.$router.push(item.path)
-      }
-    }
+  showBtn: {
+    type: Boolean,
+    default: true
   }
-}
+});
+
+// 获取路由实例
+const router = useRouter();
+
+// 处理卡片点击事件 - 导航到指定路径
+const handleItemClick = (item) => {
+  if (item?.path) {
+    router.push(item.path);
+  }
+};
 </script>
 
 <style lang="scss" scoped>

@@ -4,7 +4,7 @@
       <div class="left-box">
         <div class="text-box">
           <!-- 顶部图标/文字 -->
-          <div v-show="showVideo" class="text-icon">{{mainObj.text || ''}}</div>
+          <div class="text-icon">{{mainObj.text || ''}}</div>
           <!-- 主标题 -->
           <div class="big-title">{{mainObj.title || ''}}</div>
           <!-- 副标题描述 -->
@@ -21,27 +21,28 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'main-content',
-  /**
-   * 主内容展示组件 (版本1)
-   * @component
-   * @param {Object} mainObj - 主内容数据对象
-   * @param {string} [mainObj.text] - 顶部图标/文字
-   * @param {string} [mainObj.title] - 主标题
-   * @param {string} [mainObj.content] - 副标题描述
-   * @param {string} [mainObj.btnText] - 按钮文本
-   * @param {string} [mainObj.imgSrc] - 右侧展示图片地址
+<script setup>
+// 主内容展示组件 (版本1)
+import { defineProps } from 'vue';
+
+/**
+ * 主内容展示组件 (版本1)
+ * @component
+ * @param {Object} mainObj - 主内容数据对象
+ * @param {string} [mainObj.text] - 顶部图标/文字
+ * @param {string} [mainObj.title] - 主标题
+ * @param {string} [mainObj.content] - 副标题描述
+ * @param {string} [mainObj.btnText] - 按钮文本
+ * @param {string} [mainObj.imgSrc] - 右侧展示图片地址
  */
-  props: {
-    mainObj: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
+const props = defineProps({
+  mainObj: {
+    type: Object,
+    required: true,
+    default: () => ({})
   }
-}
+});
+
 </script>
 
 <style lang="scss" scoped>

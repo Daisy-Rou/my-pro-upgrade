@@ -1,9 +1,8 @@
 <template>
   <!-- 小屏全屏抽屉菜单 -->
   <el-drawer
-    title="我是标题"
     class="drawer-menu"
-    :visible.sync="showAllMenu"
+    v-model="showAllMenu"
     :append-to-body="true"
     :modal-append-to-body="false"
     :before-close="handleClose"
@@ -12,8 +11,8 @@
     style="background-color: #000;"
   >
     <!-- 标题区域 -->
-    <template #title>
-      <img class="text-icon" src="@/assets/images/jysz.png" alt="">
+    <template #header>
+      <img class="text-icon" src="@/assets/images/jysz-white.png" alt="">
     </template>
     <!-- 顶部按钮组 -->
     <div class="btn-box" v-show="!showSubMenu">
@@ -56,87 +55,102 @@
   </el-drawer>
 </template>
 
-<script>
-export default {
-  name: 'drawer-menu',
-  props: {
-    showAllMenu: {
-      type: Boolean,
-      require: true,
-      default: false
-    }
-  },
-  computed: {
-    // 菜单列表（从i18n获取）
-    menuList() {
-      return this.$t('user.menuList');
-    }
-  },
-  data() {
-    return {
-      menuTitle: '',        // 当前菜单标题
-      showSubMenu: false,   // 是否显示子菜单
-      subList: [],          // 当前子菜单数据
-    }
-  },
-  methods: {
-    // 关闭抽屉菜单
-    handleClose() {
-      this.$parent.showAllMenu = false
-      this.showSubMenu = false
-      this.changeMenuTitle()
-    },
-    // 返回主菜单
-    goBack() {
-      this.showSubMenu = false
-      this.changeMenuTitle()
-    },
-    changeMenuTitle() {
-      const lang = localStorage.getItem('lang') || 'zh_CN'
-      if (lang === 'zh_CN') {
-        this.menuTitle = '菜单'
-      } else {
-        this.menuTitle = 'Menus'
-      }
-    },
-    // 小屏菜单项点击
-    handleClickItem(item) {
-      if (item.showMoreIcon) {
-        this.showSubMenu = true
-        this.subList = item.subList
-        this.menuTitle = item.name
-      } else {
-        this.$router.push(item.path)
-        this.handleClose()
-      }
-    }
-  }
+<script setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+// 获取国际化实例
+const { tm } = useI18n();
+
+// 获取路由实例
+const router = useRouter();
+
+// 响应式数据
+const showAllMenu = ref(false)
+const menuTitle = ref('');
+const showSubMenu = ref(false);
+const subList = ref([]);
+
+
+// 菜单列表（从i18n获取）
+const menuList = computed(() => {
+  return tm('user.menuList');
+});
+
+// 打开抽屉菜单
+const openDrawer = () => {
+  showAllMenu.value = true;
 }
+
+// 关闭抽屉菜单
+const handleClose = () => {
+  showAllMenu.value = false;
+  showSubMenu.value = false;
+  changeMenuTitle();
+};
+
+// 返回主菜单
+const goBack = () => {
+  showSubMenu.value = false;
+  changeMenuTitle();
+};
+
+// 更改菜单标题
+const changeMenuTitle = () => {
+  const lang = localStorage.getItem('lang') || 'zh_CN';
+  menuTitle.value = lang === 'zh_CN' ? '菜单' : 'Menus';
+};
+
+// 菜单项点击处理
+const handleClickItem = (item) => {
+  if (item.showMoreIcon) {
+    showSubMenu.value = true;
+    subList.value = item.subList;
+    menuTitle.value = item.name;
+  } else {
+    router.push(item.path);
+    handleClose();
+  }
+};
+
+// 初始化菜单标题
+changeMenuTitle();
+// 暴露方法给父组件
+defineExpose({
+  changeMenuTitle,
+  openDrawer
+});
 </script>
+
 <style lang="scss">
 /* 全局Element UI样式覆盖 */
 .el-drawer {
   background-color: #000 !important;
 }
-.el-drawer__wrapper {
-  .el-drawer__header>:first-child {
-    flex: none !important;
+.el-drawer__header>:first-child {
+  flex: none !important;
+}
+.el-drawer__header {
+  justify-content: space-between;
+  .text-icon {
+    width: 100px;
+    height: 40px;
   }
-  .el-drawer__header {
-    justify-content: space-between;
-    .text-icon {
-      width: 100px;
-      height: 32px;
-    }
-  }
-  .el-icon-close {
-    font-size: 24px !important;
-    font-weight: 400 !important;
+  
+  .el-drawer__close {
     color: $color-white;
+    font-size: 24px;
   }
-  .el-drawer__body {
-    padding: 0 20px 20px;
+  .el-icon svg {
+    width: 32px;
+    height: 32px;
   }
+}
+.el-drawer__body {
+  padding: 0 20px 20px;
+}
+.el-drawer__wrapper {
 }
 </style>
 <style lang="scss" scoped>

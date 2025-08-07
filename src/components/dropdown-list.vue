@@ -44,39 +44,53 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'dropdown-list',
-  data() {
+<script setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+// 获取国际化实例
+const { tm } = useI18n();
+
+// 获取路由实例
+const router = useRouter();
+
+// 响应式数据存储列表状态
+const listState = ref({});
+
+// 缓存国际化数据并初始化所有列表项为收起状态
+const footerList = computed(() => {
+  const list = tm('footer.list');
+  return list.map(item => {
+    // 确保每个item都有唯一标识符用于状态管理
+    const itemId = item.id || item.name;
+    // 初始化状态，如果不存在则默认为false
+    if (listState.value[itemId] === undefined) {
+      listState.value[itemId] = false;
+    }
     return {
-      footerList: []
-    }
-  },
-  mounted() {
-    // 初始化所有列表项为收起状态
-    // 避免直接修改国际化数据，创建本地响应式数据副本
-    this.footerList = JSON.parse(JSON.stringify(this.$t('footer.list'))).map(item => ({
       ...item,
-      isShow: false
-    }))
-  },
-  methods: {
-    // 处理列表项点击 - 切换展开/折叠状态
-    handleItemClick(item) {
-      item.isShow = !item.isShow
-    },
-    // 处理子列表项点击 - 导航到指定路径
-    handleSubItemClick(item) {
-      if (item.path) {
-        this.$router.push(item.path)
-        // 关闭所有下拉菜单
-        this.footerList.forEach(item => {
-          item.isShow = false
-        })
-      }
-    }
+      isShow: listState.value[itemId]
+    };
+  });
+});
+
+// 处理列表项点击 - 切换展开/折叠状态
+const handleItemClick = (item) => {
+  const itemId = item.id || item.name;
+  listState.value[itemId] = !listState.value[itemId];
+};
+
+// 处理子列表项点击 - 导航到指定路径
+const handleSubItemClick = (item) => {
+  if (item.path) {
+    router.push(item.path);
+    // 关闭所有下拉菜单
+    Object.keys(listState.value).forEach(key => {
+      listState.value[key] = false;
+    });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -54,74 +54,73 @@
   </div>
 </template>
 
-<script>
-// 组件懒加载
-const MainTitle = () => import('@/components/main-title.vue');
-const bigCard = () => import('@/components/big-card.vue');
-const leftRightCard = () => import('@/components/left-right-card.vue');
-const hoverImg = () => import('@/components/hover-img.vue');
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { debounce } from '@/assets/utils';
-export default {
-  name: 'first-page',
-  components: {
-    MainTitle,
-    bigCard,
-    leftRightCard,
-    hoverImg
-  },
-  computed: {
-    // 视频源路径
-    videoSource() {
-      return require('@/assets/images/big-bg-compress.mp4');
-    },
-    // 翻译数据缓存
-    titleObj() {
-      return this.$t('firstPage.titleObj');
-    },
-    cardList() {
-      return this.$t('firstPage.cardList');
-    },
-    list() {
-      return this.$t('firstPage.list');
-    },
-    listSolution() {
-      return this.$t('firstPage.listSolution');
-    },
-    btnText() {
-      return this.$t('firstPage.btnText');
-    }
-  },
-  data() {
-    return {
-      showVideo: true, // 控制视频显示位置（大屏右侧/小屏下方）
-    }
-  },
-  mounted() {
-    // 初始调整布局
-    this.handleResize()
-    // 添加窗口大小变化监听
-    this.resizeObserver = new ResizeObserver(entries => {
-      debounce(this.handleResize(), 100)
-    })
-    this.resizeObserver.observe(document.documentElement)
-  },
-  beforeDestroy() {
-    // 销毁ResizeObserver实例
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect()
-    }
-  },
-  methods: {
-    // 响应窗口大小变化
-    handleResize() {
-      // 触发Vue实例的更新，因为window.innerWidth的变化会导致计算属性重新计算
-      // 获取屏幕宽度
-      const screenWidth = window.innerWidth;
-      // 判断屏幕宽度并返回是否显示元素的布尔值
-      this.showVideo = screenWidth > 1280
-    }
+// 组件导入
+import MainTitle from '@/components/main-title.vue';
+import bigCard from '@/components/big-card.vue';
+import leftRightCard from '@/components/left-right-card.vue';
+import hoverImg from '@/components/hover-img.vue';
+
+// 国际化
+const { t, tm } = useI18n();
+
+// 状态定义
+const showVideo = ref(true); // 控制视频显示位置（大屏右侧/小屏下方）
+let resizeObserver = null;
+
+// 计算属性
+const videoSource = computed(() => {
+  return require('@/assets/images/big-bg-compress.mp4');
+});
+
+const titleObj = computed(() => {
+  return tm('firstPage.titleObj') || {};
+});
+
+const cardList = computed(() => {
+  return tm('firstPage.cardList') || [];
+});
+
+const list = computed(() => {
+  return tm('firstPage.list') || [];
+});
+
+const listSolution = computed(() => {
+  return tm('firstPage.listSolution') || [];
+});
+
+const btnText = computed(() => {
+  return t('firstPage.btnText') || '';
+});
+
+// 方法定义
+const handleResize = () => {
+  // 获取屏幕宽度
+  const screenWidth = window.innerWidth;
+  // 判断屏幕宽度并返回是否显示元素的布尔值
+  showVideo.value = screenWidth > 1280;
+};
+
+// 生命周期
+onMounted(() => {
+  // 初始调整布局
+  handleResize();
+  // 添加窗口大小变化监听
+  resizeObserver = new ResizeObserver(entries => {
+    debounce(handleResize(), 100);
+  });
+  resizeObserver.observe(document.documentElement);
+});
+
+onBeforeUnmount(() => {
+  // 销毁ResizeObserver实例
+  if (resizeObserver) {
+    resizeObserver.disconnect();
   }
-}
+});
 </script>
 
 <style lang="scss" scoped>

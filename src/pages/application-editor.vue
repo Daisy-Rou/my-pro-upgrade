@@ -18,58 +18,60 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, computed, getCurrentInstance } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { getElementTop } from '@/assets/utils';
+
+// 组件导入
 import mainContent from '@/components/main-content.vue';
 import stepNav from '@/components/step-nav.vue';
 import stepTitle from '@/components/step-title.vue';
 import contentIntroduction from '@/components/content-introduction.vue';
 import topBottomCard from '@/components/top-bottom-card.vue';
-import { getElementTop } from '@/assets/utils'
-export default {
-  name: 'application-editor',
-  components: {
-    mainContent,
-    stepNav,
-    stepTitle,
-    contentIntroduction,
-    topBottomCard
-  },
-  computed: {
-    // 缓存翻译数据，避免多次调用$t
-    stepList() {
-      return this.$t('applicationEditor.stepList');
-    },
-    // 缓存其他翻译数据
-    mainObj() {
-      return this.$t('applicationEditor.mainObj');
-    },
-    list() {
-      return this.$t('applicationEditor.list');
-    },
-    cpysList() {
-      return this.$t('applicationEditor.cpysList');
-    }
-  },
-  data() {
-    return {
-      // 菜单和步骤导航高度可以配置化
-      menuHeight: 72,
-      stepHeight: 51
-    }
-  },
-  methods: {
-    // 点击步骤导航项
-    clickStepItem(index) {
-      // 滚动到对应区域
-      const targetRef = `stepItem${index + 1}`
-      const targetTop = getElementTop(this.$refs[targetRef])
-      // 使用requestAnimationFrame优化滚动性能
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: targetTop - this.menuHeight - this.stepHeight, behavior: 'smooth' })
-      })
-    }
+
+// 国际化
+const { tm } = useI18n();
+
+// 组件实例引用
+const instance = getCurrentInstance();
+
+// 状态定义
+const menuHeight = ref(72);
+const stepHeight = ref(51);
+
+// 计算属性
+const stepList = computed(() => {
+  return tm('applicationEditor.stepList') || [];
+});
+
+const mainObj = computed(() => {
+  return tm('applicationEditor.mainObj') || {};
+});
+
+const list = computed(() => {
+  return tm('applicationEditor.list') || [];
+});
+
+const cpysList = computed(() => {
+  return tm('applicationEditor.cpysList') || [];
+});
+
+// 方法定义
+const clickStepItem = (index) => {
+  // 滚动到对应区域
+  const targetRef = `stepItem${index + 1}`;
+  if (instance && instance.proxy) {
+    const targetTop = getElementTop(instance.proxy.$refs[targetRef]);
+    // 使用requestAnimationFrame优化滚动性能
+    window.requestAnimationFrame(() => {
+      window.scrollTo({
+        top: targetTop - menuHeight.value - stepHeight.value,
+        behavior: 'smooth'
+      });
+    });
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
